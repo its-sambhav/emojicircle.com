@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo-180.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="canonical" href="https://emojie.in/pages/emojie_globe/globe.html">
+    <script type="application/ld+json" data-emojie-schema="brand">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "emojie.in",
+        "url": "https://emojie.in",
+        "logo": "https://emojie.in/logo-512.png"
+    }
+    </script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Emoji Globe — Canvas</title>
+  <style>
+    html,body{height:100%;margin:0}
+  #app{width:100%;height:100%;overflow:hidden;background:#000}
+  #app canvas{touch-action:none;}
+  body.pseudo-fullscreen{overflow:hidden;}
+  #app.pseudo-fullscreen{position:fixed; inset:0; width:100vw; height:100vh; background:#000; z-index:4;}
+  .fullscreen-btn.pseudo-active{background:rgba(255,255,255,0.35); color:#111;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .ui {
+      position: absolute; left: 12px; top: 12px; z-index: 2; color: #fff; font-family: Arial; min-width:0; width:auto;
+      box-sizing: border-box;
+    }
+    .ui *, .ui *:before, .ui *:after { box-sizing: inherit }
+  .ui input[type=range]{width:100%}
+    .ui details{margin:0; width:44px; transition:width 0.2s ease; display:inline-block;}
+    /* when open, use a narrower panel and cap height to reduce visual size (~40% reduction) */
+  /* base panel styling; width controlled per breakpoint (desktop override below) */
+  .ui details[open]{display:block; width:auto; background: rgba(0,0,0,0.44); padding:10px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); backdrop-filter: blur(6px); max-height:60vh; box-shadow:0 8px 24px rgba(0,0,0,0.45)}
+    .ui summary{list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0; width:44px; height:44px; padding:0; border-radius:12px; border:none; background:transparent; transition:opacity 0.18s ease, transform 0.18s ease; color:#fff; position:relative;}
+    .ui summary:hover,
+    .ui summary:focus-visible{opacity:0.75;}
+    .ui summary:focus-visible{outline:2px solid rgba(255,255,255,0.35); outline-offset:3px;}
+    .ui details[open] summary{width:100%; justify-content:flex-start; margin-bottom:12px; height:auto;}
+  .ui summary svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;}
+    .ui summary::-webkit-details-marker{display:none}
+  .ui summary:after{display:none}
+  .ui details[open] summary{justify-content:flex-start; gap:10px;}
+  /* hide the close button while the details is closed; show it only when open */
+  .ui summary .close-btn{margin-left:auto; background:transparent; border:none; color:inherit; font-size:16px; width:36px; height:36px; display:none; align-items:center; justify-content:center; cursor:pointer; border-radius:8px}
+  .ui summary .close-btn:hover{background:rgba(255,255,255,0.06)}
+  .ui details[open] summary .close-btn{display:flex}
+  .ui .ui-body{margin-top:10px; display:flex; flex-direction:column; gap:12px; font-size:12px;}
+  .ui .ui-hint{opacity:0.8; line-height:1.4}
+  .ui label.ui-line{display:flex; justify-content:space-between; align-items:center; font-size:13px}
+  .ui .category-list{display:flex; flex-direction:column; gap:6px; max-height:180px; overflow-y:auto; padding:6px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(0,0,0,0.25);}
+  /* pill-style category list (black background, white labels + border). responsive grid to fit buttons tightly and avoid horizontal scroll */
+  /* tighter pills and no vertical scroll inside the category area; grid expands columns to fit items */
+  /* desktop: 3 columns, larger labels to avoid overflow */
+  .ui .category-list{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; max-height:none; overflow-y:visible; overflow-x:hidden; padding:8px; border-radius:10px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.01); align-items:center}
+  .ui .category-option{display:flex; align-items:center; justify-content:center; padding:8px 12px; border-radius:999px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.12); font-size:12px; line-height:1; cursor:pointer; user-select:none; min-width:0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; transition:transform .10s ease, box-shadow .10s ease, border-color .10s ease}
+  .ui .category-option:hover{transform:scale(1.02); box-shadow:0 6px 14px rgba(0,0,0,0.35); border-color:rgba(255,255,255,0.22)}
+  .ui .category-option--selected{ background:rgba(185,243,167,0.06); color:#b9f3a7; border-color:#b9f3a7; box-shadow:none; outline:none }
+  .ui .category-option:focus{outline:2px solid rgba(255,255,255,0.18); outline-offset:3px}
+  /* slightly smaller pills on very narrow screens */
+  @media (max-width:420px){
+    /* mobile: panel narrower (60% of container) and show exactly 3 buttons per row */
+    .ui details[open]{ width:60%; padding:6px; }
+  .ui .category-list{grid-template-columns:repeat(3, 1fr); background:transparent; border:none; padding:0; gap:4px}
+  /* mobile: make each category button wider — fill grid cell, increase horizontal padding and font for readability */
+  .ui .category-option{width:100%; box-sizing:border-box; padding:6px 20px; font-size:11px; border-radius:12px; background:transparent; box-shadow:none; border:1px solid rgba(255,255,255,0.14)}
+    /* disable hover lift on touch devices */
+    .ui .category-option:hover{transform:none; box-shadow:none}
+    /* remove focus outline on mobile */
+    .ui .category-option:focus{outline:none}
+  }
+  /* Desktop / laptop-only tweaks: reduce inner container width and tighten spacing so content fits cleanly */
+  @media (min-width:421px){
+    /* Desktop: make the settings panel 20% of the globe/container width so it doesn't overlap the globe; clamp width for usability */
+    .ui details[open]{ width:20%; min-width:200px; max-width:360px; }
+    /* Desktop: show category buttons directly on the main panel — remove inner container visuals */
+    .ui .category-list{ width:100%; margin:0; padding:0; gap:10px; background:transparent; border:none; border-radius:0 }
+    /* slightly reduce vertical padding so bottom rows fit better */
+    .ui .category-option{ padding:8px 12px }
+  }
+  .ui .ui-actions{display:flex; gap:8px; justify-content:flex-start; align-items:center; flex-wrap:wrap;}
+  .ui button.ui-small{padding:6px 10px; border-radius:6px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.1); color:#fff; font-size:12px; cursor:pointer}
+  .ui button.ui-small:hover{background:rgba(255,255,255,0.18)}
+  .fullscreen-btn{position:absolute; right:18px; bottom:18px; z-index:3; width:52px; height:52px; border-radius:14px; border:1px solid rgba(255,255,255,0.28); background:rgba(0,0,0,0.55); color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s ease, transform 0.2s ease}
+  .fullscreen-btn:hover{background:rgba(255,255,255,0.22); transform:scale(1.03)}
+  .fullscreen-btn.active{background:rgba(255,255,255,0.35); color:#111}
+  .fullscreen-back-btn{position:absolute; left:18px; top:18px; z-index:6; padding:8px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.28); background:rgba(0,0,0,0.55); color:#fff; font-size:13px; font-weight:600; display:none; align-items:center; gap:6px; cursor:pointer; transition:background 0.2s ease, transform 0.2s ease}
+  .fullscreen-back-btn:hover{background:rgba(255,255,255,0.22); transform:translateY(-1px)}
+  .fullscreen-back-btn.visible{display:flex}
+    .status { position:absolute; right:12px; top:12px; z-index:6; font: 12px/1.4 -apple-system,Segoe UI,Arial; color:#eee; background:rgba(0,0,0,0.45); padding:8px 10px; border-radius:8px; max-width: 44ch; transition:opacity 0.2s ease }
+    .status.error{ background: rgba(128,0,0,0.55) }
+    .status.hidden{ opacity:0; visibility:hidden; pointer-events:none }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="status" id="status">Loading…</div>
+  <button type="button" id="fullscreenBack" class="fullscreen-back-btn" aria-label="Exit fullscreen"><span aria-hidden="true">←</span><span>Back</span></button>
+  <div class="ui">
+  <details id="controlDrawer">
+    <summary aria-label="Toggle emoji globe settings"></summary>
+      <div class="ui-body">
+        
+        <label class="ui-line" for="count">
+          <span>Density</span>
+          <span id="countLabel">600</span>
+        </label>
+        <input id="count" type="range" min="50" max="2000" value="600">
+  <span class="ui-line">Categories</span>
+  <div id="categoryList" class="category-list"></div>
+  <div class="ui-actions">
+    
+  </div>
+      </div>
+    </details>
+  </div>
+  <button type="button" id="fullscreenToggle" class="fullscreen-btn" aria-pressed="false" aria-label="Enter fullscreen">⤢</button>
+  <script>
+    (function(){
+      const statusEl = document.getElementById('status');
+      var statusHideTimer = null;
+
+      function hideStatusAfter(delay){
+        if(!statusEl) return;
+        if(statusHideTimer){
+          clearTimeout(statusHideTimer);
+          statusHideTimer = null;
+        }
+        statusHideTimer = setTimeout(function(){
+          statusEl.classList.add('hidden');
+          statusHideTimer = null;
+        }, Math.max(0, delay || 0));
+      }
+
+      function setStatus(msg, isError, options){
+        if(!statusEl) return;
+        if(statusHideTimer){
+          clearTimeout(statusHideTimer);
+          statusHideTimer = null;
+        }
+        statusEl.textContent = msg;
+        statusEl.classList.toggle('error', !!isError);
+        statusEl.classList.remove('hidden');
+        var autoHide = !options || options.autoHide !== false;
+        if(autoHide){
+          var delay = (options && typeof options.delay === 'number') ? options.delay : (isError ? 2600 : 1400);
+          hideStatusAfter(delay);
+        }
+      }
+
+      const CATEGORY_MAP = {
+        "2026": ["🎆","🎇","🥂","🍾","🎉"],
+        "Santa": ["🎄","🎅","❤️","❄️","🔔"],
+        "World": ["🌍"],
+        "Faces": ["😀","😄","😁"],
+        "Food": ["🍕","🍣","🍔","🍩"],
+        "Party": ["🎉","🥳","🎊"],
+        "Travel": ["🚀","✈️","🚗"],
+        "Nature": ["🌲","🌿","🌈","🌸","🌟"],
+        "Object": ["💡","📚","⌚","📸","🔑"],
+        "Sports": ["⚽","🏀","🏈"],
+        "Games": ["🎮","🕹️"],
+        "Ai": ["🧠","🤖","🔬"]
+      };
+  const DEFAULT_CATEGORY_FALLBACK = 'New Year';
+  let DEFAULT_CATEGORY = DEFAULT_CATEGORY_FALLBACK;
+
+      const search = (typeof window !== 'undefined' && window.location && typeof window.location.search === 'string')
+        ? window.location.search
+        : '';
+      let requestedDefault = '';
+      if (typeof URLSearchParams !== 'undefined') {
+        try {
+          requestedDefault = new URLSearchParams(search || '').get('default') || '';
+        } catch (err) {
+          requestedDefault = '';
+        }
+      } else if (search && search.length > 1) {
+        var pairs = search.substring(1).split('&');
+        for (var pi = 0; pi < pairs.length; pi++) {
+          var part = pairs[pi].split('=');
+          if (part[0] && decodeURIComponent(part[0]) === 'default') {
+            requestedDefault = part[1] ? decodeURIComponent(part[1]) : '';
+            break;
+          }
+        }
+      }
+      if (requestedDefault) {
+        const normalized = requestedDefault.trim().toLowerCase();
+        if (normalized === 'all') {
+          DEFAULT_CATEGORY = null;
+        } else {
+          const matchedKey = Object.keys(CATEGORY_MAP).find((key) => key.toLowerCase() === normalized);
+          if (matchedKey) {
+            DEFAULT_CATEGORY = matchedKey;
+          }
+        }
+      }
+
+      const TWEMOJI_BASE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/';
+      const emojiImageCache = Object.create(null);
+
+      function emojiToCodePoint(emoji){
+        var codePoints = [];
+        var i = 0;
+        while(i < emoji.length){
+          var code = emoji.codePointAt(i);
+          if(code !== 0xfe0f && code !== 0xfe0e){
+            codePoints.push(code.toString(16));
+          }
+          i += code > 0xffff ? 2 : 1;
+        }
+        return codePoints.join('-');
+      }
+
+      function ensureEmojiImage(emoji){
+        var cache = emojiImageCache[emoji];
+        if(cache){
+          return cache.promise;
+        }
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.decoding = 'async';
+        var code = emojiToCodePoint(emoji);
+        cache = { image: img, ready: false, failed: false, promise: null };
+        cache.promise = new Promise(function(resolve){
+          img.onload = function(){ cache.ready = true; resolve(img); };
+          img.onerror = function(){ cache.failed = true; resolve(null); };
+        });
+        emojiImageCache[emoji] = cache;
+        img.src = TWEMOJI_BASE_URL + code + '.png';
+        return cache.promise;
+      }
+
+      function getEmojiImage(emoji){
+        var cache = emojiImageCache[emoji];
+        if(cache && cache.ready && cache.image){
+          return cache.image;
+        }
+        return null;
+      }
+
+      function preloadEmojiImages(emojis, progressCallback){
+        var unique = [];
+        var seen = Object.create(null);
+        for(var i=0;i<emojis.length;i++){
+          var key = emojis[i];
+          if(!seen[key]){
+            seen[key] = true;
+            unique.push(key);
+          }
+        }
+        if(!unique.length){
+          return Promise.resolve();
+        }
+        var completed = 0;
+        return Promise.all(unique.map(function(emoji){
+          return ensureEmojiImage(emoji).then(function(){
+            completed += 1;
+            if(progressCallback){
+              progressCallback(completed, unique.length);
+            }
+          });
+        }));
+      }
+
+          function setAllCheckboxes(container, checked){
+            if(!container) return;
+            var items = container.querySelectorAll('.category-option');
+            for(var i=0;i<items.length;i++){
+              var el = items[i];
+              if(!!checked){
+                el.classList.add('category-option--selected');
+              } else {
+                el.classList.remove('category-option--selected');
+              }
+            }
+          }
+
+          function readCheckedCategories(container){
+            var values = [];
+            if(!container) return values;
+            var items = container.querySelectorAll('.category-option.category-option--selected');
+            for(var i=0;i<items.length;i++){
+              var el = items[i];
+              if(el && el.dataset && el.dataset.value){
+                values.push(el.dataset.value);
+              }
+            }
+            return values;
+          }
+
+      function buildEmojiPool(selectedKeys){
+        var pool = [];
+        for(var i=0;i<selectedKeys.length;i++){
+          var key = selectedKeys[i];
+          var list = CATEGORY_MAP[key];
+          if(!list) continue;
+          for(var j=0;j<list.length;j++){
+            pool.push(list[j]);
+          }
+        }
+        if(!pool.length){
+          for(var fallbackKey in CATEGORY_MAP){
+            if(!CATEGORY_MAP.hasOwnProperty(fallbackKey)) continue;
+            var fallbackList = CATEGORY_MAP[fallbackKey];
+            for(var k=0;k<fallbackList.length;k++){
+              pool.push(fallbackList[k]);
+            }
+          }
+        }
+        return pool;
+      }
+
+      function fibonacciPoints(n){
+        var pts = [];
+        var golden = Math.PI * (3 - Math.sqrt(5));
+        var denom = Math.max(1, n - 1);
+        for(var i=0;i<n;i++){
+          var y = 1 - (i / denom) * 2;
+          var radiusXZ = Math.sqrt(Math.max(0, 1 - y * y));
+          var theta = i * golden;
+          var x = Math.cos(theta) * radiusXZ;
+          var z = Math.sin(theta) * radiusXZ;
+          pts.push({ x: x, y: y, z: z });
+        }
+        return pts;
+      }
+
+      function manualCopy(text){
+        try{
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        }catch(err){
+          return false;
+        }
+      }
+
+      function initCanvasGlobe(){
+        var container = document.getElementById('app');
+        if(!container) return;
+
+        container.innerHTML = '';
+  setStatus('Preparing globe…', false, { autoHide: false });
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+  canvas.style.touchAction = 'none';
+  canvas.style.cursor = 'grab';
+        container.appendChild(canvas);
+
+  var categoryList = document.getElementById('categoryList');
+  var controlDrawer = document.getElementById('controlDrawer');
+  var controlSummary = controlDrawer ? controlDrawer.querySelector('summary') : null;
+  var countInput = document.getElementById('count');
+  var countLabel = document.getElementById('countLabel');
+  var fullscreenBtn = document.getElementById('fullscreenToggle');
+  var fullscreenBack = document.getElementById('fullscreenBack');
+  var pseudoFullscreen = false;
+  var fullscreenFallbackTimer = null;
+
+        if(controlDrawer){
+          controlDrawer.removeAttribute('open');
+        }
+
+        function checkDefaultOnly(){
+          if(!categoryList || !defaultCategory) return;
+          var items = categoryList.querySelectorAll('.category-option');
+          for(var idx=0; idx<items.length; idx++){
+            var el = items[idx];
+            if(el && el.dataset && el.dataset.value){
+              if(el.dataset.value === defaultCategory){
+                el.classList.add('category-option--selected');
+              } else {
+                el.classList.remove('category-option--selected');
+              }
+            }
+          }
+        }
+
+        var allCategoryKeys = [];
+        for(var key in CATEGORY_MAP){
+          if(CATEGORY_MAP.hasOwnProperty(key)){
+            allCategoryKeys.push(key);
+          }
+        }
+  var defaultCategory = CATEGORY_MAP.hasOwnProperty(DEFAULT_CATEGORY) ? DEFAULT_CATEGORY : null;
+  var CONTROL_SUMMARY_ICON_HTML = '<span aria-hidden="true"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.78 1.78 0 0 0 .35 1.94l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.78 1.78 0 0 0-1.94-.35 1.78 1.78 0 0 0-1 1.6V21a2 2 0 0 1-4 0v-.09a1.78 1.78 0 0 0-1-1.6 1.78 1.78 0 0 0-1.94.35l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.78 1.78 0 0 0 .35-1.94 1.78 1.78 0 0 0-1.6-1H3a2 2 0 0 1 0-4h.09a1.78 1.78 0 0 0 1.6-1 1.78 1.78 0 0 0-.35-1.94l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.78 1.78 0 0 0 1.94.35H9a1.78 1.78 0 0 0 1-1.6V3a2 2 0 0 1 4 0v.09a1.78 1.78 0 0 0 1 1.6 1.78 1.78 0 0 0 1.94-.35l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.78 1.78 0 0 0-.35 1.94V9a1.78 1.78 0 0 0 1.6 1H21a2 2 0 0 1 0 4h-.09a1.78 1.78 0 0 0-1.51 1z"></path></svg></span><span class="sr-only">Emoji globe settings</span>';
+  // add a small close control (X) inside the summary when the drawer is shown
+  // this will be rendered alongside the settings icon and wired in updateControlsSummary()
+  var CONTROL_SUMMARY_CLOSE_HTML = '<button type="button" id="controlDrawerClose" class="close-btn" aria-label="Close settings">\u00d7</button>';
+
+        if(categoryList){
+          categoryList.innerHTML = '';
+          for(var i=0;i<allCategoryKeys.length;i++){
+            var key = allCategoryKeys[i];
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'category-option';
+            btn.textContent = key;
+            btn.setAttribute('data-value', key);
+            // initial selection: start deselected to match request (everything unselected)
+            if(defaultCategory){
+              if(key === defaultCategory) btn.classList.add('category-option--selected');
+            }
+            // toggle selection handler
+            (function(b){
+              b.addEventListener('click', function(){
+                b.classList.toggle('category-option--selected');
+                syncCategoriesFromInputs();
+              });
+            })(btn);
+            categoryList.appendChild(btn);
+          }
+        }
+
+        var preloadList = [];
+        var seenPreload = Object.create(null);
+        for(var ai=0;ai<allCategoryKeys.length;ai++){
+          var catKey = allCategoryKeys[ai];
+          var emojiList = CATEGORY_MAP[catKey] || [];
+          for(var aj=0;aj<emojiList.length;aj++){
+            var emojiChar = emojiList[aj];
+            if(!seenPreload[emojiChar]){
+              seenPreload[emojiChar] = true;
+              preloadList.push(emojiChar);
+            }
+          }
+        }
+
+        preloadEmojiImages(preloadList).then(function(){
+          var failedCount = 0;
+          var cacheHas = Object.prototype.hasOwnProperty;
+          for(var key in emojiImageCache){
+            if(cacheHas.call(emojiImageCache, key) && emojiImageCache[key] && emojiImageCache[key].failed){
+              failedCount += 1;
+            }
+          }
+          if(failedCount){
+            setStatus('Ready (some icons may use system emoji)', true, { autoHide: false });
+            setTimeout(function(){ setStatus('Ready'); }, 1800);
+          } else {
+            var readyLabel = defaultCategory ? ('Ready — ' + defaultCategory + ' mode') : 'Ready';
+            setStatus(readyLabel);
+          }
+        });
+
+  var selectedCats = defaultCategory ? [defaultCategory] : [];
+
+        function updateControlsSummary(){
+          if(!controlSummary) return;
+          controlSummary.innerHTML = CONTROL_SUMMARY_ICON_HTML + CONTROL_SUMMARY_CLOSE_HTML;
+          // wire up the close button inside the summary; stopPropagation so the summary toggle isn't triggered twice
+          var closeBtn = controlSummary.querySelector('#controlDrawerClose');
+          if(closeBtn && !closeBtn.dataset.bound){
+            closeBtn.addEventListener('click', function(e){
+              e.stopPropagation();
+              if(controlDrawer){ controlDrawer.removeAttribute('open'); }
+            });
+            closeBtn.dataset.bound = '1';
+          }
+        }
+
+        updateControlsSummary();
+
+        document.addEventListener('click', function(event){
+          if(!controlDrawer || !controlDrawer.hasAttribute('open')) return;
+          if(controlDrawer.contains(event.target)) return;
+          controlDrawer.removeAttribute('open');
+        });
+
+        // close is handled by the inline summary close button now
+
+        // select/deselect all buttons removed — use individual pills for selection
+
+        function syncCategoriesFromInputs(options){
+          options = options || {};
+          // allow empty selection by default (user requested everything deselected possible)
+          if(typeof options.allowEmpty === 'undefined') options.allowEmpty = true;
+          var chosen = readCheckedCategories(categoryList);
+          if(!chosen.length && !options.allowEmpty){
+            if(defaultCategory){
+              selectedCats = [defaultCategory];
+              checkDefaultOnly();
+            } else {
+              selectedCats = allCategoryKeys.slice();
+              setAllCheckboxes(categoryList, true);
+            }
+          } else {
+            selectedCats = chosen;
+          }
+          updateControlsSummary();
+          EMOJI_POOL = buildEmojiPool(selectedCats);
+          rebuild(EMOJI_COUNT);
+        }
+
+        // category buttons already have click handlers attached when rendered
+
+        
+
+        var EMOJI_POOL = buildEmojiPool(selectedCats);
+  var DEFAULT_COUNT_DESKTOP = 600;
+  var DEFAULT_COUNT_MOBILE = 600;
+  var isNarrowScreen = Math.min(window.innerWidth, window.innerHeight) <= 768;
+  var EMOJI_COUNT = isNarrowScreen ? DEFAULT_COUNT_MOBILE : DEFAULT_COUNT_DESKTOP;
+        if(countInput){
+          var parsed = parseInt(countInput.value, 10);
+          var hasCustomValue = !isNaN(parsed) && parsed !== DEFAULT_COUNT_DESKTOP && parsed !== DEFAULT_COUNT_MOBILE;
+          if(hasCustomValue){
+            EMOJI_COUNT = parsed;
+          }
+          countInput.value = EMOJI_COUNT;
+        }
+  if(countLabel){ countLabel.textContent = EMOJI_COUNT; }
+
+  var width = 0;
+        var height = 0;
+        var radius = 0;
+        var DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+        function resize(){
+          width = container.clientWidth || window.innerWidth;
+          height = container.clientHeight || window.innerHeight;
+          radius = Math.min(width, height) * 0.36;
+          canvas.width = Math.floor(width * DPR);
+          canvas.height = Math.floor(height * DPR);
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function supportsNativeFullscreen(){
+          if(!container) return false;
+          return !!(container.requestFullscreen || container.webkitRequestFullscreen || container.msRequestFullscreen);
+        }
+
+        function applyPseudoFullscreen(enabled){
+          pseudoFullscreen = enabled;
+          var body = document.body;
+          if(body){
+            body.classList.toggle('pseudo-fullscreen', enabled);
+          }
+          container.classList.toggle('pseudo-fullscreen', enabled);
+          if(fullscreenBtn){
+            fullscreenBtn.classList.toggle('pseudo-active', enabled);
+          }
+        }
+
+        function enablePseudoFullscreen(){
+          if(pseudoFullscreen) return;
+          applyPseudoFullscreen(true);
+          updateFullscreenState();
+          resize();
+        }
+
+        function disablePseudoFullscreen(){
+          if(!pseudoFullscreen) return;
+          applyPseudoFullscreen(false);
+          updateFullscreenState();
+          resize();
+        }
+
+        function fullscreenElement(){
+          return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        }
+
+        function isFullscreenActive(){
+          return pseudoFullscreen || fullscreenElement() === container;
+        }
+
+        function handleFullscreenError(err){
+          console.warn('Fullscreen error', err);
+          setStatus('Fullscreen not supported here. Using expanded view.', false, { autoHide: false });
+          enablePseudoFullscreen();
+          setTimeout(function(){ setStatus('Ready'); }, 1500);
+        }
+
+        function updateFullscreenState(){
+          var nativeActive = fullscreenElement() === container;
+          var active = nativeActive || pseudoFullscreen;
+          if(fullscreenBtn){
+            fullscreenBtn.classList.toggle('active', nativeActive && !pseudoFullscreen);
+            fullscreenBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            fullscreenBtn.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen');
+            fullscreenBtn.textContent = active ? '⤡' : '⤢';
+          }
+          if(fullscreenBack){
+            fullscreenBack.classList.toggle('visible', active);
+            fullscreenBack.setAttribute('aria-hidden', active ? 'false' : 'true');
+          }
+          if(statusEl && active){
+            hideStatusAfter(0);
+          }
+        }
+
+        function enterFullscreen(){
+          if(!container) return;
+          if(pseudoFullscreen){
+            updateFullscreenState();
+            return;
+          }
+          if(supportsNativeFullscreen()){
+            try{
+              var req = null;
+              if(container.requestFullscreen){ req = container.requestFullscreen(); }
+              else if(container.webkitRequestFullscreen){ req = container.webkitRequestFullscreen(); }
+              else if(container.msRequestFullscreen){ req = container.msRequestFullscreen(); }
+              if(req && req.catch){
+                req.catch(function(err){ handleFullscreenError(err); });
+              }
+              if(fullscreenFallbackTimer){ clearTimeout(fullscreenFallbackTimer); }
+              fullscreenFallbackTimer = setTimeout(function(){
+                fullscreenFallbackTimer = null;
+                if(!isFullscreenActive()){
+                  handleFullscreenError(new Error('Native fullscreen request timed out'));
+                }
+              }, 450);
+            }catch(err){
+              handleFullscreenError(err);
+            }
+          } else {
+            setStatus('Expanded view enabled.', false, { delay: 1600 });
+            enablePseudoFullscreen();
+            setTimeout(function(){ setStatus('Ready'); }, 1400);
+          }
+        }
+
+        function exitFullscreen(){
+          if(fullscreenFallbackTimer){
+            clearTimeout(fullscreenFallbackTimer);
+            fullscreenFallbackTimer = null;
+          }
+          if(pseudoFullscreen){
+            disablePseudoFullscreen();
+            return;
+          }
+          try{
+            var exit = null;
+            if(document.exitFullscreen){ exit = document.exitFullscreen(); }
+            else if(document.webkitExitFullscreen){ document.webkitExitFullscreen(); }
+            else if(document.msExitFullscreen){ document.msExitFullscreen(); }
+            if(exit && exit.catch){ exit.catch(handleFullscreenError); }
+          }catch(err){ handleFullscreenError(err); }
+        }
+
+        function onFullscreenChange(){
+          if(fullscreenFallbackTimer){
+            clearTimeout(fullscreenFallbackTimer);
+            fullscreenFallbackTimer = null;
+          }
+          updateFullscreenState();
+          resize();
+        }
+
+        if(fullscreenBtn && !fullscreenBtn.dataset.bound){
+          fullscreenBtn.addEventListener('click', function(){
+            if(isFullscreenActive()){
+              exitFullscreen();
+            } else {
+              enterFullscreen();
+            }
+          });
+          fullscreenBtn.dataset.bound = '1';
+        }
+        if(fullscreenBack && !fullscreenBack.dataset.bound){
+          fullscreenBack.addEventListener('click', function(){
+            if(pseudoFullscreen){
+              disablePseudoFullscreen();
+            } else if(isFullscreenActive()){
+              exitFullscreen();
+            }
+          });
+          fullscreenBack.dataset.bound = '1';
+        }
+        document.addEventListener('keydown', function(e){
+          if(e && (e.key === 'Escape' || e.key === 'Esc') && pseudoFullscreen){
+            e.preventDefault();
+            disablePseudoFullscreen();
+          }
+        });
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+        document.addEventListener('msfullscreenchange', onFullscreenChange);
+        document.addEventListener('fullscreenerror', handleFullscreenError);
+        document.addEventListener('webkitfullscreenerror', handleFullscreenError);
+
+        var points = [];
+        function rebuild(n){
+          var base = fibonacciPoints(n);
+          var pool = EMOJI_POOL.length ? EMOJI_POOL : (selectedCats.length ? buildEmojiPool(allCategoryKeys) : []);
+          if(!pool.length){
+            points = [];
+            return;
+          }
+          points = [];
+          for(var i=0;i<base.length;i++){
+            var emoji = pool[i % pool.length];
+            points.push({ x: base[i].x, y: base[i].y, z: base[i].z, emoji: emoji });
+            ensureEmojiImage(emoji);
+          }
+        }
+        rebuild(EMOJI_COUNT);
+
+        if(countInput && !countInput.dataset.boundDensity){
+          var rebuildFrame = null;
+          countInput.addEventListener('input', function(e){
+            var v = parseInt(e.target.value, 10);
+            if(isNaN(v)) return;
+            if(countLabel){ countLabel.textContent = v; }
+            if(rebuildFrame){ cancelAnimationFrame(rebuildFrame); }
+            rebuildFrame = requestAnimationFrame(function(){
+              EMOJI_COUNT = v;
+              rebuild(EMOJI_COUNT);
+            });
+          });
+          countInput.dataset.boundDensity = '1';
+        }
+
+  var rotY = 0;
+  var rotX = 0;
+  var auto = 0.06;
+  var dragging = false;
+  var lastX = 0;
+  var lastY = 0;
+  var activePointers = Object.create(null);
+  var pinchStartDistance = null;
+  var pinchStartRadius = null;
+
+        function trySetPointerCapture(target, pointerId){
+          try{
+            if(target.setPointerCapture){
+              target.setPointerCapture(pointerId);
+            }
+          }catch(_err){}
+        }
+
+        function tryReleasePointerCapture(target, pointerId){
+          try{
+            if(target.releasePointerCapture){
+              target.releasePointerCapture(pointerId);
+            }
+          }catch(_err){}
+        }
+
+        function activePointerIds(){
+          return Object.keys(activePointers);
+        }
+
+        function updatePointer(e){
+          activePointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+        }
+
+        function removePointer(e){
+          delete activePointers[e.pointerId];
+          if(activePointerIds().length < 2){
+            pinchStartDistance = null;
+            pinchStartRadius = null;
+          }
+        }
+
+        function computeDistance(a, b){
+          if(!a || !b) return 0;
+          var dx = a.x - b.x;
+          var dy = a.y - b.y;
+          return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function clampRadius(value){
+          var minRadius = 60;
+          var maxRadius = Math.min(width, height) * 0.48;
+          if(value < minRadius) value = minRadius;
+          if(value > maxRadius) value = maxRadius;
+          return value;
+        }
+
+        canvas.addEventListener('pointerdown', function(e){
+          e.preventDefault();
+          updatePointer(e);
+          var ids = activePointerIds();
+          if(ids.length === 1){
+            dragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            canvas.style.cursor = 'grabbing';
+          } else if(ids.length === 2){
+            dragging = false;
+            var first = activePointers[ids[0]];
+            var second = activePointers[ids[1]];
+            pinchStartDistance = computeDistance(first, second) || null;
+            pinchStartRadius = radius;
+          }
+          trySetPointerCapture(canvas, e.pointerId);
+        });
+
+        canvas.addEventListener('pointerup', function(e){
+          dragging = false;
+          canvas.style.cursor = 'grab';
+          removePointer(e);
+          tryReleasePointerCapture(canvas, e.pointerId);
+        });
+
+        canvas.addEventListener('pointercancel', function(e){
+          dragging = false;
+          canvas.style.cursor = 'grab';
+          removePointer(e);
+          tryReleasePointerCapture(canvas, e.pointerId);
+        });
+
+        canvas.addEventListener('pointerleave', function(e){
+          dragging = false;
+          canvas.style.cursor = 'grab';
+          if(e){
+            removePointer(e);
+          }
+        });
+
+        canvas.addEventListener('pointermove', function(e){
+          e.preventDefault();
+          if(activePointers[e.pointerId]){
+            updatePointer(e);
+          }
+          var ids = activePointerIds();
+          if(ids.length >= 2){
+            var first = activePointers[ids[0]];
+            var second = activePointers[ids[1]];
+            if(!pinchStartDistance || !pinchStartRadius){
+              pinchStartDistance = computeDistance(first, second) || null;
+              pinchStartRadius = radius;
+            }
+            var currentDistance = computeDistance(first, second);
+            if(currentDistance && pinchStartRadius && pinchStartDistance){
+              var scale = currentDistance / pinchStartDistance;
+              if(scale){
+                radius = clampRadius(pinchStartRadius * scale);
+                pinchStartRadius = radius;
+                pinchStartDistance = currentDistance;
+              }
+            }
+            return;
+          }
+          if(!dragging) return;
+          var dx = e.clientX - lastX;
+          var dy = e.clientY - lastY;
+          lastX = e.clientX;
+          lastY = e.clientY;
+          rotY += dx * 0.01;
+          rotX += dy * 0.01;
+          var limit = Math.PI / 2 - 0.05;
+          if(rotX > limit) rotX = limit;
+          if(rotX < -limit) rotX = -limit;
+        });
+
+        canvas.addEventListener('wheel', function(e){
+          e.preventDefault();
+          var delta = e.deltaY > 0 ? 1 : -1;
+          var nextRadius = radius * (delta > 0 ? 0.93 : 1.07);
+          radius = clampRadius(nextRadius);
+        }, { passive: false });
+
+        var lastDraw = [];
+
+        function draw(){
+          ctx.clearRect(0,0,width,height);
+          ctx.beginPath();
+          ctx.arc(width/2, height/2, radius, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          var t = performance.now() * 0.001;
+          var angleY = rotY + t * auto;
+          var sinY = Math.sin(angleY);
+          var cosY = Math.cos(angleY);
+          var sinX = Math.sin(rotX);
+          var cosX = Math.cos(rotX);
+
+          var projected = [];
+          for(var i=0;i<points.length;i++){
+            var p = points[i];
+            var x1 = p.x * cosY + p.z * sinY;
+            var y1 = p.y;
+            var z1 = -p.x * sinY + p.z * cosY;
+            var x = x1;
+            var y = y1 * cosX - z1 * sinX;
+            var z = y1 * sinX + z1 * cosX;
+            if(z <= -0.05) continue;
+            var depth = (z + 1) / 2;
+            var s = 0.5 + depth * 0.7;
+            projected.push({
+              px: width/2 + x * radius,
+              py: height/2 - y * radius,
+              s: s,
+              z: z,
+              emoji: p.emoji
+            });
+          }
+          projected.sort(function(a,b){ return a.z - b.z; });
+
+          lastDraw = [];
+          for(var i=0;i<projected.length;i++){
+            var q = projected[i];
+            var size = Math.max(16, Math.floor(22 * q.s));
+            var half = size / 2;
+            var clickRadius = size * 0.55;
+            var img = getEmojiImage(q.emoji);
+            if(img){
+              ctx.globalAlpha = 1;
+              ctx.drawImage(img, q.px - half, q.py - half, size, size);
+            } else {
+              ctx.globalAlpha = 0.7;
+              ctx.fillStyle = '#4f4f4f';
+              ctx.beginPath();
+              ctx.arc(q.px, q.py, Math.max(6, clickRadius * 0.6), 0, Math.PI * 2);
+              ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            lastDraw.push({ x: q.px, y: q.py, r: clickRadius, emoji: q.emoji });
+          }
+
+          requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+
+        canvas.addEventListener('click', function(e){
+          var rect = canvas.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          for(var i=lastDraw.length-1;i>=0;i--){
+            var item = lastDraw[i];
+            var dx = x - item.x;
+            var dy = y - item.y;
+            if(dx*dx + dy*dy <= item.r * item.r){
+              copyEmoji(item.emoji);
+              break;
+            }
+          }
+        });
+
+        function copyEmoji(emoji){
+          function success(){
+            setStatus('Copied ' + emoji + ' to clipboard');
+            setTimeout(function(){ setStatus('Ready'); }, 1200);
+          }
+          function failure(){
+            setStatus('Copy failed. Please copy manually.', true);
+            setTimeout(function(){ setStatus('Ready'); }, 1500);
+          }
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(emoji).then(success).catch(function(){
+              if(manualCopy(emoji)){ success(); } else { failure(); }
+            });
+          } else {
+            if(manualCopy(emoji)){ success(); } else { failure(); }
+          }
+        }
+
+  updateFullscreenState();
+  syncCategoriesFromInputs();
+      }
+
+      initCanvasGlobe();
+    })();
+  </script>
+</body>
+</html>
