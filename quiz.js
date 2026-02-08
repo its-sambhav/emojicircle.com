@@ -1,40 +1,42 @@
+
+
 		const DATA = {
 			"Movies / Web Series": {
 				easy: [
-					{ emojis: "🦁👑", answer: "The Lion King", clue: "An animated movie about a jungle prince" },
-					{ emojis: "🧑‍🤝‍🧑🧠", answer: "3 Idiots", clue: "Engineering college + friendship" },
+					// user-added easy questions
+					{ emojis: "1🐼🥋", answer: "Kung Fu Panda", clue: "Panda who learns kung fu" },
+					{ emojis: "3️⃣🤓🤓🤓", answer: "3 Idiots", clue: "Three friends + engineering college" },
+					{ emojis: "🦁👑", answer: "The Lion King", clue: "A lion cub becomes king" },
+					{ emojis: "🕷️🧑‍🦱🏙️", answer: "Spider Man", clue: "A teenager with spider powers" },
+					{ emojis: "🦖🏝️", answer: "Jurassic Park", clue: "Dinosaurs on an island" },
+					{ emojis: "👮‍♂️🕶️🔥", answer: "Singham", clue: "Fearless cop fighting crime" },
 					{ emojis: "🧊👸", answer: "Frozen", clue: "Ice powers and sisters" },
-					{ emojis: "🏏🇮🇳", answer: "Lagaan", clue: "Cricket match that changed a village" },
-					{ emojis: "🕷️🧑‍♂️", answer: "Spider-Man", clue: "A teenager becomes a superhero after a bite" },
-					{ emojis: "🚆❤️", answer: "Chennai Express", clue: "Love story across India" },
-					{ emojis: "🦖🏝️", answer: "Jurassic Park", clue: "Dinosaurs brought back to life" },
-					{ emojis: "👮‍♂️💥", answer: "Singham", clue: "A fearless cop with a loud entry" },
-					{ emojis: "🤖🔫", answer: "Terminator", clue: "A robot from the future" },
-					{ emojis: "👨‍👦❤️", answer: "Bajrangi Bhaijaan", clue: "A man escorts a child across borders" }
-				],
-				medium: [
 					{ emojis: "🚢💔🌊", answer: "Titanic", clue: "Love story on a sinking ship" },
-					{ emojis: "🕺🎥🌟", answer: "Om Shanti Om", clue: "Rebirth and cinema connection" },
-					{ emojis: "🧠💭💤", answer: "Inception", clue: "Dreams inside dreams" },
-					{ emojis: "🧑‍🎓🎓📚", answer: "Chhichhore", clue: "College life and pressure" },
-					{ emojis: "🧑‍🚀🌌⏳", answer: "Interstellar", clue: "Space travel and time" },
-					{ emojis: "👮‍♂️🧠📜", answer: "Special 26", clue: "Fake CBI raid based on true events" },
-					{ emojis: "🎩🪄🐇", answer: "Now You See Me", clue: "Magicians pulling off a big trick" },
-					{ emojis: "👁️👂🎹", answer: "Andhadhun", clue: "Blind man, music, and mystery" },
-					{ emojis: "🦇🤡🌃", answer: "The Dark Knight", clue: "Hero vs a chaotic villain" },
-					{ emojis: "🍱❤️🚆", answer: "The Lunchbox", clue: "Love story through lunchboxes" }
+					{ emojis: "🧞‍♂️🪔", answer: "Aladdin", clue: "Genie from a magic lamp" },
+					{ emojis: "🎸🎤🔥", answer: "Rockstar", clue: "Passionate musician chasing love and fame" },
+					{ emojis: "🧑‍🎓3️⃣0️⃣", answer: "Super 30", clue: "Exam pressure & competition" },
+			],
+				medium: [
+					// user-added medium questions
+					{ emojis: "👗👠🕛", answer: "Cinderella", clue: "Don't lose your glass slipper." },
+					{ emojis: "👨‍👧‍👧🏋️‍♂️🏅", answer: "Dangal", clue: "Maari choriyan choron se kam hain ke?" },
+					{ emojis: "🏑👭🇮🇳", answer: "Chak De! India", clue: "70 minutes of a women's hockey team fighting for gold." },
+					{ emojis: "🎸🎤💔", answer: "Aashiqui 2", clue: "A singer's rise to fame and his self-destructive love." },
+					{ emojis: "🧒🎤🌟", answer: "Taare Zameen Par", clue: "A child singer becomes famous" },
+					{ emojis: "👨‍⚖️⚖️🇮🇳", answer: "Jolly LLB", clue: "Fight for justice in India" },
+					{ emojis: "🚂❤️", answer: "Dilwale Dulhania Le Jayenge", clue: "Love story that starts on a train" },
+					{ emojis: "👩‍🚀🇮🇳🚀", answer: "Mission Mangal", clue: "India’s space mission" },
+					{ emojis: "🚽🇮🇳", answer: "Toilet Ek Prem Katha", clue: "Toilet revolution in villages" },
+					{ emojis: "🚢💔🌊", answer: "Titanic", clue: "Love story on a sinking ship" },
+					
 				],
 				hard: [
-					{ emojis: "🧠⏳🔄", answer: "Ghajini", clue: "Memory loss and revenge" },
-					{ emojis: "🧪💊🔴🔵", answer: "The Matrix", clue: "Reality is an illusion" },
-					{ emojis: "👁️📦😱", answer: "Bird Box", clue: "You survive by not seeing" },
-					{ emojis: "🎭🧠👽", answer: "PK", clue: "Alien questions religion and society" },
-					{ emojis: "🧠🪐🔄", answer: "Tenet", clue: "Time moves differently for everyone" },
-					{ emojis: "🏚️🌧️😶", answer: "Masaan", clue: "Small town, loss, and silence" },
-					{ emojis: "🕳️🌌🐰", answer: "Donnie Darko", clue: "Time loops and strange visions" },
-					{ emojis: "🎨🔥🧑‍🎓", answer: "Rang De Basanti", clue: "Youth awakening and revolution" },
-					{ emojis: "🌊🛶🐯", answer: "Life of Pi", clue: "Survival story with an animal" },
-					{ emojis: "👁️🪞🎶", answer: "Black Swan", clue: "Nothing is what it seems" }
+					// user-added hard questions
+					{ emojis: "👮‍♂️⚖️🔥", answer: "Satyameva Jayate", clue: "Honest officer fighting injustice" },
+					{ emojis: "👩‍🦱💔🚬", answer: "Kabir Singh", clue: "Dark romance and obsession" },
+					{ emojis: "🚗🛣️🧍‍♀️", answer: "Highway", clue: "Journey becomes escape from trauma" },
+					{ emojis: "👩‍🎤🎧🌃", answer: "Secret Superstar", clue: "Singer singing while hiding face" },
+					
 				]
 			},
 			"Countries": {
@@ -75,44 +77,7 @@
 					{ emojis: "🏝️🌪️🇯🇲", answer: "Jamaica", clue: "Caribbean island famous for reggae music" }
 				]
 			},
-			"Famous Personalities": {
-				easy: [
-					{ emojis: "🏏🇮🇳👑", answer: "Virat Kohli", clue: "Known as the 'King' of Indian cricket" },
-					{ emojis: "🏏🧤👨‍✈️", answer: "MS Dhoni", clue: "Captain Cool, famous wicketkeeper" },
-					{ emojis: "🎬🕶️🔥", answer: "Shah Rukh Khan", clue: "Bollywood superstar known as King Khan" },
-					{ emojis: "🎥💪🕺", answer: "Salman Khan", clue: "Bollywood’s action hero with huge fan following" },
-					{ emojis: "🏏💥🧢", answer: "Sachin Tendulkar", clue: "God of Cricket" },
-					{ emojis: "🎬🧔🎭", answer: "Aamir Khan", clue: "Actor known for intense roles and method acting" },
-					{ emojis: "💃👑🎬", answer: "Aishwarya Rai Bachchan", clue: "Miss World turned Bollywood actress" },
-					{ emojis: "🎬🕶️🌟", answer: "Hrithik Roshan", clue: "Bollywood actor known for stylish roles" },
-					{ emojis: "🏏⚡🌍", answer: "Hardik Pandya", clue: "Famous Indian all-rounder" },
-					{ emojis: "🎬💃❤️", answer: "Deepika Padukone", clue: "Bollywood actress known for elegance and grace" }
-				],
-				medium: [
-					{ emojis: "🏏🎯🇮🇳", answer: "Jasprit Bumrah", clue: "Indian bowler famous for yorkers" },
-					{ emojis: "🏏🧠📊", answer: "Sourav Ganguly", clue: "Former Indian captain known for strategy" },
-					{ emojis: "🎬🎭👨‍👦", answer: "Amitabh Bachchan", clue: "Bollywood legend and Bachchan family head" },
-					{ emojis: "🎬🕶️💼", answer: "Saif Ali Khan", clue: "Actor known for negative and stylish roles" },
-					{ emojis: "🏏🧢🔥", answer: "Rohit Sharma", clue: "Young Indian captain and opener" },
-					{ emojis: "🎬👑🎭", answer: "Kangana Ranaut", clue: "Actress famous for powerful female-centric films" },
-					{ emojis: "🏏🧤⚡", answer: "Rishabh Pant", clue: "Explosive wicketkeeper-batsman" },
-					{ emojis: "🎬💃🎶", answer: "Katrina Kaif", clue: "Actress known for dance numbers and glamour" },
-					{ emojis: "🏏🌍🧠", answer: "Anil Kumble", clue: "Former Indian spinner with unique action" },
-					{ emojis: "🎬👩‍🎓🔥", answer: "Alia Bhatt", clue: "Actress known for realistic and bold roles" }
-				],
-				hard: [
-					{ emojis: "🏏⚖️🔥", answer: "S. Sreesanth", clue: "Indian cricketer banned and later returned strong" },
-					{ emojis: "🏏🌊🌍", answer: "Zaheer Khan", clue: "Indian fast bowler who dominated overseas" },
-					{ emojis: "🎬🧠🎭", answer: "Rajkummar Rao", clue: "Actor known for experimental and indie films" },
-					{ emojis: "🎬🎥⚡", answer: "Anurag Kashyap", clue: "Director-actor known for intense cinema" },
-					{ emojis: "🏏🧠🧤", answer: "Rahul Dravid", clue: "Former Indian wicketkeeper before Dhoni era" },
-					{ emojis: "🎬👩‍⚖️🎭", answer: "Taapsee Pannu", clue: "Actress famous for courtroom and serious roles" },
-					{ emojis: "🏏🧠🕰️", answer: "Kapil Dev", clue: "India’s first World Cup winning captain" },
-					{ emojis: "🎬🌊🎭", answer: "Vidya Balan", clue: "Actress known for offbeat and parallel cinema" },
-					{ emojis: "🏏🔥🇮🇳", answer: "Shikhar Dhawan", clue: "Indian batsman nicknamed 'Gabbar'" },
-					{ emojis: "🎬🧬🎭", answer: "Radhika Apte", clue: "Actress known for unconventional roles and scripts" }
-				]
-			},
+			
 			"Tech & Brands": {
 				easy: [
 					{ emojis: "🍎📱", answer: "Apple", clue: "A famous company known for iPhone and Mac" },
@@ -248,7 +213,7 @@
 		const LEVELS = {
 			easy: {time:15,pointsCorrect:10,pointsWrong:0,hints:2},
 			medium:{time:10,pointsCorrect:15,pointsWrong:-5,hints:1},
-			hard:{time:7,pointsCorrect:20,pointsWrong:-10,hints:0}
+			hard:{time:9,pointsCorrect:20,pointsWrong:-10,hints:2}
 		};
 
 		// elements
@@ -265,10 +230,11 @@
 		const emojiBox = document.getElementById('emojiBox');
 		const answerEl = document.getElementById('answer');
 		const submitBtn = document.getElementById('submit');
+		const revealBtn = document.getElementById('revealBtn');
 		const feedback = document.getElementById('feedback');
 		const hintBtn = document.getElementById('hintBtn');
 		const hintsLeftEl = document.getElementById('hintsLeft');
-		const nextBtn = document.getElementById('next');
+		
 		const endBtn = document.getElementById('end');
 		const scoresEl = document.getElementById('scores');
 		const turnLabel = document.getElementById('turnLabel');
@@ -277,7 +243,8 @@
 		const playAgain = document.getElementById('playAgain');
 		const rulesCard = document.getElementById('rules');
 
-		let state = {category:null,level:'easy',players:1,questions:[],qIndex:0,timerId:null,playersState:[],currentPlayer:0,inProgress:false};
+		let state = {category:null,level:'easy',players:1,questions:[],qIndex:0,timerId:null,playersState:[],currentPlayer:0,inProgress:false,currentQuestionIndex:null};
+
 
 		function populateCategories(){ categoryEl.innerHTML=''; Object.keys(DATA).forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; categoryEl.appendChild(o); }); }
 		populateCategories();
@@ -285,8 +252,9 @@
 		startBtn.addEventListener('click',startFlow);
 		rulesBtn.addEventListener('click',()=>{ rulesCard.classList.toggle('hidden'); });
 		submitBtn.addEventListener('click',submitAnswer);
+		if(revealBtn) revealBtn.addEventListener('click', revealAnswerRequest);
 		hintBtn.addEventListener('click',useHint);
-		nextBtn.addEventListener('click',nextQuestion);
+		
 		endBtn.addEventListener('click',endGame);
 		playAgain.addEventListener('click',resetToSetup);
 		answerEl.addEventListener('keydown',e=>{ if(e.key==='Enter') submitAnswer(); });
@@ -299,7 +267,11 @@
 			if(state.questions.length===0) state.questions = (DATA['Mixed (All categories)'][state.level]||[]).slice();
 			shuffle(state.questions);
 			state.qIndex=0; state.playersState=[]; state.currentPlayer=0;
-			for(let i=0;i<state.players;i++) state.playersState.push({name:`Player ${i+1}`,score:0,hintsLeft:LEVELS[state.level].hints});
+			// track per-question results: { correct: bool, given: string, timeExpired: bool }
+			state.questionResults = new Array(state.questions.length).fill(null);
+			// determine starting hints (Hard always gets 2 hints)
+			let startingHints = (state.level === 'hard') ? 2 : LEVELS[state.level].hints;
+			for(let i=0;i<state.players;i++) state.playersState.push({name:`Player ${i+1}`,score:0,hintsLeft:startingHints});
 			renderScores();
 			setup.classList.add('hidden'); game.classList.remove('hidden'); results.classList.add('hidden');
 			startCountdown(()=>{ state.inProgress=true; showQuestion(); });
@@ -308,7 +280,12 @@
 		function startCountdown(cb){ let c=3; countdown.textContent='Starting in '+c+'...'; const id=setInterval(()=>{ c--; if(c>0) countdown.textContent='Starting in '+c+'...'; else{ clearInterval(id); countdown.textContent='Go!'; cb(); setTimeout(()=>countdown.textContent='',600);} },1000); }
 
 		function showQuestion(){
-			feedback.textContent=''; nextBtn.disabled=true; const q = state.questions[state.qIndex];
+			feedback.textContent=''; const q = state.questions[state.qIndex];
+			// reset reveal state for this question
+			state.revealRequested = false;
+			// mark which question is currently shown
+			state.currentQuestionIndex = state.qIndex;
+			if(revealBtn) { revealBtn.disabled = false; revealBtn.textContent = 'Show Answer'; }
 			if(!q){ endGame(); return; }
 			turnLabel.textContent = state.players>1? state.playersState[state.currentPlayer].name : '';
 			emojiBox.textContent = q.emojis;
@@ -319,19 +296,143 @@
 			startTimer(LEVELS[state.level].time, onTimeUp);
 		}
 
-		function startTimer(seconds, onExpire){ clearInterval(state.timerId); timerBar.style.transition='none'; timerBar.style.width='100%'; setTimeout(()=>{ timerBar.style.transition=`width ${seconds}s linear`; timerBar.style.width='0%'; },30); let t=seconds; state.timerId=setInterval(()=>{ t--; if(t<=0){ clearInterval(state.timerId); onExpire(); } },1000); }
+		function startTimer(seconds, onExpire){
+			clearInterval(state.timerId);
+			timerBar.style.transition='none'; timerBar.style.width='100%';
+			setTimeout(()=>{ timerBar.style.transition=`width ${seconds}s linear`; timerBar.style.width='0%'; },30);
+			let t=seconds;
+			state.timerActive = true;
+			state.timeExpired = false;
+			state.timerId = setInterval(()=>{
+				t--;
+				if(t<=0){ clearInterval(state.timerId); state.timerActive = false; onExpire(); }
+			},1000);
+		}
 
-		function onTimeUp(){ feedback.style.color='#ffd166'; feedback.textContent = "Time's up!"; applyWrong(); }
+		function onTimeUp(){
+			// mark time expired for this question; do NOT evaluate answers anymore
+			state.timeExpired = true;
+			feedback.style.color='#ffd166'; feedback.textContent = "You are out of time";
+			// mark result as wrong due to timeout
+			state.questionResults[state.qIndex] = { correct: false, given: '', timeExpired: true };
+			// if a reveal was requested earlier, show the answer now
+			if(state.revealRequested){ revealAnswerNow(state.qIndex); }
+			// auto-advance to next question after short delay
+			setTimeout(()=>{
+				state.qIndex++;
+				if(state.qIndex >= (state.questions||[]).length){ endGame(); return; }
+				if(state.players>1) state.currentPlayer=(state.currentPlayer+1)%state.players;
+				showQuestion();
+			},900);
+		}
 
-		function submitAnswer(){ if(!state.inProgress) return; const text = answerEl.value.trim().toLowerCase(); if(!text) return; const q = state.questions[state.qIndex]; clearInterval(state.timerId); const correct = (q.answer||'').trim().toLowerCase(); if(text===correct){ const pts=LEVELS[state.level].pointsCorrect; state.playersState[state.currentPlayer].score += pts; feedback.style.color='#7ef9b1'; feedback.textContent = `Correct! +${pts}`; } else { const pts=LEVELS[state.level].pointsWrong; state.playersState[state.currentPlayer].score += pts; feedback.style.color='#ff7b7b'; feedback.textContent = `Wrong! ${pts<0?pts:''}`; } renderScores(); nextBtn.disabled=false; state.qIndex++; }
+		function submitAnswer(){
+			if(!state.inProgress) return;
+			const text = answerEl.value.trim().toLowerCase(); if(!text) return;
+			// If time has expired for this question, inform user and do not evaluate (but auto-advance)
+			if(state.timeExpired){ feedback.style.color='#ffd166'; feedback.textContent = 'You are out of time';
+				setTimeout(()=>{ state.qIndex++; if(state.qIndex >= (state.questions||[]).length){ endGame(); return; } if(state.players>1) state.currentPlayer=(state.currentPlayer+1)%state.players; showQuestion(); },900);
+				return; }
+			// Only evaluate answers while timer is active
+			if(!state.timerActive){ return; }
+			const idx = state.qIndex;
+			const q = state.questions[idx];
+			const correct = (q.answer||'').trim().toLowerCase();
+			if(text===correct){
+				// correct while time left: award points, stop timer, auto-advance
+				const pts = LEVELS[state.level].pointsCorrect;
+				state.playersState[state.currentPlayer].score += pts;
+				feedback.style.color='#7ef9b1'; feedback.textContent = `Correct! +${pts}`;
+				// stop timer and mark as not active
+				clearInterval(state.timerId); state.timerActive = false;
+				renderScores();
+				// advance after a short delay
+				setTimeout(()=>{
+					state.qIndex++;
+					if(state.players>1) state.currentPlayer = (state.currentPlayer+1) % state.players;
+					showQuestion();
+				},900);
+				// record correct result
+				state.questionResults[idx] = { correct: true, given: text, timeExpired: false };
+				// reveal answer immediately if requested
+				if(state.revealRequested) revealAnswerNow(idx);
+			} else {
+				// wrong answer while time left: apply penalty, allow retries, show Next button
+				const pts = LEVELS[state.level].pointsWrong;
+				state.playersState[state.currentPlayer].score += pts;
+				feedback.style.color='#ff7b7b'; feedback.textContent = `Wrong! ${pts<0?pts:''}`;
+				renderScores();
+				// record wrong result and then auto-advance (rapid-fire)
+				state.questionResults[idx] = { correct: false, given: text, timeExpired: false };
+				// stop timer for this question
+				clearInterval(state.timerId); state.timerActive = false;
+				setTimeout(()=>{
+					state.qIndex++;
+					if(state.qIndex >= (state.questions||[]).length){ endGame(); return; }
+					if(state.players>1) state.currentPlayer=(state.currentPlayer+1)%state.players;
+					showQuestion();
+				},900);
+			}
+		}
 
-		function applyWrong(){ const pts=LEVELS[state.level].pointsWrong; state.playersState[state.currentPlayer].score += pts; renderScores(); nextBtn.disabled=false; state.qIndex++; }
+		function revealAnswerRequest(){
+			// If timer is active, schedule reveal when time's up. Otherwise reveal now.
+			if(state.timerActive){
+				state.revealRequested = true;
+				if(revealBtn) { revealBtn.disabled = true; revealBtn.textContent = 'Will reveal after time'; }
+			} else {
+				const idxToReveal = (state.currentQuestionIndex !== null) ? state.currentQuestionIndex : Math.max(0, state.qIndex);
+				revealAnswerNow(idxToReveal);
+			}
+		}
 
-		function nextQuestion(){ if(state.players>1) state.currentPlayer=(state.currentPlayer+1)%state.players; showQuestion(); }
+		function revealAnswerNow(index){
+			const q = (typeof index === 'number') ? state.questions[index] : null;
+			if(!q) return;
+			feedback.style.color = '#60a5fa';
+			feedback.textContent = `Answer: ${q.answer}`;
+			if(revealBtn){ revealBtn.disabled = true; revealBtn.textContent = 'Answer Shown'; }
+		}
+
+		function applyWrong(){ const pts=LEVELS[state.level].pointsWrong; state.playersState[state.currentPlayer].score += pts; renderScores(); }
+
+		function nextQuestion(){
+			// kept for compatibility but not used by UI (rapid-fire)
+			clearInterval(state.timerId); state.timerActive = false; state.timeExpired = false;
+			state.qIndex++;
+			if(state.qIndex >= (state.questions||[]).length){ endGame(); return; }
+			if(state.players>1) state.currentPlayer=(state.currentPlayer+1)%state.players;
+			showQuestion();
+		}
 
 		function useHint(){ const player=state.playersState[state.currentPlayer]; if(player.hintsLeft<=0) return; if(LEVELS[state.level].hints===0) return; player.hintsLeft--; player.score -=5; const q = state.questions[state.qIndex]; const parts = q.emojis.split(/\s+/).filter(Boolean); if(parts.length>1){ parts.pop(); emojiBox.textContent = parts.join(' '); } else { feedback.textContent = `Clue: ${q.clue||''}`; } renderScores(); hintsLeftEl.textContent = player.hintsLeft; }
 
-		function endGame(){ clearInterval(state.timerId); state.inProgress=false; game.classList.add('hidden'); results.classList.remove('hidden'); const sorted = [...state.playersState].sort((a,b)=>b.score-a.score); resultsList.innerHTML=''; sorted.forEach(p=>{ const li=document.createElement('li'); li.textContent = `${p.name} — ${p.score} pts`; resultsList.appendChild(li); }); }
+		function endGame(){
+			clearInterval(state.timerId);
+			state.inProgress=false;
+			game.classList.add('hidden');
+			results.classList.remove('hidden');
+			const sorted = [...state.playersState].sort((a,b)=>b.score-a.score);
+			resultsList.innerHTML='';
+			// Scores header
+			const scoresHeader = document.createElement('li');
+			scoresHeader.innerHTML = '<strong>Scores</strong>';
+			resultsList.appendChild(scoresHeader);
+			sorted.forEach(p=>{ const li=document.createElement('li'); li.textContent = `${p.name} — ${p.score} pts`; resultsList.appendChild(li); });
+			// Answers header (only wrong/timeout questions)
+			const answersHeader = document.createElement('li');
+			answersHeader.innerHTML = '<strong>Answers (wrong / timed out)</strong>';
+			resultsList.appendChild(answersHeader);
+			// List only questions that were answered incorrectly or timed out
+			(state.questions||[]).forEach((q,i)=>{
+				const res = state.questionResults && state.questionResults[i];
+				if(res && res.correct === false){
+					const li = document.createElement('li');
+					li.textContent = `${q.emojis} — ${q.answer}`;
+					resultsList.appendChild(li);
+				}
+			});
+		}
 
 		function resetToSetup(){ results.classList.add('hidden'); game.classList.add('hidden'); setup.classList.remove('hidden'); state={category:null,level:'easy',players:1,questions:[],qIndex:0,timerId:null,playersState:[],currentPlayer:0,inProgress:false}; }
 
@@ -340,3 +441,4 @@
 		function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
 
 		console.log('Emoji Quiz ready');
+	
