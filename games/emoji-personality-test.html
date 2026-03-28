@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Emoji Personality Test ✨ | Discover Your Persona</title>
+    <meta name="description"
+        content="Take the free Emoji Personality Test! Answer fun emoji-based questions to discover your personality type. Are you an Explorer, Artist, Athlete, or Scholar?">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://emojicircle.com/games/emoji-personality-test.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emojicircle.com/games/emoji-personality-test.html">
+    <meta property="og:title" content="Emoji Personality Test">
+    <meta property="og:description" content="Answer fun emoji questions to discover your personality type!">
+    <meta property="og:image" content="https://emojicircle.com/images/games/emoji-personality-test-og.jpg">
+    <meta property="og:site_name" content="EmojiCircle">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://emojicircle.com/games/emoji-personality-test.html">
+    <meta name="twitter:title" content="Emoji Personality Test">
+    <meta name="twitter:description" content="Answer fun emoji questions to discover your personality type!">
+    <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-personality-test-og.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    "name": "Emoji Personality Test",
+    "url": "https://emojicircle.com/games/emoji-personality-test.html",
+    "genre": ["Quiz", "Personality"],
+    "description": "A fun and interactive personality quiz utilizing emojis. Answer multiple-choice questions to determine your personality archetype.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Emoji Personality Test",
+        "item": "https://emojicircle.com/games/emoji-personality-test.html"
+      }
+    ]
+  }
+  </script>
+
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/emoji-header.css">
+    <link rel="stylesheet" href="game-layout.css">
+    <script src="game-layout.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-77D61P8G0J');
+    </script>
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #121214;
+            --surface-alt: #18181b;
+            --surface-strong: #0b0b0c;
+            --border: #27272a;
+            --accent: #ff4d00;
+            --text-primary: #f8fafc
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial
+        }
+
+        /* Compact card that fits inside .game-container without scrolling */
+        .pt-card {
+            background: var(--surface);
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            align-items: stretch;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Board area should not scroll; let inner components manage overflow */
+        .board-area {
+            flex-direction: column;
+            overflow: hidden;
+            justify-content: center;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .question-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .q-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        .choice-btn {
+            background: var(--surface-alt);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.98rem;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+            justify-content: center;
+        }
+
+        .choice-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+
+        .choice-emoji { font-size: 1.6rem; }
+        .choice-label { color: var(--text-primary); font-weight: 600; }
+        .choice-btn { color: var(--text-primary); }
+
+        .choice-btn.selected {
+            background: linear-gradient(90deg, rgba(255,77,0,0.12), rgba(255,77,0,0.06));
+            box-shadow: 0 6px 18px rgba(255,77,0,0.08);
+            transform: translateY(-2px) scale(1.02);
+            border-color: var(--accent);
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 999px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .progress > i {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), #ff8c00);
+            transition: width 280ms ease;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--text-primary); cursor: pointer }
+
+        .result-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .result-emoji { font-size: 3.6rem; }
+
+        /* Small screens adjustments */
+        @media (max-width: 640px) {
+            .choices { grid-template-columns: 1fr 1fr; }
+            .result-emoji { font-size: 2.8rem; }
+        }
+    
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 10px 14px; }
+      .game-hud .hud-right { width: 100%; justify-content: space-between; }
+      .board-area { padding: 0 !important; overflow: hidden; }
+      .pt-card {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+        aspect-ratio: 4 / 5;
+        margin: 0 !important;
+        border-radius: 0;
+        overflow: hidden;
+      }
+    }
+
+  </style>
+</head>
+
+<body data-current-game="emoji-personality-test">
+
+    <main class="game-page">
+        <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+            <div class="game-hud">
+                <h1>✨ Emoji <span>Personality Test</span></h1>
+                <div class="hud-right">
+                    <button id="submit" class="btn primary">Submit</button>
+                    <button id="restart" class="btn">Restart</button>
+                </div>
+            </div>
+            
+            <div class="board-area" style="flex-direction: column; overflow: hidden; justify-content: center; padding: 24px;">
+                <div class="pt-card">
+                    <div id="qwrap"></div>
+                    <div id="result" class="feedback" style="margin-top:24px; font-weight:bold; font-size:1.2rem; color:var(--accent); text-align:center;"></div>
+
+                    <div class="visually-hidden">
+                        <h2>Take the Emoji Personality Test</h2>
+                        <p>Curious about what your favorite emojis say about you? Take our quick and fun Emoji Personality Test!
+                            By answering simple multiple-choice questions using only emojis, we can help determine your unique
+                            archetype. Will you be the adventurous Explorer, the creative Artist, the energetic Athlete, or the
+                            thoughtful Scholar?</p>
+                        <ul>
+                            <li><a href="/index.html">Discover the hidden meaning behind your favorite emojis</a></li>
+                            <li><a href="/games.html">Explore more fun emoji quizzes and games</a></li>
+                        </ul>
+                        <h3>How It Works</h3>
+                        <p>Simply read each question—like "Pick a weekend activity" or "Your ideal pet"—and select the emoji
+                            option that best represents you. Once you have answered all the questions, hit Submit to reveal your
+                            generated psychological profile based entirely on your emoji preferences!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        (() => {
+            const DATA = [
+                { q: 'Pick a weekend activity', a: ['🏖️ Relaxing', '🎨 Creative', '🏃 Active', '📚 Read'] },
+                { q: 'Your ideal pet', a: ['🐶 Dog', '🐱 Cat', '🦜 Bird', '🐢 Turtle'] },
+                { q: 'Favorite snack', a: ['🍫 Chocolate', '🍎 Fruit', '🍿 Savory', '🍪 Sweet'] },
+                { q: 'Preferred weather', a: ['☀️ Sunny', '🌤 Mild', '🌧 Rainy', '❄️ Snowy'] },
+                { q: 'Pick a weekend plan', a: ['🧭 Explore', '🎭 Create', '🏅 Compete', '📖 Learn'] },
+                { q: 'Pick a drink', a: ['🧃 Juice', '🍷 Wine', '🏃‍♂️ Sports Drink', '☕ Coffee'] },
+                { q: 'Music mood', a: ['🎶 Chill', '🎨 Indie', '🔥 Pumped', '🎧 Focused'] },
+                { q: 'Ideal vacation', a: ['🏝 Beach', '🏕 Camp', '🏛 City tour', '📚 Retreat'] },
+                { q: 'Free-time hobby', a: ['📷 Photography', '🎨 Drawing', '🏋️ Fitness', '🧩 Puzzles'] },
+                { q: 'Reaction to surprise', a: ['😮 Excited', '😊 Touched', '💪 Energized', '🤔 Curious'] }
+            ];
+
+            const profiles = [
+                { title: 'Explorer', desc: 'Adventurous and curious — you love new places and experiences.', emoji: '🧭' },
+                { title: 'Artist', desc: 'Creative and thoughtful — you see beauty in small things.', emoji: '🎨' },
+                { title: 'Athlete', desc: 'Energetic and competitive — you thrive in motion and challenge.', emoji: '🏅' },
+                { title: 'Scholar', desc: 'Reflective and analytical — you enjoy learning and deep thought.', emoji: '📚' }
+            ];
+
+            const qwrap = document.getElementById('qwrap');
+            const submit = document.getElementById('submit');
+            const restart = document.getElementById('restart');
+            const resultEl = document.getElementById('result');
+
+            let answers = new Array(DATA.length).fill(null);
+            let idx = 0;
+
+            function renderQuestion(i) {
+                const item = DATA[i];
+                qwrap.innerHTML = '';
+
+                const stage = document.createElement('div');
+                stage.className = 'question-stage';
+
+                const title = document.createElement('div');
+                title.className = 'q-title';
+                title.textContent = (i + 1) + '. ' + item.q;
+                stage.appendChild(title);
+
+                // progress
+                const progress = document.createElement('div');
+                progress.className = 'progress';
+                const bar = document.createElement('i');
+                bar.style.width = Math.round(((i) / DATA.length) * 100) + '%';
+                progress.appendChild(bar);
+                stage.appendChild(progress);
+
+                const choices = document.createElement('div');
+                choices.className = 'choices';
+
+                item.a.forEach((opt, oi) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'choice-btn';
+                    btn.innerHTML = '<span class="choice-emoji">' + opt.split(' ')[0] + '</span><span class="choice-label">' + opt.split(' ').slice(1).join(' ') + '</span>';
+                    if (answers[i] === oi) btn.classList.add('selected');
+                    btn.addEventListener('click', () => {
+                        // record answer and mark selection
+                        answers[i] = oi;
+                        choices.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        // small pulse animation
+                        btn.animate([{ transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 180 });
+
+                        // disable further clicks while transitioning
+                        choices.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+
+                        // Auto-advance after a short delay; submit on last question
+                        setTimeout(() => {
+                            if (i === DATA.length - 1) {
+                                showResult();
+                            } else {
+                                idx = Math.min(DATA.length - 1, idx + 1);
+                                renderQuestion(idx);
+                            }
+                        }, 300);
+                    });
+                    choices.appendChild(btn);
+                });
+                stage.appendChild(choices);
+
+                const controls = document.createElement('div');
+                controls.className = 'controls';
+
+                const prev = document.createElement('button');
+                prev.className = 'btn';
+                prev.textContent = 'Previous';
+                prev.disabled = i === 0;
+                prev.addEventListener('click', () => { idx = Math.max(0, idx - 1); renderQuestion(idx); });
+
+                const next = document.createElement('button');
+                next.className = 'btn primary';
+                next.textContent = (i === DATA.length - 1) ? 'Submit' : 'Next';
+                next.disabled = answers[i] === null;
+                next.addEventListener('click', () => {
+                    if (answers[i] === null) return; // guard
+                    if (i === DATA.length - 1) return showResult();
+                    idx = Math.min(DATA.length - 1, idx + 1);
+                    renderQuestion(idx);
+                });
+
+                // re-enable/disable next when selection changes
+                choices.addEventListener('click', () => { next.disabled = answers[i] === null; });
+
+                controls.appendChild(prev);
+                controls.appendChild(next);
+                stage.appendChild(controls);
+
+                qwrap.appendChild(stage);
+            }
+
+            function showResult() {
+                // tally answers: simple mapping by index -> profile index (mod 4)
+                const counts = [0, 0, 0, 0];
+                answers.forEach(a => { if (a !== null) counts[a % 4]++; });
+                const max = counts.indexOf(Math.max(...counts));
+
+                qwrap.innerHTML = '';
+                const res = document.createElement('div');
+                res.className = 'result-screen';
+
+                const emoji = document.createElement('div');
+                emoji.className = 'result-emoji';
+                emoji.textContent = profiles[max].emoji;
+                res.appendChild(emoji);
+
+                const title = document.createElement('div');
+                title.style.fontWeight = '800';
+                title.textContent = profiles[max].title;
+                res.appendChild(title);
+
+                const desc = document.createElement('div');
+                desc.textContent = profiles[max].desc;
+                res.appendChild(desc);
+
+                const scoreLine = document.createElement('div');
+                scoreLine.style.opacity = '0.9';
+                scoreLine.textContent = '(' + counts[max] + ' matching answers)';
+                res.appendChild(scoreLine);
+
+                const again = document.createElement('button');
+                again.className = 'btn primary';
+                again.textContent = 'Try again';
+                again.addEventListener('click', () => { answers = new Array(DATA.length).fill(null); idx = 0; renderQuestion(0); resultEl.textContent = ''; });
+                res.appendChild(again);
+
+                qwrap.appendChild(res);
+            }
+
+            // wire up top buttons
+            submit.addEventListener('click', () => { showResult(); });
+            restart.addEventListener('click', () => { answers = new Array(DATA.length).fill(null); idx = 0; renderQuestion(0); resultEl.textContent = ''; });
+
+            // initial render
+            renderQuestion(0);
+        })();
+    </script>
+    <footer class="site-footer" role="contentinfo">
+        <section class="site-footer-content">
+            <div class="site-footer__content">
+                <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+                    EmojiCircle<span>.com</span>
+                </a>
+                <p>
+                    All the emojis, stickers, and captions you need to light up every chat and post.
+                </p>
+            </div>
+
+            <section class="site-footer-content1">
+                <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+                    <h3 id="footer-explore-heading">Explore</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+                        <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+                        <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+                        <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+                    <h3 id="footer-support-heading">Support</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+                                Conditions</a></li>
+                        <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p>
+                © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+            </p>
+        </div>
+    </footer>
+    <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

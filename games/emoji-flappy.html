@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emoji Flappy Bird – Free Online Flappy Game with Emojis | EmojiCircle</title>
+  <meta name="description"
+    content="Play Emoji Flappy online for free. Tap, click, or press Space to flap your emoji bird through the pipes. Addictive browser game – no login needed." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-flappy.html" />
+  <meta property="og:site_name" content="EmojiCircle">
+  <meta property="og:title" content="Emoji Flappy – Flappy Bird with Emojis | EmojiCircle">
+  <meta property="og:description"
+    content="Tap to flap! Dodge the pipes in this free emoji version of the classic Flappy Bird browser game.">
+  <meta property="og:image" content="https://emojicircle.com/game-banners/flappy.webp">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-flappy.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emoji Flappy – Free Browser Game | EmojiCircle">
+  <meta name="twitter:description"
+    content="Tap, click, or press Space to flap through emoji pipes. Free browser game on EmojiCircle!">
+  <meta name="twitter:image" content="https://emojicircle.com/game-banners/flappy.webp">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Game","name":"Emoji Flappy","description":"A free browser-based Flappy Bird game featuring emoji graphics. Tap, click, or use Space Bar to flap and dodge the pipes.","url":"https://emojicircle.com/games/emoji-flappy.html","genre":["Arcade","Action"],"applicationCategory":"Game","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emojicircle.com/"},{"@type":"ListItem","position":2,"name":"Emoji Games","item":"https://emojicircle.com/games/games.html"},{"@type":"ListItem","position":3,"name":"Emoji Flappy","item":"https://emojicircle.com/games/emoji-flappy.html"}]}
+  </script>
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-alt: #1e1e22;
+      --border: #2a2a30;
+      --accent: #ff4d00;
+      --accent-glow: rgba(255, 77, 0, 0.35);
+      --text-primary: #f8fafc;
+      --text-muted: #a1a1aa;
+      --green: #22c55e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .score-pill.best .score-value { color: var(--green); }
+
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* On mobile use full width and height as well */
+    @media (max-width: 600px) {
+      .canvas-area { align-items: stretch; padding: 0; }
+      .canvas-wrap {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+      }
+    }
+
+    .canvas-wrap canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Override game-layout.css which applies object-fit:contain to all canvases.
+       That would force the portrait 480×640 canvas to shrink and stay narrow.
+       We want it to stretch and fill the full landscape container instead. */
+    .game-container canvas {
+      max-width: none !important;
+      max-height: none !important;
+      object-fit: contain;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ── Overlays (Start / Game Over) ── */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 10;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+      text-align: center;
+      gap: 6px;
+    }
+    .overlay.hidden { opacity: 0; pointer-events: none; }
+
+    .overlay-emoji {
+      font-size: 3rem;
+      animation: bounce 1.2s ease infinite;
+    }
+
+    /* Countdown big number */
+    .countdown-number {
+      font-size: 6.5rem;
+      font-weight: 900;
+      animation: none;
+      color: var(--accent);
+      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .overlay h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 4px 0 0;
+    }
+    .overlay p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin: 2px 0 10px;
+    }
+    .overlay .final-score {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin: 4px 0 0;
+    }
+    .overlay .final-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    /* Buttons inside overlay */
+    .btn {
+      padding: 9px 22px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn:hover { border-color: var(--accent); background: rgba(255,77,0,0.12); }
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+    .btn.primary:hover { background: #e64400; box-shadow: 0 0 16px var(--accent-glow); }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 10px 14px; }
+      .hud-right { width: 100%; justify-content: flex-end; }
+      #pauseBtn { margin-right: auto; }
+      .canvas-area { align-items: stretch; padding: 0; }
+      .canvas-wrap {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        aspect-ratio: 3 / 4; /* same as 480x640 */
+        max-height: 80vh;
+      }
+    }
+  </style>
+</head>
+
+<body data-current-game="emoji-flappy">
+
+  <!-- ============================== -->
+  <!--        GAME HTML STRUCTURE      -->
+  <!-- ============================== -->
+  <main class="game-page">
+    <section class="card">
+
+      <!-- Top HUD -->
+      <div class="game-hud">
+        <h1>🐥 Emoji <span>Flappy</span></h1>
+        <div class="hud-right">
+          <button id="pauseBtn" class="btn" style="padding: 5px 12px; font-size: 1.1rem; line-height: 1;" title="Pause / Resume">⏸</button>
+          <div class="score-pill">
+            <span class="score-label">Score</span>
+            <span class="score-value" id="scoreDisplay">0</span>
+          </div>
+          <div class="score-pill best">
+            <span class="score-label">Best</span>
+            <span class="score-value" id="bestDisplay">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas + overlays -->
+      <div class="canvas-area">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="gameCanvas"></canvas>
+
+          <!-- START SCREEN -->
+          <div class="overlay" id="startScreen">
+            <div class="overlay-emoji">🐥</div>
+            <h2>Ready to Flap?</h2>
+            <p>Press <b>Space</b>, <b>Click</b>, or <b>Tap</b> to start</p>
+            <button type="button" class="btn primary" id="startBtn">Start Game</button>
+          </div>
+
+          <!-- COUNTDOWN (3..2..1) -->
+          <div class="overlay hidden" id="countdownScreen">
+            <div class="overlay-emoji countdown-number" id="countdownNumber">3</div>
+          </div>
+
+          <!-- PAUSE SCREEN -->
+          <div class="overlay hidden" id="pauseScreen">
+            <div class="overlay-emoji" style="animation:none;">⏸</div>
+            <h2>Paused</h2>
+            <p>Take a breather!</p>
+            <button class="btn primary" id="resumeBtn">Resume</button>
+          </div>
+
+          <!-- GAME OVER -->
+          <div class="overlay hidden" id="gameOverScreen">
+            <div class="overlay-emoji" style="animation:none;">💥</div>
+            <h2>Game Over!</h2>
+            <div class="final-score" id="finalScore">0</div>
+            <div class="final-label">Your Score</div>
+            <p id="newBestMsg" style="color:var(--green);font-weight:700;margin:0 0 10px 0;display:none;">🎉 New High Score!</p>
+            <button type="button" class="btn primary" id="restartBtn">Play Again</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ============================== -->
+  <!--       GAME LOGIC (JavaScript)   -->
+  <!-- ============================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // -------------------------
+      // DOM
+      // -------------------------
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      const canvasWrap = document.getElementById('canvasWrap');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const bestDisplay = document.getElementById('bestDisplay');
+      const startScreen = document.getElementById('startScreen');
+      const startBtn = document.getElementById('startBtn');
+      const countdownScreen = document.getElementById('countdownScreen');
+      const countdownNumberEl = document.getElementById('countdownNumber');
+      const gameOverScreen = document.getElementById('gameOverScreen');
+      const finalScoreEl = document.getElementById('finalScore');
+      const newBestMsg = document.getElementById('newBestMsg');
+      const restartBtn = document.getElementById('restartBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const pauseScreen = document.getElementById('pauseScreen');
+      const resumeBtn = document.getElementById('resumeBtn');
+
+      // -------------------------
+      // Configurable constants (tweak these for feel)
+      // -------------------------
+      let W = 480, H = 640;
+
+      // Physics (values are applied using deltaTime multiplier)
+      const GRAVITY = 0.6;       // acceleration per frame-equivalent
+      const FLAP_POWER = -10.5;  // immediate upward velocity set on flap
+      const MAX_FALL = 12.5;     // terminal velocity cap
+
+      const BIRD_SIZE = 36;      // diameter (reduced for movie view)
+      const BIRD_X = 80;         // fixed bird x
+
+      const PIPE_WIDTH = 58;     // narrower pipes
+      const PIPE_CAP_H = 12;     // cap height
+      const PIPE_CAP_OVR = 4;    // cap overdraw
+      const BASE_GAP = 170;
+      const MIN_GAP = 110;
+
+      const BASE_SPEED = 2.6;    // slow base speed
+      const MAX_SPEED = 7.0;     // cap speed
+      const PIPE_SPACING = 330;   // desired horizontal spacing between pipes (px)
+      const GAP_MARGIN = 80;      // vertical margin to keep the gap within safe bounds
+
+      const GROUND_H = 60;
+      const CLOUD_COUNT = 5;
+
+      // Difficulty tuning
+      const SCORE_FOR_MAX = 50;      // score at which difficulty reaches max
+      const DIFFICULTY_DELAY = 2;    // delay in score points before scaling starts
+
+      // -------------------------
+      // State
+      // -------------------------
+      let gameState = 'start'; // 'start'|'playing'|'paused'|'over'
+      let score = 0;
+      let best = Number(localStorage.getItem('flappy-best') || 0);
+      bestDisplay.textContent = best;
+
+      let birdY = H / 2;
+      let birdVel = 0;
+      let birdAngle = 0;
+
+      // Pipes: { x, gapY, scored, renderX }
+      let pipes = [];
+
+      let groundX = 0;
+      let clouds = [];
+
+      // Timing
+      let lastTime = 0;
+      let rafId = null;
+
+      let isCountingDown = false;
+
+      // Polish
+      let shakeTimer = 0;
+      let shakeIntensity = 0;
+
+      // Derived values that smoothly follow targets
+      let pipeSpeed = BASE_SPEED;
+      let gapSize = BASE_GAP;
+      let difficultyProgress = 0; // 0..1 smooth
+
+      // -------------------------
+      // Helpers
+      // -------------------------
+      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function easeCubic(t) { return t * t * (3 - 2 * t); } // smoothstep
+
+      // -------------------------
+      // Resize & visuals
+      // -------------------------
+      function resizeCanvas() {
+        const displayW = canvasWrap.clientWidth || 480;
+        const displayH = canvasWrap.clientHeight || 640;
+        if (displayW !== W || displayH !== H) {
+          W = displayW; H = displayH;
+          // High-DPI canvas backing store
+          const dpr = Math.max(1, window.devicePixelRatio || 1);
+          // Set CSS display size (keeps layout intact)
+          canvas.style.width = W + 'px';
+          canvas.style.height = H + 'px';
+          // Set backing store size for crisp rendering
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          // Scale the drawing context so all drawing uses CSS pixel coordinates
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          // Enable smoothing where applicable
+          if (typeof ctx.imageSmoothingEnabled !== 'undefined') ctx.imageSmoothingEnabled = true;
+          if (gameState !== 'playing') birdY = H / 2;
+          initClouds();
+        }
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function initClouds() {
+        clouds = [];
+        for (let i = 0; i < CLOUD_COUNT; i++) {
+          clouds.push({ x: Math.random() * W, y: 30 + Math.random() * (H * 0.35), w: 50 + Math.random() * 70, h: 20 + Math.random() * 20, speed: 0.08 + Math.random() * 0.4 });
+        }
+      }
+      initClouds();
+
+      // -------------------------
+      // Spawn logic
+      // -------------------------
+      function spawnPipe(atX) {
+        const minTop = GAP_MARGIN;
+        const maxTop = Math.max(minTop + 10, H - GROUND_H - gapSize - GAP_MARGIN);
+        const gapY = minTop + Math.random() * (maxTop - minTop);
+        let x = (typeof atX === 'number') ? atX : (W + 10);
+        // Defensive: ensure we don't place a new pipe that overlaps the previous one
+        if (pipes.length > 0) {
+          let rightmost = pipes[0].x;
+          for (let i = 1; i < pipes.length; i++) if (pipes[i].x > rightmost) rightmost = pipes[i].x;
+          x = Math.max(x, rightmost + PIPE_SPACING);
+        }
+        pipes.push({ x: x, gapY: gapY, scored: false, renderX: x });
+      }
+
+      // -------------------------
+      // Collision (optimized, forgiving)
+      // -------------------------
+      function checkCollision() {
+        const cx = BIRD_X;
+        const cy = birdY;
+        const r = Math.max(6, BIRD_SIZE / 2 - 8); // forgiving hit radius
+
+        // bounds
+        if (cy - r < 0 || cy + r > H - GROUND_H) return true;
+
+        for (let i = 0; i < pipes.length; i++) {
+          const p = pipes[i];
+          const rx = p.x;
+          const ryTop = 0;
+          const rw = PIPE_WIDTH;
+          const rhTop = p.gapY;
+
+          // circle vs top rect
+          if (circleRect(cx, cy, r, rx, ryTop, rw, rhTop)) return true;
+
+          const ryBot = p.gapY + gapSize;
+          const rhBot = H - GROUND_H - ryBot;
+          if (circleRect(cx, cy, r, rx, ryBot, rw, rhBot)) return true;
+        }
+        return false;
+      }
+
+      function circleRect(cx, cy, r, rx, ry, rw, rh) {
+        const closestX = clamp(cx, rx, rx + rw);
+        const closestY = clamp(cy, ry, ry + rh);
+        const dx = cx - closestX;
+        const dy = cy - closestY;
+        return (dx * dx + dy * dy) < (r * r);
+      }
+
+      // -------------------------
+      // Reset / start / pause
+      // -------------------------
+      function resetGame() {
+        score = 0;
+        birdY = H / 2; birdVel = 0; birdAngle = 0;
+        pipes = []; groundX = 0; shakeTimer = 0; shakeIntensity = 0;
+        pipeSpeed = BASE_SPEED; gapSize = BASE_GAP; difficultyProgress = 0;
+        scoreDisplay.textContent = '0';
+        initClouds();
+
+        // Pre-spawn closer pipes so gameplay starts with obstacles nearby
+        spawnPipe(W + 60);
+        spawnPipe(W + 60 + PIPE_SPACING);
+      }
+
+      function startGame() {
+        resetGame();
+        gameState = 'playing';
+        startScreen.classList.add('hidden');
+        gameOverScreen.classList.add('hidden');
+        // gentle initial flap so the player isn't immediately falling
+        birdVel = FLAP_POWER * 0.85;
+      }
+
+      // Begin a 3..2..1 countdown, then call startGame()
+      function beginCountdown() {
+        if (isCountingDown) return;
+        isCountingDown = true;
+        let count = 3;
+        countdownNumberEl.textContent = String(count);
+        countdownScreen.classList.remove('hidden');
+        startScreen.classList.add('hidden');
+
+        const step = 700; // ms per number
+        for (let i = 1; i <= 3; i++) {
+          window.setTimeout(((n) => () => {
+            if (n > 0) {
+              countdownNumberEl.textContent = String(n);
+            } else {
+              // finished
+              countdownScreen.classList.add('hidden');
+              isCountingDown = false;
+              startGame();
+            }
+          })(3 - i), i * step);
+        }
+      }
+
+      function pauseGame() { if (gameState === 'playing') { gameState = 'paused'; pauseScreen.classList.remove('hidden'); } }
+      function resumeGame() { if (gameState === 'paused') { gameState = 'playing'; pauseScreen.classList.add('hidden'); } }
+
+      function triggerGameOver() {
+        gameState = 'over';
+        finalScoreEl.textContent = score;
+        if (score >= best && score > 0) { newBestMsg.style.display = 'block'; best = score; localStorage.setItem('flappy-best', best); bestDisplay.textContent = best; }
+        else newBestMsg.style.display = 'none';
+        // small shake and freeze
+        shakeTimer = 600; shakeIntensity = 8;
+        gameOverScreen.classList.remove('hidden');
+      }
+
+      function restartGame() { gameOverScreen.classList.add('hidden'); startGame(); }
+
+      // -------------------------
+      // Input (kept unchanged behaviour)
+      // -------------------------
+      function flap() { birdVel = FLAP_POWER; }
+
+      window.addEventListener('keydown', function (e) {
+        if (e.code === 'Space' || e.code === 'ArrowUp') {
+          e.preventDefault();
+          if (gameState === 'start') beginCountdown(); else if (gameState === 'playing') flap(); else if (gameState === 'over') restartGame(); else if (gameState === 'paused') resumeGame();
+        }
+        if (e.code === 'Escape' || e.code === 'KeyP') { if (gameState === 'playing') pauseGame(); else if (gameState === 'paused') resumeGame(); }
+      });
+
+      canvasWrap.addEventListener('click', function (e) { if (e.target.tagName === 'BUTTON') return; if (gameState === 'start') beginCountdown(); else if (gameState === 'playing') flap(); else if (gameState === 'over') restartGame(); else if (gameState === 'paused') resumeGame(); });
+      canvasWrap.addEventListener('touchstart', function (e) { if (e.target.tagName === 'BUTTON') return; e.preventDefault(); if (gameState === 'start') beginCountdown(); else if (gameState === 'playing') flap(); else if (gameState === 'over') restartGame(); else if (gameState === 'paused') resumeGame(); }, { passive: false });
+
+      startBtn.addEventListener('click', function (e) { e.stopPropagation(); beginCountdown(); });
+      // Pointer handler for better responsiveness across devices
+      startBtn.addEventListener('pointerdown', function (e) { e.stopPropagation(); e.preventDefault(); beginCountdown(); });
+      restartBtn.addEventListener('click', function (e) { e.stopPropagation(); restartGame(); });
+      restartBtn.addEventListener('pointerdown', function (e) { e.stopPropagation(); e.preventDefault(); restartGame(); });
+      pauseBtn.addEventListener('click', function (e) { e.stopPropagation(); if (gameState === 'playing') pauseGame(); else if (gameState === 'paused') resumeGame(); });
+      resumeBtn.addEventListener('click', function (e) { e.stopPropagation(); resumeGame(); });
+
+      // -------------------------
+      // Update (deltaTime-based)
+      // -------------------------
+      function updateGame(time) {
+        if (!lastTime) lastTime = time;
+        // Normalize to 60fps-like step: 16.67 ms => dt == 1
+        let dt = (time - lastTime) / 16.67;
+        // clamp dt so a tab-switch or pause doesn't explode physics
+        dt = Math.min(dt, 4);
+
+        if (gameState === 'playing') {
+          // Bird physics
+          birdVel += GRAVITY * dt;
+          birdVel = Math.min(birdVel, MAX_FALL);
+          birdY += birdVel * dt;
+
+          // Smooth rotation towards target (frame-independent feel)
+          const targetAngle = clamp(birdVel * 3, -25, 70);
+          birdAngle = birdAngle * 0.9 + targetAngle * 0.1;
+
+          // Difficulty progress (smooth easing, delayed start)
+          const raw = clamp((score - DIFFICULTY_DELAY) / Math.max(1, SCORE_FOR_MAX - DIFFICULTY_DELAY), 0, 1);
+          difficultyProgress = lerp(difficultyProgress, raw, 0.02 * dt);
+          const eased = easeCubic(difficultyProgress);
+
+          // Apply speed & gap targets using eased progress
+          const targetSpeed = lerp(BASE_SPEED, MAX_SPEED, eased);
+          pipeSpeed = lerp(pipeSpeed, targetSpeed, 0.02 * dt);
+          gapSize = Math.round(lerp(BASE_GAP, MIN_GAP, eased));
+
+          // Spawn logic removed (we spawn based on last pipe position below)
+
+          // Move pipes and score
+          for (let i = pipes.length - 1; i >= 0; i--) {
+            const p = pipes[i];
+            p.x -= pipeSpeed * dt;
+            // smooth render x for nicer visuals
+            p.renderX = lerp(p.renderX === undefined ? p.x : p.renderX, p.x, clamp(0.12 * dt, 0, 1));
+
+            // scoring
+            if (!p.scored && p.x + PIPE_WIDTH < BIRD_X) {
+              p.scored = true;
+              score++;
+              scoreDisplay.textContent = score;
+            }
+
+            // cull
+            if (p.x + PIPE_WIDTH < -40) pipes.splice(i, 1);
+          }
+
+          // ground & clouds
+          groundX -= pipeSpeed * dt;
+          if (groundX <= -48) groundX += 48;
+          for (const c of clouds) { c.x -= c.speed * dt * 8; if (c.x + c.w < 0) { c.x = W + 10; c.y = 30 + Math.random() * (H * 0.35); } }
+
+          // --- Spawn based on rightmost pipe to maintain consistent spacing ---
+          if (pipes.length === 0) {
+            spawnPipe(W + 60);
+          } else {
+            // find rightmost existing pipe x
+            let rightmost = pipes[0].x;
+            for (let i = 1; i < pipes.length; i++) if (pipes[i].x > rightmost) rightmost = pipes[i].x;
+            if (rightmost < W - PIPE_SPACING) {
+              spawnPipe(rightmost + PIPE_SPACING);
+            }
+          }
+
+          // collisions
+          if (checkCollision()) { triggerGameOver(); }
+        }
+
+        // Shake timer update
+        if (shakeTimer > 0) {
+          shakeTimer -= (16.67 * dt);
+          shakeIntensity = lerp(shakeIntensity, 0, 0.08 * dt);
+        }
+
+        lastTime = time;
+      }
+
+      // -------------------------
+      // Draw
+      // -------------------------
+      function drawGame() {
+        // apply shake transform if active
+        ctx.save();
+        if (shakeTimer > 0 && shakeIntensity > 0.01) {
+          const sx = (Math.random() - 0.5) * shakeIntensity;
+          const sy = (Math.random() - 0.5) * shakeIntensity;
+          ctx.translate(sx, sy);
+        }
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Sky
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, H - GROUND_H);
+        // Lighter blue palette for a brighter sky
+        skyGrad.addColorStop(0, '#9BD7FF');
+        skyGrad.addColorStop(0.5, '#6EC8FF');
+        skyGrad.addColorStop(1, '#3EA0FF');
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, W, H - GROUND_H);
+
+        // Pipes (draw using renderX for smoothing)
+        for (const p of pipes) drawPipe(p);
+
+        // Ground
+        drawGround();
+
+        // Bird (use smoothed angle)
+        drawBird();
+
+        // Score
+        if (gameState === 'playing') { ctx.save(); ctx.font = 'bold 52px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(255,255,255,0.18)'; ctx.fillText(score, W / 2, 72); ctx.restore(); }
+
+        ctx.restore();
+      }
+
+      function drawPipe(p) {
+        const x = Math.round((p.renderX !== undefined) ? p.renderX : p.x);
+        const topH = p.gapY;
+        const botY = p.gapY + gapSize;
+        const botH = H - GROUND_H - botY;
+        const grad = ctx.createLinearGradient(x, 0, x + PIPE_WIDTH, 0);
+        grad.addColorStop(0, '#15803d'); grad.addColorStop(0.3, '#22c55e'); grad.addColorStop(0.7, '#22c55e'); grad.addColorStop(1, '#15803d');
+        ctx.fillStyle = grad; ctx.fillRect(x, 0, PIPE_WIDTH, topH);
+        ctx.fillStyle = '#16a34a'; ctx.fillRect(x - PIPE_CAP_OVR, topH - PIPE_CAP_H, PIPE_WIDTH + PIPE_CAP_OVR * 2, PIPE_CAP_H);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(x - PIPE_CAP_OVR, topH - PIPE_CAP_H, PIPE_WIDTH + PIPE_CAP_OVR * 2, 3);
+
+        ctx.fillStyle = grad; ctx.fillRect(x, botY, PIPE_WIDTH, botH);
+        ctx.fillStyle = '#16a34a'; ctx.fillRect(x - PIPE_CAP_OVR, botY, PIPE_WIDTH + PIPE_CAP_OVR * 2, PIPE_CAP_H);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(x - PIPE_CAP_OVR, botY + PIPE_CAP_H - 3, PIPE_WIDTH + PIPE_CAP_OVR * 2, 3);
+      }
+
+      function drawGround() {
+        const gY = H - GROUND_H;
+        const gGrad = ctx.createLinearGradient(0, gY, 0, H); gGrad.addColorStop(0, '#65451F'); gGrad.addColorStop(1, '#3b2a14');
+        ctx.fillStyle = gGrad; ctx.fillRect(0, gY, W, GROUND_H);
+        ctx.fillStyle = '#4ade80'; ctx.fillRect(0, gY, W, 6); ctx.fillStyle = '#22c55e'; ctx.fillRect(0, gY + 6, W, 3);
+        ctx.fillStyle = 'rgba(0,0,0,0.08)';
+        for (let gx = groundX; gx < W + 48; gx += 48) { ctx.fillRect(gx, gY + 14, 24, 2); ctx.fillRect(gx + 12, gY + 28, 24, 2); ctx.fillRect(gx, gY + 42, 24, 2); }
+      }
+
+      function drawBird() {
+        ctx.save();
+        // visual bounce (cosmetic only) to give life to the bird
+        const bounce = Math.sin(lastTime * 0.01) * 0.3;
+        const visualY = birdY + bounce;
+        ctx.translate(BIRD_X, visualY);
+        ctx.rotate((birdAngle * Math.PI) / 180);
+
+        // Subtle shadow for depth (reduced washout)
+        ctx.shadowColor = 'rgba(0,0,0,0.45)';
+        ctx.shadowBlur = 6;
+
+        // Use color-emoji font stack for best rendering across platforms
+        ctx.font = `${BIRD_SIZE}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Add a subtle dark stroke to improve contrast and perceived sharpness
+        const dpr = Math.max(1, window.devicePixelRatio || 1);
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = Math.max(1, 2 / dpr);
+        ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+        ctx.strokeText('🐥', 0, 0);
+
+        // Fill the emoji on top
+        ctx.fillText('🐥', 0, 0);
+
+        // Reset shadow
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+
+      // -------------------------
+      // Main loop
+      // -------------------------
+      function loop(time) { updateGame(time); drawGame(); rafId = requestAnimationFrame(loop); }
+
+      // -------------------------
+      // Boot
+      // -------------------------
+      resetGame(); drawGame(); rafId = requestAnimationFrame(loop);
+
+    })();
+  </script>
+
+  <!-- ============================== -->
+  <!--            FOOTER               -->
+  <!-- ============================== -->
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>
+          All the emojis, stickers, and captions you need to light up every chat and post.
+        </p>
+      </div>
+
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+
+    <div class="site-footer__bottom">
+      <p>
+        &copy; <span id="year"></span> EmojiCircle.com &middot; Made in India 🇮🇳
+      </p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>

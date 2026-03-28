@@ -1,33 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://emojicircle.com/</loc>
+    <loc>https://emojicircle.com/index.html</loc>
   </url>
   <url>
     <loc>https://emojicircle.com/emoji-search.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/games.html</loc>
+    <loc>https://emojicircle.com/blogs/science-of-emojis.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/tick-tac-toe.html</loc>
+    <loc>https://emojicircle.com/blogs/emojis-and-diversity.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/quiz.html</loc>
+    <loc>https://emojicircle.com/blogs/blog.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/memory.html</loc>
+    <loc>https://emojicircle.com/blogs/new-emojis-2025-2026.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/blogs/ai-changing-emoji-game.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/blogs/emojis-in-business.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/blogs/unicode-and-emojis.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/blogs/history-of-emojis.html</loc>
   </url>
   <url>
     <loc>https://emojicircle.com/pages/rules/about.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/pages/rules/privacy.html</loc>
+    <loc>https://emojicircle.com/pages/rules/contact.html</loc>
   </url>
   <url>
     <loc>https://emojicircle.com/pages/rules/terms.html</loc>
   </url>
   <url>
-    <loc>https://emojicircle.com/pages/rules/contact.html</loc>
+    <loc>https://emojicircle.com/pages/rules/privacy.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-2048-extreme.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-tick-tac-toe.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-personality-test.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-compatibility-calculator.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-snake.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-hollywood-quiz.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-flappy.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-sequence-remember-game.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-othello.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-racing-game.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-memory.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-bollywood-game.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-spot-the-different.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-quiz.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-crush.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-chess.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-rock-paper-scissors.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/games.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-minesweeper.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/games/emoji-guess-my-mood.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/symbols.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/flags.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/activity.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/objects.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/people.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/animals.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/food.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/smileys.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/categories/travel.html</loc>
+  </url>
+  <url>
+    <loc>https://emojicircle.com/emojie_globe/globe.html</loc>
   </url>
 </urlset>

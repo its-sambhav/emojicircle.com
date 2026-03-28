@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Emoji Minesweeper – Play Online Free | EmojiCircle</title>
+    <meta name="description"
+        content="Play Emoji Minesweeper free online. A classic puzzle game reimagined with emojis. Choose Easy (8x8) or Hard (12x12) mode. Flag the bombs and win!" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://emojicircle.com/games/emoji-minesweeper.html" />
+    <meta property="og:site_name" content="EmojiCircle">
+    <meta property="og:title" content="Emoji Minesweeper – Free Classic Puzzle Game">
+    <meta property="og:description"
+        content="The classic Minesweeper game played entirely with emojis! Avoid the bombs, flag the dangers, and clear the board.">
+    <meta property="og:image" content="https://emojicircle.com/game-banners/minesweeper.webp">
+    <meta property="og:url" content="https://emojicircle.com/games/emoji-minesweeper.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Emoji Minesweeper – Free Online Game | EmojiCircle">
+    <meta name="twitter:description"
+        content="Clear the board and flag the bombs! Play Emoji Minesweeper free on EmojiCircle.">
+    <meta name="twitter:image" content="https://emojicircle.com/game-banners/minesweeper.webp">
+    <script
+        type="application/ld+json">{"@context":"https://schema.org","@type":"Game","name":"Emoji Minesweeper","description":"Classic Minesweeper puzzle game reimagined with emoji characters. Features Easy (8x8 grid) and Hard (12x12 grid) difficulties with a time tracker.","url":"https://emojicircle.com/games/emoji-minesweeper.html","genre":["Puzzle","Strategy"],"applicationCategory":"Game","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+    <script
+        type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emojicircle.com/"},{"@type":"ListItem","position":2,"name":"Emoji Games","item":"https://emojicircle.com/games/games.html"},{"@type":"ListItem","position":3,"name":"Emoji Minesweeper","item":"https://emojicircle.com/games/emoji-minesweeper.html"}]}</script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-77D61P8G0J');
+    </script>
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/emoji-header.css">
+    <link rel="stylesheet" href="game-layout.css">
+    <script src="game-layout.js" defer></script>
+
+    <style>
+        /* ===== CSS VARIABLES (Dark Theme) ===== */
+        :root {
+            --bg: #000000;
+            --surface: #121214;
+            --surface-alt: #18181b;
+            --surface-strong: #0b0b0c;
+            --border: #27272a;
+            --accent: #ff4d00;
+            --accent-glow: rgba(255, 77, 0, 0.25);
+            --text-primary: #f8fafc;
+            --text-muted: rgba(148, 163, 184, 0.75);
+            --cell-size: 42px;
+            /* adjusted per difficulty */
+            --grid-cols: 8;
+            /* adjusted per difficulty */
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        /* ===== GAME CARD CONTAINER ===== */
+        .minesweeper-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 780px;
+            margin: 28px auto;
+            text-align: center;
+        }
+
+        .minesweeper-card h1 {
+            margin: 0 0 6px;
+            font-size: 1.6rem;
+        }
+
+        .minesweeper-card .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        /* ===== TOP CONTROLS: difficulty + restart ===== */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent);
+        }
+
+        .btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-restart {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-restart:hover {
+            filter: brightness(1.15);
+        }
+
+        /* ===== INFO BAR: bomb count, timer, face ===== */
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .info-bar span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #face-btn {
+            font-size: 1.6rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: transform 0.15s;
+        }
+
+        #face-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* ===== BOARD GRID ===== */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(var(--grid-cols), var(--cell-size));
+            gap: var(--grid-gap, 8px);
+            margin: 20px auto;
+            user-select: none;
+            -webkit-user-select: none;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        /* ===== INDIVIDUAL CELL ===== */
+        .cell {
+            width: var(--cell-size);
+            height: var(--cell-size);
+            background: var(--surface-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            box-sizing: border-box;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.12s, transform 0.1s;
+            padding: 0;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .cell:hover:not(.revealed) {
+            background: rgba(255, 255, 255, 0.07);
+            transform: scale(1.05);
+        }
+
+        .cell.revealed {
+            background: var(--surface-strong);
+            cursor: default;
+            animation: pop 0.18s ease-out;
+        }
+
+        .cell.boom {
+            background: #7f1d1d;
+            border-color: #dc2626;
+        }
+
+        /* Pop animation for reveal */
+        @keyframes pop {
+            0% {
+                transform: scale(0.7);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== STATUS MESSAGE ===== */
+        #status {
+            display: block;
+            margin-top: 14px;
+            font-size: 1.1rem;
+            min-height: 1.5em;
+            font-weight: 600;
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .minesweeper-card {
+                padding: 14px 8px;
+                margin: 16px 8px;
+            }
+
+            .info-bar {
+                gap: 14px;
+                font-size: 0.95rem;
+            }
+
+            .cell {
+                border-radius: 4px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .game-hud h1 {
+                display: none;
+            }
+
+            .game-hud {
+                padding: 8px 12px;
+            }
+
+            .game-hud .hud-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .board-area {
+                padding: 0 !important;
+                overflow: visible;
+                width: 100%;
+            }
+
+            .minesweeper-card {
+                width: 100% !important;
+                height: auto !important;
+                max-height: 90vh !important;
+                margin: 0 !important;
+                border-radius: 0;
+                padding: 15px 5px !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .board {
+                margin: 10px auto !important;
+            }
+
+            .cell {
+                border-radius: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body data-current-game="emoji-minesweeper">
+
+    <main class="game-page">
+        <section class="card"
+            style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+            <div class="game-hud">
+                <h1>💣 Emoji <span>Minesweeper</span></h1>
+                <div class="hud-right">
+                    <button class="btn active" data-mode="easy">Easy</button>
+                    <button class="btn" data-mode="hard">Hard</button>
+                    <button class="btn primary" id="restart-btn">Restart</button>
+                </div>
+            </div>
+
+            <div class="board-area"
+                style="flex: 1; display: flex; flex-direction: column; overflow: hidden; justify-content: flex-start; align-items: center; padding: 10px; width: 100%; min-width: 0;">
+                <div class="minesweeper-card"
+                    style="box-shadow:none; border:none; background:transparent; margin:0; padding:30px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; height: 100%; overflow: hidden; min-width: 0;">
+                    <p class="subtitle" style="margin: 0 0 10px; font-size: 0.85rem; opacity: 0.8;">Left-click to reveal
+                        · Right-click to flag 🚩</p>
+
+                    <!-- Info bar: remaining flags, face, timer -->
+                    <div class="info-bar" style="margin: 10px 0;">
+                        <div class="score-pill">
+                            <span class="score-label">Flags</span>
+                            <span class="score-value" id="bomb-count">10</span>
+                        </div>
+                        <button id="face-btn" title="Restart">🙂</button>
+                        <div class="score-pill">
+                            <span class="score-label">Time</span>
+                            <span class="score-value" id="timer">0</span>
+                        </div>
+                    </div>
+
+                    <!-- The game grid renders here -->
+                    <div id="board" class="board" aria-live="polite"></div>
+
+                    <!-- Status message (win / game over) -->
+                    <div id="status"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        /**
+         * ============================================================
+         *  EMOJI MINESWEEPER — Full Game Logic
+         * ============================================================
+         *  Classic Minesweeper rules, rendered entirely with emojis.
+         *
+         *  Emoji legend:
+         *    🙂  → Hidden (unrevealed) cell
+         *    💣  → Bomb
+         *    🚩  → Flagged cell
+         *    1️⃣–8️⃣ → Adjacent bomb count
+         *    😎  → Win face
+         *    💀  → Game-over face
+         *    😮  → "Thinking" face while mouse is held down
+         * ============================================================
+         */
+        (() => {
+            'use strict';
+
+            // ─── EMOJI MAPS ────────────────────────────────────────
+            // Number emojis keyed by adjacent-bomb count (1-8)
+            const NUMBER_EMOJIS = {
+                1: '1️⃣', 2: '2️⃣', 3: '3️⃣', 4: '4️⃣',
+                5: '5️⃣', 6: '6️⃣', 7: '7️⃣', 8: '8️⃣'
+            };
+
+            const EMOJI = {
+                hidden: '🙂',   // default unrevealed cell
+                bomb: '💣',
+                flag: '🚩',
+                win: '😎',
+                dead: '💀',
+                thinking: '😮',
+                neutral: '🙂'
+            };
+
+            // ─── DIFFICULTY PRESETS ────────────────────────────────
+            const MODES = {
+                easy: { rows: 5, cols: 12, bombs: 12 },
+                hard: { rows: 8, cols: 20, bombs: 30 }
+            };
+
+            // ─── DOM REFERENCES ────────────────────────────────────
+            const boardEl = document.getElementById('board');
+            const statusEl = document.getElementById('status');
+            const faceBtn = document.getElementById('face-btn');
+            const bombCountEl = document.getElementById('bomb-count');
+            const timerEl = document.getElementById('timer');
+            const restartBtn = document.getElementById('restart-btn');
+            const modeBtns = document.querySelectorAll('[data-mode]');
+
+            // ─── GAME STATE ────────────────────────────────────────
+            let rows, cols, totalBombs;          // current difficulty params
+            let board = [];                    // 2D array of cell objects
+            let gameOver = false;                // true after win or loss
+            let firstClick = true;               // ensure first click is never a bomb
+            let flagsPlaced = 0;                 // number of flags on the board
+            let timerInterval = null;            // setInterval reference
+            let secondsElapsed = 0;
+            let currentMode = 'easy';            // tracks active difficulty
+
+            // ============================================================
+            //  1. BOARD INITIALIZATION
+            // ============================================================
+
+            /**
+             * createBoard()
+             * Builds the 2D board array with default cell objects.
+             * Each cell: { bomb, revealed, flagged, count }
+             */
+            function createBoard() {
+                board = [];
+                for (let r = 0; r < rows; r++) {
+                    const row = [];
+                    for (let c = 0; c < cols; c++) {
+                        row.push({
+                            bomb: false,   // does this cell contain a bomb?
+                            revealed: false,   // has the player uncovered it?
+                            flagged: false,   // has the player placed a flag?
+                            count: 0        // number of adjacent bombs (0-8)
+                        });
+                    }
+                    board.push(row);
+                }
+            }
+
+            /**
+             * placeBombs(safeRow, safeCol)
+             * Randomly distributes bombs across the board.
+             * Guarantees the first-clicked cell (and its neighbours) are safe.
+             */
+            function placeBombs(safeRow, safeCol) {
+                let placed = 0;
+
+                // Build a set of "safe" positions around the first click
+                const safeSet = new Set();
+                for (let dr = -1; dr <= 1; dr++) {
+                    for (let dc = -1; dc <= 1; dc++) {
+                        const nr = safeRow + dr;
+                        const nc = safeCol + dc;
+                        if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+                            safeSet.add(`${nr},${nc}`);
+                        }
+                    }
+                }
+
+                while (placed < totalBombs) {
+                    const r = Math.floor(Math.random() * rows);
+                    const c = Math.floor(Math.random() * cols);
+
+                    // Skip if already a bomb or in the safe zone
+                    if (board[r][c].bomb) continue;
+                    if (safeSet.has(`${r},${c}`)) continue;
+
+                    board[r][c].bomb = true;
+                    placed++;
+                }
+            }
+
+            /**
+             * calculateNumbers()
+             * For every non-bomb cell, count adjacent bombs in all 8 directions
+             * and store the result in cell.count.
+             */
+            function calculateNumbers() {
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        if (board[r][c].bomb) continue; // skip bomb cells
+
+                        let count = 0;
+                        // Check all 8 neighbours
+                        for (let dr = -1; dr <= 1; dr++) {
+                            for (let dc = -1; dc <= 1; dc++) {
+                                if (dr === 0 && dc === 0) continue; // skip self
+                                const nr = r + dr;
+                                const nc = c + dc;
+                                // Bounds check
+                                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+                                    if (board[nr][nc].bomb) count++;
+                                }
+                            }
+                        }
+                        board[r][c].count = count;
+                    }
+                }
+            }
+
+            // ============================================================
+            //  2. RENDERING
+            // ============================================================
+
+            /**
+             * renderBoard()
+             * Clears the grid container and generates a <button> for every cell.
+             * Attaches click (reveal) and contextmenu (flag) listeners.
+             */
+            function renderBoard() {
+                boardEl.innerHTML = '';
+
+                // Update CSS custom properties for the chosen grid size
+                boardEl.style.setProperty('--grid-cols', cols);
+
+                // ── Auto-size cells to fill the board-area ──
+                const container = document.querySelector('.minesweeper-card');
+                const infoBar = document.querySelector('.info-bar');
+                const subtitle = document.querySelector('.subtitle');
+                const isMobile = window.innerWidth <= 600;
+
+                // Get available dimensions, using window as fallback if container is empty/small
+                let rect = container.getBoundingClientRect();
+                let areaWidth = rect.width - (isMobile ? 60 : 80);
+
+                const reservedHeight = (infoBar ? infoBar.offsetHeight + 20 : 60) +
+                    (subtitle ? subtitle.offsetHeight + 10 : 30) +
+                    (isMobile ? 60 : 100);
+
+                let areaHeight = rect.height - reservedHeight;
+
+                // Fallback for first render or small containers
+                if (areaHeight <= 50 || areaWidth <= 50) {
+                    areaWidth = isMobile ? window.innerWidth - 60 : 600;
+                    areaHeight = isMobile ? (window.innerHeight * 0.7) - reservedHeight : 400;
+                }
+
+                const gap = 8;
+                const maxCellW = Math.floor((areaWidth - (cols - 1) * gap) / cols);
+                const maxCellH = Math.floor((areaHeight - (rows - 1) * gap) / rows);
+
+                const cellSize = Math.max(12, Math.min(maxCellW, maxCellH)); // Minimum 12px cell size
+                const fontSize = (cellSize * (isMobile ? 0.62 : 0.75)) + 'px';
+
+                boardEl.style.setProperty('--cell-size', cellSize + 'px');
+                boardEl.style.setProperty('--grid-gap', gap + 'px');
+
+                // Ensure no scrolling on body while over board
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => document.body.style.overflow = '', 100);
+
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const cell = board[r][c];
+                        const btn = document.createElement('button');
+                        btn.className = 'cell';
+                        btn.style.fontSize = fontSize;
+                        btn.dataset.row = r;
+                        btn.dataset.col = c;
+
+                        // Set the emoji content based on cell state
+                        btn.textContent = getCellDisplay(cell);
+
+                        if (cell.revealed) {
+                            btn.classList.add('revealed');
+                            // Highlight the bomb that ended the game
+                            if (cell.bomb && cell._boom) btn.classList.add('boom');
+                        }
+
+                        // Left click → reveal
+                        btn.addEventListener('click', handleLeftClick);
+
+                        // Right click → flag toggle
+                        btn.addEventListener('contextmenu', handleRightClick);
+
+                        // Optional: mouse-down face
+                        btn.addEventListener('mousedown', () => {
+                            if (!gameOver && !cell.revealed) faceBtn.textContent = EMOJI.thinking;
+                        });
+                        btn.addEventListener('mouseup', () => {
+                            if (!gameOver) faceBtn.textContent = EMOJI.neutral;
+                        });
+
+                        boardEl.appendChild(btn);
+                    }
+                }
+            }
+
+            /**
+             * getCellDisplay(cell)
+             * Returns the correct emoji string to show inside a cell.
+             */
+            function getCellDisplay(cell) {
+                if (cell.flagged && !cell.revealed) return EMOJI.flag;
+                if (!cell.revealed) return EMOJI.hidden;
+                if (cell.bomb) return EMOJI.bomb;
+                if (cell.count > 0) return NUMBER_EMOJIS[cell.count];
+                return '';  // revealed empty cell (count 0)
+            }
+
+            // ============================================================
+            //  3. CLICK HANDLERS
+            // ============================================================
+
+            /**
+             * handleLeftClick(e)
+             * Left-click: reveal the cell. If it's the very first click,
+             * generate bombs first so the player never dies on the first move.
+             */
+            function handleLeftClick(e) {
+                if (gameOver) return;
+
+                const r = +e.currentTarget.dataset.row;
+                const c = +e.currentTarget.dataset.col;
+                const cell = board[r][c];
+
+                // Don't reveal flagged or already-revealed cells
+                if (cell.flagged || cell.revealed) return;
+
+                // On first click: place bombs (safe zone), calc numbers, start timer
+                if (firstClick) {
+                    placeBombs(r, c);
+                    calculateNumbers();
+                    startTimer();
+                    firstClick = false;
+                }
+
+                // Reveal this cell (may trigger flood-fill)
+                revealCell(r, c);
+
+                // Re-draw the board to reflect changes
+                renderBoard();
+
+                // Check if the player has won
+                checkWin();
+            }
+
+            /**
+             * handleRightClick(e)
+             * Right-click: toggle flag 🚩 on an unrevealed cell.
+             * Flagged cells cannot be accidentally revealed.
+             */
+            function handleRightClick(e) {
+                e.preventDefault(); // suppress browser context menu
+                if (gameOver) return;
+
+                const r = +e.currentTarget.dataset.row;
+                const c = +e.currentTarget.dataset.col;
+                const cell = board[r][c];
+
+                if (cell.revealed) return; // can't flag revealed cells
+
+                // Toggle flag state
+                cell.flagged = !cell.flagged;
+                flagsPlaced += cell.flagged ? 1 : -1;
+
+                // Update the flag counter display
+                updateBombCounter();
+
+                // Immediately update this button's text (no full re-render needed)
+                e.currentTarget.textContent = getCellDisplay(cell);
+
+                // Check win (all bombs flagged correctly is one win condition)
+                checkWin();
+            }
+
+            // ============================================================
+            //  4. CORE GAME LOGIC
+            // ============================================================
+
+            /**
+             * revealCell(r, c)
+             * Reveals a single cell. If the cell is a bomb → game over.
+             * If count is 0 → recursively flood-fill adjacent empty cells.
+             */
+            function revealCell(r, c) {
+                const cell = board[r][c];
+
+                // Boundary & state guards
+                if (r < 0 || r >= rows || c < 0 || c >= cols) return;
+                if (cell.revealed || cell.flagged) return;
+
+                // Mark as revealed
+                cell.revealed = true;
+
+                // ❌ BOMB HIT → end game
+                if (cell.bomb) {
+                    cell._boom = true;  // mark the bomb that killed the player
+                    endGame(false);     // false = loss
+                    return;
+                }
+
+                // ✅ EMPTY CELL (count 0) → flood-fill neighbours
+                if (cell.count === 0) {
+                    for (let dr = -1; dr <= 1; dr++) {
+                        for (let dc = -1; dc <= 1; dc++) {
+                            if (dr === 0 && dc === 0) continue;
+                            revealCell(r + dr, c + dc);
+                        }
+                    }
+                }
+            }
+
+            /**
+             * checkWin()
+             * The player wins when ALL non-bomb cells have been revealed.
+             * (Alternatively, if every bomb is correctly flagged and all
+             *  safe cells are revealed.)
+             */
+            function checkWin() {
+                if (gameOver) return;
+
+                let unrevealedSafe = 0;
+
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        if (!board[r][c].bomb && !board[r][c].revealed) {
+                            unrevealedSafe++;
+                        }
+                    }
+                }
+
+                // Win condition: every non-bomb cell is revealed
+                if (unrevealedSafe === 0) {
+                    endGame(true); // true = win
+                }
+            }
+
+            /**
+             * endGame(won)
+             * Ends the game, stops the timer, reveals all bombs,
+             * updates face and status message.
+             * @param {boolean} won – true if the player won
+             */
+            function endGame(won) {
+                gameOver = true;
+                stopTimer();
+
+                if (won) {
+                    // 🎉 WIN
+                    faceBtn.textContent = EMOJI.win;
+                    statusEl.textContent = '😎 You win! All clear!';
+                    statusEl.style.color = '#22c55e'; // green
+
+                    // Auto-flag all remaining bombs
+                    for (let r = 0; r < rows; r++) {
+                        for (let c = 0; c < cols; c++) {
+                            if (board[r][c].bomb && !board[r][c].flagged) {
+                                board[r][c].flagged = true;
+                            }
+                        }
+                    }
+                } else {
+                    // 💀 LOSS
+                    faceBtn.textContent = EMOJI.dead;
+                    statusEl.textContent = '💀 Boom! Game over!';
+                    statusEl.style.color = '#ef4444'; // red
+
+                    // Reveal all bombs so the player can see where they were
+                    for (let r = 0; r < rows; r++) {
+                        for (let c = 0; c < cols; c++) {
+                            if (board[r][c].bomb) {
+                                board[r][c].revealed = true;
+                            }
+                        }
+                    }
+                }
+
+                // Re-render board to show final state
+                renderBoard();
+                updateBombCounter();
+            }
+
+            // ============================================================
+            //  5. TIMER
+            // ============================================================
+
+            /** Start the elapsed-time counter (runs every second). */
+            function startTimer() {
+                stopTimer(); // clear any existing interval
+                secondsElapsed = 0;
+                timerEl.textContent = '0';
+                timerInterval = setInterval(() => {
+                    secondsElapsed++;
+                    timerEl.textContent = secondsElapsed;
+                }, 1000);
+            }
+
+            /** Stop the timer. */
+            function stopTimer() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+            }
+
+            // ============================================================
+            //  6. UI HELPERS
+            // ============================================================
+
+            /** Update the remaining-bomb counter (totalBombs − flagsPlaced). */
+            function updateBombCounter() {
+                bombCountEl.textContent = totalBombs - flagsPlaced;
+            }
+
+            /** Highlight the active difficulty button. */
+            function setActiveModeBtn(mode) {
+                modeBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.mode === mode);
+                });
+            }
+
+            // ============================================================
+            //  7. NEW GAME / RESTART
+            // ============================================================
+
+            /**
+             * newGame(mode)
+             * Resets everything and starts a fresh game with the given difficulty.
+             * @param {string} mode – 'easy' | 'hard'
+             */
+            function newGame(mode) {
+                // Load difficulty settings
+                currentMode = mode;
+                let preset = MODES[mode];
+
+                // Square grid for mobile
+                if (window.innerWidth <= 600) {
+                    if (mode === 'easy') {
+                        preset = { rows: 6, cols: 6, bombs: 6 };
+                    } else if (mode === 'hard') {
+                        preset = { rows: 8, cols: 8, bombs: 12 };
+                    }
+                }
+
+                rows = preset.rows;
+                cols = preset.cols;
+                totalBombs = preset.bombs;
+
+                // Reset game state
+                gameOver = false;
+                firstClick = true;
+                flagsPlaced = 0;
+                stopTimer();
+                secondsElapsed = 0;
+                timerEl.textContent = '0';
+
+                // Reset UI
+                faceBtn.textContent = EMOJI.neutral;
+                statusEl.textContent = '';
+                statusEl.style.color = '';
+                updateBombCounter();
+                setActiveModeBtn(mode);
+
+                // Build empty board (bombs placed on first click)
+                createBoard();
+                renderBoard();
+            }
+
+            // ============================================================
+            //  8. EVENT LISTENERS
+            // ============================================================
+
+            // Difficulty buttons
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    newGame(btn.dataset.mode);
+                });
+            });
+
+            // Restart button
+            restartBtn.addEventListener('click', () => {
+                newGame(currentMode);
+            });
+
+            // Face button also restarts the current mode
+            faceBtn.addEventListener('click', () => {
+                newGame(currentMode);
+            });
+
+            // Prevent default context menu on the entire board
+            boardEl.addEventListener('contextmenu', e => e.preventDefault());
+
+            // ─── RESIZE OBSERVER ───────────────────────────────────
+            // Re-render board when container size changes
+            const resizeObserver = new ResizeObserver(() => {
+                if (board && board.length > 0) renderBoard();
+            });
+            resizeObserver.observe(document.querySelector('.board-area'));
+
+            // ─── MOBILE LONG-PRESS SUPPORT ─────────────────────────
+            // On touch devices, a long press (500 ms) acts as right-click (flag).
+            let longPressTimer = null;
+
+            boardEl.addEventListener('touchstart', e => {
+                const target = e.target.closest('.cell');
+                if (!target) return;
+
+                longPressTimer = setTimeout(() => {
+                    // Simulate a right-click event on the cell
+                    const evt = new MouseEvent('contextmenu', {
+                        bubbles: true, cancelable: true
+                    });
+                    target.dispatchEvent(evt);
+                    longPressTimer = null;
+                }, 500);
+            }, { passive: true });
+
+            boardEl.addEventListener('touchend', () => {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+            });
+
+            boardEl.addEventListener('touchmove', () => {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+            });
+
+            // ─── RESIZE HANDLER ───────────────────────────────────
+            // Re-render on window resize / orientation change so cells fit
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => renderBoard(), 150);
+            });
+
+            // ============================================================
+            //  9. START THE GAME!
+            // ============================================================
+            newGame('easy');
+
+        })();
+    </script>
+    <footer class="site-footer" role="contentinfo">
+        <section class="site-footer-content">
+            <div class="site-footer__content">
+                <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+                    EmojiCircle<span>.com</span>
+                </a>
+                <p>
+                    All the emojis, stickers, and captions you need to light up every chat and post.
+                </p>
+            </div>
+
+            <section class="site-footer-content1">
+                <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+                    <h3 id="footer-explore-heading">Explore</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+                        <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+                        <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+                        <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+                    <h3 id="footer-support-heading">Support</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+                                Conditions</a></li>
+                        <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p>
+                © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+            </p>
+        </div>
+    </footer>
+
+    <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

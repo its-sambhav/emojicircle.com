@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Guess My Mood Emoji Game 🤔 | Read the Emotions</title>
+    <meta name="description"
+        content="Play the Guess My Mood game! Identify the emotion conveyed by different facial emojis. A fun, interactive way to learn emotional intelligence using emojis.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://emojicircle.com/games/emoji-guess-my-mood.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emojicircle.com/games/emoji-guess-my-mood.html">
+    <meta property="og:title" content="Guess My Mood Emoji Game">
+    <meta property="og:description" content="Guess the mood behind the emoji in this fun emotional intelligence game!">
+    <meta property="og:image" content="https://emojicircle.com/images/games/emoji-guess-mood-og.jpg">
+    <meta property="og:site_name" content="EmojiCircle">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://emojicircle.com/games/emoji-guess-my-mood.html">
+    <meta name="twitter:title" content="Guess My Mood Emoji Game">
+    <meta name="twitter:description" content="Guess the mood behind the emoji in this fun emotional intelligence game!">
+    <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-guess-mood-og.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOccupationalProgram",
+      "name": "Guess My Mood Emoji Game",
+      "url": "https://emojicircle.com/games/emoji-guess-my-mood.html",
+      "description": "An educational game designed to help users identify and understand different emotions and moods expressed through emojis.",
+      "provider": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://emojicircle.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://emojicircle.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Guess My Mood",
+          "item": "https://emojicircle.com/games/emoji-guess-my-mood.html"
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/emoji-header.css">
+    <link rel="stylesheet" href="game-layout.css">
+    <script src="game-layout.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-77D61P8G0J');
+    </script>
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #121214;
+            --surface-alt: #18181b;
+            --surface-strong: #0b0b0c;
+            --border: #27272a;
+            --accent: #ff4d00;
+            --text-primary: #f8fafc
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial
+        }
+
+        .mood {
+            font-size: 72px;
+            text-align: center;
+            margin: 28px 0 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 10px;
+            max-width: 720px;
+            margin: 28px auto
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer
+        }
+        .opt-btn { padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface-alt); color:var(--text-primary); cursor:pointer; font-weight:700; }
+        .opt-btn.correct { border-color: #44cc88; box-shadow: 0 6px 18px rgba(68,204,136,0.12); transform: translateY(-3px); }
+        .opt-btn.wrong { border-color: #ff4d4d; animation: shake 0.5s; }
+        @keyframes shake { 0%{ transform: translateX(0) } 20%{ transform: translateX(-6px) } 40%{ transform: translateX(6px)} 60%{ transform: translateX(-4px)} 80%{ transform: translateX(4px)} 100%{ transform: translateX(0)} }
+        .mood .emoji-seq { display:inline-block; padding:8px 12px; background:var(--surface-strong); border-radius:12px; box-shadow: 0 8px 18px rgba(0,0,0,0.45); }
+        .score-row { display:flex; justify-content:center; gap:14px; margin-top:10px; color:var(--text-secondary); font-weight:700 }
+        .score { color:var(--accent); font-weight:900 }
+        .choose-label { text-align:center; margin-top:16px; margin-bottom:12px; color: rgba(248,250,252,0.6); font-weight:700; letter-spacing:0.02em; }
+        /* slightly larger gaps for options and better responsive wrapping */
+        #opts { gap: 14px; margin: 12px 0 16px; }
+        .opt-btn { padding: 12px 16px; min-width: 140px; }
+        .score-row { display:flex; justify-content:center; gap:14px; margin-top:18px; margin-bottom:16px; color:var(--text-secondary); font-weight:700 }
+        .next-btn { margin-top:16px; }
+        .feedback { margin-top:18px; }
+    
+    @media (max-width: 600px) {
+      main.game-page .game-hud {
+          padding: 10px 14px;
+          min-height: 56px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+      }
+      main.game-page .game-hud h1 {
+          display: block;
+          font-size: 1rem;
+          font-weight: 700;
+          margin: 0;
+      }
+      .game-hud .hud-right { width: auto; justify-content: flex-end; }
+      .board-area { 
+        padding: 16px 12px !important; 
+        overflow: visible !important; 
+        width: 100% !important;
+        max-height: none !important;
+        aspect-ratio: auto !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body data-current-game="emoji-guess-my-mood">
+
+    <main class="game-page">
+        <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+            <div class="game-hud">
+                <h1>🤔 Guess My <span>Mood</span></h1>
+                <div class="hud-right"></div>
+            </div>
+            <div class="board-area" style="flex-direction: column; overflow: visible; justify-content: flex-start; padding: 18px 12px;">
+                <div style="background: var(--surface); border: none; padding: 22px 20px; border-radius: 12px; max-width: 720px; margin: 28px auto; width: 100%; box-sizing: border-box;">
+                    <div id="mood" class="mood"><span class="emoji-seq">🙂</span></div>
+                    <div class="choose-label">Choose your answer</div>
+                    <div id="opts" style="display:flex;flex-wrap:wrap;justify-content:center"></div>
+                    <div class="score-row"><div>Score: <span id="score" class="score">0</span></div><div>Streak: <span id="streak">0</span></div></div>
+                    <div id="res" class="feedback" style="text-align: center; min-height: 28px;"></div>
+                </div>
+
+                <div class="visually-hidden">
+                    <h2>Play the Guess My Mood Emoji Game</h2>
+                    <p>Improve your emotional intelligence and learn emoji meanings with our Guess My Mood game! Look at the
+                        facial emoji presented on screen—like happy 😀, sad 😢, or angry 😡—and choose the correct textual
+                        emotion that matches it.</p>
+                    <ul>
+                        <li><a href="/index.html">Discover all smiley and emotion emojis</a></li>
+                        <li><a href="/games.html">Explore our other educational emoji games</a></li>
+                    </ul>
+                    <h3>How to Play</h3>
+                    <p>A large emoji will appear in the center of the screen. Below it, you'll see several buttons with
+                        emotion words. Click the button that accurately describes the mood of the emoji. If you're correct,
+                        the game will let you know! Click "New" to try another expression.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        (() => {
+            // Emoji combination mood game — pick a short emoji sequence that maps to a mood.
+            const COMBOS = [
+                { e: ['😀','☀️'], t: 'Happy' },
+                { e: ['😢','💧'], t: 'Sad' },
+                { e: ['😡','💥'], t: 'Angry' },
+                { e: ['😱','😮‍💨'], t: 'Shocked' },
+                { e: ['😴','🌙'], t: 'Sleepy' },
+                { e: ['😇','✨'], t: 'Calm' },
+                { e: ['🤯','💡'], t: 'Amazed' },
+                { e: ['😂','🤣'], t: 'Amused' },
+                { e: ['😍','💘'], t: 'In Love' },
+                { e: ['🤢','🤮'], t: 'Grossed Out' },
+
+                // 20 additional combos
+                { e: ['🤩','🎉'], t: 'Excited' },
+                { e: ['😒','😑'], t: 'Annoyed' },
+                { e: ['😌','🛀'], t: 'Relaxed' },
+                { e: ['😳','🙈'], t: 'Embarrassed' },
+                { e: ['🤔','📚'], t: 'Thoughtful' },
+                { e: ['😬','😅'], t: 'Nervous' },
+                { e: ['🤗','💞'], t: 'Affectionate' },
+                { e: ['🤤','🍔'], t: 'Hungry' },
+                { e: ['😤','💨'], t: 'Frustrated' },
+                { e: ['😕','❓'], t: 'Confused' },
+                { e: ['🤨','🧐'], t: 'Suspicious' },
+                { e: ['🙏','🌤️'], t: 'Grateful' },
+                { e: ['😎','🕶️'], t: 'Cool' },
+                { e: ['😩','😭'], t: 'Overwhelmed' },
+                { e: ['😐','🤷'], t: 'Indifferent' },
+                { e: ['🙃','😜'], t: 'Playful' },
+                { e: ['🤝','💪'], t: 'Supportive' },
+                { e: ['🌤️','🙏'], t: 'Hopeful' },
+                { e: ['🤫','🫢'], t: 'Secretive' },
+                { e: ['💭','🧐'], t: 'Pensive' }
+            ];
+
+            const moodEl = document.getElementById('mood');
+            const opts = document.getElementById('opts');
+            const res = document.getElementById('res');
+            const scoreEl = document.getElementById('score');
+            const streakEl = document.getElementById('streak');
+
+            let score = 0;
+            let streak = 0;
+            let current = null;
+            let answering = false;
+
+            function pickCombo() { return COMBOS[Math.floor(Math.random() * COMBOS.length)]; }
+
+            function renderCombo(seq) {
+                const span = moodEl.querySelector('.emoji-seq');
+                span.innerHTML = '';
+                seq.forEach((s,i) => {
+                    const e = document.createElement('span');
+                    e.textContent = s;
+                    e.style.fontSize = '48px';
+                    e.style.display = 'inline-block';
+                    e.style.margin = '0 6px';
+                    e.style.transform = 'translateY(-6px)';
+                    e.style.transition = 'transform 320ms ease';
+                    // small entrance animation
+                    requestAnimationFrame(() => { e.style.transform = 'translateY(0)'; });
+                    span.appendChild(e);
+                });
+            }
+
+            function shuffle(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+
+            function buildOptions(correct) {
+                opts.innerHTML = '';
+                const choices = [correct.t];
+                // choose 3 distractors
+                const others = COMBOS.filter(c=>c.t!==correct.t).slice().sort(()=>Math.random()-0.5).slice(0,3).map(c=>c.t);
+                choices.push(...others);
+                shuffle(choices).forEach(text => {
+                    const b = document.createElement('button');
+                    b.className = 'opt-btn';
+                    b.textContent = text;
+                    b.addEventListener('click', () => handleGuess(b, text, correct.t));
+                    opts.appendChild(b);
+                });
+            }
+
+            function handleGuess(btn, picked, correct) {
+                if (answering) return;
+                answering = true;
+                if (picked === correct) {
+                    btn.classList.add('correct');
+                    res.textContent = 'Nice! That was ' + correct;
+                    score += 10;
+                    streak += 1;
+                    scoreEl.textContent = score;
+                    streakEl.textContent = streak;
+                } else {
+                    btn.classList.add('wrong');
+                    res.textContent = 'Oh no — it was ' + correct + ' ✨';
+                    streak = 0;
+                    streakEl.textContent = streak;
+                }
+                // highlight correct option
+                Array.from(opts.children).forEach(b=>{ if (b.textContent === correct) b.classList.add('correct'); });
+                // allow next after short delay
+                setTimeout(()=>{ nextRound(); answering = false; }, 1200);
+            }
+
+            // confetti removed (no emoji fall)
+
+            function nextRound() {
+                res.textContent = '';
+                const combo = pickCombo();
+                current = combo;
+                renderCombo(combo.e);
+                buildOptions(combo);
+            }
+
+            // allow keyboard shortcuts (1-4) to pick options
+            window.addEventListener('keydown', (e) => {
+                const k = parseInt(e.key,10);
+                if (isNaN(k)) return;
+                const btn = opts.children[k-1];
+                if (btn) btn.click();
+            });
+
+            // init
+            nextRound();
+        })();
+    </script>
+    <footer class="site-footer" role="contentinfo">
+        <section class="site-footer-content">
+            <div class="site-footer__content">
+                <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+                    EmojiCircle<span>.com</span>
+                </a>
+                <p>
+                    All the emojis, stickers, and captions you need to light up every chat and post.
+                </p>
+            </div>
+
+            <section class="site-footer-content1">
+                <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+                    <h3 id="footer-explore-heading">Explore</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+                        <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+                        <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+                        <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+                    <h3 id="footer-support-heading">Support</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+                                Conditions</a></li>
+                        <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p>
+                © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+            </p>
+        </div>
+    </footer>
+    <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

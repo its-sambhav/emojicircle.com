@@ -11,6 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:site_name" content="EmojiCircle">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="ar_SA">
   <meta property="og:title" content="Search & Copy Emojis – EmojiCircle">
   <meta property="og:description"
     content="Search and copy emojis by name. Find heart emojis, smiley emojis, fire emojis and more on EmojiCircle.">
@@ -26,6 +31,9 @@
   <meta name="twitter:image" content="https://emojicircle.com/logo-512.png">
   <!-- Reuse your main styles -->
   <link rel="stylesheet" href="/style1.css" />
+
+  <!-- Preload emoji dataset for faster search startup -->
+  <link rel="preload" href="/emojis.enhanced.json" as="fetch" type="application/json">
 
   <!-- WebPage Schema -->
   <script type="application/ld+json">
@@ -64,6 +72,14 @@
     },
     {
       "@type": "Question",
+      "name": "Can I find heart emojis, smiley emojis, and fire emojis here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can search for popular emojis like heart emojis, smiley emojis, fire emojis, and many more using the search box. EmojiCircle shows all related emojis instantly."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Do emojis work on iPhone and Android?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -77,57 +93,63 @@
         "@type": "Answer",
         "text": "Unicode emojis are free for personal and commercial use. Custom emoji packs may have licensing restrictions."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account to use emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No account or login is required. You can search, copy, and use emojis on EmojiCircle instantly without signing up."
+      }
     }
   ]
 }
 </script>
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://emojicircle.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Emoji Search",
-      "item": "https://emojicircle.com/emoji-search.html"
-    }
-  ]
-}
-</script>
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://emojicircle.com/"},
+      {"@type":"ListItem","position":2,"name":"Emoji Search","item":"https://emojicircle.com/emoji-search.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Popular Emoji Searches on EmojiCircle",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Heart Emojis","url":"https://emojicircle.com/emoji-search.html?q=heart"},
+      {"@type":"ListItem","position":2,"name":"Smiley Emojis","url":"https://emojicircle.com/emoji-search.html?q=smiley"},
+      {"@type":"ListItem","position":3,"name":"Fire Emojis","url":"https://emojicircle.com/emoji-search.html?q=fire"},
+      {"@type":"ListItem","position":4,"name":"Love Emojis","url":"https://emojicircle.com/emoji-search.html?q=love"},
+      {"@type":"ListItem","position":5,"name":"Sad Emojis","url":"https://emojicircle.com/emoji-search.html?q=sad"},
+      {"@type":"ListItem","position":6,"name":"Angry Emojis","url":"https://emojicircle.com/emoji-search.html?q=angry"},
+      {"@type":"ListItem","position":7,"name":"Star Emojis","url":"https://emojicircle.com/emoji-search.html?q=star"},
+      {"@type":"ListItem","position":8,"name":"Food Emojis","url":"https://emojicircle.com/emoji-search.html?q=food"},
+      {"@type":"ListItem","position":9,"name":"Animal Emojis","url":"https://emojicircle.com/emoji-search.html?q=cat"},
+      {"@type":"ListItem","position":10,"name":"Flag Emojis","url":"https://emojicircle.com/emoji-search.html?q=flag"}
+    ]
+  }
+  </script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-77D61P8G0J');
   </script>
-
+  <link rel="stylesheet" href="emoji-header.css">
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="header-inner">
-      <a class="logo" href="/">EMOJI<span>CIRCLE</span></a>
-      <nav class="header-nav" aria-label="Primary">
-        <a href="/">HOME</a>
-        <a href="/emoji-search.html">EMOJIS</a>
-        <a href="/games.html">GAMES</a>
-      </nav>
-    </div>
-  </header>
-
-
+  <script src="/emoji-header.js?v=3" defer></script>
 
   <main>
     <!-- Emoji Search / Catalog Section -->
@@ -165,123 +187,171 @@
 
       </div>
 
+      <!-- Multilingual Support (SEO + UX) -->
+      <div class="visually-hidden" aria-hidden="true">
+        <p><strong>Multilingual Emoji Search:</strong> EmojiCircle supports emoji search in multiple languages including
+          English, Japanese (日本語), Chinese (中文), French (Français), Arabic (العربية), Hindi (हिन्दी), and Spanish
+          (Español). Try searching for the Apple emoji as: りんご / 苹果 / pomme / تفاحة / सेब / manzana.</p>
+        <h2>Emoji Meanings in Hindi (हिंदी में इमोजी अर्थ)</h2>
+        <p>😀 का मतलब है खुशी (happiness). 😢 का मतलब है उदास (sadness). ❤️ का मतलब है प्यार (love). 🔥 का मतलब है आग
+          (fire). 🎉 का मतलब है जश्न (celebration). 🙏 का मतलब है धन्यवाद या नमस्ते (thank you or namaste). 😂 का मतलब
+          है बहुत हँसी (laughing hard). 💔 का मतलब है टूटा हुआ दिल (broken heart). 🌹 का मतलब है गुलाब (rose, love).
+          Emojis in Hindi conversations are widely used on WhatsApp, Instagram, and Snapchat across India.</p>
+        <h2>Emoji Meanings in Spanish (significado de emojis en español)</h2>
+        <p>😂 significa "cara llorando de risa" (laughing crying face). ❤️ significa "corazón" (heart). 🙏 significa
+          "manos en oración" meaning thanks or please. 🔥 significa "fuego" (fire). 💀 significa "calavera" (skull, also
+          used humorously). 😍 significa "cara con ojos de corazón" (heart eyes, love). 🤣 significa "revolcándose de
+          risa" (rolling on floor laughing). 😭 significa "llorando intensamente" (sobbing). 🌮 significa "taco". 💃
+          significa "mujer bailando" (dancing woman).</p>
+        <h2>Emoji Meanings in Japanese (日本語でのイモジの意味)</h2>
+        <p>😊 は「微笑み」(smile) を意味します。🌸 は「桜」(sakura, cherry blossom) を意味します。🍣 は「寿司」(sushi) を意味します。🗼 は「東京タワー」(Tokyo
+          Tower) を意味します。❤️ は「愛」(love, ai) を意味します。😂 は「笑い泣き」(laughing while crying) を意味します。🙇 は「お辞儀」(bowing, apology or
+          gratitude) を意味します。</p>
+        <h2>Emoji Meanings in Arabic (معنى الرموز التعبيرية بالعربية)</h2>
+        <p>❤️ يعني "الحب" (love). 😂 يعني "الضحك بشدة" (laughing hard). 🙏 يعني "شكراً" أو "من فضلك" (thanks or please).
+          😍 يعني "مفتون" (infatuated). 🌹 يعني "الورد" (rose). 💔 يعني "قلب مكسور" (broken heart). 🤲 يعني "الدعاء"
+          (supplication/prayer). 🇸🇦 يمثل "المملكة العربية السعودية" (Saudi Arabia flag).</p>
+        <h2>Emoji Categories – Browse All Emojis by Type</h2>
+        <ul>
+          <li><a href="/categories/smileys.html">Smiley and Face Emojis – meanings and copy</a></li>
+          <li><a href="/categories/people.html">People and Body Emojis</a></li>
+          <li><a href="/categories/animals.html">Animal and Nature Emojis</a></li>
+          <li><a href="/categories/food.html">Food and Drink Emojis</a></li>
+          <li><a href="/categories/travel.html">Travel and Places Emojis</a></li>
+          <li><a href="/categories/activity.html">Activity and Sports Emojis</a></li>
+          <li><a href="/categories/objects.html">Objects Emojis</a></li>
+          <li><a href="/categories/symbols.html">Symbols Emojis – heart, stars, signs</a></li>
+          <li><a href="/categories/flags.html">Flag Emojis – all country flags</a></li>
+          <li><a href="/games/games.html">Play emoji games online for free</a></li>
+          <li><a href="/blogs/blog.html">Emoji history, psychology, and culture blog</a></li>
+        </ul>
+        <h2>Common Emoji Questions</h2>
+        <p>What does 🥺 mean? – Pleading face, puppy eyes, expressing desire or vulnerability. What does 💀 mean? –
+          Skull emoji, often used humorously to mean "I'm dead" (from laughter). What does 🤌 mean? – Italian hand
+          gesture meaning "perfect" or "what do you want?" What does 🫶 mean? – Heart hands, expressing love and
+          appreciation. What does 🙃 mean? – Upside-down face, used for sarcasm or playful irony. What does 😭 mean? –
+          Loudly crying face, extreme sadness or emotional overwhelm (also used exaggeratedly for humor). What does 🔥
+          mean? – Fire emoji, meaning something is hot, trending, impressive, or exciting.</p>
+      </div>
+
       <!-- emojis.js will inject the emoji list here -->
     </section>
+
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="faq-section__inner">
+
+        <div class="faq-section__header section-heading-group">
+          <span class="emoji-grid__breadcrumb">Search / FAQs</span>
+
+          <h2 id="faq-heading" class="emoji-grid__heading faq-section__heading">
+            Emoji Search FAQs
+          </h2>
+
+          <p class="faq-section__intro section-meta">
+            Answers about searching, copying, and using emojis on EmojiCircle.
+          </p>
+        </div>
+
+        <div class="faq-list" role="list">
+
+          <!-- FAQ 1 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+              <span itemprop="name">How do I search for emojis by name?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a1" aria-labelledby="faq-q1" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                Use the search box on this page and type any keyword like <strong>heart</strong>,
+                <strong>smiley</strong>,
+                or <strong>fire</strong>.
+                EmojiCircle will instantly filter and show matching emojis you can copy and use.
+              </p>
+            </div>
+          </article>
+
+          <!-- FAQ 2 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+              <span itemprop="name">How do I copy emojis from EmojiCircle?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a2" aria-labelledby="faq-q2" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                Click any emoji to copy it instantly. You can then paste the emoji into WhatsApp,
+                Instagram, captions, messages, documents, or anywhere you want.
+              </p>
+            </div>
+          </article>
+
+          <!-- FAQ 3 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+              <span itemprop="name">Can I find heart emojis, smiley emojis, and fire emojis here?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a3" aria-labelledby="faq-q3" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                Yes. You can search for popular emojis like <strong>heart emojis</strong>,
+                <strong>smiley emojis</strong>, <strong>fire emojis</strong>, and many more using the search box.
+                EmojiCircle shows all related emojis instantly.
+              </p>
+            </div>
+          </article>
+
+          <!-- FAQ 4 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+              <span itemprop="name">Do emojis work on iPhone and Android?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a4" aria-labelledby="faq-q4" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                Yes. Emojis work on both iPhone (iOS) and Android devices. The design may look slightly
+                different on each platform, but the emoji meaning and compatibility stay the same.
+              </p>
+            </div>
+          </article>
+
+          <!-- FAQ 5 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+              <span itemprop="name">Are emojis free for commercial use?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a5" aria-labelledby="faq-q5" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                Standard Unicode emojis are free to use in personal and commercial content.
+                However, custom emoji designs, sticker packs, or branded emojis may have licensing
+                restrictions depending on the creator or platform.
+              </p>
+            </div>
+          </article>
+
+          <!-- FAQ 6 -->
+          <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+              <span itemprop="name">Do I need to create an account to use emojis?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region" id="faq-a6" aria-labelledby="faq-q6" itemscope
+              itemtype="https://schema.org/Answer">
+              <p itemprop="text">
+                No account or login is required. You can search, copy, and use emojis on EmojiCircle
+                instantly without signing up.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
   </main>
-
-  <section class="faq-section" id="faq" aria-labelledby="faq-heading">
-    <div class="faq-section__inner">
-
-      <div class="faq-section__header section-heading-group">
-        <span class="emoji-grid__breadcrumb">Search / FAQs</span>
-
-        <h2 id="faq-heading" class="emoji-grid__heading faq-section__heading">
-          Emoji Search FAQs
-        </h2>
-
-        <p class="faq-section__intro section-meta">
-          Answers about searching, copying, and using emojis on EmojiCircle.
-        </p>
-      </div>
-
-      <div class="faq-list" role="list">
-
-        <!-- FAQ 1 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
-            <span itemprop="name">How do I search for emojis by name?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a1" aria-labelledby="faq-q1" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              Use the search box on this page and type any keyword like <strong>heart</strong>, <strong>smiley</strong>,
-              or <strong>fire</strong>.
-              EmojiCircle will instantly filter and show matching emojis you can copy and use.
-            </p>
-          </div>
-        </article>
-
-        <!-- FAQ 2 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
-            <span itemprop="name">How do I copy emojis from EmojiCircle?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a2" aria-labelledby="faq-q2" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              Click any emoji to copy it instantly. You can then paste the emoji into WhatsApp,
-              Instagram, captions, messages, documents, or anywhere you want.
-            </p>
-          </div>
-        </article>
-
-        <!-- FAQ 3 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
-            <span itemprop="name">Can I find heart emojis, smiley emojis, and fire emojis here?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a3" aria-labelledby="faq-q3" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              Yes. You can search for popular emojis like <strong>heart emojis</strong>,
-              <strong>smiley emojis</strong>, <strong>fire emojis</strong>, and many more using the search box.
-              EmojiCircle shows all related emojis instantly.
-            </p>
-          </div>
-        </article>
-
-        <!-- FAQ 4 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
-            <span itemprop="name">Do emojis work on iPhone and Android?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a4" aria-labelledby="faq-q4" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              Yes. Emojis work on both iPhone (iOS) and Android devices. The design may look slightly
-              different on each platform, but the emoji meaning and compatibility stay the same.
-            </p>
-          </div>
-        </article>
-
-        <!-- FAQ 5 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
-            <span itemprop="name">Are emojis free for commercial use?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a5" aria-labelledby="faq-q5" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              Standard Unicode emojis are free to use in personal and commercial content.
-              However, custom emoji designs, sticker packs, or branded emojis may have licensing
-              restrictions depending on the creator or platform.
-            </p>
-          </div>
-        </article>
-
-        <!-- FAQ 6 -->
-        <article class="faq-item" role="listitem" data-faq-item itemscope itemtype="https://schema.org/Question">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
-            <span itemprop="name">Do I need to create an account to use emojis?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-answer" role="region" id="faq-a6" aria-labelledby="faq-q6" itemscope
-            itemtype="https://schema.org/Answer">
-            <p itemprop="text">
-              No account or login is required. You can search, copy, and use emojis on EmojiCircle
-              instantly without signing up.
-            </p>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
 
 
   <footer class="site-footer" role="contentinfo">
@@ -303,6 +373,7 @@
             <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
             <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
             <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+            <li><a href="/blogs/blog.html" title="Read emoji blog posts">Emoji Blog</a></li>
           </ul>
         </nav>
 
@@ -310,7 +381,8 @@
           <h3 id="footer-support-heading">Support</h3>
           <ul class="site-footer__list" role="list">
             <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
-            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
             <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
           </ul>
         </nav>
@@ -392,7 +464,8 @@
       background: #121214;
       border: 1px solid #27272a;
       margin: 30px 10%;
-      padding: 30px 32px;
+      margin-top: clamp(2rem, 3vw + 0.5rem, 3.5rem);
+      padding: 50px 32px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -470,6 +543,7 @@
     @media (max-width: 1024px) {
       .emoji-search-panel {
         margin: 28px 12%;
+        margin-top: clamp(1.8rem, 2.5vw + 0.5rem, 3rem);
         padding: 28px 26px;
       }
     }
@@ -477,6 +551,7 @@
     @media (max-width: 680px) {
       .emoji-search-panel {
         margin: 24px 8%;
+        margin-top: clamp(1.5rem, 2vw + 0.5rem, 2.5rem);
         padding: 24px 22px 26px;
         gap: 20px;
       }
@@ -519,6 +594,7 @@
     @media (max-width: 480px) {
       .emoji-search-panel {
         margin: 20px 6%;
+        margin-top: clamp(1.2rem, 1.5vw + 0.5rem, 2rem);
         padding: 20px 18px 24px;
         gap: 18px;
       }
@@ -749,14 +825,14 @@
 
     @media (max-width: 1024px) {
       .faq-section {
-        margin: 32px 12%;
+        margin: 28px 12%;
         padding: 36px 28px;
       }
     }
 
     @media (max-width: 680px) {
       .faq-section {
-        margin: 26px 8%;
+        margin: 24px 8%;
         padding: 30px 20px 38px;
       }
 
@@ -809,7 +885,7 @@
 
     @media (max-width: 480px) {
       .faq-section {
-        margin: 22px 6%;
+        margin: 20px 6%;
         padding: 26px 16px 32px;
       }
 

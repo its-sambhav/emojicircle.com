@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spot the Different Emoji 🔍 | Visual Puzzle Game</title>
+  <meta name="description"
+    content="Play the Spot the Different Emoji game! Test your visual perception by finding the one emoji that doesn't belong in the grid. Easy to hard difficulty levels.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-spot-the-different.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-spot-the-different.html">
+  <meta property="og:title" content="Spot the Different Emoji Puzzle">
+  <meta property="og:description" content="Test your eyesight! Can you find the odd emoji out before time runs out?">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-spot-the-different-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-spot-the-different.html">
+  <meta name="twitter:title" content="Spot the Different Emoji Puzzle">
+  <meta name="twitter:description" content="Test your eyesight! Can you find the odd emoji out before time runs out?">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-spot-the-different-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Spot the Different Emoji",
+    "url": "https://emojicircle.com/games/emoji-spot-the-different.html",
+    "genre": ["Puzzle", "Brainteaser", "Casual"],
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "description": "A visual perception puzzle game where players must quickly identify the single emoji that differs from the rest of the grid before time runs out.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Spot the Different Emoji",
+        "item": "https://emojicircle.com/games/emoji-spot-the-different.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <style>
+    /* ===== CSS Variables (Dark Theme) ===== */
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-alt: #18181b;
+      --surface-strong: #0b0b0c;
+      --border: #27272a;
+      --accent: #ff4d00;
+      --accent-glow: rgba(255, 77, 0, 0.35);
+      --green: #22c55e;
+      --red: #ef4444;
+      --text-primary: #f8fafc;
+      --text-muted: #a1a1aa;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* ===== Card Container ===== */
+    .spot-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 920px;
+      margin: 28px auto;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 14px;
+      transition: all .2s;
+    }
+
+    .btn:hover {
+      background: var(--surface-alt);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.15);
+    }
+
+    /* ===== Title ===== */
+    .title-block h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .title-block h1 .emoji-icon {
+      margin-right: 8px;
+    }
+
+    /* ===== Difficulty Selector ===== */
+    .difficulty-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .difficulty-bar label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .diff-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .2s;
+    }
+
+    .diff-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .diff-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ===== Stats Bar ===== */
+    .game-stats {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .lives-display {
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    .lives-display .heart-lost {
+      opacity: 0.2;
+    }
+
+    /* ===== Timer Countdown ===== */
+    .timer-warn {
+      color: var(--red) !important;
+      animation: timerPulse .5s ease infinite alternate;
+    }
+
+    @keyframes timerPulse {
+      to {
+        opacity: .5;
+      }
+    }
+
+    /* ===== Grid Board ===== */
+    #boardWrap {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    @media (min-width: 601px) {
+      #boardWrap {
+        max-height: calc(100vh - 320px);
+        overflow: hidden;
+      }
+      .board-area {
+        overflow: hidden !important;
+      }
+    }
+
+    #board {
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      transition: opacity .3s, transform .3s;
+    }
+
+    /* ===== Grid Cell (Emoji Card) ===== */
+    .emoji-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: transform .15s, border-color .2s, background .2s, box-shadow .2s;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .emoji-cell:hover {
+      transform: scale(1.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+      z-index: 2;
+    }
+
+    .emoji-cell:active {
+      transform: scale(0.95);
+    }
+
+    /* ===== Cell Animations ===== */
+    .emoji-cell.correct {
+      border-color: var(--green) !important;
+      background: rgba(34, 197, 94, 0.12) !important;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+      animation: popCorrect .45s ease;
+    }
+
+    @keyframes popCorrect {
+      0% {
+        transform: scale(1);
+      }
+
+      40% {
+        transform: scale(1.25);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .emoji-cell.wrong {
+      border-color: var(--red) !important;
+      background: rgba(239, 68, 68, 0.12) !important;
+      animation: shakeWrong .4s ease;
+    }
+
+    @keyframes shakeWrong {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-8px);
+      }
+
+      40% {
+        transform: translateX(8px);
+      }
+
+      60% {
+        transform: translateX(-6px);
+      }
+
+      80% {
+        transform: translateX(6px);
+      }
+    }
+
+    /* Board fade transition between rounds */
+    .board-fade-out {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    .board-fade-in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ===== Status Message ===== */
+    .status-msg {
+      margin-top: 14px;
+      font-size: 15px;
+      min-height: 24px;
+      text-align: center;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .status-msg.success {
+      color: var(--green);
+    }
+
+    .status-msg.error {
+      color: var(--red);
+    }
+
+    /* ===== Game Over Overlay ===== */
+    .game-over-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s;
+    }
+
+    .game-over-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .game-over-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 42px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      transform: translateY(30px);
+      transition: transform .35s;
+    }
+
+    .game-over-overlay.visible .game-over-box {
+      transform: translateY(0);
+    }
+
+    .game-over-box h2 {
+      margin: 0 0 6px;
+      font-size: 1.6rem;
+    }
+
+    .game-over-box .go-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .game-over-box .stat-line {
+      margin: 8px 0;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .game-over-box .stat-line b {
+      color: var(--text-primary);
+    }
+
+    .game-over-box .btn {
+      margin-top: 18px;
+      padding: 12px 32px;
+      font-size: 15px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .spot-card {
+        padding: 14px;
+        margin: 14px 8px;
+      }
+
+      .emoji-cell {
+        font-size: 1.6rem;
+        border-radius: 8px;
+      }
+
+      #board {
+        gap: 6px;
+      }
+
+      .game-over-box {
+        padding: 24px 18px;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { 
+        padding: 10px 14px; 
+      }
+      .game-hud .hud-right { 
+        width: 100%; 
+        justify-content: flex-end; 
+        align-items: center;
+        gap: 10px;
+      }
+      #restart {
+        margin-right: auto;
+        padding: 8px 12px;
+        font-size: 1.1rem;
+        line-height: 1;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+      }
+      .score-pill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 4px 12px;
+        min-width: 70px;
+      }
+      .score-pill .score-label {
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 2px;
+      }
+      .score-pill .score-value {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .score-pill.best .score-value {
+        color: #22c55e;
+      }
+      .lives-display { 
+        font-size: 14px;
+        margin: 0 4px;
+      }
+      .board-area { padding: 10px !important; }
+      .spot-card {
+        width: min(430px, 95%) !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+      }
+      .difficulty-bar {
+        margin-top: 20px !important;
+        margin-bottom: 24px !important;
+        gap: 8px;
+        justify-content: center;
+      }
+      .diff-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+      .status-msg {
+        font-size: 13px;
+        margin-bottom: 8px !important;
+      }
+    }
+
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+</head>
+
+<body data-current-game="emoji-spot-the-different">
+  <!-- ==================== GAME MARKUP ==================== -->
+  <main class="game-page">
+    <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent; height: 100%; display: flex; flex-direction: column;">
+      <div class="game-hud">
+        <h1>🔍 Spot the <span>Different Emoji</span></h1>
+        <div class="hud-right">
+          <button id="restart" class="btn" title="Restart">🔄</button>
+          <div class="score-pill" style="min-width: 65px;">
+            <span class="score-label">Level</span>
+            <span class="score-value" id="level">1</span>
+          </div>
+          <div class="score-pill" style="min-width: 85px;">
+            <span class="score-label">Time</span>
+            <span class="score-value" id="timer">00:15</span>
+          </div>
+          <div class="chip" style="background:transparent; border:none; padding:0; display:flex; align-items:center; margin-left: 2px;">
+            <span id="lives" class="lives-display">❤️❤️❤️❤️❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="board-area" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; justify-content: flex-start; align-items: center; padding: 10px; width: 100%; height: 100%;">
+        <div class="spot-card" style="box-shadow:none; border:none; background:transparent; margin:0 auto; padding:0; width:100%;">
+          
+          <!-- Difficulty Selector -->
+          <div class="difficulty-bar" style="justify-content: center; margin-top:0; margin-bottom: 24px;">
+            <label>Difficulty:</label>
+            <button class="diff-btn active" data-mode="easy">😊 Easy</button>
+            <button class="diff-btn" data-mode="medium">😎 Medium</button>
+            <button class="diff-btn" data-mode="hard">🤯 Hard</button>
+          </div>
+
+          <!-- Status Message -->
+          <div id="status" class="status-msg" style="margin-top:0; margin-bottom:14px;">Find the emoji that's different from the rest!</div>
+
+          <!-- Game Board -->
+          <div id="boardWrap">
+            <div id="board" role="grid"></div>
+          </div>
+
+          <div class="visually-hidden">
+            <h2>Play Spot the Different Emoji Game</h2>
+            <p>Challenge your vision and reflexes with our online Spot the Different Emoji game! In a grid full of identical
+              emojis, one is slightly (or completely) different. As you progress, the grids get larger and the differences
+              become subtler. Can you spot the odd one out before the timer runs out?</p>
+            <ul>
+              <li><a href="/index.html">Discover nuanced differences between smiley emojis</a></li>
+              <li><a href="/games.html">Browse our collection of fun emoji puzzles</a></li>
+            </ul>
+            <h3>How to Play</h3>
+            <p>Choose your difficulty level to start. You will see a grid filled with emojis (like 🍎 apples or 😀 smileys).
+              Click or tap the single emoji that does not perfectly match the others. If you choose correctly, you earn
+              points and move to the next level. If you click the wrong emoji or run out of time, you lose a life.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Game Over Overlay -->
+  <div id="gameOverOverlay" class="game-over-overlay">
+    <div class="game-over-box">
+      <div class="go-emoji">😵</div>
+      <h2>Game Over!</h2>
+      <div class="stat-line">Score: <b id="goScore">0</b></div>
+      <div class="stat-line">Level Reached: <b id="goLevel">1</b></div>
+      <div class="stat-line">Time Played: <b id="goTime">00:00</b></div>
+      <button id="goRestart" class="btn primary">🔄 Play Again</button>
+    </div>
+  </div>
+
+  <!-- ==================== GAME SCRIPT ==================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ============================================================
+       *  EMOJI POOLS — organised by difficulty
+       *  Each entry is [baseEmoji, differentEmoji].
+       *  Easy   → visually very different pair
+       *  Medium → same category, somewhat similar
+       *  Hard   → nearly identical / subtle variation
+       * ============================================================ */
+      const EMOJI_SETS = {
+        easy: [
+          ['🍎', '🍌'], ['🐶', '🐱'], ['🌻', '🌵'], ['🏀', '⚽'], ['🚗', '✈️'],
+          ['🍕', '🍦'], ['🎸', '🥁'], ['🌙', '☀️'], ['🐸', '🦁'], ['🍩', '🍔'],
+          ['🎈', '🎁'], ['🦋', '🐞'], ['🐧', '🦊'], ['🍇', '🍉'], ['🌈', '⛈️'],
+          ['🚀', '🛸'], ['🎯', '🎲'], ['🧁', '🍪'], ['🦄', '🐉'], ['🐬', '🦈']
+        ],
+        medium: [
+          ['😀', '😃'], ['🍎', '🍏'], ['🐶', '🐕'], ['🌸', '🌺'], ['🟢', '🟡'],
+          ['👋', '✋'], ['😁', '😄'], ['🐻', '🧸'], ['🌹', '🌷'], ['⭐', '🌟'],
+          ['🔵', '🟣'], ['🍊', '🍑'], ['😊', '😇'], ['🐈', '🐈‍⬛'], ['🌼', '🌻'],
+          ['🤍', '🩶'], ['🫐', '🍇'], ['🥝', '🫒'], ['🦆', '🐥'], ['🫧', '💧']
+        ],
+        hard: [
+          ['😀', '😁'], ['🙂', '🙃'], ['🤗', '🤭'], ['😶', '😑'], ['🫠', '😶‍🌫️'],
+          ['🩵', '🩶'], ['🤍', '🤎'], ['🔴', '🟠'], ['👁️', '👀'], ['✊', '👊'],
+          ['🫶', '🤲'], ['🌑', '🌚'], ['🌕', '🌝'], ['♠️', '♣️'], ['♥️', '♦️'],
+          ['🪨', '🪵'], ['🫎', '🫏'], ['🪿', '🦢'], ['🪻', '🪷'], ['🩷', '🩵']
+        ]
+      };
+
+      /* ============================================================
+       *  DIFFICULTY CONFIG
+       *  startSize  : initial grid NxN
+       *  maxSize    : largest grid for this mode
+       *  timerSecs  : seconds allowed per round (countdown)
+       * ============================================================ */
+      const DIFFICULTY = {
+        easy: { startSize: { rows: 5, cols: 10 }, maxCols: 12, timerSecs: 15 },
+        medium: { startSize: { rows: 8, cols: 15 }, maxCols: 18, timerSecs: 10 },
+        hard: { startSize: { rows: 8, cols: 20 }, maxCols: 25, timerSecs: 8 }
+      };
+
+      /** Maximum lives the player starts with */
+      const MAX_LIVES = 5;
+
+      /* ============================================================
+       *  DOM REFERENCES
+       * ============================================================ */
+      const boardEl = document.getElementById('board');
+      const levelEl = document.getElementById('level');
+      const scoreEl = document.getElementById('score');
+      const timerEl = document.getElementById('timer');
+      const livesEl = document.getElementById('lives');
+      const statusEl = document.getElementById('status');
+      const restartBtn = document.getElementById('restart');
+      const diffBtns = document.querySelectorAll('.diff-btn');
+      const gameOverlay = document.getElementById('gameOverOverlay');
+      const goScoreEl = document.getElementById('goScore');
+      const goLevelEl = document.getElementById('goLevel');
+      const goTimeEl = document.getElementById('goTime');
+      const goRestartBtn = document.getElementById('goRestart');
+
+      /* ============================================================
+       *  GAME STATE
+       * ============================================================ */
+      let mode = 'easy';      // current difficulty key
+      let gridRows = window.innerWidth <= 600 ? 5 : 5;       // current rows
+      let gridCols = window.innerWidth <= 600 ? 5 : 10;      // current columns
+      let level = 1;           // current level number
+      let score = 0;           // cumulative score
+      let lives = MAX_LIVES;   // remaining lives
+      let diffIndex = -1;          // index of the odd-one-out cell
+      let baseEmoji = '';          // the majority emoji
+      let diffEmoji = '';          // the different emoji
+      let accepting = false;       // can the player click?
+      let lastPairKey = '';          // prevents same emoji pair twice in a row
+
+      // Timer state
+      let roundTimer = null;      // setInterval id for countdown
+      let roundSecsLeft = 0;         // seconds remaining this round
+      let gameStartTime = 0;         // Date.now() when game started
+
+      /* ============================================================
+       *  UTILITY — format seconds as MM:SS
+       * ============================================================ */
+      function formatTime(s) {
+        const m = String(Math.floor(s / 60)).padStart(2, '0');
+        const ss = String(s % 60).padStart(2, '0');
+        return m + ':' + ss;
+      }
+
+      /* ============================================================
+       *  pickEmojis()
+       *  Randomly choose a [base, different] emoji pair from the
+       *  current difficulty pool. Ensures the same pair does not
+       *  repeat on consecutive rounds.
+       * ============================================================ */
+      function pickEmojis() {
+        const pool = EMOJI_SETS[mode];
+        let pair, key;
+
+        do {
+          pair = pool[Math.floor(Math.random() * pool.length)];
+          // Randomly swap which emoji is "base" vs "different"
+          if (Math.random() < 0.5) pair = [pair[1], pair[0]];
+          key = pair[0] + pair[1];
+        } while (key === lastPairKey && pool.length > 1);
+
+        lastPairKey = key;
+        baseEmoji = pair[0];
+        diffEmoji = pair[1];
+      }
+
+      /* ============================================================
+       *  placeDifferentEmoji(total)
+       *  Pick ONE random index where the different emoji will appear.
+       * ============================================================ */
+      function placeDifferentEmoji(total) {
+        diffIndex = Math.floor(Math.random() * total);
+      }
+
+      /* ============================================================
+       *  generateGrid()
+       *  Build the NxN board of emoji buttons. Only ONE cell gets
+       *  the different emoji; all others show the base emoji.
+       * ============================================================ */
+      function generateGrid() {
+        boardEl.innerHTML = '';
+        const total = gridRows * gridCols;
+
+        // ── Auto-size cells to fill the board-area ──
+        const boardArea = document.querySelector('.board-area');
+        const hud = document.querySelector('.game-hud');
+        const diffBar = document.querySelector('.difficulty-bar');
+        const status = document.getElementById('status');
+        const rect = boardArea.getBoundingClientRect();
+
+        const areaWidth = rect.width - 20;
+        
+        let areaHeight;
+        if (window.innerWidth > 600) {
+          // Desktop: use viewport height minus all fixed UI heights
+          const headerEl = document.querySelector('.header');
+          const hudEl = document.querySelector('.game-hud');
+          const headerH = headerEl ? headerEl.offsetHeight : 0;
+          const hudH = hudEl ? hudEl.offsetHeight : 60;
+          const diffBarH = diffBar ? diffBar.offsetHeight : 44;
+          const statusH = status ? status.offsetHeight : 24;
+          areaHeight = window.innerHeight - headerH - hudH - diffBarH - statusH - 160;
+        } else {
+          // Mobile: use board-area rect minus internal elements
+          const reservedMobile = (diffBar ? diffBar.offsetHeight : 44) + (status ? status.offsetHeight : 24) + 10;
+          areaHeight = rect.height - reservedMobile;
+        }
+        
+        // Final fallback
+        if (areaHeight <= 50) areaHeight = 300;
+        if (areaWidth <= 0) return;
+
+        const gap = (gridCols > 15) ? 2 : 4;
+        const maxCellW = Math.floor((areaWidth - (gridCols - 1) * gap) / gridCols);
+        const maxCellH = Math.floor((areaHeight - (gridRows - 1) * gap) / gridRows);
+        
+        // Cap cell size on desktop to prevent emojis from being too large
+        const maxCellAllowed = window.innerWidth > 600 ? 56 : 999;
+        const cellSize = Math.min(maxCellW, maxCellH, maxCellAllowed);
+        const fontSize = Math.floor(cellSize * 0.8) + 'px';
+
+        boardEl.style.gridTemplateColumns = 'repeat(' + gridCols + ', 1fr)';
+        boardEl.style.width = (gridCols * cellSize + (gridCols - 1) * gap) + 'px';
+        boardEl.style.gap = gap + 'px';
+
+        // Choose emojis & place the odd one out
+        pickEmojis();
+        placeDifferentEmoji(total);
+
+        // Create each cell
+        for (var i = 0; i < total; i++) {
+          var cell = document.createElement('button');
+          cell.className = 'emoji-cell';
+          cell.style.fontSize = fontSize;
+          cell.setAttribute('role', 'gridcell');
+          cell.dataset.index = i;
+          cell.textContent = (i === diffIndex) ? diffEmoji : baseEmoji;
+          cell.addEventListener('click', handleClick);
+          boardEl.appendChild(cell);
+        }
+
+        // Smooth fade-in transition
+        boardEl.classList.remove('board-fade-in');
+        boardEl.classList.add('board-fade-out');
+        requestAnimationFrame(function () {
+          boardEl.classList.remove('board-fade-out');
+          boardEl.classList.add('board-fade-in');
+        });
+      }
+
+      /* ============================================================
+       *  handleClick(e)
+       *  Called when any emoji cell is clicked/tapped.
+       *  - Correct → score up, success animation, next round
+       *  - Wrong   → lose a life, shake animation, maybe game over
+       * ============================================================ */
+      function handleClick(e) {
+        if (!accepting) return;
+        accepting = false; // lock input during animation
+
+        var cell = e.currentTarget;
+        var idx = Number(cell.dataset.index);
+
+        if (idx === diffIndex) {
+          /* -------- CORRECT ANSWER -------- */
+          score++;
+          if (scoreEl) scoreEl.textContent = score;
+          cell.classList.add('correct');
+          setStatus('✅ Correct! Loading next round…', 'success');
+          stopRoundTimer();
+
+          // Level up — increase grid size within mode cap
+          level++;
+          var cfg = DIFFICULTY[mode];
+          // Gradually increase columns then rows
+          if (window.innerWidth <= 600) {
+            // Square grid for mobile
+            if (gridCols < 10) { // Limit square grid on mobile for usability
+              gridCols++;
+              gridRows++;
+            }
+          } else {
+            // Rectangular grid for desktop
+            if (gridCols < cfg.maxCols) {
+              gridCols++;
+              if (level % 2 === 0 && gridRows < 8) gridRows++;
+            }
+          }
+          if (levelEl) levelEl.textContent = level;
+
+          // Move to next round after a brief pause
+          setTimeout(function () { nextRound(); }, 750);
+
+        } else {
+          /* -------- WRONG ANSWER -------- */
+          lives--;
+          cell.classList.add('wrong');
+          renderLives();
+          setStatus('❌ Wrong! ' + lives + (lives === 1 ? ' life' : ' lives') + ' left.', 'error');
+
+          if (lives <= 0) {
+            // Game Over
+            stopRoundTimer();
+            setTimeout(function () { showGameOver(); }, 600);
+            return;
+          }
+
+          // Allow clicking again after the shake finishes
+          setTimeout(function () { accepting = true; }, 450);
+        }
+      }
+
+      /* ============================================================
+       *  nextRound()
+       *  Smooth transition into a fresh round — new grid, new timer.
+       * ============================================================ */
+      function nextRound() {
+        setStatus("Find the emoji that's different from the rest!", '');
+        generateGrid();
+        startRoundTimer();
+        accepting = true;
+      }
+
+      /* ============================================================
+       *  ROUND TIMER — per-round countdown
+       *  When time runs out, the player loses a life automatically.
+       * ============================================================ */
+      function startRoundTimer() {
+        stopRoundTimer();
+        var cfg = DIFFICULTY[mode];
+        roundSecsLeft = cfg.timerSecs;
+        if (timerEl) {
+          timerEl.textContent = formatTime(roundSecsLeft);
+          timerEl.classList.remove('timer-warn');
+        }
+
+        roundTimer = setInterval(function () {
+          roundSecsLeft--;
+          if (timerEl) timerEl.textContent = formatTime(roundSecsLeft);
+
+          // Flash red when ≤ 5 seconds remain
+          if (roundSecsLeft <= 5 && timerEl) timerEl.classList.add('timer-warn');
+
+          if (roundSecsLeft <= 0) {
+            // Time's up — counts as a wrong answer
+            stopRoundTimer();
+            lives--;
+            renderLives();
+            setStatus("⏰ Time's up! Lost a life.", 'error');
+
+            if (lives <= 0) {
+              setTimeout(function () { showGameOver(); }, 600);
+              return;
+            }
+
+            // Auto-advance to a new round
+            accepting = false;
+            setTimeout(function () { nextRound(); }, 900);
+          }
+        }, 1000);
+      }
+
+      function stopRoundTimer() {
+        clearInterval(roundTimer);
+        roundTimer = null;
+        if (timerEl) timerEl.classList.remove('timer-warn');
+      }
+
+      /* ============================================================
+       *  GAME TIMER — total elapsed time (computed on demand)
+       * ============================================================ */
+      function getElapsedSecs() {
+        return Math.floor((Date.now() - gameStartTime) / 1000);
+      }
+
+      /* ============================================================
+       *  renderLives()
+       *  Draw ❤️ for remaining lives and 🖤 (dimmed) for lost ones.
+       * ============================================================ */
+      function renderLives() {
+        var html = '';
+        for (var i = 0; i < MAX_LIVES; i++) {
+          if (i < lives) {
+            html += '<span>❤️</span>';
+          } else {
+            html += '<span class="heart-lost">🖤</span>';
+          }
+        }
+        livesEl.innerHTML = html;
+      }
+
+      /* ============================================================
+       *  setStatus(msg, type)
+       *  Update the status text below the grid.
+       *  type can be 'success', 'error', or '' (neutral).
+       * ============================================================ */
+      function setStatus(msg, type) {
+        statusEl.textContent = msg;
+        statusEl.className = 'status-msg' + (type ? ' ' + type : '');
+      }
+
+      /* ============================================================
+       *  showGameOver()
+       *  Reveal the full-screen Game Over overlay with stats.
+       * ============================================================ */
+      function showGameOver() {
+        accepting = false;
+        goScoreEl.textContent = score;
+        goLevelEl.textContent = level;
+        goTimeEl.textContent = formatTime(getElapsedSecs());
+        gameOverlay.classList.add('visible');
+      }
+
+      /* ============================================================
+       *  startGame()
+       *  Initialise (or reset) all state and begin a fresh game.
+       * ============================================================ */
+      function startGame() {
+        var cfg = DIFFICULTY[mode];
+        if (window.innerWidth <= 600) {
+          gridRows = 5;
+          gridCols = 5;
+        } else {
+          gridRows = cfg.startSize.rows;
+          gridCols = cfg.startSize.cols;
+        }
+        level = 1;
+        score = 0;
+        lives = MAX_LIVES;
+        lastPairKey = '';
+
+        if (levelEl) levelEl.textContent = level;
+        if (scoreEl) scoreEl.textContent = score;
+        renderLives();
+        gameOverlay.classList.remove('visible');
+        setStatus("Find the emoji that's different from the rest!", '');
+
+        gameStartTime = Date.now();
+        accepting = true; // Set to true BEFORE generateGrid
+        generateGrid();
+        startRoundTimer();
+      }
+
+      /* ============================================================
+       *  EVENT LISTENERS
+       * ============================================================ */
+
+      // Difficulty selector buttons
+      diffBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          diffBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          mode = btn.dataset.mode;
+          stopRoundTimer();
+          startGame();
+        });
+      });
+
+      // Restart button in the top stats bar
+      restartBtn.addEventListener('click', function () {
+        stopRoundTimer();
+        startGame();
+      });
+
+      // Play Again button on the Game Over overlay
+      goRestartBtn.addEventListener('click', function () {
+        startGame();
+      });
+
+      // ─── RESIZE OBSERVER ───────────────────────────────────
+      const resizeObserver = new ResizeObserver(() => {
+        generateGrid();
+      });
+      resizeObserver.observe(document.querySelector('.board-area'));
+
+      /* ============================================================
+       *  INIT — kick off the game on page load
+       * ============================================================ */
+      startGame();
+
+    })();
+  </script>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>All the emojis, stickers, and captions you need to light up every chat and post.</p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+    <div class="site-footer__bottom">
+      <p>© <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳</p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

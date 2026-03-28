@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Emoji Othello Game ♟️ | Classic Reversi Board Game</title>
+    <meta name="description"
+        content="Play Emoji Othello (Reversi) online for free! Challenge friends or play local multiplayer on an 8x8 board. Strategic emoji flipping action.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://emojicircle.com/games/emoji-othello.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emojicircle.com/games/emoji-othello.html">
+    <meta property="og:title" content="Emoji Othello Strategy Game">
+    <meta property="og:description" content="Play the classic strategy board game Reversi using colorful emojis!">
+    <meta property="og:image" content="https://emojicircle.com/images/games/emoji-othello-og.jpg">
+    <meta property="og:site_name" content="EmojiCircle">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://emojicircle.com/games/emoji-othello.html">
+    <meta name="twitter:title" content="Emoji Othello Strategy Game">
+    <meta name="twitter:description" content="Play the classic strategy board game Reversi using colorful emojis!">
+    <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-othello-og.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Emoji Othello",
+    "url": "https://emojicircle.com/games/emoji-othello.html",
+    "genre": ["Board Game", "Strategy"],
+    "playMode": "MultiPlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "description": "A modern twist on the classic strategy board game Othello (Reversi), utilizing colorful round emojis on an 8x8 grid.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Emoji Othello",
+        "item": "https://emojicircle.com/games/emoji-othello.html"
+      }
+    ]
+  }
+  </script>
+
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/emoji-header.css">
+    <link rel="stylesheet" href="game-layout.css">
+    <script src="game-layout.js" defer></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-77D61P8G0J');
+    </script>
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #121214;
+            --surface-alt: #18181b;
+            --surface-strong: #0b0b0c;
+            --border: #27272a;
+            --accent: #ff4d00;
+            --accent-soft: rgba(255, 77, 0, 0.25);
+            --text-primary: #f8fafc;
+            --text-muted: #a1a1aa;
+            --orange: #ff8c00;
+            --black-disc: #020617;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        .game-wrapper {
+            max-width: 960px;
+            margin: 28px auto;
+            padding: 0 12px;
+        }
+
+        .othello-card {
+            background: var(--surface);
+            border: none; /* removed grey border to match site header style */
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .title-block h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-block .emoji-icon {
+            font-size: 1.8rem;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .scores {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .score-pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface-alt);
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .score-pill.orange {
+            border-color: #ff8c00;
+        }
+
+        .score-pill.black {
+            border-color: rgba(15, 23, 42, 0.5);
+        }
+
+        .turn-indicator {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .turn-indicator b {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 14px;
+            transition: background .2s, border-color .2s, transform .1s;
+        }
+
+        .btn:hover {
+            background: var(--surface-alt);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 0 12px var(--accent-soft);
+        }
+
+        .board-wrap {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 44px);
+            grid-template-rows: repeat(8, 44px);
+            gap: 6px;
+            padding: 10px;
+            background: radial-gradient(circle at top, #3d2200 0, #1a0f00 55%, #020617 100%);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 140, 0, 0.35);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .cell {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            background: rgba(251, 126, 59, 0.43);
+            border-radius: 8px;
+            border: 1px solid rgba(15, 23, 42, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            transition: background .15s, transform .12s, box-shadow .15s, border-color .15s;
+        }
+
+        .cell:hover {
+            transform: scale(1.05);
+            background: rgba(15, 23, 42, 0.6);
+            box-shadow: 0 0 10px rgba(15, 23, 42, 0.8);
+        }
+
+        .cell.disabled,
+        .cell.disabled:hover {
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .disc {
+            font-size: 26px;
+            transition: transform .25s ease, filter .25s ease;
+            transform-origin: center;
+        }
+
+        .disc.just-placed {
+            animation: popIn .32s ease;
+        }
+
+        .disc.just-flipped {
+            animation: flipDisc .35s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.25);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes flipDisc {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(90deg) scale(0.9);
+            }
+
+            100% {
+                transform: rotateY(0deg) scale(1);
+            }
+        }
+
+        .cell.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            border: 2px dashed rgba(248, 250, 252, 0.4);
+            box-shadow: 0 0 6px rgba(248, 250, 252, 0.45);
+        }
+
+        .cell.valid-move:hover::after {
+            border-style: solid;
+        }
+
+        .status {
+            margin-top: 14px;
+            font-size: 14px;
+            color: var(--text-muted);
+            min-height: 22px;
+        }
+
+        .status strong {
+            color: var(--text-primary);
+        }
+
+        .status.good {
+            color: var(--orange);
+        }
+
+        .status.bad {
+            color: #f97373;
+        }
+
+        .status.info {
+            color: var(--text-muted);
+        }
+
+        .game-over-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.84);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease;
+            z-index: 2000;
+        }
+
+        .game-over-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .game-over-box {
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 30px 26px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75);
+            transform: translateY(26px);
+            transition: transform .3s ease;
+        }
+
+        .game-over-overlay.visible .game-over-box {
+            transform: translateY(0);
+        }
+
+        .go-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 4px;
+        }
+
+        .game-over-box h2 {
+            margin: 0 0 6px;
+            font-size: 1.5rem;
+        }
+
+        .go-line {
+            margin: 8px 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .go-line b {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 900px) {
+            .game-page {
+                padding: 24px 16px 40px 16px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .othello-card {
+                padding: 10px;
+            }
+
+            .board {
+                grid-template-columns: repeat(8, 40px);
+                grid-template-rows: repeat(8, 40px);
+                gap: 5px;
+                padding: 8px;
+                margin: 0 auto;
+            }
+
+            .cell {
+                width: 40px;
+                height: 40px;
+            }
+
+            .disc {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .board {
+                grid-template-columns: repeat(8, 36px);
+                grid-template-rows: repeat(8, 36px);
+                gap: 3px;
+                padding: 6px;
+            }
+
+            .cell {
+                width: 36px;
+                height: 36px;
+            }
+
+            .disc {
+                font-size: 20px;
+            }
+        }
+
+        /* Page-specific HUD size tweaks to match other game headers */
+        main.game-page .game-hud {
+            padding: 10px 14px;
+            min-height: 56px;
+            display: flex;
+            align-items: center; /* keep contents vertically centered */
+            gap: 12px;
+        }
+
+        main.game-page .game-hud h1 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Right-side HUD cluster (score, turn, controls) */
+        main.game-page .game-hud .hud-right {
+            gap: 8px;
+            align-items: center;
+            display: flex;
+        }
+
+        /* Constrain score pills and force horizontal layout so they fit in one row */
+        main.game-page .score-pill {
+            display: inline-flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: center;
+            gap: 8px;
+            padding: 6px 10px;
+            min-width: 64px;
+            max-height: 40px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        main.game-page .score-pill .score-label {
+            font-size: 0.78rem;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        main.game-page .score-pill .score-value {
+            font-size: 1.05rem;
+            line-height: 1;
+            display: inline-block;
+            font-weight: 800;
+        }
+
+        main.game-page .turn-indicator {
+            padding: 6px 10px;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+    
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 10px 14px; }
+      .game-hud .hud-right { width: 100%; justify-content: space-between; }
+      .board-area { padding: 0 !important; overflow: hidden; }
+      .game-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        border-radius: 0;
+      }
+    }
+
+  </style>
+    </head>
+
+    <body data-current-game="emoji-othello">
+        <main class="game-page">
+            <section class="card">
+                <div class="game-hud">
+                    <h1>♟️ Emoji <span>Othello</span></h1>
+                    <div class="hud-right">
+                        <div class="score-pill orange">
+                            <span class="score-label">🟠</span>
+                            <span class="score-value" id="scoreOrange">2</span>
+                        </div>
+                        <div class="score-pill black">
+                            <span class="score-label">⚫</span>
+                            <span class="score-value" id="scoreBlack">2</span>
+                        </div>
+                        <div class="turn-indicator" id="turn">Turn: <b>🟠</b></div>
+                        <button id="restart" class="btn primary">Restart</button>
+                    </div>
+                </div>
+                <div class="board-area">
+                    <div class="game-wrapper">
+                        <div class="othello-card">
+                            <div class="board-wrap">
+                                <div id="board" class="board" role="grid" aria-label="Othello board"></div>
+                            </div>
+                            <div id="status" class="status" style="text-align: center;">
+                                Place a disc next to your opponent to flip their emojis.
+                            </div>
+                            <div class="visually-hidden">
+                                <h2>Play Emoji Othello (Reversi)</h2>
+                                <p>Welcome to Emoji Othello, a fantastic visual spin on the classic Reversi board game! Instead of
+                                    standard black and white discs, you'll be placing vibrant orange 🟠 and black ⚫ emojis on the 8x8
+                                    grid. Use your best tactics and strategic thinking to capture the board.</p>
+                                <ul>
+                                    <li><a href="/index.html">Discover more geometric emojis</a></li>
+                                    <li><a href="/games.html">Explore our multiplayer board games</a></li>
+                                </ul>
+                                <h3>How to Play Reversi</h3>
+                                <p>The goal is to have the majority of discs turned to display your emoji color when the last playable
+                                    empty square is filled. On your turn, place an emoji on the board such that there is at least one
+                                    straight line (horizontal, vertical, or diagonal) of opposing emojis trapped between your new piece
+                                    and another of your existing pieces. All opposing pieces in that line will flip to your color!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    <div id="gameOverOverlay" class="game-over-overlay" aria-hidden="true">
+        <div class="game-over-box">
+            <div id="goEmoji" class="go-emoji">🏁</div>
+            <h2 id="goTitle">Game Over</h2>
+            <p id="goScoreText" class="go-line"></p>
+            <button id="goRestart" class="btn primary">Play again</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ====== CONSTANTS ======
+            const SIZE = 8;                    // 8x8 Othello board
+            const EMPTY = 0;                   // empty square
+            const ORANGE = 1;                  // Player 1 — 🟠
+            const BLACK = 2;                   // Player 2 — ⚫
+
+            const EMOJI_MAP = {
+                [EMPTY]: '',
+                [ORANGE]: '🟠',
+                [BLACK]: '⚫'
+            };
+
+            // 8 directions: horizontal, vertical, diagonal
+            const DIRECTIONS = [
+                [1, 0], [-1, 0], [0, 1], [0, -1],
+                [1, 1], [1, -1], [-1, 1], [-1, -1]
+            ];
+
+            // ====== DOM ELEMENTS ======
+            const boardEl = document.getElementById('board');
+            const turnEl = document.getElementById('turn');
+            const scoreOrangeEl = document.getElementById('scoreOrange');
+            const scoreBlackEl = document.getElementById('scoreBlack');
+            const restartBtn = document.getElementById('restart');
+            const statusEl = document.getElementById('status');
+            const gameOverOverlay = document.getElementById('gameOverOverlay');
+            const goEmojiEl = document.getElementById('goEmoji');
+            const goTitleEl = document.getElementById('goTitle');
+            const goScoreTextEl = document.getElementById('goScoreText');
+            const goRestartBtn = document.getElementById('goRestart');
+
+            // ====== GAME STATE ======
+            /** @type {number[][]} board[r][c] -> EMPTY/ORANGE/BLACK */
+            let board = [];
+            let currentPlayer = ORANGE; // 🟠 starts
+            let gameOver = false;
+
+            // For animations
+            let lastMove = null;        // {row, col}
+            let lastFlipped = [];       // [{row, col}, ...]
+
+            // ====== INITIALIZE BOARD (FUNCTION: initializeBoard) ======
+            function initializeBoard() {
+                // Create empty 8x8 board
+                board = Array.from({ length: SIZE }, () => Array(SIZE).fill(EMPTY));
+
+                // Starting four discs in the centre:
+                //   � ⚫
+                //   ⚫ 🟠
+                const mid = SIZE / 2; // 4
+                board[mid - 1][mid - 1] = ORANGE;
+                board[mid][mid] = ORANGE;
+                board[mid - 1][mid] = BLACK;
+                board[mid][mid - 1] = BLACK;
+
+                currentPlayer = ORANGE;
+                gameOver = false;
+                lastMove = null;
+                lastFlipped = [];
+
+                updateScores();
+                updateTurnIndicator();
+                setStatus('Place a disc next to your opponent to flip their emojis.', 'info');
+                renderBoard();
+            }
+
+            // ====== RENDER BOARD (FUNCTION: renderBoard) ======
+            function renderBoard() {
+                boardEl.innerHTML = '';
+
+                // Pre-compute valid moves for highlighting
+                const validMoves = getValidMoves(currentPlayer);
+                const validSet = new Set(validMoves.map(m => m.row + ',' + m.col));
+
+                for (let r = 0; r < SIZE; r++) {
+                    for (let c = 0; c < SIZE; c++) {
+                        const cellBtn = document.createElement('button');
+                        cellBtn.className = 'cell';
+                        cellBtn.dataset.row = String(r);
+                        cellBtn.dataset.col = String(c);
+
+                        const value = board[r][c];
+                        const discSpan = document.createElement('span');
+                        discSpan.className = 'disc';
+                        discSpan.textContent = EMOJI_MAP[value];
+
+                        // Animation classes for the last move / flips
+                        if (lastMove && lastMove.row === r && lastMove.col === c) {
+                            discSpan.classList.add('just-placed');
+                        }
+                        if (lastFlipped.some(p => p.row === r && p.col === c)) {
+                            discSpan.classList.add('just-flipped');
+                        }
+
+                        // Highlight valid moves for empty cells
+                        if (value === EMPTY && !gameOver && validSet.has(r + ',' + c)) {
+                            cellBtn.classList.add('valid-move');
+                        }
+
+                        cellBtn.appendChild(discSpan);
+                        cellBtn.addEventListener('click', handleCellClick);
+                        boardEl.appendChild(cellBtn);
+                    }
+                }
+
+                // Clear animation markers after a short delay so they don't repeat
+                if (lastMove || lastFlipped.length) {
+                    setTimeout(function () {
+                        lastMove = null;
+                        lastFlipped = [];
+                    }, 350);
+                }
+            }
+
+            // ====== HANDLE MOVE (FUNCTION: handleMove) ======
+            function handleCellClick(event) {
+                if (gameOver) return;
+
+                const target = event.currentTarget;
+                const row = Number(target.dataset.row);
+                const col = Number(target.dataset.col);
+
+                handleMove(row, col);
+            }
+
+            function handleMove(row, col) {
+                // Cell must be empty
+                if (board[row][col] !== EMPTY) {
+                    setStatus('That square is already taken.', 'bad');
+                    return;
+                }
+
+                // Check if the move is valid and which discs will flip
+                const discsToFlip = checkValidMove(row, col, currentPlayer);
+                if (!discsToFlip.length) {
+                    setStatus('Invalid move — no emojis would be flipped.', 'bad');
+                    return;
+                }
+
+                // Apply the move
+                board[row][col] = currentPlayer;
+                flipDiscs(discsToFlip, currentPlayer);
+                lastMove = { row, col };
+                lastFlipped = discsToFlip.slice();
+
+                updateScores();
+                setStatus('Nice! You flipped ' + discsToFlip.length + ' emoji' + (discsToFlip.length > 1 ? 's.' : '.'), 'good');
+
+                // Switch turn and continue
+                switchTurn();
+            }
+
+            // ====== MOVE VALIDATION (FUNCTION: checkValidMove) ======
+            function checkValidMove(row, col, player) {
+                if (board[row][col] !== EMPTY) return [];
+
+                const opponent = player === ORANGE ? BLACK : ORANGE;
+                const toFlip = [];
+
+                // Look in all 8 directions
+                for (let i = 0; i < DIRECTIONS.length; i++) {
+                    const dir = DIRECTIONS[i];
+                    let r = row + dir[0];
+                    let c = col + dir[1];
+                    const line = [];
+
+                    // First, must have at least one opponent disc next to us
+                    while (inBounds(r, c) && board[r][c] === opponent) {
+                        line.push({ row: r, col: c });
+                        r += dir[0];
+                        c += dir[1];
+                    }
+
+                    // Then, if we ended on one of our own discs with at least one opponent in between, capture
+                    if (line.length && inBounds(r, c) && board[r][c] === player) {
+                        toFlip.push.apply(toFlip, line);
+                    }
+                }
+
+                return toFlip;
+            }
+
+            // Helper: is (r,c) on the board?
+            function inBounds(r, c) {
+                return r >= 0 && r < SIZE && c >= 0 && c < SIZE;
+            }
+
+            // ====== FLIPPING LOGIC (FUNCTION: flipDiscs) ======
+            function flipDiscs(discs, player) {
+                for (let i = 0; i < discs.length; i++) {
+                    const pos = discs[i];
+                    board[pos.row][pos.col] = player;
+                }
+                renderBoard();
+            }
+
+            // ====== VALID MOVE LIST (used for highlighting & skipping) ======
+            function getValidMoves(player) {
+                const moves = [];
+                for (let r = 0; r < SIZE; r++) {
+                    for (let c = 0; c < SIZE; c++) {
+                        if (board[r][c] !== EMPTY) continue;
+                        const discs = checkValidMove(r, c, player);
+                        if (discs.length) {
+                            moves.push({ row: r, col: c, flips: discs });
+                        }
+                    }
+                }
+                return moves;
+            }
+
+            // ====== TURN MANAGEMENT (FUNCTION: switchTurn) ======
+            function switchTurn() {
+                // After a move, it becomes the other player's turn.
+                currentPlayer = currentPlayer === ORANGE ? BLACK : ORANGE;
+
+                const movesForNewPlayer = getValidMoves(currentPlayer);
+                if (movesForNewPlayer.length === 0) {
+                    // No valid moves for this player — attempt to skip
+                    const other = currentPlayer === ORANGE ? BLACK : ORANGE;
+                    const movesForOther = getValidMoves(other);
+
+                    if (movesForOther.length === 0) {
+                        // Neither player can move — end the game
+                        checkGameOver();
+                        return;
+                    }
+
+                    // Skip current player's turn
+                    const name = currentPlayer === ORANGE ? '🟠' : '⚫';
+                    setStatus(name + ' has no valid moves. Turn skipped.', 'info');
+                    currentPlayer = other;
+                }
+
+                updateTurnIndicator();
+                renderBoard();
+            }
+
+            // ====== GAME OVER CHECK (FUNCTION: checkGameOver) ======
+            function checkGameOver() {
+                gameOver = true;
+
+                const counts = countDiscs();
+                const orangeCount = counts.orange;
+                const blackCount = counts.black;
+
+                let title;
+                let emoji;
+                if (orangeCount > blackCount) {
+                    title = '🟠 Wins!';
+                    emoji = '🟠';
+                } else if (blackCount > orangeCount) {
+                    title = '⚫ Wins!';
+                    emoji = '⚫';
+                } else {
+                    title = "It's a Draw!";
+                    emoji = '🤝';
+                }
+
+                goTitleEl.textContent = title;
+                goEmojiEl.textContent = emoji;
+                goScoreTextEl.innerHTML = 'Final score: <b>� ' + orangeCount + '</b> vs <b>⚫ ' + blackCount + '</b>';
+
+                gameOverOverlay.classList.add('visible');
+                gameOverOverlay.setAttribute('aria-hidden', 'false');
+                setStatus('Game over! Tap "Play again" to restart.', 'info');
+            }
+
+            // ====== SCORE & UI HELPERS ======
+            function countDiscs() {
+                let orange = 0;
+                let black = 0;
+                for (let r = 0; r < SIZE; r++) {
+                    for (let c = 0; c < SIZE; c++) {
+                        if (board[r][c] === ORANGE) orange++;
+                        else if (board[r][c] === BLACK) black++;
+                    }
+                }
+                return { orange: orange, black: black };
+            }
+
+            function updateScores() {
+                const counts = countDiscs();
+                scoreOrangeEl.textContent = String(counts.orange);
+                scoreBlackEl.textContent = String(counts.black);
+            }
+
+            function updateTurnIndicator() {
+                const emoji = currentPlayer === ORANGE ? '🟠' : '⚫';
+                turnEl.innerHTML = 'Turn: <b>' + emoji + '</b>';
+            }
+
+            function setStatus(message, type) {
+                statusEl.textContent = message;
+                statusEl.className = 'status' + (type ? ' ' + type : '');
+            }
+
+            // ====== NEW GAME / RESTART ======
+            function restartGame() {
+                gameOverOverlay.classList.remove('visible');
+                gameOverOverlay.setAttribute('aria-hidden', 'true');
+                initializeBoard();
+            }
+
+            // Restart buttons
+            restartBtn.addEventListener('click', restartGame);
+            goRestartBtn.addEventListener('click', restartGame);
+
+            // ====== INIT ======
+            initializeBoard();
+        })();
+    </script>
+    <footer class="site-footer" role="contentinfo">
+        <section class="site-footer-content">
+            <div class="site-footer__content">
+                <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+                    EmojiCircle<span>.com</span>
+                </a>
+                <p>
+                    All the emojis, stickers, and captions you need to light up every chat and post.
+                </p>
+            </div>
+
+            <section class="site-footer-content1">
+                <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+                    <h3 id="footer-explore-heading">Explore</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+                        <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+                        <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+                        <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+                    <h3 id="footer-support-heading">Support</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+                                Conditions</a></li>
+                        <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p>
+                © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+            </p>
+        </div>
+    </footer>
+    <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

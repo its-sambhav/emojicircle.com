@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emoji Tic Tac Toe – Play Online Free vs Computer or Friend | EmojiCircle</title>
+  <meta name="description"
+    content="Play Emoji Tic Tac Toe online for free. Challenge a friend or computer in 3x3 or 6x6 grid mode. Choose your emoji symbols and battle it out. No login needed." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-tick-tac-toe.html" />
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="EmojiCircle">
+  <meta property="og:title" content="Emoji Tic Tac Toe – Play Online Free | EmojiCircle">
+  <meta property="og:description"
+    content="Play Emoji Tic Tac Toe vs computer or a friend. Choose your emoji, pick 3x3 or 6x6 grid, and play for free online.">
+  <meta property="og:image" content="https://emojicircle.com/game-banners/tic-tac-toe.webp">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-tick-tac-toe.html">
+  <meta property="og:type" content="website">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emoji Tic Tac Toe – Free Online Game | EmojiCircle">
+  <meta name="twitter:description"
+    content="Play Emoji Tic Tac Toe online! Pick your emoji symbol, choose 3x3 or 6x6 grid, and play vs AI or a friend.">
+  <meta name="twitter:image" content="https://emojicircle.com/game-banners/tic-tac-toe.webp">
+  <!-- Schema: Game -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    "name": "Emoji Tic Tac Toe",
+    "description": "A modern version of Tic Tac Toe where players pick emoji symbols instead of X and O. Play on 3x3 or 6x6 grids vs AI or a friend.",
+    "url": "https://emojicircle.com/games/emoji-tick-tac-toe.html",
+    "genre": ["Board Game", "Strategy", "Puzzle"],
+    "applicationCategory": "Game",
+    "operatingSystem": "Web Browser",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+  }
+  </script>
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://emojicircle.com/"},
+      {"@type":"ListItem","position":2,"name":"Emoji Games","item":"https://emojicircle.com/games/games.html"},
+      {"@type":"ListItem","position":3,"name":"Emoji Tic Tac Toe","item":"https://emojicircle.com/games/emoji-tick-tac-toe.html"}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+  <script>
+    // =====================
+    // Emoji Tic Tac Toe
+    // =====================
+
+    // Emoji options
+    const emojis = ["❌", "⭕", "🔥", "💎", "😎", "👑", "🐱", "🐶", "🍕", "⚡"];
+
+    // DOM Elements (bound on DOMContentLoaded)
+    let boardEl;
+    let turnInfo;
+    let startButton;
+    let score1El;
+    let score2El;
+
+    const dropdownRegistry = {};
+    let openDropdownInstance = null;
+
+    // Game State
+    let board = [];
+    let size = 3;
+    let winLength = 3;
+    let currentPlayer = 1;
+    let gameOver = false;
+    let scores = { 1: 0, 2: 0 };
+    let winLineData = null;
+    let winLineElement = null;
+
+    // =====================
+    // Initialization
+    // =====================
+
+    window.addEventListener("DOMContentLoaded", () => {
+      // Bind DOM elements once the document is ready
+      boardEl = document.getElementById("board");
+      turnInfo = document.getElementById("turnInfo");
+      startButton = document.getElementById("startGame");
+      score1El = document.getElementById("score1");
+      score2El = document.getElementById("score2");
+
+      initDropdowns();
+      turnInfo.textContent = "Select options";
+
+      if (startButton) {
+        startButton.addEventListener("click", startGame);
+      }
+    });
+
+    function initDropdowns() {
+      const dropdownNodes = document.querySelectorAll("[data-dropdown]");
+
+      dropdownNodes.forEach(node => {
+        const key = node.dataset.dropdown;
+        if (!key) return;
+        dropdownRegistry[key] = createDropdownInstance(node);
+      });
+
+      if (dropdownRegistry.p1Emoji && dropdownRegistry.p2Emoji) {
+        const emojiOptions = emojis.map(symbol => ({ value: symbol, label: symbol }));
+        dropdownRegistry.p1Emoji.setOptions(emojiOptions, { emit: false });
+        dropdownRegistry.p2Emoji.setOptions(emojiOptions, { emit: false });
+      }
+
+      dropdownRegistry.mode?.setValue("single", { emit: false });
+      dropdownRegistry.gridSize?.setValue("3", { emit: false });
+      dropdownRegistry.p1Emoji?.setValue("❌", { emit: false });
+      dropdownRegistry.p2Emoji?.setValue("⭕", { emit: false });
+
+      if (dropdownRegistry.p1Emoji && dropdownRegistry.p2Emoji) {
+        dropdownRegistry.p1Emoji.onChange(() => ensureDistinctEmojis("p1"));
+        dropdownRegistry.p2Emoji.onChange(() => ensureDistinctEmojis("p2"));
+      }
+    }
+
+    function ensureDistinctEmojis(changedKey) {
+      const first = dropdownRegistry.p1Emoji?.getValue();
+      const second = dropdownRegistry.p2Emoji?.getValue();
+
+      if (!first || !second || first !== second) return;
+
+      const fallback = emojis.find(emoji => emoji !== first);
+
+      if (changedKey === "p1" && fallback) {
+        dropdownRegistry.p2Emoji.setValue(fallback, { emit: false });
+      } else if (changedKey === "p2" && fallback) {
+        dropdownRegistry.p1Emoji.setValue(fallback, { emit: false });
+      }
+    }
+
+    function createDropdownInstance(root) {
+      const trigger = root.querySelector("[data-dropdown-trigger]");
+      const valueEl = root.querySelector("[data-dropdown-value]");
+      const menu = root.querySelector("[data-dropdown-menu]");
+
+      if (!trigger || !valueEl || !menu) {
+        return {
+          root,
+          trigger,
+          menu,
+          getValue: () => null,
+          setValue: () => { },
+          setOptions: () => { },
+          close: () => { },
+          onChange: () => { },
+        };
+      }
+
+      let optionButtons = Array.from(menu.querySelectorAll("[data-dropdown-option]"));
+      const listeners = [];
+      let value = null;
+
+      trigger.setAttribute("aria-expanded", "false");
+      menu.setAttribute("tabindex", "-1");
+
+      function notify(newValue) {
+        listeners.forEach(callback => {
+          try {
+            callback(newValue);
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      }
+
+      function setValueInternal(newValue, { label, emit = true } = {}) {
+        if (newValue === undefined || newValue === null) return;
+
+        const option = optionButtons.find(btn => btn.dataset.value === newValue);
+        const display = label ?? option?.textContent.trim() ?? newValue;
+
+        value = newValue;
+        valueEl.textContent = display;
+        root.dataset.value = newValue;
+
+        optionButtons.forEach(btn => {
+          const isSelected = btn.dataset.value === newValue;
+          btn.classList.toggle("dropdown__option--selected", isSelected);
+          btn.setAttribute("aria-selected", isSelected);
+        });
+
+        if (emit) {
+          notify(newValue);
+        }
+      }
+
+      function closeDropdown() {
+        root.classList.remove("dropdown--open");
+        trigger.setAttribute("aria-expanded", "false");
+        if (openDropdownInstance === api) {
+          openDropdownInstance = null;
+        }
+      }
+
+      function openDropdown() {
+        if (openDropdownInstance && openDropdownInstance !== api) {
+          openDropdownInstance.close();
+        }
+        root.classList.add("dropdown--open");
+        trigger.setAttribute("aria-expanded", "true");
+        openDropdownInstance = api;
+      }
+
+      function attachOptionHandlers() {
+        optionButtons.forEach(option => {
+          option.setAttribute("role", "option");
+          option.addEventListener("click", () => {
+            setValueInternal(option.dataset.value, { label: option.textContent.trim() });
+            closeDropdown();
+          });
+        });
+      }
+
+      function setOptionsInternal(items = [], { emit = false } = {}) {
+        menu.innerHTML = "";
+
+        const fragment = document.createDocumentFragment();
+        items.forEach(item => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "dropdown__option";
+          btn.dataset.dropdownOption = "";
+          btn.dataset.value = item.value;
+          btn.textContent = item.label ?? item.value;
+          btn.setAttribute("role", "option");
+          fragment.appendChild(btn);
+        });
+
+        menu.appendChild(fragment);
+        optionButtons = Array.from(menu.querySelectorAll("[data-dropdown-option]"));
+        attachOptionHandlers();
+
+        const defaultValue = root.dataset.default;
+        const fallbackValue = items.find(item => item.value === defaultValue)?.value ?? items[0]?.value;
+
+        if (fallbackValue) {
+          const fallbackLabel = items.find(item => item.value === fallbackValue)?.label;
+          setValueInternal(fallbackValue, { label: fallbackLabel, emit });
+        }
+      }
+
+      attachOptionHandlers();
+
+      const api = {
+        root,
+        trigger,
+        menu,
+        getValue: () => value,
+        setValue: (newValue, options) => setValueInternal(newValue, options),
+        setOptions: (items, options) => setOptionsInternal(items, options),
+        close: () => closeDropdown(),
+        onChange(callback) {
+          if (typeof callback === "function") {
+            listeners.push(callback);
+          }
+        },
+      };
+
+      trigger.addEventListener("click", event => {
+        event.stopPropagation();
+        if (root.classList.contains("dropdown--open")) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+      });
+
+      menu.addEventListener("click", event => event.stopPropagation());
+
+      const defaultValue = root.dataset.default;
+      const fallbackValue = optionButtons.find(btn => btn.dataset.value === defaultValue)?.dataset.value
+        ?? optionButtons[0]?.dataset.value;
+
+      if (fallbackValue) {
+        setValueInternal(fallbackValue, { emit: false });
+      }
+
+      return api;
+    }
+
+    document.addEventListener("click", event => {
+      if (openDropdownInstance && !openDropdownInstance.root.contains(event.target)) {
+        openDropdownInstance.close();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && openDropdownInstance) {
+        openDropdownInstance.close();
+      }
+    });
+
+    // =====================
+    // Game Setup
+    // =====================
+
+    function startGame() {
+      if (!dropdownRegistry.gridSize || !dropdownRegistry.p1Emoji || !dropdownRegistry.p2Emoji || !dropdownRegistry.mode) {
+        return;
+      }
+
+      const selectedSize = parseInt(dropdownRegistry.gridSize.getValue(), 10);
+      size = Number.isInteger(selectedSize) ? selectedSize : 3;
+      winLength = size === 3 ? 3 : 4;
+
+      // use null for empty cells and store move snapshots as objects
+      board = Array(size * size).fill(null);
+      currentPlayer = 1;
+      gameOver = false;
+      clearWinLine();
+
+      // Switch UI
+      console.log("Starting game, hiding settings...");
+      const setup = document.getElementById('setupContainer');
+      const gameUI = document.getElementById('gameUI');
+
+      if (setup) setup.style.display = 'none';
+      if (gameUI) {
+        gameUI.style.display = 'flex';
+        gameUI.style.visibility = 'visible';
+        gameUI.style.opacity = '1';
+      }
+
+      if (boardEl) boardEl.classList.remove("board--hidden");
+      renderBoard();
+      updateTurnText();
+      startButton.textContent = "Start Game";
+      setEmojiDropdownsDisabled(true);
+      hidePopup();
+    }
+
+    function showSetup() {
+      console.log("Showing settings...");
+      const setup = document.getElementById('setupContainer');
+      const gameUI = document.getElementById('gameUI');
+
+      if (setup) setup.style.display = 'flex';
+      if (gameUI) gameUI.style.display = 'none';
+      setEmojiDropdownsDisabled(false);
+    }
+
+    // =====================
+    // Board Rendering
+    // =====================
+
+    function renderBoard() {
+      boardEl.innerHTML = "";
+      // Use flexible columns so a 6x6 grid fits on small screens.
+      boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      // Expose the column count to CSS as a custom property for any layout tweaks.
+      boardEl.style.setProperty('--cols', size);
+
+      board.forEach((cell, index) => {
+        const div = document.createElement("div");
+        div.className = "cell";
+        const display = cell ? cell.emoji : "";
+        div.textContent = display;
+        div.addEventListener("click", () => handleMove(index));
+        boardEl.appendChild(div);
+      });
+    }
+
+    // =====================
+    // Game Logic
+    // =====================
+
+    function handleMove(index) {
+      if (board[index] !== null || gameOver) return;
+
+      const emoji =
+        currentPlayer === 1
+          ? dropdownRegistry.p1Emoji?.getValue()
+          : dropdownRegistry.p2Emoji?.getValue();
+
+      if (!emoji) return;
+
+      // store an immutable snapshot so later dropdown changes don't affect past moves
+      board[index] = { emoji };
+      renderBoard();
+
+      const winInfo = checkWin(emoji);
+
+      if (winInfo) {
+        drawWinLine(winInfo);
+        finishGame(`Player ${currentPlayer} Wins 🎉`);
+        scores[currentPlayer]++;
+        updateScores();
+        return;
+      }
+
+      if (board.every(cell => cell !== null)) {
+        finishGame("It's a Draw 🤝");
+        return;
+      }
+
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      updateTurnText();
+
+      // Computer move (Single Player)
+      if (dropdownRegistry.mode?.getValue() === "single" && currentPlayer === 2) {
+        setTimeout(computerMove, 350);
+      }
+    }
+
+    // =====================
+    // Smarter Computer AI
+    // =====================
+
+    function computerMove() {
+      if (gameOver) return;
+
+      const aiEmoji = dropdownRegistry.p2Emoji?.getValue();
+      const humanEmoji = dropdownRegistry.p1Emoji?.getValue();
+
+      if (!aiEmoji || !humanEmoji) return;
+
+      // 1️⃣ Win if possible
+      let move = findBestMove(aiEmoji);
+      if (move !== null) {
+        handleMove(move);
+        return;
+      }
+
+      // 2️⃣ Block opponent win
+      move = findBestMove(humanEmoji);
+      if (move !== null) {
+        handleMove(move);
+        return;
+      }
+
+      // 3️⃣ Take center if available
+      const center = Math.floor(board.length / 2);
+      if (board[center] === null) {
+        handleMove(center);
+        return;
+      }
+
+      // 4️⃣ Pick best available position
+      const emptyCells = board
+        .map((v, i) => (v === null ? i : null))
+        .filter(i => i !== null);
+
+      if (emptyCells.length > 0) {
+        const randomIndex =
+          emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        handleMove(randomIndex);
+      }
+    }
+
+    // Try a move and see if it wins
+    function findBestMove(emoji) {
+      for (let i = 0; i < board.length; i++) {
+        if (board[i] === null) {
+          // simulate move as a snapshot object
+          board[i] = { emoji };
+          const isWin = Boolean(checkWin(emoji));
+          board[i] = null;
+          if (isWin) return i;
+        }
+      }
+      return null;
+    }
+
+    // =====================
+    // Win Detection (3x3 & 6x6)
+    // =====================
+
+    function checkWin(emoji) {
+      function getSymbolAt(index) {
+        const v = board[index];
+        return v ? v.emoji : null;
+      }
+
+      const directions = [
+        [1, 0],   // vertical
+        [0, 1],   // horizontal
+        [1, 1],   // diagonal \
+        [1, -1],  // diagonal /
+      ];
+
+      for (let row = 0; row < size; row++) {
+        for (let col = 0; col < size; col++) {
+          for (let [dx, dy] of directions) {
+            let count = 0;
+            const cells = [];
+
+            for (let k = 0; k < winLength; k++) {
+              const r = row + dx * k;
+              const c = col + dy * k;
+
+              if (
+                r < 0 || c < 0 ||
+                r >= size || c >= size ||
+                getSymbolAt(r * size + c) !== emoji
+              ) {
+                break;
+              }
+
+              count++;
+              cells.push(r * size + c);
+            }
+
+            if (count === winLength) {
+              return {
+                cells,
+                start: { row, col },
+                direction: { dx, dy },
+              };
+            }
+          }
+        }
+      }
+      return null;
+    }
+
+    // =====================
+    // UI Helpers
+    // =====================
+
+    function updateTurnText() {
+      turnInfo.textContent = `Player ${currentPlayer}`;
+    }
+
+    function updateScores() {
+      score1El.textContent = scores[1];
+      score2El.textContent = scores[2];
+    }
+
+    function finishGame(message) {
+      gameOver = true;
+      turnInfo.textContent = message;
+      startButton.textContent = "Restart Game";
+      setEmojiDropdownsDisabled(false);
+      // show themed modal
+      showPopup(message);
+    }
+
+    function setDropdownsDisabled(disabled) {
+      Object.values(dropdownRegistry).forEach(inst => {
+        try {
+          if (inst && inst.trigger) inst.trigger.disabled = disabled;
+        } catch (e) {
+          // ignore
+        }
+      });
+    }
+
+    // Disable only the emoji selection dropdowns (player 1 & 2) while a game is active
+    function setEmojiDropdownsDisabled(disabled) {
+      const p1 = dropdownRegistry.p1Emoji;
+      const p2 = dropdownRegistry.p2Emoji;
+      try {
+        if (p1 && p1.trigger) p1.trigger.disabled = disabled;
+      } catch (e) { }
+      try {
+        if (p2 && p2.trigger) p2.trigger.disabled = disabled;
+      } catch (e) { }
+    }
+
+    // Modal helpers
+    function showPopup(message) {
+      const modal = document.getElementById('gameModal');
+      const title = document.getElementById('modalTitle');
+      if (!modal || !title) return;
+      title.textContent = message;
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function hidePopup() {
+      const modal = document.getElementById('gameModal');
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    // modal event wiring
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('gameModal');
+      if (!modal) return;
+      const backdrop = document.getElementById('modalBackdrop');
+      const close = document.getElementById('modalClose');
+      if (e.target === backdrop || e.target === close) {
+        hidePopup();
+        // If user clicked the Play Again button, close the modal but
+        // do NOT auto-start the next game so players can change emojis first.
+        if (e.target === close) {
+          startButton.textContent = "Start Game";
+          boardEl.classList.add("board--hidden");
+          clearWinLine();
+          setEmojiDropdownsDisabled(false);
+          gameOver = true;
+        }
+      }
+    });
+
+    function clearWinLine() {
+      winLineData = null;
+      boardEl.querySelectorAll(".cell--winner").forEach(cell => {
+        cell.classList.remove("cell--winner");
+      });
+      if (winLineElement) {
+        winLineElement.remove();
+        winLineElement = null;
+      }
+    }
+
+    function drawWinLine(info) {
+      winLineData = info;
+
+      requestAnimationFrame(() => {
+        const cells = Array.from(boardEl.querySelectorAll(".cell"));
+        info.cells.forEach(index => {
+          const cell = cells[index];
+          if (cell) {
+            cell.classList.add("cell--winner");
+          }
+        });
+
+        const firstCell = cells[info.cells[0]];
+        const lastCell = cells[info.cells[info.cells.length - 1]];
+        if (!firstCell || !lastCell) return;
+
+        const boardRect = boardEl.getBoundingClientRect();
+        const startRect = firstCell.getBoundingClientRect();
+        const endRect = lastCell.getBoundingClientRect();
+
+        const startX = startRect.left + startRect.width / 2 - boardRect.left;
+        const startY = startRect.top + startRect.height / 2 - boardRect.top;
+        const endX = endRect.left + endRect.width / 2 - boardRect.left;
+        const endY = endRect.top + endRect.height / 2 - boardRect.top;
+
+        const length = Math.hypot(endX - startX, endY - startY);
+        const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+
+        if (!winLineElement) {
+          winLineElement = document.createElement("div");
+          winLineElement.className = "board__win-line";
+          boardEl.appendChild(winLineElement);
+        }
+
+        winLineElement.style.width = `${length}px`;
+        winLineElement.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
+        winLineElement.style.opacity = "1";
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const cs = document.getElementById('changeSettings');
+      if (cs) cs.addEventListener('click', showSetup);
+      
+      const rb = document.getElementById('restartBtnHeader');
+      if (rb) rb.addEventListener('click', showSetup);
+      
+      const cg = document.getElementById('continueGame');
+      if (cg) cg.addEventListener('click', startGame);
+
+      // Sync header elements with gameUI visibility
+      const gu = document.getElementById('gameUI');
+      const th = document.getElementById('ticHud');
+      const obs = new MutationObserver(() => {
+        const active = gu.style.display !== 'none';
+        th.style.display = active ? 'flex' : 'none';
+      });
+      obs.observe(gu, { attributes: true, attributeFilter: ['style'] });
+    });
+  </script>
+</head>
+
+<body data-current-game="emoji-tick-tac-toe">
+  <script src="/emoji-header.js" defer></script>
+
+  <!-- GAME -->
+  <main class="game-page">
+    <section class="card"
+      style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+      <div class="game-hud">
+        <h1>Emoji Tic Tac Toe</h1>
+        <div class="hud-right" id="ticHud" style="display:none">
+          <div class="score-pill">
+            <span class="score-label">P1</span>
+            <span class="score-value" id="score1">0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">P2</span>
+            <span class="score-value" id="score2">0</span>
+          </div>
+          <button id="restartBtnHeader" class="btn">Restart</button>
+        </div>
+      </div>
+
+      <div class="board-area" id="boardArea">
+        <div class="game-wrapper">
+
+          <div id="setupContainer" class="setup-container">
+            <h2 class="setup-title">Game Settings</h2>
+
+            <div class="controls">
+              <div class="dropdown" data-dropdown="mode" data-default="single" data-label="Mode">
+                <button type="button" class="dropdown__trigger" data-dropdown-trigger aria-haspopup="listbox"
+                  aria-expanded="false" aria-label="Select game mode">
+                  <span class="dropdown__value" data-dropdown-value></span>
+                </button>
+                <div class="dropdown__menu" data-dropdown-menu role="listbox">
+                  <button type="button" class="dropdown__option" data-dropdown-option data-value="single"
+                    role="option">Computer</button>
+                  <button type="button" class="dropdown__option" data-dropdown-option data-value="multi"
+                    role="option">Duo</button>
+                </div>
+              </div>
+
+              <div class="dropdown" data-dropdown="gridSize" data-default="3" data-label="Grid">
+                <button type="button" class="dropdown__trigger" data-dropdown-trigger aria-haspopup="listbox"
+                  aria-expanded="false" aria-label="Select grid size">
+                  <span class="dropdown__value" data-dropdown-value></span>
+                </button>
+                <div class="dropdown__menu" data-dropdown-menu role="listbox">
+                  <button type="button" class="dropdown__option" data-dropdown-option data-value="3" role="option">3 ×
+                    3</button>
+                  <button type="button" class="dropdown__option" data-dropdown-option data-value="6" role="option">6 ×
+                    6</button>
+                </div>
+              </div>
+
+              <div class="dropdown dropdown--emoji" data-dropdown="p1Emoji" data-default="❌" data-label="Player 1">
+                <button type="button" class="dropdown__trigger" data-dropdown-trigger aria-haspopup="listbox"
+                  aria-expanded="false" aria-label="Select emoji for player one">
+                  <span class="dropdown__value" data-dropdown-value></span>
+                </button>
+                <div class="dropdown__menu" data-dropdown-menu role="listbox"></div>
+              </div>
+
+              <div class="dropdown dropdown--emoji" data-dropdown="p2Emoji" data-default="⭕" data-label="Player 2">
+                <button type="button" class="dropdown__trigger" data-dropdown-trigger aria-haspopup="listbox"
+                  aria-expanded="false" aria-label="Select emoji for player two">
+                  <span class="dropdown__value" data-dropdown-value></span>
+                </button>
+                <div class="dropdown__menu" data-dropdown-menu role="listbox"></div>
+              </div>
+
+              <button id="startGame" type="button">Start Game</button>
+            </div>
+          </div>
+
+          <div id="gameUI" class="game-ui" style="display:none">
+            <div class="status" aria-live="polite">
+              <span class="status-label">Turn</span>
+              <span id="turnInfo"></span>
+            </div>
+
+            <div id="board" class="board"></div>
+
+            <div class="game-controls">
+              <button id="changeSettings" class="btn-secondary">Change Settings</button>
+              <button id="continueGame" class="btn-primary">Continue</button>
+            </div>
+          </div>
+
+          <!-- Game modal -->
+          <div id="gameModal" class="modal" aria-hidden="true">
+            <div class="modal__backdrop" id="modalBackdrop"></div>
+            <div class="modal__panel" role="dialog" aria-modal="true">
+              <h2 id="modalTitle">Super Win</h2>
+              <button id="modalClose" type="button">Play Again</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>
+          All the emojis, stickers, and captions you need to light up every chat and post.
+        </p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+
+    <div class="site-footer__bottom">
+      <p>
+        © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <style>
+    /* Mobile Header Cleanup */
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 8px 14px; min-height: 56px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .game-hud .hud-right { width: 100%; display: flex !important; justify-content: flex-start !important; gap: 8px !important; }
+      
+      #restartBtnHeader { margin-left: auto !important; padding: 6px 14px !important; font-size: 14px !important; border-radius: 20px !important; background: var(--accent); color: var(--surface-strong); border: none; font-weight: 700; cursor: pointer; }
+      
+      .score-pill { 
+        padding: 6px 12px !important; 
+        font-size: 13px !important; 
+        min-width: 0 !important; 
+        flex-direction: row !important; 
+        gap: 4px !important; 
+        border-radius: 20px !important; 
+        background: rgba(255,255,255,0.04) !important; 
+        border: 1px solid rgba(255,255,255,0.1) !important; 
+        align-items: center !important;
+      }
+      .score-pill .score-label { display: block !important; font-size: 10px !important; opacity: 0.8; text-transform: uppercase !important; font-weight: 500 !important; }
+      .score-pill .score-label::after { content: ":"; }
+      .score-pill .score-value { font-size: 13px !important; font-weight: 700 !important; color: var(--accent) !important; }
+
+      .board-area { padding: 0 !important; overflow: hidden; display: flex !important; flex: 1 !important; }
+      .game-wrapper { margin: 10px auto !important; padding: 15px !important; min-height: 0 !important; }
+    }
+    /* =========================
+   Base Variables
+========================= */
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-strong: #0b0b0c;
+      --border: #27272a;
+      --accent: #ff4d00;
+      --accent-soft: rgba(255, 77, 0, 0.16);
+      --text-primary: #f8fafc;
+      --text-muted: rgba(148, 163, 184, 0.75);
+    }
+
+    /* Laptop Header & Layout Polish */
+    @media (min-width: 601px) {
+      .game-hud { padding: 8px 20px !important; min-height: 56px !important; }
+      .game-hud h1 { font-size: 1.15rem !important; }
+      
+      .hud-right { gap: 12px !important; }
+      
+      .score-pill { 
+        flex-direction: row !important; 
+        gap: 8px !important; 
+        padding: 6px 16px !important; 
+        min-width: 0 !important;
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+      .score-pill .score-label { font-size: 11px !important; opacity: 0.8; }
+      .score-pill .score-label::after { content: ":"; }
+      .score-pill .score-value { font-size: 16px !important; font-weight: 700 !important; line-height: 1 !important; }
+
+      #restartBtnHeader { 
+        background: var(--accent) !important; 
+        color: #fff !important; 
+        border: none !important; 
+        padding: 8px 18px !important; 
+        font-size: 13px !important; 
+        font-weight: 800 !important; 
+        border-radius: 20px !important; 
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #restartBtnHeader:hover { transform: translateY(-1px); box-shadow: 0 4px 12px var(--accent-soft); }
+
+      .board-area { padding-top: 40px !important; padding-bottom: 40px !important; }
+      .game-wrapper { margin-top: 60px !important; }
+    }
+
+
+    .game-wrapper {
+      position: relative;
+      max-width: 720px;
+      margin: 36px auto 48px;
+      padding: 34px 40px;
+      background: var(--surface);
+      border: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: none;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+    }
+
+    .game-wrapper h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 40px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .controls #startGame {
+      flex: 1 1 140px;
+      min-width: 130px;
+      max-width: 200px;
+      padding: 0 18px;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--surface-strong);
+      border: 1px solid var(--accent);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .controls #startGame:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(255, 77, 0, 0.24);
+    }
+
+    .dropdown {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1 1 140px;
+      min-width: 125px;
+      max-width: 210px;
+      --dropdown-width: 100%;
+    }
+
+    .dropdown[data-label]::before {
+      content: attr(data-label);
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-left: 2px;
+    }
+
+    .dropdown__trigger {
+      width: 100%;
+      padding: 0 16px;
+      min-height: 52px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: var(--surface-strong);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      transition: border-color 0.18s ease, background 0.18s ease;
+      box-sizing: border-box;
+    }
+
+    /* Modal styles */
+    .modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .modal[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal__panel {
+      position: relative;
+      min-width: 280px;
+      max-width: 92%;
+      background: var(--surface-strong);
+      border: 2px solid var(--accent);
+      padding: 22px 26px;
+      color: var(--text-primary);
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    .modal__panel h2 {
+      margin: 0 0 16px 0;
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    #modalClose {
+      background: var(--accent);
+      color: var(--surface-strong);
+      border: none;
+      padding: 10px 16px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #modalClose:hover {
+      transform: translateY(-2px);
+    }
+
+    .dropdown__trigger::after {
+      content: "";
+      width: 0.55em;
+      height: 0.55em;
+      border-right: 2px solid var(--text-muted);
+      border-bottom: 2px solid var(--text-muted);
+      transform: rotate(45deg);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .dropdown--open .dropdown__trigger::after {
+      transform: rotate(225deg);
+      border-color: var(--accent);
+    }
+
+    .dropdown__value {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      text-align: left;
+    }
+
+    .dropdown[data-dropdown="gridSize"] .dropdown__value {
+      text-align: center;
+    }
+
+    .dropdown[data-dropdown="gridSize"] .dropdown__value,
+    .dropdown[data-dropdown="mode"] .dropdown__value {
+      text-align: center;
+    }
+
+    .dropdown[data-dropdown="gridSize"] .dropdown__trigger,
+    .dropdown[data-dropdown="mode"] .dropdown__trigger {
+      justify-content: center;
+    }
+
+    .dropdown__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      width: var(--dropdown-width, 100%);
+      min-width: var(--dropdown-width, 100%);
+      max-width: var(--dropdown-width, 100%);
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 46px rgba(8, 8, 10, 0.48);
+      padding: 8px 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 1200;
+      max-height: 240px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    .dropdown--open .dropdown__menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown__option {
+      width: 100%;
+      padding: 10px 18px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.16s ease, color 0.16s ease;
+      box-sizing: border-box;
+    }
+
+    .dropdown__option:hover,
+    .dropdown__option[aria-selected="true"],
+    .dropdown__option.dropdown__option--selected {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .dropdown--emoji {
+      flex: 1 1 140px;
+      min-width: 125px;
+      max-width: 210px;
+      --dropdown-width: 100%;
+    }
+
+    .dropdown--emoji .dropdown__trigger {
+      justify-content: center;
+      font-size: 1.3rem;
+      letter-spacing: 0.12em;
+    }
+
+    .dropdown--emoji[data-label]::before {
+      text-align: center;
+    }
+
+    .dropdown--emoji .dropdown__value {
+      text-align: center;
+    }
+
+    .dropdown--emoji .dropdown__option {
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* Ensure the dropdown arrow is visible on all screen sizes (including mobile) */
+    .dropdown__trigger {
+      position: relative;
+      padding-right: 36px;
+    }
+
+    .dropdown__trigger::after {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid var(--text-muted);
+      border-bottom: 2px solid var(--text-muted);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    @media (min-width: 561px) {
+      .dropdown__trigger {
+        position: relative;
+        padding-right: 36px;
+      }
+
+      .dropdown__trigger::after {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        border-right: 2px solid var(--text-muted);
+        border-bottom: 2px solid var(--text-muted);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .dropdown--open .dropdown__trigger::after {
+        transform: translateY(-50%) rotate(225deg);
+        border-color: var(--accent);
+      }
+    }
+
+    .dropdown[data-dropdown="gridSize"] .dropdown__option,
+    .dropdown[data-dropdown="mode"] .dropdown__option {
+      text-align: center;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .status-label {
+      position: relative;
+    }
+
+    .status-label::after {
+      content: ":";
+      margin-left: 6px;
+      color: var(--border);
+    }
+
+    .status #turnInfo {
+      color: var(--accent);
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .scoreboard span {
+      color: var(--text-primary);
+    }
+
+    .board {
+      display: grid;
+      gap: 10px;
+      margin: 24px auto;
+      width: min(100%, 460px);
+      grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .board--hidden {
+      display: none;
+    }
+
+    .cell {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(28px, 6vw, 44px);
+      background: var(--surface-strong);
+      border: 1px solid rgba(255, 77, 0, 0.3);
+      color: var(--accent);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .cell:hover {
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .board__win-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 6px;
+      background: var(--accent);
+      transform-origin: left center;
+      border-radius: 999px;
+      box-shadow: 0 0 24px rgba(255, 77, 0, 0.55);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .cell--winner {
+      background: rgba(255, 77, 0, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 77, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .game-wrapper {
+        margin: 32px 8% 48px;
+        padding: 32px;
+      }
+    }
+
+    @media (max-width: 1200px) and (min-width: 769px) {
+      .game-wrapper {
+        margin: 30px auto 40px;
+        padding: 30px 32px;
+        gap: 22px;
+      }
+
+      .controls {
+        gap: 10px;
+      }
+
+      .board {
+        gap: 8px;
+        width: min(100%, 420px);
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
+      }
+
+      .cell {
+        font-size: clamp(26px, 5.2vw, 38px);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .game-wrapper {
+        margin: 24px 6% 40px;
+        padding: 26px;
+        gap: 24px;
+      }
+
+      .game-wrapper h1 {
+        font-size: clamp(22px, 5.8vw, 28px);
+        letter-spacing: 0.07em;
+        white-space: nowrap;
+        max-width: 100%;
+      }
+
+      .controls {
+        gap: 12px;
+      }
+
+      .dropdown {
+        flex: 1 1 calc(50% - 18px);
+        max-width: 150px;
+        min-width: 0;
+      }
+
+      .dropdown[data-dropdown="mode"] {
+        order: 1;
+      }
+
+      .dropdown[data-dropdown="gridSize"] {
+        order: 2;
+      }
+
+      .dropdown[data-dropdown="p1Emoji"] {
+        order: 3;
+      }
+
+      .dropdown[data-dropdown="p2Emoji"] {
+        order: 4;
+      }
+
+      .dropdown__trigger {
+        padding: 0 14px;
+        min-height: 48px;
+        font-size: 0.7rem;
+      }
+
+      /* Keep the arrow visible on small screens */
+      .dropdown__trigger {
+        position: relative;
+        padding-right: 34px;
+      }
+
+      .dropdown__trigger::after {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid var(--text-muted);
+        border-bottom: 2px solid var(--text-muted);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .dropdown--emoji {
+        flex: 1 1 calc(50% - 18px);
+        max-width: 140px;
+      }
+
+      .dropdown--emoji .dropdown__trigger {
+        font-size: 1.08rem;
+      }
+
+      .controls #startGame {
+        order: 5;
+        flex: 1 1 100%;
+        padding: 0 16px;
+        min-height: 48px;
+        font-size: 0.74rem;
+        max-width: 260px;
+        margin: 6px auto 0;
+      }
+
+      .board {
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+      }
+
+      .scoreboard {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .game-wrapper {
+        margin: 22px 5% 36px;
+        padding: 22px;
+      }
+
+      .game-wrapper h1 {
+        font-size: clamp(20px, 5.6vw, 24px);
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+
+      .controls {
+        gap: 10px;
+      }
+
+      .dropdown {
+        flex: 1 1 calc(50% - 12px);
+        max-width: 120px;
+      }
+
+      .dropdown__trigger {
+        padding: 0 12px;
+        min-height: 44px;
+        font-size: 0.68rem;
+      }
+
+      .dropdown__trigger {
+        position: relative;
+        padding-right: 30px;
+      }
+
+      .dropdown__trigger::after {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid var(--text-muted);
+        border-bottom: 2px solid var(--text-muted);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .dropdown--emoji {
+        flex: 1 1 calc(50% - 12px);
+        max-width: 105px;
+      }
+
+      .dropdown--emoji .dropdown__trigger {
+        font-size: 1.02rem;
+      }
+
+      .controls #startGame {
+        padding: 0 14px;
+        min-height: 44px;
+        font-size: 0.72rem;
+      }
+
+      .board {
+        gap: 8px;
+      }
+    }
+
+    .dropdown__trigger:focus-visible,
+    .controls #startGame:focus-visible,
+    .cell:focus-visible {
+      outline: 3px solid rgba(255, 77, 0, 0.25);
+      outline-offset: 2px;
+    }
+
+    /* ── Centering & Scrolling Fixes ── */
+    .board-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex: 1;
+      overflow: hidden !important;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .setup-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 0.4s ease-out;
+      margin: 40px auto;
+    }
+
+    .setup-title {
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      margin-bottom: 4px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .game-ui {
+      display: none;
+      /* Controlled by JS */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+      animation: slideIn 0.4s ease-out;
+      margin: 40px auto;
+    }
+
+    .status {
+      margin-bottom: 8px;
+      padding: 8px 16px;
+      background: var(--accent-soft);
+      border-radius: 99px;
+    }
+
+    .game-controls {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: var(--surface-strong);
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px var(--accent-soft);
+      filter: brightness(1.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 10px 14px; }
+      .game-hud .hud-right { width: 100%; justify-content: space-between; }
+      .board-area { padding: 0 !important; overflow: hidden; }
+      .game-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+        aspect-ratio: 1 / 1;
+        margin: 0 !important;
+        border-radius: 0;
+        overflow: hidden;
+      }
+    }
+
+  </style>
+</body>
+
+</html>
+
+</html>

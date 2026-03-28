@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Bollywood Emoji Quiz Game 🎬 | Guess the Movie</title>
+	<meta name="description"
+		content="Test your Bollywood knowledge with the Bollywood Emoji Quiz Game! Guess Indian movies and web series from emoji clues. Play solo or multiplayer." />
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://emojicircle.com/games/emoji-bollywood-game.html">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://emojicircle.com/games/emoji-bollywood-game.html">
+	<meta property="og:title" content="Bollywood Emoji Quiz Game">
+	<meta property="og:description" content="Guess the Bollywood movie from emojis! A fun quiz game for cinema lovers.">
+	<meta property="og:image" content="https://emojicircle.com/images/games/emoji-bollywood-og.jpg">
+	<meta property="og:site_name" content="EmojiCircle">
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:url" content="https://emojicircle.com/games/emoji-bollywood-game.html">
+	<meta name="twitter:title" content="Bollywood Emoji Quiz Game">
+	<meta name="twitter:description"
+		content="Guess the Bollywood movie from emojis! A fun quiz game for cinema lovers.">
+	<meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-bollywood-og.jpg">
+
+	<!-- Structured Data -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "VideoGame",
+	  "name": "Bollywood Emoji Quiz",
+	  "url": "https://emojicircle.com/games/emoji-bollywood-game.html",
+	  "genre": ["Trivia", "Puzzle", "Educational"],
+	  "playMode": ["SinglePlayer", "MultiPlayer"],
+	  "applicationCategory": "Game",
+	  "operatingSystem": "Any",
+	  "description": "A fun trivia game where players guess the names of popular Bollywood movies based on a sequence of emojis.",
+	  "publisher": {
+	    "@type": "Organization",
+	    "name": "EmojiCircle",
+	    "url": "https://emojicircle.com"
+	  },
+	  "author": {
+	    "@type": "Organization",
+	    "name": "EmojiCircle",
+	    "url": "https://emojicircle.com"
+	  }
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "BreadcrumbList",
+	  "itemListElement": [
+	    {
+	      "@type": "ListItem",
+	      "position": 1,
+	      "name": "Home",
+	      "item": "https://emojicircle.com/"
+	    },
+	    {
+	      "@type": "ListItem",
+	      "position": 2,
+	      "name": "Games",
+	      "item": "https://emojicircle.com/games.html"
+	    },
+	    {
+	      "@type": "ListItem",
+	      "position": 3,
+	      "name": "Bollywood Emoji Quiz",
+	      "item": "https://emojicircle.com/games/emoji-bollywood-game.html"
+	    }
+	  ]
+	}
+	</script>
+
+	<link rel="stylesheet" href="style1.css" />
+	<link rel="stylesheet" href="/emoji-header.css">
+	<script src="/emoji-header.js" defer></script>
+	<link rel="stylesheet" href="game-layout.css">
+	<script src="game-layout.js" defer></script>
+	<script>
+
+
+		const DATA = {
+			"Movies / Web Series": {
+				easy: [
+					// easy: Bollywood / Indian movies only
+					{ emojis: "3️⃣🤓🤓🤓", answer: "3 Idiots", clue: "Three friends + engineering college" },
+					{ emojis: "👮‍♂️🕶️🔥", answer: "Singham", clue: "Fearless cop fighting crime" },
+					{ emojis: "🎸🎤🔥", answer: "Rockstar", clue: "Passionate musician chasing love and fame" },
+					{ emojis: "🧑‍🎓3️⃣0️⃣", answer: "Super 30", clue: "Exam pressure & competition" },
+					{ emojis: "👨‍👧‍👧🏋️‍♂️🏅", answer: "Dangal", clue: "Maari choriyan choron se kam hain ke?" },
+				],
+				medium: [
+					// medium: Bollywood / Indian movies only
+					{ emojis: "👨‍👧👧🏋️‍♂️🏅", answer: "Dangal", clue: "Maari choriyan choron se kam hain ke?" },
+					{ emojis: "🏑👭🇮🇳", answer: "Chak De! India", clue: "70 minutes of a women's hockey team fighting for gold." },
+					{ emojis: "🎸🎤💔", answer: "Aashiqui 2", clue: "A singer's rise to fame and his self-destructive love." },
+					{ emojis: "🧒🎤🌟", answer: "Taare Zameen Par", clue: "A child finds their talent" },
+					{ emojis: "👨‍⚖️⚖️🇮🇳", answer: "Jolly LLB", clue: "Fight for justice in India" },
+					{ emojis: "🚂❤️", answer: "Dilwale Dulhania Le Jayenge", clue: "Love story that starts on a train" },
+					{ emojis: "👩‍🚀🇮🇳🚀", answer: "Mission Mangal", clue: "India’s space mission" },
+					{ emojis: "🚽🇮🇳", answer: "Toilet Ek Prem Katha", clue: "Toilet revolution in villages" },
+					{ emojis: "👮‍♀️🧒🏫", answer: "Taare Zameen Par", clue: "A teacher helps a child" },
+					{ emojis: "🎬🇮🇳🕺", answer: "Bajrangi Bhaijaan", clue: "A man helps a lost child return home" },
+
+				],
+				hard: [
+					// user-added hard questions
+					{ emojis: "👮‍♂️⚖️🔥", answer: "Satyameva Jayate", clue: "Honest officer fighting injustice" },
+					{ emojis: "👩‍🦱💔🚬", answer: "Kabir Singh", clue: "Dark romance and obsession" },
+					{ emojis: "🚗🛣️🧍‍♀️", answer: "Highway", clue: "Journey becomes escape from trauma" },
+					{ emojis: "👩‍🎤🎧🌃", answer: "Secret Superstar", clue: "Singer singing while hiding face" },
+
+				]
+			},
+		};
+
+		const LEVELS = {
+			easy: { time: 15, pointsCorrect: 10, pointsWrong: 0, hints: 2 },
+			medium: { time: 10, pointsCorrect: 15, pointsWrong: -5, hints: 1 },
+			hard: { time: 9, pointsCorrect: 20, pointsWrong: -10, hints: 2 }
+		};
+
+		document.addEventListener('DOMContentLoaded', function () {
+
+			// elements
+
+			const levelEl = document.getElementById('level');
+			const playersEl = document.getElementById('players');
+			const startBtn = document.getElementById('startBtn');
+			const rulesBtn = document.getElementById('rulesBtn');
+			const setup = document.getElementById('setup');
+			const game = document.getElementById('game');
+			const results = document.getElementById('results');
+			const countdown = document.getElementById('countdown');
+			const timerBar = document.getElementById('timerBar');
+			const emojiBox = document.getElementById('emojiBox');
+			const answerEl = document.getElementById('answer');
+			const submitBtn = document.getElementById('submit');
+			const revealBtn = document.getElementById('revealBtn');
+			const feedback = document.getElementById('feedback');
+			const hintBtn = document.getElementById('hintBtn');
+			const hintsLeftEl = document.getElementById('hintsLeft');
+
+			const endBtn = document.getElementById('end');
+			const scoresEl = document.getElementById('scores');
+			const turnLabel = document.getElementById('turnLabel');
+			const qInfo = document.getElementById('qInfo');
+			const resultsList = document.getElementById('resultsList');
+			const playAgain = document.getElementById('playAgain');
+			const rulesCard = document.getElementById('rules');
+
+			let state = { category: null, level: 'easy', players: 1, questions: [], qIndex: 0, timerId: null, playersState: [], currentPlayer: 0, inProgress: false, currentQuestionIndex: null };
+
+
+			let previousState = '';
+
+			function populateCategories() { }
+			populateCategories();
+
+			startBtn.addEventListener('click', startFlow);
+
+			rulesBtn.addEventListener('click', () => {
+				if (!rulesCard.classList.contains('hidden')) return;
+				if (!setup.classList.contains('hidden')) previousState = 'setup';
+				else if (!game.classList.contains('hidden')) previousState = 'game';
+				else if (!results.classList.contains('hidden')) previousState = 'results';
+
+				setup.classList.add('hidden');
+				game.classList.add('hidden');
+				results.classList.add('hidden');
+				rulesCard.classList.remove('hidden');
+			});
+
+			document.getElementById('backFromRulesBtn').addEventListener('click', () => {
+				rulesCard.classList.add('hidden');
+				if (previousState === 'setup') setup.classList.remove('hidden');
+				else if (previousState === 'game') game.classList.remove('hidden');
+				else if (previousState === 'results') results.classList.remove('hidden');
+			});
+
+			submitBtn.addEventListener('click', submitAnswer);
+			if (revealBtn) revealBtn.addEventListener('click', revealAnswerRequest);
+			hintBtn.addEventListener('click', useHint);
+
+			endBtn.addEventListener('click', endGame);
+			playAgain.addEventListener('click', resetToSetup);
+			answerEl.addEventListener('keydown', e => { if (e.key === 'Enter') submitAnswer(); });
+
+			function startFlow() {
+				state.category = Object.keys(DATA)[0];
+				state.level = levelEl.value;
+				state.players = Number(playersEl.value) || 1;
+				state.questions = (DATA[state.category][state.level] || []).slice();
+				if (state.questions.length === 0) state.questions = (DATA['Mixed (All categories)'][state.level] || []).slice();
+				shuffle(state.questions);
+				state.qIndex = 0; state.playersState = []; state.currentPlayer = 0;
+				// track per-question results: { correct: bool, given: string, timeExpired: bool }
+				state.questionResults = new Array(state.questions.length).fill(null);
+				// determine starting hints (Hard always gets 2 hints)
+				let startingHints = (state.level === 'hard') ? 2 : LEVELS[state.level].hints;
+				for (let i = 0; i < state.players; i++) state.playersState.push({ name: `Player ${i + 1}`, score: 0, hintsLeft: startingHints });
+				renderScores();
+				setup.classList.add('hidden'); game.classList.remove('hidden'); results.classList.add('hidden');
+				startCountdown(() => { state.inProgress = true; showQuestion(); });
+			}
+
+			function startCountdown(cb) { let c = 3; countdown.textContent = 'Starting in ' + c + '...'; const id = setInterval(() => { c--; if (c > 0) countdown.textContent = 'Starting in ' + c + '...'; else { clearInterval(id); countdown.textContent = 'Go!'; cb(); setTimeout(() => countdown.textContent = '', 600); } }, 1000); }
+
+			function showQuestion() {
+				feedback.textContent = ''; const q = state.questions[state.qIndex];
+				// reset reveal state for this question
+				state.revealRequested = false;
+				// mark which question is currently shown
+				state.currentQuestionIndex = state.qIndex;
+				if (revealBtn) { revealBtn.disabled = false; revealBtn.textContent = 'Show Answer'; }
+				if (!q) { endGame(); return; }
+				turnLabel.textContent = state.players > 1 ? state.playersState[state.currentPlayer].name : '';
+				emojiBox.textContent = q.emojis;
+				answerEl.value = ''; answerEl.focus();
+				hintsLeftEl.textContent = state.playersState[state.currentPlayer].hintsLeft;
+				hintBtn.disabled = (state.playersState[state.currentPlayer].hintsLeft <= 0 || LEVELS[state.level].hints === 0);
+				qInfo.textContent = `${state.qIndex + 1}/${state.questions.length}`;
+				startTimer(LEVELS[state.level].time, onTimeUp);
+			}
+
+			function startTimer(seconds, onExpire) {
+				clearInterval(state.timerId);
+				timerBar.style.transition = 'none'; timerBar.style.width = '100%';
+				setTimeout(() => { timerBar.style.transition = `width ${seconds}s linear`; timerBar.style.width = '0%'; }, 30);
+				let t = seconds;
+				state.timerActive = true;
+				state.timeExpired = false;
+				state.timerId = setInterval(() => {
+					t--;
+					if (t <= 0) { clearInterval(state.timerId); state.timerActive = false; onExpire(); }
+				}, 1000);
+			}
+
+			function onTimeUp() {
+				// mark time expired for this question; do NOT evaluate answers anymore
+				state.timeExpired = true;
+				feedback.style.color = '#ffd166'; feedback.textContent = "You are out of time";
+				// mark result as wrong due to timeout
+				state.questionResults[state.qIndex] = { correct: false, given: '', timeExpired: true };
+				// if a reveal was requested earlier, show the answer now
+				if (state.revealRequested) { revealAnswerNow(state.qIndex); }
+				// auto-advance to next question after short delay
+				setTimeout(() => {
+					state.qIndex++;
+					if (state.qIndex >= (state.questions || []).length) { endGame(); return; }
+					if (state.players > 1) state.currentPlayer = (state.currentPlayer + 1) % state.players;
+					showQuestion();
+				}, 900);
+			}
+
+			function submitAnswer() {
+				if (!state.inProgress) return;
+				const text = answerEl.value.trim().toLowerCase(); if (!text) return;
+				// If time has expired for this question, inform user and do not evaluate (but auto-advance)
+				if (state.timeExpired) {
+					feedback.style.color = '#ffd166'; feedback.textContent = 'You are out of time';
+					setTimeout(() => { state.qIndex++; if (state.qIndex >= (state.questions || []).length) { endGame(); return; } if (state.players > 1) state.currentPlayer = (state.currentPlayer + 1) % state.players; showQuestion(); }, 900);
+					return;
+				}
+				// Only evaluate answers while timer is active
+				if (!state.timerActive) { return; }
+				const idx = state.qIndex;
+				const q = state.questions[idx];
+				const correct = (q.answer || '').trim().toLowerCase();
+				if (text === correct) {
+					// correct while time left: award points, stop timer, auto-advance
+					const pts = LEVELS[state.level].pointsCorrect;
+					state.playersState[state.currentPlayer].score += pts;
+					feedback.style.color = '#7ef9b1'; feedback.textContent = `Correct! +${pts}`;
+					// stop timer and mark as not active
+					clearInterval(state.timerId); state.timerActive = false;
+					renderScores();
+					// advance after a short delay
+					setTimeout(() => {
+						state.qIndex++;
+						if (state.players > 1) state.currentPlayer = (state.currentPlayer + 1) % state.players;
+						showQuestion();
+					}, 900);
+					// record correct result
+					state.questionResults[idx] = { correct: true, given: text, timeExpired: false };
+					// reveal answer immediately if requested
+					if (state.revealRequested) revealAnswerNow(idx);
+				} else {
+					// wrong answer while time left: apply penalty, allow retries, show Next button
+					const pts = LEVELS[state.level].pointsWrong;
+					state.playersState[state.currentPlayer].score += pts;
+					feedback.style.color = '#ff7b7b'; feedback.textContent = `Wrong! ${pts < 0 ? pts : ''}`;
+					renderScores();
+					// record wrong result and then auto-advance (rapid-fire)
+					state.questionResults[idx] = { correct: false, given: text, timeExpired: false };
+					// stop timer for this question
+					clearInterval(state.timerId); state.timerActive = false;
+					setTimeout(() => {
+						state.qIndex++;
+						if (state.qIndex >= (state.questions || []).length) { endGame(); return; }
+						if (state.players > 1) state.currentPlayer = (state.currentPlayer + 1) % state.players;
+						showQuestion();
+					}, 900);
+				}
+			}
+
+			function revealAnswerRequest() {
+				// If timer is active, schedule reveal when time's up. Otherwise reveal now.
+				if (state.timerActive) {
+					state.revealRequested = true;
+					if (revealBtn) { revealBtn.disabled = true; revealBtn.textContent = 'Will reveal after time'; }
+				} else {
+					const idxToReveal = (state.currentQuestionIndex !== null) ? state.currentQuestionIndex : Math.max(0, state.qIndex);
+					revealAnswerNow(idxToReveal);
+				}
+			}
+
+			function revealAnswerNow(index) {
+				const q = (typeof index === 'number') ? state.questions[index] : null;
+				if (!q) return;
+				feedback.style.color = '#60a5fa';
+				feedback.textContent = `Answer: ${q.answer}`;
+				if (revealBtn) { revealBtn.disabled = true; revealBtn.textContent = 'Answer Shown'; }
+			}
+
+			function applyWrong() { const pts = LEVELS[state.level].pointsWrong; state.playersState[state.currentPlayer].score += pts; renderScores(); }
+
+			function nextQuestion() {
+				// kept for compatibility but not used by UI (rapid-fire)
+				clearInterval(state.timerId); state.timerActive = false; state.timeExpired = false;
+				state.qIndex++;
+				if (state.qIndex >= (state.questions || []).length) { endGame(); return; }
+				if (state.players > 1) state.currentPlayer = (state.currentPlayer + 1) % state.players;
+				showQuestion();
+			}
+
+			function useHint() { const player = state.playersState[state.currentPlayer]; if (player.hintsLeft <= 0) return; if (LEVELS[state.level].hints === 0) return; player.hintsLeft--; player.score -= 5; const q = state.questions[state.qIndex]; const parts = q.emojis.split(/\s+/).filter(Boolean); if (parts.length > 1) { parts.pop(); emojiBox.textContent = parts.join(' '); } else { feedback.textContent = `Clue: ${q.clue || ''}`; } renderScores(); hintsLeftEl.textContent = player.hintsLeft; }
+
+			function endGame() {
+				clearInterval(state.timerId);
+				state.inProgress = false;
+				game.classList.add('hidden');
+				results.classList.remove('hidden');
+				const sorted = [...state.playersState].sort((a, b) => b.score - a.score);
+				resultsList.innerHTML = '';
+				// Scores header
+				const scoresHeader = document.createElement('li');
+				scoresHeader.innerHTML = '<strong>Scores</strong>';
+				resultsList.appendChild(scoresHeader);
+				sorted.forEach(p => { const li = document.createElement('li'); li.textContent = `${p.name} — ${p.score} pts`; resultsList.appendChild(li); });
+				// Answers header (only wrong/timeout questions)
+				const answersHeader = document.createElement('li');
+				answersHeader.innerHTML = '<strong>Answers (wrong / timed out)</strong>';
+				resultsList.appendChild(answersHeader);
+				// List only questions that were answered incorrectly or timed out
+				(state.questions || []).forEach((q, i) => {
+					const res = state.questionResults && state.questionResults[i];
+					if (res && res.correct === false) {
+						const li = document.createElement('li');
+						li.textContent = `${q.emojis} — ${q.answer}`;
+						resultsList.appendChild(li);
+					}
+				});
+			}
+
+			function resetToSetup() { results.classList.add('hidden'); game.classList.add('hidden'); setup.classList.remove('hidden'); state = { category: Object.keys(DATA)[0], level: 'easy', players: 1, questions: [], qIndex: 0, timerId: null, playersState: [], currentPlayer: 0, inProgress: false }; }
+
+			function renderScores() { scoresEl.innerHTML = ''; state.playersState.forEach(p => { const li = document.createElement('li'); li.className = 'score-item'; li.innerHTML = `<strong>${p.name}</strong>: <span>${p.score}</span>`; scoresEl.appendChild(li); }); }
+
+			function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } }
+
+			console.log('Emoji Quiz ready');
+
+		}); // end DOMContentLoaded
+
+	</script>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-77D61P8G0J');
+	</script>
+</head>
+
+<body data-current-game="emoji-bollywood-game">
+
+
+	<main class="game-page">
+		<section class="card">
+			<div class="game-hud">
+				<h1>🎬 Bollywood <span>Quiz</span></h1>
+				<div class="hud-right">
+					<button id="rulesBtn" class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Rules</button>
+				</div>
+			</div>
+
+			<div class="board-area"
+				style="flex-direction: column; overflow-y: auto; justify-content: flex-start; padding: 12px 24px;">
+				<div id="setup" class="quiz-wrapper" style="margin: 0 auto; width: 100%; max-width: 600px;">
+					<div class="controls">
+						<label>Level
+							<select id="level">
+								<option value="easy">Easy</option>
+								<option value="medium">Medium</option>
+								<option value="hard">Hard</option>
+							</select>
+						</label>
+						<label>Players
+							<select id="players">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</label>
+						<div class="control-actions">
+							<button id="startBtn" class="btn primary">Start Game</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="game" class="quiz-wrapper hidden" style="margin: 0 auto; width: 100%; max-width: 800px;">
+					<div class="game-top">
+						<div class="countdown" id="countdown">Ready?</div>
+						<div class="timer">
+							<div id="timerBar" class="timer-bar"></div>
+						</div>
+						<div id="turnLabel" class="turn-label"></div>
+					</div>
+
+					<div class="grid game-grid">
+						<div>
+							<div id="emojiBox" class="emoji">🙂</div>
+							<div class="hint-row">
+								<div id="hintInfo">Hints: <span id="hintsLeft">0</span></div>
+								<div>
+									<button id="hintBtn" class="btn">Use Hint</button>
+								</div>
+							</div>
+							<div class="answer-row">
+								<input id="answer" placeholder="Type your answer" autocomplete="off">
+								<button id="submit" class="btn primary">Submit</button>
+								<button id="end" class="btn">End</button>
+							</div>
+							<div id="feedback" class="feedback"></div>
+						</div>
+
+						<aside>
+							<div class="score-header">
+								<h3 class="score-title">Scores</h3>
+								<small id="qInfo" class="score-meta"></small>
+							</div>
+							<ul id="scores" class="scores"></ul>
+						</aside>
+					</div>
+				</div>
+
+				<div id="results" class="quiz-wrapper hidden" style="margin: 0 auto; width: 100%; max-width: 600px;">
+					<h2>Final Results</h2>
+					<ol id="resultsList"></ol>
+					<div class="results-actions">
+						<button id="playAgain" class="btn primary">Play Again</button>
+					</div>
+				</div>
+
+				<div id="rules" class="quiz-wrapper hidden" style="margin: 0 auto; width: 100%; max-width: 600px;">
+					<div class="rules-header"
+						style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+						<h3 style="margin: 0;">Rules</h3>
+						<button id="backFromRulesBtn" class="btn"
+							style="padding: 6px 12px; min-height: 32px; font-size: 0.7rem;">&larr; Back</button>
+					</div>
+					<ul>
+						<li><b>Easy</b>: Time : 15s, +10 points for each correct answer, 0 points deducted for each
+							wrong
+							answer, 2 hints can be used</li>
+						<li><b>Medium</b>: Time :10s, +15 points for each correct answer, −5 points decducted for each
+							wrong
+							answer, 1 hint can be used</li>
+						<li><b>Hard</b>: Time :9s, +20 points for each correct answer, −10 points deducted for each
+							wrong
+							answer, 2 hints can be used</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);"
+			aria-hidden="true">
+			<h2>Guess The Bollywood Movie from Emojis</h2>
+			<p>Put your cinema knowledge to the test with our Bollywood Emoji Quiz Game! Can you decode famous Indian
+				movies just by looking at a sequence of emojis? Play in Easy, Medium, or Hard modes. Perfect for movie
+				buffs wanting to play multiplayer locally with friends.</p>
+			<ul>
+				<li><a href="/index.html">Discover the meaning of emojis</a></li>
+				<li><a href="/games.html">Explore our other emoji quiz games</a></li>
+			</ul>
+			<h3>How to Play</h3>
+			<p>Look at the series of emojis displayed on screen. Type your best guess for the movie title into the
+				answer box and hit Submit before the timer runs out. If you're stuck, you can use your limited hints to
+				reveal a text clue or remove emojis.</p>
+		</div>
+	</main>
+
+	<footer class="site-footer" role="contentinfo">
+		<section class="site-footer-content">
+			<div class="site-footer__content">
+				<a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+					EmojiCircle<span>.com</span>
+				</a>
+				<p>
+					All the emojis, stickers, and captions you need to light up every chat and post.
+				</p>
+			</div>
+			<section class="site-footer-content1">
+				<nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+					<h3 id="footer-explore-heading">Explore</h3>
+					<ul class="site-footer__list" role="list">
+						<li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+						<li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+						<li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+						<li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+					</ul>
+				</nav>
+				<nav class="site-footer__content" aria-labelledby="footer-support-heading">
+					<h3 id="footer-support-heading">Support</h3>
+					<ul class="site-footer__list" role="list">
+						<li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+						</li>
+						<li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+								Conditions</a></li>
+						<li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+					</ul>
+				</nav>
+			</section>
+		</section>
+
+		<div class="site-footer__bottom">
+			<p>
+				© <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+			</p>
+		</div>
+	</footer>
+
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+		}
+
+		:root {
+			--page-bg: #000000;
+			--surface: #121214;
+			--surface-alt: #18181b;
+			--border: #27272a;
+			--accent: #ff4d00;
+			--accent-hover: #ff7030;
+			--text: #f8fafc;
+			--muted: rgba(148, 163, 184, 0.78);
+			--timer-track: #1f1f21;
+		}
+
+		.quiz-wrapper {
+			margin: clamp(48px, 8vh, 72px) auto 96px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+		}
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			flex-wrap: wrap;
+			gap: 18px;
+		}
+
+		.title-block {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+
+
+		p.lead {
+			margin: 0;
+			color: var(--muted);
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			font-size: 0.8rem;
+			max-width: 560px;
+		}
+
+		.card {
+			background: var(--surface);
+			border: 1px solid var(--border);
+			padding: clamp(16px, 4vw, 24px);
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			box-shadow: 0 28px 60px rgba(0, 0, 0, 0.46);
+		}
+
+		.controls {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 18px;
+			align-items: flex-end;
+		}
+
+		.controls label {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			font-size: 0.74rem;
+			letter-spacing: 0.22em;
+			text-transform: uppercase;
+			color: var(--muted);
+			flex: 1 1 160px;
+		}
+
+		.controls select,
+		.answer-row input {
+			padding: 14px 16px;
+			border-radius: 0;
+			border: 1px solid var(--border);
+			background: var(--surface-alt);
+			color: var(--text);
+			font-size: 0.95rem;
+			letter-spacing: 0.06em;
+		}
+
+		.controls select:focus,
+		.answer-row input:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: 0 0 0 2px rgba(255, 77, 0, 0.25);
+		}
+
+		.answer-row input::placeholder {
+			color: rgba(148, 163, 184, 0.62);
+			letter-spacing: 0.08em;
+		}
+
+		.control-actions {
+			display: flex;
+			gap: 14px;
+			margin-left: auto;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+
+		.btn {
+			padding: 14px 22px;
+			border-radius: 0;
+			border: 1px solid var(--border);
+			background: transparent;
+			color: var(--text);
+			cursor: pointer;
+			text-transform: uppercase;
+			letter-spacing: 0.24em;
+			font-size: 0.72rem;
+			font-weight: 600;
+			transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+			min-height: 46px;
+		}
+
+		.btn:hover {
+			border-color: var(--accent);
+			color: var(--accent);
+		}
+
+		.btn.primary {
+			background: var(--accent);
+			border-color: var(--accent);
+			color: #050505;
+		}
+
+		.btn.primary:hover {
+			background: var(--accent-hover);
+			border-color: var(--accent-hover);
+			color: #050505;
+		}
+
+		.btn:disabled,
+		.btn[disabled] {
+			opacity: 0.4;
+			cursor: not-allowed;
+		}
+
+		.hidden {
+			display: none !important;
+		}
+
+		.game-top {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			flex-wrap: wrap;
+		}
+
+		.countdown {
+			font-weight: 700;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+		}
+
+		.timer {
+			flex: 1;
+			min-width: 200px;
+			height: 12px;
+			background: var(--timer-track);
+			border: 1px solid var(--border);
+			border-radius: 0;
+			overflow: hidden;
+		}
+
+		.timer-bar {
+			height: 100%;
+			width: 100%;
+			background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hover) 100%);
+			transition: width linear;
+		}
+
+		.turn-label {
+			min-width: 140px;
+			text-align: right;
+			font-weight: 700;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: minmax(0, 2.2fr) minmax(220px, 1fr);
+			gap: 20px;
+		}
+
+		.game-grid {
+			margin-top: 12px;
+		}
+
+		.emoji {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: clamp(40px, 8vw, 64px);
+			padding: clamp(20px, 5vw, 32px);
+			border: 1px solid var(--border);
+			background: var(--surface-alt);
+			color: var(--text);
+			letter-spacing: 0.18em;
+			border-radius: 0;
+		}
+
+		.hint-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 16px;
+			margin-top: 12px;
+			color: var(--muted);
+			font-size: 0.78rem;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+		}
+
+		.answer-row {
+			display: flex;
+			gap: 12px;
+			margin-top: 12px;
+			align-items: stretch;
+		}
+
+		.answer-row input {
+			flex: 1 1 auto;
+		}
+
+		.feedback {
+			min-height: 24px;
+			margin-top: 12px;
+			color: var(--accent-hover);
+			font-size: 0.82rem;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+		}
+
+		.game-nav {
+			display: flex;
+			gap: 12px;
+			justify-content: flex-end;
+			margin-top: 12px;
+			flex-wrap: wrap;
+		}
+
+		aside {
+			background: var(--surface-alt);
+			border: 1px solid var(--border);
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.score-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 16px;
+			padding-bottom: 14px;
+			border-bottom: 1px solid var(--border);
+		}
+
+		.score-title {
+			margin: 0;
+			text-transform: uppercase;
+			letter-spacing: 0.26em;
+			font-size: 0.9rem;
+			color: var(--text);
+		}
+
+		.score-meta {
+			color: var(--muted);
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+		}
+
+		.scores {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.score-item {
+			padding: 12px 0;
+			border-bottom: 1px solid var(--border);
+			color: var(--muted);
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.score-item:last-child {
+			border-bottom: none;
+		}
+
+		#results h2 {
+			margin: 0;
+			font-size: 1.2rem;
+			letter-spacing: 0.28em;
+			text-transform: uppercase;
+			color: var(--text);
+		}
+
+		#resultsList {
+			margin: 0;
+			padding-left: 0;
+			list-style: none;
+			color: var(--muted);
+			letter-spacing: 0.1em;
+			line-height: 1.6;
+		}
+
+		#resultsList li {
+			padding: 2px 0;
+		}
+
+		.results-actions {
+			display: flex;
+			gap: 12px;
+			justify-content: flex-end;
+			margin-top: 18px;
+			flex-wrap: wrap;
+		}
+
+		#rules h3 {
+			margin: 0;
+			font-size: 1rem;
+			letter-spacing: 0.24em;
+			text-transform: uppercase;
+			color: var(--text);
+		}
+
+		#rules ul {
+			margin: 0;
+			padding-left: 18px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		#rules li {
+			color: var(--muted);
+			letter-spacing: 0.08em;
+			line-height: 1.6;
+		}
+
+		@media (min-width: 901px) {
+			.desktop-note {
+				display: block;
+			}
+
+			.title-inline .note {
+				display: none;
+			}
+
+			.title-block p.lead {
+				margin-top: 10px;
+			}
+		}
+
+		@media (max-width: 900px) {
+			.quiz-wrapper {
+				margin-top: 40px;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+
+			.turn-label {
+				min-width: 0;
+				text-align: left;
+			}
+
+			.control-actions {
+				margin-left: 0;
+				justify-content: flex-start;
+			}
+		}
+
+		@media (max-width: 640px) {
+			.quiz-wrapper {
+				padding: 0 16px;
+			}
+
+			.controls label {
+				flex: 1 1 100%;
+			}
+
+			.control-actions,
+			.results-actions {
+				width: 100%;
+				justify-content: space-between;
+			}
+
+			.control-actions .btn,
+			.results-actions .btn {
+				flex: 1 1 100%;
+				text-align: center;
+			}
+
+			.answer-row {
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+
+			.answer-row input {
+				flex: 1 1 100%;
+			}
+
+			#submit {
+				flex: 3;
+				height: 44px;
+				min-height: unset;
+			}
+
+			#end {
+				flex: 1;
+				height: 44px;
+				min-height: unset;
+			}
+		}
+
+		@media (max-width: 420px) {
+			.card {
+				padding: 20px;
+			}
+
+			.btn {
+				padding: 12px 16px;
+				letter-spacing: 0.2em;
+			}
+
+			.title-inline h1 {
+				font-size: 26px;
+			}
+
+			.countdown {
+				font-size: 0.74rem;
+			}
+
+			.timer {
+				min-width: 0;
+			}
+		}
+
+		/* Force readable white text for the Bollywood game UI */
+		body[data-current-game="emoji-bollywood-game"] {
+			color: #ffffff !important;
+		}
+
+		body[data-current-game="emoji-bollywood-game"] .muted,
+		body[data-current-game="emoji-bollywood-game"] .score-meta,
+		body[data-current-game="emoji-bollywood-game"] .score-item,
+		body[data-current-game="emoji-bollywood-game"] .controls label,
+		body[data-current-game="emoji-bollywood-game"] .countdown,
+		body[data-current-game="emoji-bollywood-game"] .turn-label {
+			color: #ffffff !important;
+		}
+
+		body[data-current-game="emoji-bollywood-game"] .btn {
+			color: #ffffff !important;
+		}
+
+		@media (max-width: 600px) {
+			.game-hud h1 {
+				display: block;
+				font-size: 1.2rem;
+				margin: 0;
+			}
+
+			.game-hud {
+				padding: 10px 14px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.game-hud .hud-right {
+				width: auto;
+				justify-content: flex-end;
+			}
+
+			.board-area {
+				padding: 0 !important;
+				overflow: hidden !important;
+				width: 100% !important;
+				height: 100% !important;
+				max-height: 85vh !important;
+				aspect-ratio: auto;
+				display: flex;
+				flex-direction: column;
+			}
+
+			#setup,
+			#rules {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				overflow-y: auto;
+			}
+
+			#game {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				padding-top: 24px;
+				overflow-y: auto;
+			}
+
+			.grid {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				margin-top: 32px;
+				flex: 1;
+			}
+
+			.game-grid aside {
+				display: none !important;
+			}
+
+			.emoji {
+				padding: 36px 10px;
+				min-height: 160px;
+				font-size: 56px;
+			}
+		}
+
+		@media (max-width: 600px) {
+
+			.controls select,
+			.answer-row input {
+				font-size: 16px !important;
+			}
+		}
+	</style>
+</body>
+
+</html>

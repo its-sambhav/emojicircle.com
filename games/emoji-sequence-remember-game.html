@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emoji Sequence Remember 🧠 | Memory Pattern Game</title>
+  <meta name="description"
+    content="Test your brain with Emoji Sequence Remember! Memorize the flashing emoji patterns and repeat them back. A fun, Simon-style memory challenge.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-sequence-remember-game.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-sequence-remember-game.html">
+  <meta property="og:title" content="Emoji Sequence Memory Game">
+  <meta property="og:description"
+    content="How good is your memory? Watch the emoji sequence and repeat it back in this addictive Simon-style game.">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-sequence-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-sequence-remember-game.html">
+  <meta name="twitter:title" content="Emoji Sequence Memory Game">
+  <meta name="twitter:description"
+    content="How good is your memory? Watch the emoji sequence and repeat it back in this addictive Simon-style game.">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-sequence-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Emoji Sequence Remember",
+    "url": "https://emojicircle.com/games/emoji-sequence-remember-game.html",
+    "genre": ["Brainteaser", "Memory", "Puzzle"],
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "description": "A memory game where players must watch and then accurately repeat an increasingly long sequence of flashing emojis. Inspired by the classic Simon game.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Emoji Sequence Remember",
+        "item": "https://emojicircle.com/games/emoji-sequence-remember-game.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/style1.css" />
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+  <style>
+    /* ========================================================
+   CSS VARIABLES & RESET
+   ======================================================== */
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-alt: #18181b;
+      --surface-strong: #0b0b0c;
+      --border: #27272a;
+      --accent: #ff4d00;
+      --accent-glow: rgba(255, 77, 0, 0.35);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.35);
+      --red: #ef4444;
+      --red-glow: rgba(239, 68, 68, 0.35);
+      --yellow: #eab308;
+      --text-primary: #f8fafc;
+      --text-muted: #a1a1aa;
+      --radius: 12px;
+      --transition: 0.2s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    /* ========================================================
+   CARD CONTAINER
+   ======================================================== */
+    .seq-card {
+      background: transparent;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 0;
+      max-width: 780px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ========================================================
+   BUTTONS
+   ======================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 0;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      user-select: none;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn.primary:hover {
+      background: #e64400;
+      filter: brightness(1.1);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* ========================================================
+   START SCREEN
+   ======================================================== */
+    #setup {
+      text-align: center;
+    }
+
+    #setup h1 {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    #setup .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .setup-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .setup-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .setup-options select,
+    .setup-options input[type="checkbox"] {
+      accent-color: var(--accent);
+    }
+
+    .setup-options select {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .high-score-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 16px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      font-size: 0.85rem;
+      color: var(--yellow);
+    }
+
+    /* ========================================================
+   COUNTDOWN OVERLAY
+   ======================================================== */
+    .countdown-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+    }
+
+    .countdown-number {
+      font-size: 8rem;
+      font-weight: 900;
+      color: var(--accent);
+      animation: countPulse 0.6s ease;
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    @keyframes countPulse {
+      0% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.95);
+        opacity: 0.9;
+      }
+    }
+
+    /* ========================================================
+   LAYOUT & CENTERING
+   ======================================================== */
+    .board-area {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      width: 100%;
+      min-height: 480px;
+    }
+
+    .seq-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .game-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ========================================================
+   TOP BAR (inside game card)
+   ======================================================== */
+    .game-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      white-space: nowrap;
+    }
+
+    .badge.level-badge {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .badge.score-badge {
+      color: var(--green);
+      border-color: var(--green);
+    }
+
+    .badge.timer-badge {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .badge.hs-badge {
+      color: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    /* ========================================================
+   EMOJI GRID
+   ======================================================== */
+    .seq-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .seq-btn {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      border-radius: 0;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .seq-btn:hover:not(.disabled) {
+      border-color: #3f3f46;
+      transform: translateY(-2px);
+    }
+
+    .seq-btn:active:not(.disabled) {
+      transform: scale(0.94);
+    }
+
+    /* Flash states */
+    .seq-btn.flash-show {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 24px var(--accent-glow), inset 0 0 14px rgba(255, 77, 0, 0.12);
+      transform: scale(1.08);
+      background: #1c1a17;
+    }
+
+    .seq-btn.flash-correct {
+      border-color: var(--green) !important;
+      box-shadow: 0 0 20px var(--green-glow);
+      background: #0f1f14;
+    }
+
+    .seq-btn.flash-wrong {
+      border-color: var(--red) !important;
+      box-shadow: 0 0 20px var(--red-glow);
+      background: #1f0f0f;
+      animation: shake 0.4s ease;
+    }
+
+    .seq-btn.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-6px);
+      }
+
+      40% {
+        transform: translateX(6px);
+      }
+
+      60% {
+        transform: translateX(-4px);
+      }
+
+      80% {
+        transform: translateX(4px);
+      }
+    }
+
+    /* ========================================================
+   STATUS BAR
+   ======================================================== */
+    .status-bar {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 0;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .status-bar.status-correct {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .status-bar.status-wrong {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .status-bar.status-watch {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ========================================================
+   SEQUENCE PROGRESS DOTS
+   ======================================================== */
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .progress-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s ease;
+    }
+
+    .progress-dots .dot.filled {
+      background: var(--green);
+    }
+
+    .progress-dots .dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .progress-dots .dot.wrong {
+      background: var(--red);
+    }
+
+    /* ========================================================
+   INLINE ACTIONS (below grid)
+   ======================================================== */
+    .inline-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ========================================================
+   GAME OVER SCREEN
+   ======================================================== */
+    #results {
+      text-align: center;
+    }
+
+    #results h2 {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    #results .go-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .result-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .result-stat {
+      padding: 14px 22px;
+      border-radius: 0;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      text-align: center;
+      min-width: 110px;
+    }
+
+    .result-stat .val {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .result-stat .lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .new-high {
+      color: var(--yellow) !important;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+
+
+    /* ========================================================
+   RESPONSIVE
+   ======================================================== */
+    @media (max-width: 640px) {
+      .seq-card {
+        margin: 12px 8px;
+        padding: 18px 14px;
+      }
+
+      .seq-grid {
+        gap: 8px;
+        max-width: 300px;
+      }
+
+      .seq-btn {
+        font-size: 1.6rem;
+      }
+
+      .game-topbar {
+        justify-content: center;
+      }
+
+      #setup h1 {
+        font-size: 1.5rem;
+      }
+
+      .countdown-number {
+        font-size: 5rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .seq-grid {
+        gap: 6px;
+        max-width: 260px;
+      }
+
+      .seq-btn {
+        font-size: 1.3rem;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 12px 14px; }
+      .game-hud .hud-right { width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; align-items: center; }
+      .board-area { 
+        padding: 0 !important; 
+        overflow-y: auto; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center; 
+        flex: 1; 
+      }
+      .seq-wrapper {
+        width: 100% !important;
+        min-height: 100% !important;
+        margin: auto !important;
+        padding: 20px 16px !important;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+  </style>
+</head>
+
+<body data-current-game="emoji-sequence-remember-game">
+  <!-- ============================================================
+     MAIN GAME WRAPPER
+     ============================================================ -->
+
+  <main class="game-page">
+    <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+      <div class="game-hud">
+        <h1>🧠 Emoji <span>Sequence</span></h1>
+        <div class="hud-right">
+          <span class="badge level-badge" id="levelBadge">🎯 Round 1</span>
+          <span class="badge score-badge" id="scoreBadge">💎 0</span>
+          <span class="badge hs-badge" id="hsBadge">🏆 Best: 0</span>
+          <span class="badge timer-badge hidden" id="timerBadge">⏱ 10s</span>
+        </div>
+      </div>
+      
+      <div class="board-area">
+        <div class="seq-wrapper">
+          <!-- ======================== START SCREEN ======================== -->
+          <section class="seq-card" id="setup">
+            <h2 style="font-size:1.5rem; margin-bottom:12px; color:var(--accent);">Game Settings</h2>
+            <p class="subtitle">Remember the pattern. Repeat the emojis. How far can you go?</p>
+      
+            <div class="setup-options">
+              <label>
+                Mode
+                <select id="gameMode">
+                  <option value="classic">Classic</option>
+                  <option value="timed">Timed (10s)</option>
+                </select>
+              </label>
+              <label>
+                <input type="checkbox" id="strictMode" />
+                Strict Mode
+              </label>
+            </div>
+      
+            <button id="startBtn" class="btn primary">
+              ▶ Start Game
+            </button>
+      
+            <div class="high-score-badge" id="hsDisplay">🏆 High Score: <span id="hsValue">0</span></div>
+          </section>
+      
+          <!-- ======================== GAME SCREEN ======================== -->
+          <section id="game" class="seq-card hidden">
+      
+            <div class="game-inner">
+              <div id="grid" class="seq-grid" aria-live="polite"></div>
+    
+              <div class="progress-dots" id="progressDots"></div>
+    
+              <div class="status-bar" id="status">Press Start to begin</div>
+    
+              <div class="inline-actions">
+                <button id="replayBtn" class="btn" disabled>🔁 Replay</button>
+                <button id="restartBtn" class="btn">🔄 Restart</button>
+              </div>
+            </div>
+          </section>
+      
+          <!-- ======================== GAME OVER SCREEN ======================== -->
+          <section id="results" class="seq-card hidden">
+            <h2>😵 Game Over!</h2>
+            <p class="go-subtitle" id="goMessage">You made it to Round 5</p>
+      
+            <div class="result-stats" id="resultStats"></div>
+      
+            <div class="results-actions">
+              <button id="playAgain" class="btn primary">🔄 Play Again</button>
+              <button id="goHome" class="btn">🏠 Home</button>
+            </div>
+          </section>
+      
+          <div class="visually-hidden">
+            <h2>Play Emoji Sequence Memory Game</h2>
+            <p>Train your brain with the Emoji Sequence Remember game! Inspired by the classic Simon memory game, this
+              addictive challenge tests your ability to remember increasingly long patterns of flashing emojis. With both
+              Classic mode and an intense Timed mode, it's the perfect way to improve your cognitive skills while having fun.
+            </p>
+            <ul>
+              <li><a href="/index.html">Discover cool and funny emojis</a></li>
+              <li><a href="/games.html">Play more memory and puzzle games</a></li>
+            </ul>
+            <h3>How to Play</h3>
+            <p>When the game starts, watch carefully as the emojis flash on the 4x4 grid. Once the sequence is finished, tap
+              the exact same emojis in the identical order. Each round you complete adds a new emoji to the pattern, making it
+              harder to remember. If you enable "Strict Mode", a single mistake resets the game completely!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+  <!-- ============================================================
+     GAME LOGIC — Vanilla JS, well-commented
+     ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ===========================================================
+         1. CONSTANTS & EMOJI POOL
+         =========================================================== */
+      // 16 emojis for a 4×4 grid — more choices = more confusion!
+      const EMOJIS = ['😀', '😎', '🔥', '💎', '🎯', '🚀', '🌈', '⚡', '🎲', '🍕', '👻', '🦄', '🌸', '🎸', '🐉', '💣'];
+
+      // Difficulty scaling: delay (ms) between emojis in sequence
+      const SPEED_TIERS = [
+        { maxRound: 3, delay: 800 },
+        { maxRound: 6, delay: 600 },
+        { maxRound: 9, delay: 450 },
+        { maxRound: Infinity, delay: 320 }
+      ];
+
+      const POINTS_PER_ROUND = 10;      // Base score per correct round
+      const STREAK_BONUS = 5;       // Extra points per consecutive streak
+      const TIMER_SECONDS = 10;      // Seconds in timed mode
+
+      /* ===========================================================
+         2. DOM REFERENCES
+         =========================================================== */
+      const $ = id => document.getElementById(id);
+
+      const setupEl = $('setup');
+      const gameEl = $('game');
+      const resultsEl = $('results');
+
+      // Setup
+      const startBtn = $('startBtn');
+      const gameModeSelect = $('gameMode');
+      const strictCheckbox = $('strictMode');
+      const hsValue = $('hsValue');
+      const hsDisplay = $('hsDisplay');
+
+      // Game
+      const gridEl = $('grid');
+      const statusEl = $('status');
+      const levelBadge = $('levelBadge');
+      const scoreBadge = $('scoreBadge');
+      const hsBadge = $('hsBadge');
+      const timerBadge = $('timerBadge');
+      const progressDots = $('progressDots');
+      const replayBtn = $('replayBtn');
+      const restartBtn = $('restartBtn');
+
+      // Results
+      const goMessage = $('goMessage');
+      const resultStats = $('resultStats');
+      const playAgainBtn = $('playAgain');
+      const goHomeBtn = $('goHome');
+
+      /* ===========================================================
+         3. GAME STATE
+         =========================================================== */
+      // These five states drive the entire flow
+      const STATE = {
+        IDLE: 'IDLE',          // Start screen
+        COUNTDOWN: 'COUNTDOWN',     // 3-2-1 countdown
+        SHOWING: 'SHOWING',       // Displaying sequence
+        INPUT: 'INPUT',         // Waiting for player clicks
+        CHECKING: 'CHECKING',      // Evaluating answer
+        GAME_OVER: 'GAME_OVER'
+      };
+
+      let state = STATE.IDLE;
+      let sequence = [];        // Array of emojis the player must repeat
+      let playerInput = [];        // Array recording the player's clicks
+      let round = 0;         // Current round number
+      let score = 0;
+      let streak = 0;         // Current consecutive-correct streak
+      let bestStreak = 0;
+      let highScore = 0;
+      let currentDelay = 800;       // Current speed tier delay in ms
+      let timerInterval = null;      // For timed mode countdown
+      let timerLeft = 0;
+
+      // Options (read from UI at start)
+      let isTimedMode = false;
+      let isStrictMode = false;
+      let soundEnabled = true;
+
+      /* ===========================================================
+         4. AUDIO — Web Audio API beeps (no external files needed)
+         =========================================================== */
+      let audioCtx = null;
+
+      /** Lazily create AudioContext (must happen after user gesture) */
+      function ensureAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+      }
+
+      /**
+       * Play a short beep with the given frequency.
+       * @param {number} freq  - Hz
+       * @param {number} dur   - Duration in seconds
+       * @param {string} type  - Oscillator type (sine, square, triangle, sawtooth)
+       */
+      function playTone(freq, dur = 0.12, type = 'sine') {
+        if (!soundEnabled) return;
+        try {
+          ensureAudio();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+          osc.connect(gain).connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + dur);
+        } catch (_) { /* silently ignore audio failures */ }
+      }
+
+      // Predefined sound helpers
+      const sfx = {
+        show: () => playTone(520, 0.15, 'triangle'),
+        tap: () => playTone(660, 0.1, 'sine'),
+        correct: () => { playTone(880, 0.15, 'sine'); setTimeout(() => playTone(1100, 0.18, 'sine'), 100); },
+        wrong: () => playTone(220, 0.35, 'sawtooth'),
+        count: () => playTone(440, 0.12, 'triangle'),
+        go: () => playTone(880, 0.25, 'triangle'),
+      };
+
+      /* ===========================================================
+         5. HIGH SCORE — localStorage
+         =========================================================== */
+      const HS_KEY = 'emoji_seq_high_score';
+
+      function loadHighScore() {
+        try { highScore = parseInt(localStorage.getItem(HS_KEY), 10) || 0; } catch (_) { highScore = 0; }
+        hsValue.textContent = highScore;
+        hsBadge.textContent = `🏆 Best: ${highScore}`;
+      }
+
+      function saveHighScore() {
+        if (score > highScore) {
+          highScore = score;
+          try { localStorage.setItem(HS_KEY, highScore); } catch (_) { }
+        }
+        hsValue.textContent = highScore;
+        hsBadge.textContent = `🏆 Best: ${highScore}`;
+      }
+
+      /* ===========================================================
+         6. UTILITY HELPERS
+         =========================================================== */
+
+      /** Fisher-Yates shuffle (in-place) */
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      /** Pick a random item from an array */
+      function randomPick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      /** Get the animation delay for the current round */
+      function getDelay() {
+        for (const tier of SPEED_TIERS) {
+          if (round <= tier.maxRound) return tier.delay;
+        }
+        return 320;
+      }
+
+      /** Promisified timeout */
+      function wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      /** Set a CSS class briefly on an element, then remove it */
+      function flashClass(el, cls, duration = 400) {
+        el.classList.add(cls);
+        setTimeout(() => el.classList.remove(cls), duration);
+      }
+
+      /* ===========================================================
+         7. BUILD EMOJI GRID
+         =========================================================== */
+      function buildGrid() {
+        gridEl.innerHTML = '';
+        // Shuffle the emoji pool & create 8 buttons (4×2 grid)
+        const pool = shuffle(EMOJIS.slice());
+        pool.forEach(emoji => {
+          const btn = document.createElement('button');
+          btn.className = 'seq-btn';
+          btn.dataset.emoji = emoji;
+          btn.textContent = emoji;
+          btn.setAttribute('aria-label', emoji);
+          btn.addEventListener('click', handlePlayerClick);
+          gridEl.appendChild(btn);
+        });
+      }
+
+      /** Get all grid buttons as an array */
+      function getButtons() {
+        return Array.from(gridEl.querySelectorAll('.seq-btn'));
+      }
+
+      /** Enable or disable all grid buttons visually */
+      function setGridEnabled(enabled) {
+        getButtons().forEach(btn => {
+          btn.classList.toggle('disabled', !enabled);
+        });
+      }
+
+      /* ===========================================================
+         8. PROGRESS DOTS
+         =========================================================== */
+      function renderDots() {
+        progressDots.innerHTML = '';
+        sequence.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'dot';
+          if (i < playerInput.length) dot.classList.add('filled');
+          if (i === playerInput.length) dot.classList.add('active');
+          progressDots.appendChild(dot);
+        });
+      }
+
+      function markDotWrong(index) {
+        const dots = progressDots.querySelectorAll('.dot');
+        if (dots[index]) {
+          dots[index].classList.remove('active');
+          dots[index].classList.add('wrong');
+        }
+      }
+
+      /* ===========================================================
+         9. UI UPDATERS
+         =========================================================== */
+      function updateBadges() {
+        levelBadge.textContent = `🎯 Round ${round}`;
+        scoreBadge.textContent = `💎 ${score}`;
+        hsBadge.textContent = `🏆 Best: ${highScore}`;
+      }
+
+      function setStatus(text, type = '') {
+        statusEl.textContent = text;
+        statusEl.className = 'status-bar';
+        if (type) statusEl.classList.add('status-' + type);
+      }
+
+      function showScreen(screen) {
+        setupEl.classList.add('hidden');
+        gameEl.classList.add('hidden');
+        resultsEl.classList.add('hidden');
+        screen.classList.remove('hidden');
+      }
+
+      /* ===========================================================
+         10. COUNTDOWN (3…2…1…GO!)
+         =========================================================== */
+      async function showCountdown() {
+        state = STATE.COUNTDOWN;
+        const overlay = document.createElement('div');
+        overlay.className = 'countdown-overlay';
+        const numEl = document.createElement('div');
+        numEl.className = 'countdown-number';
+        overlay.appendChild(numEl);
+        const boardArea = document.querySelector('.board-area');
+        boardArea.appendChild(overlay);
+
+        for (const label of ['3', '2', '1']) {
+          numEl.textContent = label;
+          // Re-trigger animation
+          numEl.style.animation = 'none';
+          void numEl.offsetWidth; // force reflow
+          numEl.style.animation = '';
+          sfx.count();
+          await wait(700);
+        }
+
+        numEl.textContent = 'GO!';
+        numEl.style.color = 'var(--green)';
+        numEl.style.animation = 'none';
+        void numEl.offsetWidth;
+        numEl.style.animation = '';
+        sfx.go();
+        await wait(500);
+
+        overlay.remove();
+      }
+
+      /* ===========================================================
+         11. SHOW SEQUENCE ANIMATION
+         =========================================================== */
+      async function showSequenceAnimation() {
+        state = STATE.SHOWING;
+        setStatus('👀 Watch the sequence!', 'watch');
+        setGridEnabled(false);
+        replayBtn.disabled = true;
+
+        const buttons = getButtons();
+
+        // Brief pause before starting
+        await wait(400);
+
+        for (let i = 0; i < sequence.length; i++) {
+          const emoji = sequence[i];
+          const btn = buttons.find(b => b.dataset.emoji === emoji);
+          if (!btn) continue;
+
+          // Highlight
+          btn.classList.add('flash-show');
+          sfx.show();
+          await wait(currentDelay);
+          btn.classList.remove('flash-show');
+
+          // Gap between emojis
+          if (i < sequence.length - 1) await wait(200);
+        }
+
+        // Transition to input phase
+        beginInputPhase();
+      }
+
+      /* ===========================================================
+         12. PLAYER INPUT PHASE
+         =========================================================== */
+      function beginInputPhase() {
+        state = STATE.INPUT;
+        playerInput = [];
+        setGridEnabled(true);
+        renderDots();
+        setStatus('🎮 Your turn! Repeat the sequence', '');
+        replayBtn.disabled = false;
+
+        // Start timer if timed mode
+        if (isTimedMode) {
+          timerLeft = TIMER_SECONDS;
+          timerBadge.classList.remove('hidden');
+          timerBadge.textContent = `⏱ ${timerLeft}s`;
+          clearInterval(timerInterval);
+          timerInterval = setInterval(() => {
+            timerLeft--;
+            timerBadge.textContent = `⏱ ${timerLeft}s`;
+            if (timerLeft <= 3) timerBadge.style.color = 'var(--red)';
+            if (timerLeft <= 0) {
+              clearInterval(timerInterval);
+              handleWrong(-1); // -1 means timeout
+            }
+          }, 1000);
+        }
+      }
+
+      /* ===========================================================
+         13. HANDLE PLAYER CLICK
+         =========================================================== */
+      function handlePlayerClick(e) {
+        // Guard: only accept clicks in INPUT state
+        if (state !== STATE.INPUT) return;
+
+        const btn = e.currentTarget;
+        const chosen = btn.dataset.emoji;
+        const expected = sequence[playerInput.length];
+
+        sfx.tap();
+
+        if (chosen === expected) {
+          /* ---- Correct tap ---- */
+          flashClass(btn, 'flash-correct', 300);
+          playerInput.push(chosen);
+          renderDots();
+
+          // Check if sequence complete
+          if (playerInput.length === sequence.length) {
+            handleRoundComplete();
+          }
+        } else {
+          /* ---- Wrong tap ---- */
+          flashClass(btn, 'flash-wrong', 500);
+          markDotWrong(playerInput.length);
+          handleWrong(playerInput.length);
+        }
+      }
+
+      /* ===========================================================
+         14. ROUND COMPLETE (player got it right)
+         =========================================================== */
+      function handleRoundComplete() {
+        state = STATE.CHECKING;
+        clearInterval(timerInterval);
+        timerBadge.classList.add('hidden');
+        setGridEnabled(false);
+
+        // Calculate score
+        streak++;
+        if (streak > bestStreak) bestStreak = streak;
+
+        const streakBonus = streak > 1 ? (streak - 1) * STREAK_BONUS : 0;
+        const roundScore = POINTS_PER_ROUND + streakBonus;
+        score += roundScore;
+
+        sfx.correct();
+        setStatus(`✅ Correct! +${roundScore} pts${streakBonus ? ` (streak ×${streak})` : ''}`, 'correct');
+        updateBadges();
+        saveHighScore();
+
+        // Next round after a short delay
+        setTimeout(() => nextRound(), 1200);
+      }
+
+      /* ===========================================================
+         15. WRONG INPUT / GAME OVER
+         =========================================================== */
+      function handleWrong(failIndex) {
+        state = STATE.GAME_OVER;
+        clearInterval(timerInterval);
+        timerBadge.classList.add('hidden');
+        setGridEnabled(false);
+        replayBtn.disabled = true;
+
+        sfx.wrong();
+
+        if (failIndex === -1) {
+          setStatus('⏱ Time\'s up! Game Over', 'wrong');
+        } else {
+          setStatus('❌ Wrong! Game Over', 'wrong');
+        }
+
+        saveHighScore();
+
+        // Show results screen after a pause
+        setTimeout(() => showResults(), 1500);
+      }
+
+      /* ===========================================================
+         16. GAME OVER RESULTS SCREEN
+         =========================================================== */
+      function showResults() {
+        showScreen(resultsEl);
+
+        goMessage.textContent = `You reached Round ${round} — nice effort!`;
+
+        const isNewHigh = (score === highScore && score > 0);
+
+        resultStats.innerHTML = '';
+
+        const stats = [
+          { val: round, lbl: 'Rounds', isHigh: false },
+          { val: score, lbl: 'Score', isHigh: isNewHigh },
+          { val: bestStreak, lbl: 'Best Streak', isHigh: false },
+          { val: highScore, lbl: 'High Score', isHigh: isNewHigh },
+        ];
+
+        stats.forEach(s => {
+          const div = document.createElement('div');
+          div.className = 'result-stat';
+          div.innerHTML = `
+        <span class="val ${s.isHigh ? 'new-high' : ''}">${s.val}${s.isHigh ? ' 🏆' : ''}</span>
+        <span class="lbl">${s.lbl}</span>
+      `;
+          resultStats.appendChild(div);
+        });
+      }
+
+      /* ===========================================================
+         17. NEXT ROUND
+         =========================================================== */
+      function nextRound() {
+        round++;
+        currentDelay = getDelay();
+
+        // Add one new random emoji to the sequence
+        sequence.push(randomPick(EMOJIS));
+
+        updateBadges();
+
+        // Show the sequence
+        showSequenceAnimation();
+      }
+
+      /* ===========================================================
+         18. START / RESTART GAME
+         =========================================================== */
+      async function startGame() {
+        // Read options from UI
+        isTimedMode = gameModeSelect.value === 'timed';
+        isStrictMode = strictCheckbox.checked;
+        soundEnabled = true;
+
+        // Reset all state
+        sequence = [];
+        playerInput = [];
+        round = 0;
+        score = 0;
+        streak = 0;
+        bestStreak = 0;
+        currentDelay = 800;
+        clearInterval(timerInterval);
+
+        // Update UI
+        showScreen(gameEl);
+        timerBadge.classList.toggle('hidden', !isTimedMode);
+        updateBadges();
+        buildGrid();
+        setGridEnabled(false);
+
+        // 3-2-1 countdown
+        await showCountdown();
+
+        // Begin first round
+        nextRound();
+      }
+
+      /* ===========================================================
+         19. REPLAY LAST SEQUENCE (only during INPUT state)
+         =========================================================== */
+      function replaySequence() {
+        if (state !== STATE.INPUT) return;
+        // Reset player input and replay
+        clearInterval(timerInterval);
+        playerInput = [];
+        renderDots();
+        showSequenceAnimation();
+      }
+
+      /* ===========================================================
+         20. EVENT LISTENERS
+         =========================================================== */
+      startBtn.addEventListener('click', startGame);
+      restartBtn.addEventListener('click', startGame);
+      replayBtn.addEventListener('click', replaySequence);
+      playAgainBtn.addEventListener('click', startGame);
+      goHomeBtn.addEventListener('click', () => {
+        showScreen(setupEl);
+        loadHighScore();
+      });
+
+      /* ===========================================================
+         21. INIT
+         =========================================================== */
+      loadHighScore();
+    })();
+  </script>
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>
+          All the emojis, stickers, and captions you need to light up every chat and post.
+        </p>
+      </div>
+
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+
+    <div class="site-footer__bottom">
+      <p>
+        © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+      </p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>

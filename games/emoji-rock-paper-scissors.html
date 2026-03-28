@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Rock Paper Scissors | Fun Multiplayer Emoji Game</title>
+  <meta name="description"
+    content="Play Emoji Rock Paper Scissors online! Challenge the computer or play with friends in 2-player or 3-player mode. A fun, free classic game with emojis.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-rock-paper-scissors.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-rock-paper-scissors.html">
+  <meta property="og:title" content="Emoji Rock Paper Scissors Game">
+  <meta property="og:description"
+    content="Play Rock Paper Scissors with emojis! Challenge the computer or your friends.">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-rock-paper-scissors-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-rock-paper-scissors.html">
+  <meta name="twitter:title" content="Emoji Rock Paper Scissors Game">
+  <meta name="twitter:description"
+    content="Play Rock Paper Scissors with emojis! Challenge the computer or your friends.">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-rock-paper-scissors-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Emoji Rock Paper Scissors",
+      "url": "https://emojicircle.com/games/emoji-rock-paper-scissors.html",
+      "genre": ["Puzzle", "Action", "Casual"],
+      "playMode": ["SinglePlayer", "MultiPlayer"],
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "description": "A fun and interactive Rock Paper Scissors game using emojis. Play against the computer or together with up to 3 players.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      }
+    }
+    </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://emojicircle.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://emojicircle.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Emoji Rock Paper Scissors",
+          "item": "https://emojicircle.com/games/emoji-rock-paper-scissors.html"
+        }
+      ]
+    }
+    </script>
+
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <style>
+    /* ===== CSS VARIABLES (matches header theme) ===== */
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-alt: #18181b;
+      --surface-strong: #0b0b0c;
+      --border: #27272a;
+      --accent: #ff4d00;
+      --accent-glow: rgba(255, 77, 0, 0.25);
+      --text-primary: #f8fafc;
+      --text-muted: rgba(203, 213, 225, 0.7);
+      --win-color: #22c55e;
+      --lose-color: #ef4444;
+      --draw-color: #facc15;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Modern Setup Screen Styling */
+    /* Premium Setup Screen Styling */
+    .setup-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex: 1;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      background: rgba(18, 18, 20, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: none;
+      padding: 40px 32px;
+      border-radius: 0;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+    }
+
+    .setup-title {
+      font-size: 2rem;
+      margin: 0;
+      background: linear-gradient(135deg, #ff4d00, #ff9900);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+      text-align: center;
+      text-shadow: 0 8px 16px rgba(255, 77, 0, 0.2);
+    }
+
+    .setup-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .setup-field {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .field-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.6);
+      font-weight: 800;
+      margin-left: 4px;
+    }
+
+    .mode-select {
+      width: 100%;
+      height: 56px;
+      padding: 0 24px;
+      font-size: 1.45rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 20px center;
+      padding-right: 48px;
+    }
+
+    .mode-select:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .mode-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 77, 0, 0.05);
+      box-shadow: 0 0 0 4px rgba(255, 77, 0, 0.15);
+    }
+
+    .start-game-btn {
+      width: 100%;
+      height: 56px;
+      padding: 0 24px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 1.25rem !important;
+      font-weight: 900 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.15em !important;
+      border-radius: 0 !important;
+      margin-top: 16px;
+      background: linear-gradient(135deg, #ff4d00, #ff7b00) !important;
+      color: #fff !important;
+      border: none !important;
+      box-shadow: 0 12px 24px rgba(255, 77, 0, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .start-game-btn:hover {
+      transform: translateY(-3px) scale(1.02) !important;
+      box-shadow: 0 16px 32px rgba(255, 77, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.25) !important;
+    }
+
+    .start-game-btn:active {
+      transform: translateY(1px) scale(0.98) !important;
+      box-shadow: 0 6px 12px rgba(255, 77, 0, 0.25) !important;
+    }
+
+
+
+    /* ===== CARD CONTAINER ===== */
+    .rps-card {
+      background: transparent;
+      border: none;
+      padding: 10px 0;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* ===== TITLE ===== */
+    .title-block {
+      margin-bottom: 28px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .title-block h1 span {
+      color: var(--accent);
+    }
+
+    /* ===== TOP BAR: scores on left, options on far right ===== */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    /* Score boxes */
+    .score-board {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .score-box {
+      text-align: center;
+      min-width: 50px;
+    }
+
+    .score-box .score-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1px;
+    }
+
+    .score-box .score-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .score-box .score-value.pop {
+      transform: scale(1.35);
+      color: var(--accent);
+    }
+
+    /* Divider between scores */
+    .score-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    /* Mode selector — pinned right */
+    .options-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .mode-select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .mode-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* ===== TURN INDICATOR (multiplayer) ===== */
+    .turn-indicator {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      min-height: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    /* ===== ROUND INFO (Best of N) ===== */
+    .round-info {
+      display: none !important;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      min-height: 1.2em;
+    }
+
+    /* ===== EMOJI CHOICE BUTTONS ===== */
+    .choices {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .choice-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 14px;
+      font-size: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--border);
+      background: var(--surface-alt);
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      transform: translateY(-4px) scale(1.06);
+      border-color: var(--accent);
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+
+    .choice-btn:active:not(:disabled) {
+      transform: translateY(1px) scale(0.97);
+    }
+
+    .choice-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Tooltip label under each button */
+    .choice-btn .tip {
+      position: absolute;
+      bottom: -22px;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* ===== ARENA (player vs computer display) ===== */
+    .arena {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 18px;
+    }
+
+    .arena-player {
+      text-align: center;
+    }
+
+    .arena-player .arena-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .arena-player .arena-emoji {
+      font-size: 48px;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: transform 0.35s ease;
+    }
+
+    .arena-player .arena-emoji.bounce {
+      animation: emojiPop 0.45s ease;
+    }
+
+    .vs-badge {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== RESULT MESSAGE ===== */
+    .result-msg {
+      font-size: 1.15rem;
+      font-weight: 700;
+      min-height: 1.5em;
+      margin-bottom: 18px;
+      transition: opacity 0.3s ease;
+    }
+
+    .result-msg.win {
+      color: var(--win-color);
+    }
+
+    .result-msg.lose {
+      color: var(--lose-color);
+    }
+
+    .result-msg.draw {
+      color: var(--draw-color);
+    }
+
+    .result-msg.highlight {
+      animation: resultFlash 0.5s ease;
+    }
+
+    /* ===== ACTION BUTTONS ===== */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      background: rgba(255, 77, 0, 0.08);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--surface-strong);
+      font-weight: 800;
+    }
+
+    .btn.primary:hover {
+      background: #e64400;
+    }
+
+    /* ===== MATCH BANNER (shown when best-of match ends) ===== */
+    .match-banner {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      animation: resultFlash 0.5s ease;
+    }
+
+    .match-banner.show {
+      display: block;
+    }
+
+    .match-banner.win-banner {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--win-color);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .match-banner.lose-banner {
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--lose-color);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes emojiPop {
+      0% {
+        transform: scale(0.3) rotate(-15deg);
+        opacity: 0.4;
+      }
+
+      50% {
+        transform: scale(1.2) rotate(5deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .btn-reset {
+      background: rgba(255, 77, 0, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+      padding: 0;
+    }
+
+    .btn-reset:hover {
+      background: var(--accent);
+      color: var(--surface-strong);
+      transform: rotate(180deg);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 680px) {
+      .rps-card {
+        padding: 20px 16px;
+        margin: 16px 10px;
+      }
+
+      .choice-btn {
+        width: 78px;
+        height: 78px;
+        font-size: 36px;
+        border-radius: 16px;
+      }
+
+      .arena {
+        gap: 20px;
+      }
+
+      .arena-player .arena-emoji {
+        font-size: 44px;
+        min-height: 56px;
+      }
+
+      .top-bar {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .game-hud h1 {
+        display: none;
+      }
+
+      .game-hud {
+        padding: 10px 14px;
+      }
+
+      .game-hud .hud-right {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+      .game-hud .hud-right #restartBtnHeader {
+        margin-left: auto;
+      }
+
+      .board-area {
+        padding: 0 !important;
+        overflow: hidden;
+      }
+
+      .rps-card {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+        aspect-ratio: 3 / 4;
+        margin: 0 !important;
+        border-radius: 0;
+        overflow: hidden;
+      }
+    }
+
+    /* Refined row-based header scores */
+    .game-hud .score-pill {
+      flex-direction: row !important;
+      align-items: baseline;
+      gap: 6px;
+      padding: 6px 14px !important;
+      min-width: auto !important;
+      background: rgba(255,255,255,0.06) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 12px;
+    }
+    .game-hud .score-pill .score-label {
+      font-size: 0.75rem !important;
+      color: var(--text-primary) !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.05em;
+      margin-bottom: 0 !important;
+    }
+    .game-hud .score-pill .score-value {
+      font-size: 1.15rem !important;
+      line-height: 1 !important;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+</head>
+
+<body data-current-game="emoji-rock-paper-scissors">
+  <!-- ============================= -->
+  <!--         GAME HTML             -->
+  <!-- ============================= -->
+  <main class="game-page">
+    <section class="card"
+      style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent;">
+      <div class="game-hud">
+        <h1>Rock Paper Scissors</h1>
+        <div class="hud-right">
+          <div class="score-pill">
+            <span class="score-label" id="scoreLabel1">You:</span>
+            <span class="score-value" id="score1">0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label" id="scoreLabel2">Comp:</span>
+            <span class="score-value" id="score2">0</span>
+          </div>
+          <div class="score-pill" id="scoreBox3" style="display:none">
+            <span class="score-label" id="scoreLabel3">P3:</span>
+            <span class="score-value" id="score3">0</span>
+          </div>
+          <button class="btn accent" id="restartBtnHeader" title="Restart Game"
+            style="background:var(--accent); color:#fff; border:none; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem;">🔄</button>
+        </div>
+      </div>
+
+      <!-- Sub-header for settings -->
+      <div class="board-area"
+        style="flex-direction: column; overflow: hidden; justify-content: center; padding: 0; flex: 1; display: flex; min-height: 60vh;">
+
+        <!-- Setup Screen -->
+        <div id="setupScreen" class="setup-container">
+          <h2 class="setup-title">Game Settings</h2>
+
+          <div class="setup-fields">
+            <div class="setup-field">
+              <span class="field-label">Choose Mode</span>
+              <select class="mode-select" id="modeSelect" aria-label="Game mode">
+                <option value="computer">vs Computer</option>
+                <option value="2player">2 Players</option>
+                <option value="3player">3 Players</option>
+              </select>
+            </div>
+
+            <div class="setup-field">
+              <span class="field-label">Choose Rounds</span>
+              <select class="mode-select" id="roundSelect" aria-label="Round mode">
+                <option value="endless">Endless</option>
+                <option value="best3">Best of 3</option>
+                <option value="best5">Best of 5</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="startGameBtn" class="btn primary start-game-btn">Start Game</button>
+        </div>
+
+        <!-- Gameplay Container (Hidden Initially) -->
+        <div id="gameplayContainer"
+          style="display: none; flex-direction: column; gap: 48px; align-items: center; justify-content: center; flex: 1; width: 100%; padding: 20px; margin: auto;">
+
+          <!-- Arena: shows all picks -->
+          <div class="arena" id="arena" style="margin-bottom:0; gap:40px;">
+            <div class="arena-player">
+              <div class="arena-label" id="arenaLabel1"
+                style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 12px;">You</div>
+              <div class="arena-emoji" id="arenaEmoji1" style="font-size: 5rem;">—</div>
+            </div>
+            <div class="vs-badge" style="font-size:1.8rem; opacity: 0.5;">VS</div>
+            <div class="arena-player">
+              <div class="arena-label" id="arenaLabel2"
+                style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 12px;">Computer</div>
+              <div class="arena-emoji" id="arenaEmoji2" style="font-size: 5rem;">—</div>
+            </div>
+            <div class="vs-badge" id="vsBadge3" style="display:none; font-size:1.8rem; opacity: 0.5;">VS</div>
+            <div class="arena-player" id="arenaSlot3" style="display:none;">
+              <div class="arena-label" id="arenaLabel3"
+                style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 12px;">Player 3</div>
+              <div class="arena-emoji" id="arenaEmoji3" style="font-size: 5rem;">—</div>
+            </div>
+          </div>
+
+          <!-- Emoji choice buttons -->
+          <div class="choices-container" style="display:flex; flex-direction:column; gap:12px; align-items:center;">
+            <div class="choices" id="choices" style="margin-bottom:0;">
+              <button class="choice-btn" data-choice="rock" aria-label="Rock">
+                ✊
+                <span class="tip">Rock</span>
+              </button>
+              <button class="choice-btn" data-choice="paper" aria-label="Paper">
+                ✋
+                <span class="tip">Paper</span>
+              </button>
+              <button class="choice-btn" data-choice="scissors" aria-label="Scissors">
+                ✌️
+                <span class="tip">Scissors</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Result & Match Banner -->
+          <div class="result-group"
+            style="display:flex; flex-direction:column; gap:16px; align-items:center; min-height: 80px;">
+            <div class="result-msg" id="resultMsg" aria-live="polite" style="margin-bottom:0; font-size: 1.25rem;">Pick
+              an emoji to start!</div>
+            <div class="match-banner" id="matchBanner" style="margin-top:0;"></div>
+          </div>
+
+          <!-- Info-group removed from card body and moved below if needed, or kept inside gameplay -->
+          <div class="info-group" style="display:flex; flex-direction:column; gap:8px;">
+            <div class="round-info" id="roundInfo" style="margin-bottom:0;"></div>
+            <div class="turn-indicator" id="turnIndicator" style="margin-bottom:0;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons removed from here and moved to HUD -->
+
+      <div class="visually-hidden">
+        <h2>Play Emoji Rock Paper Scissors Online</h2>
+        <p>Enjoy the classic Rock Paper Scissors game transformed with emojis! Discover emojis as you play and interact
+          with fun hand signs like ✊ (Rock), ✋ (Paper), and ✌️ (Scissors). Play against the smart computer or engage in
+          intense 2-player and 3-player multiplayer action. Perfect for quick games or best-of-5 tournaments.</p>
+        <ul>
+          <li><a href="/index.html">Discover more emojis</a></li>
+          <li><a href="/games.html">Play more emoji games</a></li>
+          <li><a href="/emojie_globe/globe.html">Explore emojis across languages</a></li>
+        </ul>
+        <h3>How to Play Emoji Rock Paper Scissors</h3>
+        <ol>
+          <li>Select your mode: vs Computer, 2 Players, or 3 Players.</li>
+          <li>Tap on either the ✊ rock, ✋ paper, or ✌️ scissors emoji to make your choice.</li>
+          <li>See who wins based on classic rules: Rock beats Scissors, Scissors beats Paper, and Paper beats Rock!</li>
+        </ol>
+      </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================= -->
+  <!--        GAME JAVASCRIPT        -->
+  <!-- ============================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ─── Constants ───────────────────────────────
+      const CHOICES = ['rock', 'paper', 'scissors'];
+      const EMOJI = { rock: '✊', paper: '✋', scissors: '✌️' };
+
+      // Which choice beats which
+      const BEATS = { rock: 'scissors', scissors: 'paper', paper: 'rock' };
+
+      // ─── DOM Elements ────────────────────────────
+      const choiceBtns = document.querySelectorAll('.choice-btn');
+      const resultMsgEl = document.getElementById('resultMsg');
+      const resetBtn = document.getElementById('restartBtnHeader');
+      const startGameBtn = document.getElementById('startGameBtn');
+      const setupScreen = document.getElementById('setupScreen');
+      const gameplayContainer = document.getElementById('gameplayContainer');
+      const modeSelect = document.getElementById('modeSelect');      // computer / 2player / 3player
+      const roundSelect = document.getElementById('roundSelect');     // endless / best5
+      const roundInfoEl = document.getElementById('roundInfo');
+      const turnIndicator = document.getElementById('turnIndicator');
+      const matchBannerEl = document.getElementById('matchBanner');
+
+      // Score elements
+      const scoreLabel1 = document.getElementById('scoreLabel1');
+      const scoreLabel2 = document.getElementById('scoreLabel2');
+      const scoreLabel3 = document.getElementById('scoreLabel3');
+      const scoreEl1 = document.getElementById('score1');
+      const scoreEl2 = document.getElementById('score2');
+      const scoreEl3 = document.getElementById('score3');
+      const scoreBox3 = document.getElementById('scoreBox3');
+
+      // Arena elements
+      const arenaLabel1 = document.getElementById('arenaLabel1');
+      const arenaLabel2 = document.getElementById('arenaLabel2');
+      const arenaLabel3 = document.getElementById('arenaLabel3');
+      const arenaEmoji1 = document.getElementById('arenaEmoji1');
+      const arenaEmoji2 = document.getElementById('arenaEmoji2');
+      const arenaEmoji3 = document.getElementById('arenaEmoji3');
+      const arenaSlot3 = document.getElementById('arenaSlot3');
+      const vsBadge3 = document.getElementById('vsBadge3');
+
+      // ─── Game State ──────────────────────────────
+      let scores = [0, 0, 0];  // scores for up to 3 participants
+      let roundNumber = 0;
+      let isDisabled = false;
+      let matchOver = false;
+
+      // Multiplayer pass-and-play state
+      let currentTurn = 0;          // index of who is picking next (0-based)
+      let picks = [];         // collected picks this round
+      let totalPlayers = 2;         // 2 = vs Computer or 2-Player, 3 = 3-Player
+      let humanPlayers = 1;         // how many human players (1 for vs Computer)
+
+      // ─── Audio (Web Audio API — no external files) ──
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let audioCtx = null;
+
+      function playTone(freq, dur, type) {
+        try {
+          if (!audioCtx) audioCtx = new AudioCtx();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type || 'triangle';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+          osc.connect(gain).connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + dur);
+        } catch (_) { /* silent fallback */ }
+      }
+      function playWinSound() { playTone(660, 0.22, 'triangle'); setTimeout(() => playTone(880, 0.3, 'triangle'), 120); }
+      function playLoseSound() { playTone(260, 0.35, 'sawtooth'); }
+      function playDrawSound() { playTone(440, 0.18, 'sine'); }
+
+      // ─── Helper: player names based on mode ──────
+      function getPlayerName(index) {
+        var mode = modeSelect.value;
+        if (mode === 'computer') {
+          return index === 0 ? 'You' : 'Computer';
+        }
+        return 'Player ' + (index + 1);
+      }
+
+      // ─── getComputerChoice() ─────────────────────
+      function getComputerChoice() {
+        return CHOICES[Math.floor(Math.random() * CHOICES.length)];
+      }
+
+      // ─── determineWinner for 2 players ───────────
+      // Returns 0 (player-0 wins), 1 (player-1 wins), or -1 (draw)
+      function determineWinner2(a, b) {
+        if (a === b) return -1;
+        return BEATS[a] === b ? 0 : 1;
+      }
+
+      // ─── determineWinner for 3 players ───────────
+      // Returns array of winner indices, or empty array for draw
+      function determineWinner3(p) {
+        var unique = [...new Set(p)];
+        // All same or all different → draw
+        if (unique.length === 1 || unique.length === 3) return [];
+
+        // Exactly 2 unique choices — find the winning choice
+        // The choice that appears once or twice might win
+        // Pair vs solo: the choice that BEATS the other is the winner
+        var choiceA = unique[0];
+        var choiceB = unique[1];
+        var winningChoice = BEATS[choiceA] === choiceB ? choiceA : choiceB;
+
+        // Return indices of all players who picked the winning choice
+        var winners = [];
+        for (var i = 0; i < p.length; i++) {
+          if (p[i] === winningChoice) winners.push(i);
+        }
+        return winners;
+      }
+
+      // ─── UI update helpers ───────────────────────
+
+      function setButtonsDisabled(state) {
+        isDisabled = state;
+        choiceBtns.forEach(function (btn) { btn.disabled = state; });
+      }
+
+      function triggerBounce(el) {
+        el.classList.remove('bounce');
+        void el.offsetWidth;
+        el.classList.add('bounce');
+      }
+
+      function popScore(el) {
+        el.classList.add('pop');
+        setTimeout(function () { el.classList.remove('pop'); }, 350);
+      }
+
+      function getScoreEl(index) {
+        return [scoreEl1, scoreEl2, scoreEl3][index];
+      }
+      function getArenaEmojiEl(index) {
+        return [arenaEmoji1, arenaEmoji2, arenaEmoji3][index];
+      }
+
+      /** Show / hide the 3rd player slot in scoreboard & arena */
+      function configureLayout() {
+        var mode = modeSelect.value;
+        totalPlayers = (mode === '3player') ? 3 : 2;
+        humanPlayers = (mode === 'computer') ? 1 : totalPlayers;
+
+        // Labels
+        scoreLabel1.textContent = getPlayerName(0);
+        scoreLabel2.textContent = getPlayerName(1);
+        scoreLabel3.textContent = getPlayerName(2);
+        arenaLabel1.textContent = getPlayerName(0);
+        arenaLabel2.textContent = getPlayerName(1);
+        arenaLabel3.textContent = getPlayerName(2);
+
+        // 3rd slot visibility
+        var show3 = (totalPlayers === 3);
+        scoreBox3.style.display = show3 ? 'flex' : 'none';
+        arenaSlot3.style.display = show3 ? '' : 'none';
+        vsBadge3.style.display = show3 ? '' : 'none';
+      }
+
+      function updateTurnIndicator() {
+        if (modeSelect.value === 'computer') {
+          turnIndicator.textContent = '';
+          return;
+        }
+        if (matchOver) { turnIndicator.textContent = ''; return; }
+        turnIndicator.textContent = getPlayerName(currentTurn) + ' — pick your emoji!';
+      }
+
+      function updateRoundInfo() {
+        var rMode = roundSelect.value;
+        if (rMode === 'best5') {
+          roundInfoEl.textContent = 'Round ' + roundNumber + ' · First to 3 wins';
+        } else if (rMode === 'best3') {
+          roundInfoEl.textContent = 'Round ' + roundNumber + ' · First to 2 wins';
+        } else {
+          roundInfoEl.textContent = roundNumber > 0 ? 'Round ' + roundNumber : '';
+        }
+      }
+
+      // ─── Check best-of-5 match end ───────────────
+      function checkMatchEnd() {
+        var rMode = roundSelect.value;
+        if (rMode === 'endless') return false;
+
+        var needed = (rMode === 'best5') ? 3 : 2;
+        var winnerIdx = -1;
+        for (var i = 0; i < totalPlayers; i++) {
+          if (scores[i] >= needed) { winnerIdx = i; break; }
+        }
+        if (winnerIdx === -1) return false;
+
+        matchOver = true;
+        setButtonsDisabled(true);
+        turnIndicator.textContent = '';
+
+        var name = getPlayerName(winnerIdx);
+        var scoreStr = scores.slice(0, totalPlayers).join(' – ');
+
+        // Win or lose banner (from Player-0 perspective in vs Computer mode)
+        if (modeSelect.value === 'computer' && winnerIdx === 0) {
+          matchBannerEl.textContent = '🏆 ' + name + ' won the match ' + scoreStr + '! Congratulations!';
+          matchBannerEl.className = 'match-banner show win-banner';
+        } else if (modeSelect.value === 'computer') {
+          matchBannerEl.textContent = '💻 Computer won the match ' + scoreStr + '. Better luck next time!';
+          matchBannerEl.className = 'match-banner show lose-banner';
+        } else {
+          matchBannerEl.textContent = '🏆 ' + name + ' wins the match! (' + scoreStr + ')';
+          matchBannerEl.className = 'match-banner show win-banner';
+        }
+        return true;
+      }
+
+      // ─── Resolve a completed round ───────────────
+      function resolveRound() {
+        roundNumber++;
+
+        if (totalPlayers === 2) {
+          // ── 2-player resolution ──
+          var w = determineWinner2(picks[0], picks[1]);
+          if (w === -1) {
+            // Draw
+            resultMsgEl.textContent = 'Both chose ' + EMOJI[picks[0]] + ' — It\'s a Draw! 🤝';
+            resultMsgEl.className = 'result-msg draw highlight';
+            playDrawSound();
+          } else {
+            scores[w]++;
+            getScoreEl(w).textContent = scores[w];
+            popScore(getScoreEl(w));
+            var winnerName = getPlayerName(w);
+            var loserIdx = w === 0 ? 1 : 0;
+            resultMsgEl.textContent = EMOJI[picks[w]] + ' beats ' + EMOJI[picks[loserIdx]] + ' — ' + winnerName + ' wins! 🎉';
+            resultMsgEl.className = 'result-msg win highlight';
+            playWinSound();
+          }
+        } else {
+          // ── 3-player resolution ──
+          var winners = determineWinner3(picks);
+          if (winners.length === 0) {
+            resultMsgEl.textContent = 'It\'s a Draw! 🤝';
+            resultMsgEl.className = 'result-msg draw highlight';
+            playDrawSound();
+          } else {
+            winners.forEach(function (idx) {
+              scores[idx]++;
+              getScoreEl(idx).textContent = scores[idx];
+              popScore(getScoreEl(idx));
+            });
+            var names = winners.map(function (idx) { return getPlayerName(idx); }).join(' & ');
+            resultMsgEl.textContent = names + ' win' + (winners.length === 1 ? 's' : '') + ' this round! 🎉';
+            resultMsgEl.className = 'result-msg win highlight';
+            playWinSound();
+          }
+        }
+
+        updateRoundInfo();
+
+        if (!checkMatchEnd()) {
+          // Prepare for next round after brief cooldown
+          setTimeout(function () {
+            currentTurn = 0;
+            picks = [];
+            // Reset arena emojis for next round
+            arenaEmoji1.textContent = '—';
+            arenaEmoji2.textContent = '—';
+            arenaEmoji3.textContent = '—';
+            setButtonsDisabled(false);
+            updateTurnIndicator();
+          }, 1200);
+        }
+      }
+
+      // ─── Main click handler ──────────────────────
+      function handleChoice(choice) {
+        if (isDisabled || matchOver) return;
+
+        var mode = modeSelect.value;
+
+        // ── vs Computer (single player) ──
+        if (mode === 'computer') {
+          setButtonsDisabled(true);
+
+          // Show player pick
+          arenaEmoji1.textContent = EMOJI[choice];
+          triggerBounce(arenaEmoji1);
+          arenaEmoji2.textContent = '🤔';
+          resultMsgEl.textContent = '';
+          resultMsgEl.className = 'result-msg';
+
+          picks = [choice];
+
+          setTimeout(function () {
+            var compPick = getComputerChoice();
+            picks.push(compPick);
+            arenaEmoji2.textContent = EMOJI[compPick];
+            triggerBounce(arenaEmoji2);
+            resolveRound();
+          }, 500);
+          return;
+        }
+
+        // ── Multiplayer pass-and-play (2P or 3P) ──
+        setButtonsDisabled(true);
+        picks[currentTurn] = choice;
+
+        // Show a ✅ placeholder (hide actual pick until all have chosen)
+        getArenaEmojiEl(currentTurn).textContent = '✅';
+        triggerBounce(getArenaEmojiEl(currentTurn));
+
+        currentTurn++;
+
+        if (currentTurn < totalPlayers) {
+          // More players need to pick
+          resultMsgEl.textContent = getPlayerName(currentTurn - 1) + ' locked in!';
+          resultMsgEl.className = 'result-msg';
+          updateTurnIndicator();
+          // Brief delay then re-enable for next player
+          setTimeout(function () {
+            setButtonsDisabled(false);
+          }, 400);
+        } else {
+          // All players have picked — reveal!
+          turnIndicator.textContent = 'Revealing...';
+          resultMsgEl.textContent = '';
+          resultMsgEl.className = 'result-msg';
+
+          setTimeout(function () {
+            // Reveal all picks
+            for (var i = 0; i < totalPlayers; i++) {
+              getArenaEmojiEl(i).textContent = EMOJI[picks[i]];
+              triggerBounce(getArenaEmojiEl(i));
+            }
+            resolveRound();
+          }, 600);
+        }
+      }
+
+      // ─── Actions ────────────────────────────────
+
+      function startGame() {
+        setupScreen.style.display = 'none';
+        gameplayContainer.style.display = 'flex';
+        resetGame(true); // reset scores but don't show setup screen again
+        configureLayout();
+      }
+
+      function resetGame(keepGameplay) {
+        scores = [0, 0, 0];
+        roundNumber = 0;
+        matchOver = false;
+        currentTurn = 0;
+        picks = [];
+
+        scoreEl1.textContent = '0';
+        scoreEl2.textContent = '0';
+        scoreEl3.textContent = '0';
+
+        arenaEmoji1.textContent = '—';
+        arenaEmoji2.textContent = '—';
+        arenaEmoji3.textContent = '—';
+
+        resultMsgEl.textContent = 'Pick an emoji to start!';
+        resultMsgEl.className = 'result-msg';
+
+        roundInfoEl.textContent = '';
+        matchBannerEl.className = 'match-banner';
+        matchBannerEl.textContent = '';
+
+        configureLayout();
+        setButtonsDisabled(false);
+        updateTurnIndicator();
+
+        if (!keepGameplay) {
+          setupScreen.style.display = 'flex';
+          gameplayContainer.style.display = 'none';
+        }
+      }
+
+      // ─── Event Listeners ─────────────────────────
+      choiceBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          handleChoice(btn.getAttribute('data-choice'));
+        });
+      });
+
+      resetBtn.addEventListener('click', () => resetGame(false));
+      startGameBtn.addEventListener('click', startGame);
+      modeSelect.addEventListener('change', () => resetGame(false));
+      roundSelect.addEventListener('change', () => resetGame(false));
+
+      // ─── Initialize ──────────────────────────────
+      configureLayout();
+      setButtonsDisabled(false);
+      updateTurnIndicator();
+
+    })();
+  </script>
+
+  <!-- ============================= -->
+  <!--          FOOTER               -->
+  <!-- ============================= -->
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>All the emojis, stickers, and captions you need to light up every chat and post.</p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+    <div class="site-footer__bottom">
+      <p>© <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳</p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>
+
+</html>

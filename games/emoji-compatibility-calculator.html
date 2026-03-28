@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Emoji Compatibility Calculator 💘 | Test Your Love</title>
+    <meta name="description"
+        content="Calculate your relationship compatibility using the Emoji Compatibility Calculator! Enter your names and pick emojis to see your love score.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://emojicircle.com/games/emoji-compatibility-calculator.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emojicircle.com/games/emoji-compatibility-calculator.html">
+    <meta property="og:title" content="Emoji Compatibility Calculator 💘">
+    <meta property="og:description" content="Calculate your relationship compatibility using emojis!">
+    <meta property="og:image" content="https://emojicircle.com/images/games/emoji-compatibility-og.jpg">
+    <meta property="og:site_name" content="EmojiCircle">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://emojicircle.com/games/emoji-compatibility-calculator.html">
+    <meta name="twitter:title" content="Emoji Compatibility Calculator 💘">
+    <meta name="twitter:description" content="Calculate your relationship compatibility using emojis!">
+    <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-compatibility-og.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Emoji Compatibility Calculator",
+      "url": "https://emojicircle.com/games/emoji-compatibility-calculator.html",
+      "applicationCategory": "EntertainmentApplication",
+      "operatingSystem": "Any",
+      "description": "A fun love and relationship compatibility calculator utilizing names and emoji selections to generate a compatibility score.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://emojicircle.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://emojicircle.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Emoji Compatibility",
+          "item": "https://emojicircle.com/games/emoji-compatibility-calculator.html"
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/emoji-header.css">
+    <link rel="stylesheet" href="game-layout.css">
+    <script src="game-layout.js" defer></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-77D61P8G0J');
+    </script>
+
+    <style>
+        /* ============================
+           CSS VARIABLES (match header/footer theme)
+           ============================ */
+        :root {
+            --bg: #000000;
+            --surface: #121214;
+            --surface-alt: #18181b;
+            --surface-strong: #0b0b0c;
+            --border: #27272a;
+            --accent: #ff4d00;
+            --accent-glow: rgba(255, 77, 0, 0.35);
+            --accent-soft: rgba(255, 77, 0, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: rgba(248, 250, 252, 0.6);
+            --text-muted: rgba(248, 250, 252, 0.35);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        /* ============================
+           BODY & LAYOUT
+           ============================ */
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Push content below fixed header */
+        .game-wrapper {
+            /* reduced top padding so content fits inside the game container */
+            padding: 24px 16px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: auto;
+        }
+
+        /* ============================
+           MAIN CARD
+           ============================ */
+        .compat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            padding: 18px 16px 18px;
+            max-width: none;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            /* keep card content visible and avoid internal scrolling */
+            max-height: none;
+            overflow: visible;
+        }
+
+        /* remove the orange top glow line above the card */
+        .compat-card::before { display: none; }
+
+        /* ============================
+           TITLE
+           ============================ */
+        .game-title {
+            text-align: center;
+            margin: 0 0 6px;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .game-title span {
+            color: var(--accent);
+        }
+
+        .game-subtitle {
+            text-align: center;
+            margin: 0 0 28px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* ============================
+           INPUT FIELDS
+           ============================ */
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--surface-alt);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            box-sizing: border-box;
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        /* ============================
+           EMOJI PICKER AREA
+           ============================ */
+        .emoji-picker-section {
+            margin-bottom: 18px;
+        }
+
+        .emoji-picker-section>label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .emoji-grid-picker {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .emoji-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: var(--surface-alt);
+            cursor: pointer;
+            transition: all 0.16s ease;
+            position: relative;
+            padding: 0;
+        }
+
+        .emoji-btn:hover {
+            border-color: rgba(255, 77, 0, 0.4);
+            background: rgba(255, 77, 0, 0.06);
+            transform: scale(1.1);
+        }
+
+        .emoji-btn.selected {
+            border-color: var(--accent);
+            background: rgba(255, 77, 0, 0.12);
+            box-shadow: 0 0 12px var(--accent-glow);
+            transform: scale(1.12);
+        }
+
+        .emoji-btn.selected::after {
+            content: '\2713';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.55rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Selection counter badge next to label */
+        .emoji-counter {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .emoji-counter.complete {
+            color: #44cc88;
+        }
+
+        /* Selected emojis preview row */
+        .selected-preview {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .selected-preview-emoji {
+            font-size: 1.1rem;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.14s ease, opacity 0.3s ease;
+            animation: popIn 0.22s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============================
+           BUTTONS
+           ============================ */
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            letter-spacing: 0.06em;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #e64400;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-reset:hover {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+        }
+
+        /* ============================
+           VALIDATION MESSAGE
+           ============================ */
+        .validation-msg {
+            font-size: 0.75rem;
+            color: #ff4d4d;
+            margin-top: 8px;
+            min-height: 18px;
+            letter-spacing: 0.04em;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ============================
+           STEP UI
+           ============================ */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* ============================
+           RESULT CARD
+           ============================ */
+        .result-card {
+            margin-top: 28px;
+            background: var(--surface-strong);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            display: none;
+        }
+
+        .result-card.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-names {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .result-names strong {
+            color: var(--text-primary);
+        }
+
+        /* Animated score number */
+        .result-score {
+            font-size: 3.6rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        /* Progress bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: var(--surface-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, var(--accent), #ff8c00);
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Category label */
+        .result-category {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 10px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ============================
+           HEARTBEAT ANIMATION (score > 80)
+           ============================ */
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.15);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.1);
+            }
+
+            56% {
+                transform: scale(1);
+            }
+        }
+
+        .heartbeat {
+            animation: heartbeat 1.4s ease-in-out infinite;
+        }
+
+        /* ============================
+           EMOJI CONFETTI BURST
+           ============================ */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            font-size: 1.6rem;
+            animation: confettiFall linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-10vh) rotate(0deg) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(105vh) rotate(720deg) scale(0.4);
+            }
+        }
+
+        /* ============================
+           HISTORY SECTION
+           ============================ */
+        .history-section {
+            display: none !important;
+            margin-top: 28px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .history-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-size: 0.78rem;
+            transition: background 0.2s ease;
+        }
+
+        .history-item:hover {
+            background: rgba(255, 77, 0, 0.04);
+        }
+
+        .history-names {
+            color: var(--text-primary);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .history-emojis {
+            margin: 0 8px;
+            font-size: 0.9rem;
+        }
+
+        .history-score {
+            color: var(--accent);
+            font-weight: 800;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .history-empty {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        /* ============================
+           RESPONSIVE
+           ============================ */
+        @media (max-width: 560px) {
+            .game-wrapper {
+                padding: 60px 10px 30px;
+            }
+
+            .compat-card {
+                padding: 24px 18px 22px;
+            }
+
+            .game-title {
+                font-size: 1.25rem;
+            }
+
+            .result-score {
+                font-size: 2.8rem;
+            }
+
+            .emoji-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .btn-row {
+                flex-direction: column;
+            }
+        }
+    
+    @media (max-width: 600px) {
+      main.game-page .game-hud {
+          padding: 10px 14px;
+          min-height: 56px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+      }
+      main.game-page .game-hud h1 {
+          display: block;
+          font-size: 1rem;
+          font-weight: 700;
+          margin: 0;
+      }
+      .game-hud .hud-right { width: auto; justify-content: flex-end; }
+      .board-area { 
+        padding: 16px 12px !important; 
+        overflow: visible !important; 
+        width: 100% !important;
+        max-height: none !important;
+        aspect-ratio: auto !important;
+      }
+      .emoji-grid-picker .emoji-btn:nth-child(n+15) {
+          display: none !important;
+      }
+      .selected-preview {
+          display: none !important;
+      }
+      .step, .input-group label, .emoji-picker-section > label {
+          text-align: center !important;
+      }
+      .emoji-grid-picker {
+          justify-content: center !important;
+      }
+      #resetBtn {
+          display: none !important;
+      }
+      #historySection {
+          display: none !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body data-current-game="emoji-compatibility-calculator">
+    <script src="/emoji-header.js" defer></script>
+
+    <!-- ============================
+         MAIN GAME WRAPPER
+         ============================ -->
+    <main class="game-page">
+        <section class="card compat-card" style="padding: 0; border: none;">
+            <div class="game-hud">
+                <h1>💘 Emoji <span>Compatibility</span></h1>
+                <div class="hud-right"></div>
+            </div>
+            <div class="board-area" style="flex-direction: column; overflow: visible; justify-content: center; padding: 24px;">
+                <div style="max-width: 600px; width: 100%; margin: 0 auto;">
+                    <p class="game-subtitle" style="margin-top: 10px;">Find out how compatible you really are 💘</p>
+            <!-- STEP 1: NAMES -->
+            <div class="step step-1 active">
+                <!-- Name 1 -->
+                <div class="input-group">
+                    <label for="name1">👤 Person 1</label>
+                    <input type="text" id="name1" placeholder="Enter first name..." maxlength="40" autocomplete="off">
+                </div>
+
+                <!-- Name 2 -->
+                <div class="input-group">
+                    <label for="name2">👤 Person 2</label>
+                    <input type="text" id="name2" placeholder="Enter second name..." maxlength="40" autocomplete="off">
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-primary" id="toPickersBtn">Choose Emojis →</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: EMOJI PICKERS -->
+            <div class="step step-2">
+                <!-- Emoji Picker 1 -->
+                <div class="emoji-picker-section">
+                    <label>🎭 Choose 5 Emojis for Person 1 <span class="emoji-counter" id="counter1">0/5</span></label>
+                    <div class="emoji-grid-picker" id="emojiPicker1"></div>
+                    <div class="selected-preview" id="preview1"></div>
+                </div>
+
+                <!-- Emoji Picker 2 -->
+                <div class="emoji-picker-section">
+                    <label>🎭 Choose 5 Emojis for Person 2 <span class="emoji-counter" id="counter2">0/5</span></label>
+                    <div class="emoji-grid-picker" id="emojiPicker2"></div>
+                    <div class="selected-preview" id="preview2"></div>
+                </div>
+
+                <!-- Validation message -->
+                <div class="validation-msg" id="validationMsg"></div>
+
+                <!-- Buttons -->
+                <div class="btn-row">
+                    <button class="btn" id="backToNamesBtn">← Back</button>
+                    <button class="btn btn-primary" id="calcBtn" disabled>Check Compatibility 💘</button>
+                    <button class="btn btn-reset" id="resetBtn">Reset</button>
+                </div>
+            </div>
+
+            <!-- ============================
+                 RESULT CARD (hidden initially)
+                 ============================ -->
+            <div class="step step-3">
+                <div class="result-card" id="resultCard">
+                <div class="result-names" id="resultNames"></div>
+                <div class="result-score" id="resultScore">0%</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="result-category" id="resultCategory"></div>
+                <div class="btn-row" style="justify-content:center; margin-top:18px;">
+                    <button class="btn" id="tryAgainBtn">Try Again 🔄</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- ============================
+                 HISTORY (Last 3 results)
+                 ============================ -->
+            <div class="history-section" id="historySection">
+                <div class="history-title">📜 Recent Results</div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">No history yet. Try a match!</div>
+                </div>
+            </div>
+                </div>
+            </div><!-- /board-area -->
+        </section><!-- /card -->
+
+        <div class="visually-hidden">
+            <h2>Emoji Love & Compatibility Test</h2>
+            <p>Curious if you and your crush are meant to be? Try our interactive Emoji Compatibility Calculator! By
+                combining numerology based on your names with the vibes of your favorite emojis, our algorithm
+                calculates a fun compatibility score. Will you get a fiery 100% or something a bit cooler?</p>
+            <ul>
+                <li><a href="/index.html">Discover heart and love emojis</a></li>
+                <li><a href="/games.html">Play more fun emoji games</a></li>
+            </ul>
+            <h3>How to Use the Calculator</h3>
+            <p>Enter your first name and your partner's or friend's name. Then, have each person select 5 emojis that
+                best represent their personality or current mood. Click "Check Compatibility 💘" to see your unique
+                relationship score percentage and a fun assessment of your dynamic!</p>
+        </div>
+    </main>
+
+    <!-- Confetti container (for emoji burst) -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- ============================
+         FOOTER (same as other pages)
+         ============================ -->
+    <footer class="site-footer" role="contentinfo">
+        <section class="site-footer-content">
+            <div class="site-footer__content">
+                <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+                    EmojiCircle<span>.com</span>
+                </a>
+                <p>
+                    All the emojis, stickers, and captions you need to light up every chat and post.
+                </p>
+            </div>
+
+            <section class="site-footer-content1">
+                <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+                    <h3 id="footer-explore-heading">Explore</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+                        <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+                        <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+                        <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+                    <h3 id="footer-support-heading">Support</h3>
+                    <ul class="site-footer__list" role="list">
+                        <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp;
+                                Conditions</a></li>
+                        <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p>
+                &copy; <span id="year"></span> EmojiCircle.com &middot; Made in India 🇮🇳
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================
+         JAVASCRIPT — All game logic
+         ============================ -->
+    <script>
+        (() => {
+            'use strict';
+
+            // ── Footer year ──
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // ============================
+            // EMOJI LIST (available for selection)
+            // ============================
+            const EMOJIS = [
+                '❤️', '😍', '🥰', '😘', '💖', '🔥', '😂', '🤣',
+                '😎', '🥺', '😡', '⭐', '🍕', '🎵', '💎', '🌈', '🎮'
+            ];
+
+            // Maximum emojis each person can select
+            const MAX_EMOJI_SELECT = 5;
+
+            // ── DOM references ──
+            const name1Input = document.getElementById('name1');
+            const name2Input = document.getElementById('name2');
+            const picker1 = document.getElementById('emojiPicker1');
+            const picker2 = document.getElementById('emojiPicker2');
+            const counter1 = document.getElementById('counter1');
+            const counter2 = document.getElementById('counter2');
+            const preview1 = document.getElementById('preview1');
+            const preview2 = document.getElementById('preview2');
+            const calcBtn = document.getElementById('calcBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const toPickersBtn = document.getElementById('toPickersBtn');
+            const backToNamesBtn = document.getElementById('backToNamesBtn');
+            const tryAgainBtn = document.getElementById('tryAgainBtn');
+            const validationMsg = document.getElementById('validationMsg');
+            const resultCard = document.getElementById('resultCard');
+            const resultNames = document.getElementById('resultNames');
+            const resultScore = document.getElementById('resultScore');
+            const progressBar = document.getElementById('progressBar');
+            const resultCategory = document.getElementById('resultCategory');
+            const historyList = document.getElementById('historyList');
+            const confettiCont = document.getElementById('confettiContainer');
+            const step1 = document.querySelector('.step-1');
+            const step2 = document.querySelector('.step-2');
+            const step3 = document.querySelector('.step-3');
+
+            // ── State ──
+            let selectedEmojis1 = []; // Emojis chosen for person 1 (up to 5)
+            let selectedEmojis2 = []; // Emojis chosen for person 2 (up to 5)
+            let history = [];          // Last 3 results
+            let currentStep = 1; // 1 = names, 2 = pickers, 3 = result
+
+            // Load history from sessionStorage (persists during tab session)
+            try {
+                const saved = sessionStorage.getItem('compat_history');
+                if (saved) history = JSON.parse(saved);
+            } catch (e) { /* ignore */ }
+
+            // ============================
+            // BUILD EMOJI PICKER BUTTONS
+            // ============================
+            function buildPicker(container, pickerNum) {
+                EMOJIS.forEach(emoji => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'emoji-btn';
+                    btn.textContent = emoji;
+                    btn.setAttribute('aria-label', 'Select ' + emoji);
+                    btn.addEventListener('click', () => toggleEmoji(pickerNum, emoji, btn));
+                    container.appendChild(btn);
+                });
+            }
+
+            // Handle emoji toggle — select or deselect (max 5 per picker)
+            function toggleEmoji(pickerNum, emoji, btn) {
+                const arr = pickerNum === 1 ? selectedEmojis1 : selectedEmojis2;
+                const idx = arr.indexOf(emoji);
+
+                if (idx !== -1) {
+                    // Already selected → deselect it
+                    arr.splice(idx, 1);
+                    btn.classList.remove('selected');
+                } else {
+                    // Not selected yet → add if under limit
+                    if (arr.length >= MAX_EMOJI_SELECT) {
+                        // Shake the button briefly to show limit reached
+                        btn.style.animation = 'none';
+                        void btn.offsetWidth;
+                        btn.style.animation = '';
+                        return;
+                    }
+                    arr.push(emoji);
+                    btn.classList.add('selected');
+                }
+
+                // Update counter & preview
+                updatePickerUI(pickerNum);
+                // Re-check form validity
+                updateButtonState();
+            }
+
+            // Update the counter badge and selected-emoji preview row
+            function updatePickerUI(pickerNum) {
+                const arr = pickerNum === 1 ? selectedEmojis1 : selectedEmojis2;
+                const counterEl = pickerNum === 1 ? counter1 : counter2;
+                const previewEl = pickerNum === 1 ? preview1 : preview2;
+
+                // Counter text
+                counterEl.textContent = arr.length + '/' + MAX_EMOJI_SELECT;
+                if (arr.length === MAX_EMOJI_SELECT) {
+                    counterEl.classList.add('complete');
+                } else {
+                    counterEl.classList.remove('complete');
+                }
+
+                // Preview row: show only the selected emojis (no placeholders)
+                let html = '';
+                for (let i = 0; i < arr.length; i++) {
+                    html += '<span class="selected-preview-emoji">' + arr[i] + '</span>';
+                }
+                previewEl.innerHTML = html;
+            }
+
+            // Initialize pickers
+            buildPicker(picker1, 1);
+            buildPicker(picker2, 2);
+            // Render initial empty previews
+            updatePickerUI(1);
+            updatePickerUI(2);
+
+            // Step navigation helpers
+            function goToStep(n) {
+                currentStep = n;
+                // hide all
+                step1.classList.remove('active');
+                step2.classList.remove('active');
+                step3.classList.remove('active');
+                if (n === 1) step1.classList.add('active');
+                if (n === 2) step2.classList.add('active');
+                if (n === 3) step3.classList.add('active');
+                // ensure result card visibility toggles with step 3
+                if (n !== 3) {
+                    resultCard.classList.remove('visible');
+                    setTimeout(() => { resultCard.style.display = 'none'; }, 300);
+                }
+                // scroll parent to top (prevent internal container offset)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // ============================
+            // FORM VALIDATION
+            // ============================
+            function updateButtonState() {
+                const n1 = name1Input.value.trim();
+                const n2 = name2Input.value.trim();
+                const allFilled = n1 && n2
+                    && selectedEmojis1.length === MAX_EMOJI_SELECT
+                    && selectedEmojis2.length === MAX_EMOJI_SELECT;
+                calcBtn.disabled = !allFilled;
+                // Enable "to pickers" button when names are filled
+                const namesFilled = n1 && n2;
+                if (toPickersBtn) toPickersBtn.disabled = !namesFilled;
+                // Clear validation when user fixes inputs
+                if (allFilled || namesFilled) validationMsg.textContent = '';
+            }
+
+            // Listen for input changes
+            name1Input.addEventListener('input', updateButtonState);
+            name2Input.addEventListener('input', updateButtonState);
+
+            // ============================
+            // CORE COMPATIBILITY LOGIC (supports 5 emojis per person)
+            // ============================
+            function calculateCompatibility(n1, n2, emojis1, emojis2) {
+                // STEP 1: Clean names — lowercase and trim extra spaces
+                const cleanName1 = n1.toLowerCase().replace(/\s+/g, ' ').trim();
+                const cleanName2 = n2.toLowerCase().replace(/\s+/g, ' ').trim();
+
+                // STEP 2: Create combined string (names + all emojis from both persons)
+                const combinedString = cleanName1 + cleanName2 + emojis1.join('') + emojis2.join('');
+
+                // STEP 3: Sum Unicode char codes
+                let totalScore = 0;
+                for (let i = 0; i < combinedString.length; i++) {
+                    totalScore += combinedString.charCodeAt(i);
+                }
+
+                // STEP 4: Modulo 101 to get range 0-100
+                let finalScore = totalScore % 101;
+
+                // ── BONUS RULES (checked across all selected emojis) ──
+
+                // Both persons picked ❤️ (appears in both arrays) → +10
+                if (emojis1.indexOf('\u2764\uFE0F') !== -1 && emojis2.indexOf('\u2764\uFE0F') !== -1) {
+                    finalScore += 10;
+                }
+                // Both persons picked 😂 → +5
+                if (emojis1.indexOf('\uD83D\uDE02') !== -1 && emojis2.indexOf('\uD83D\uDE02') !== -1) {
+                    finalScore += 5;
+                }
+                // Opposite moods: one has 😡 and the other has 🥰 → −10
+                const p1Angry = emojis1.indexOf('\uD83D\uDE21') !== -1;
+                const p1Love = emojis1.indexOf('\uD83E\uDD70') !== -1;
+                const p2Angry = emojis2.indexOf('\uD83D\uDE21') !== -1;
+                const p2Love = emojis2.indexOf('\uD83E\uDD70') !== -1;
+                if ((p1Angry && p2Love) || (p1Love && p2Angry)) {
+                    finalScore -= 10;
+                }
+
+                // Clamp between 0 and 100
+                if (finalScore > 100) finalScore = 100;
+                if (finalScore < 0) finalScore = 0;
+
+                return finalScore;
+            }
+
+            // ============================
+            // GET RESULT CATEGORY
+            // ============================
+            function getCategory(score) {
+                if (score <= 30) return { text: 'Not Compatible \uD83D\uDE2C', color: '#ff4d4d' };
+                if (score <= 60) return { text: 'Average Match \uD83D\uDE42', color: '#ffaa00' };
+                if (score <= 80) return { text: 'Good Chemistry \uD83D\uDE0D', color: '#44cc88' };
+                return { text: 'Perfect Match \uD83D\uDC96\uD83D\uDD25', color: '#ff4d00' };
+            }
+
+            // ============================
+            // ANIMATED COUNTER (0 → target)
+            // ============================
+            function animateCounter(target, duration) {
+                const start = performance.now();
+                function step(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease-out curve for satisfying deceleration
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(eased * target);
+                    resultScore.textContent = current + '%';
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            // ============================
+            // EMOJI CONFETTI BURST
+            // ============================
+            function launchConfetti() {
+                const confettiEmojis = ['\uD83D\uDC96', '\uD83D\uDD25', '\u2728', '\uD83D\uDC98', '\uD83C\uDF89', '\u2764\uFE0F', '\uD83D\uDC95', '\u2B50', '\uD83C\uDF1F', '\uD83E\uDD70'];
+                const count = 30;
+                for (let i = 0; i < count; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                    // Random horizontal position
+                    piece.style.left = Math.random() * 100 + '%';
+                    // Stagger start
+                    piece.style.animationDelay = (Math.random() * 1.2) + 's';
+                    // Random duration for variety
+                    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    confettiCont.appendChild(piece);
+                }
+                // Clean up after animations finish
+                setTimeout(() => { confettiCont.innerHTML = ''; }, 5000);
+            }
+
+            // ============================
+            // PLAY SOUND EFFECT (Web Audio API — no external files)
+            // ============================
+            function playResultSound(score) {
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+
+                    // Higher score = happier sound (rising tone)
+                    if (score > 80) {
+                        // Triumphant arpeggio
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(523, audioCtx.currentTime);       // C5
+                        oscillator.frequency.setValueAtTime(659, audioCtx.currentTime + 0.12); // E5
+                        oscillator.frequency.setValueAtTime(784, audioCtx.currentTime + 0.24); // G5
+                        oscillator.frequency.setValueAtTime(1047, audioCtx.currentTime + 0.36); // C6
+                        gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+                        oscillator.start(audioCtx.currentTime);
+                        oscillator.stop(audioCtx.currentTime + 0.6);
+                    } else if (score > 50) {
+                        // Gentle chime
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                        oscillator.frequency.setValueAtTime(554, audioCtx.currentTime + 0.15);
+                        gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
+                        oscillator.start(audioCtx.currentTime);
+                        oscillator.stop(audioCtx.currentTime + 0.45);
+                    } else {
+                        // Low tone
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(330, audioCtx.currentTime);
+                        oscillator.frequency.setValueAtTime(262, audioCtx.currentTime + 0.2);
+                        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                        oscillator.start(audioCtx.currentTime);
+                        oscillator.stop(audioCtx.currentTime + 0.4);
+                    }
+                } catch (e) {
+                    // Web Audio not supported — fail silently
+                }
+            }
+
+            // ============================
+            // SHOW RESULT
+            // ============================
+            function showResult(n1, n2, emojis1, emojis2, score) {
+                const cat = getCategory(score);
+
+                // Populate result card — show all 5 emojis per person
+                resultNames.innerHTML = '<strong>' + escapeHTML(n1) + '</strong> ' + emojis1.join('') + ' &nbsp;\u2764&nbsp; ' + emojis2.join('') + ' <strong>' + escapeHTML(n2) + '</strong>';
+                resultScore.textContent = '0%';
+                progressBar.style.width = '0%';
+                resultCategory.textContent = '';
+                resultCategory.style.color = cat.color;
+
+                // Remove heartbeat class if previously added
+                resultScore.classList.remove('heartbeat');
+
+                // Show card with fade-in (uses CSS transition)
+                resultCard.style.display = 'block';
+                // Force reflow so transition works
+                void resultCard.offsetWidth;
+                resultCard.classList.add('visible');
+
+                // Animate counter & progress bar after short delay
+                setTimeout(() => {
+                    animateCounter(score, 1200);
+                    progressBar.style.width = score + '%';
+                }, 200);
+
+                // Show category text after counter finishes
+                setTimeout(() => {
+                    resultCategory.textContent = cat.text;
+                    // If score > 80, add heartbeat animation
+                    if (score > 80) {
+                        resultScore.classList.add('heartbeat');
+                        launchConfetti();
+                    }
+                    // Play sound
+                    playResultSound(score);
+                }, 1500);
+
+                // Save to history
+                addToHistory(n1, n2, emojis1, emojis2, score);
+            }
+
+            // ============================
+            // HISTORY MANAGEMENT
+            // ============================
+            function addToHistory(n1, n2, emojis1, emojis2, score) {
+                // Add new entry at the beginning
+                history.unshift({ n1: n1, n2: n2, e1: emojis1.join(''), e2: emojis2.join(''), score: score });
+                // Keep only last 3
+                if (history.length > 3) history = history.slice(0, 3);
+                // Persist in sessionStorage
+                try { sessionStorage.setItem('compat_history', JSON.stringify(history)); } catch (e) { }
+                renderHistory();
+            }
+
+            function renderHistory() {
+                if (history.length === 0) {
+                    historyList.innerHTML = '<div class="history-empty">No history yet. Try a match!</div>';
+                    return;
+                }
+                let html = '';
+                for (let i = 0; i < history.length; i++) {
+                    const h = history[i];
+                    html += '<div class="history-item">'
+                        + '<span class="history-names">' + escapeHTML(h.n1) + ' & ' + escapeHTML(h.n2) + '</span>'
+                        + '<span class="history-emojis">' + h.e1 + ' ' + h.e2 + '</span>'
+                        + '<span class="history-score">' + h.score + '%</span>'
+                        + '</div>';
+                }
+                historyList.innerHTML = html;
+            }
+
+            // ============================
+            // UTILITY: Escape HTML to prevent XSS
+            // ============================
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.appendChild(document.createTextNode(str));
+                return div.innerHTML;
+            }
+
+            // ============================
+            // RESET EVERYTHING
+            // ============================
+            function resetAll() {
+                name1Input.value = '';
+                name2Input.value = '';
+                selectedEmojis1 = [];
+                selectedEmojis2 = [];
+                picker1.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+                picker2.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+                updatePickerUI(1);
+                updatePickerUI(2);
+                calcBtn.disabled = true;
+                validationMsg.textContent = '';
+                resultCard.classList.remove('visible');
+                setTimeout(() => { resultCard.style.display = 'none'; }, 600);
+                // return to first step
+                goToStep(1);
+                resultScore.classList.remove('heartbeat');
+                confettiCont.innerHTML = '';
+                name1Input.focus();
+            }
+
+            // ============================
+            // EVENT LISTENERS
+            // ============================
+
+            // "Check Compatibility" button
+            calcBtn.addEventListener('click', () => {
+                const n1 = name1Input.value.trim();
+                const n2 = name2Input.value.trim();
+
+                // Validation
+                if (!n1 || !n2) {
+                    validationMsg.textContent = '\u26A0\uFE0F Please enter both names.';
+                    return;
+                }
+                if (selectedEmojis1.length < MAX_EMOJI_SELECT || selectedEmojis2.length < MAX_EMOJI_SELECT) {
+                    validationMsg.textContent = '\u26A0\uFE0F Please select 5 emojis for each person.';
+                    return;
+                }
+
+                validationMsg.textContent = '';
+
+                // Calculate and show result
+                const score = calculateCompatibility(n1, n2, selectedEmojis1, selectedEmojis2);
+                // Move to result step and show result (keeps page short to avoid scrolling)
+                goToStep(3);
+                showResult(n1, n2, selectedEmojis1, selectedEmojis2, score);
+            });
+
+            // "Reset" button
+            resetBtn.addEventListener('click', resetAll);
+
+            // "Try Again" button (same as reset)
+            tryAgainBtn.addEventListener('click', resetAll);
+
+            // Step navigation: from names -> pickers
+            if (toPickersBtn) {
+                toPickersBtn.addEventListener('click', () => {
+                    const n1 = name1Input.value.trim();
+                    const n2 = name2Input.value.trim();
+                    if (!n1 || !n2) {
+                        validationMsg.textContent = '\u26A0\uFE0F Please enter both names.';
+                        return;
+                    }
+                    validationMsg.textContent = '';
+                    goToStep(2);
+                    // focus first picker for keyboard users
+                    const firstBtn = picker1.querySelector('.emoji-btn');
+                    if (firstBtn) firstBtn.focus();
+                });
+            }
+
+            if (backToNamesBtn) {
+                backToNamesBtn.addEventListener('click', () => {
+                    goToStep(1);
+                });
+            }
+
+            // Render history on load (if any saved)
+            renderHistory();
+            // Ensure initial step state
+            goToStep(1);
+            // Initialize button states
+            updateButtonState();
+        })();
+    </script>
+</body>
+
+</html>

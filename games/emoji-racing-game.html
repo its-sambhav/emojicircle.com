@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Emoji Racing Game 🏁 | Fast-Paced Arcade Action</title>
+  <meta name="description"
+    content="Play the Emoji Racing Game online! Dodge traffic, collect fuel, grab shields, and hit the nitro boost in this endless highway racer featuring your favorite vehicle emojis.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-racing-game.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-racing-game.html">
+  <meta property="og:title" content="Emoji Racing Game">
+  <meta property="og:description"
+    content="Dodge traffic, collect power-ups, and reach high speeds in the Emoji Racing Game!">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-racing-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-racing-game.html">
+  <meta name="twitter:title" content="Emoji Racing Game">
+  <meta name="twitter:description"
+    content="Dodge traffic, collect power-ups, and reach high speeds in the Emoji Racing Game!">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-racing-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Emoji Racing Game",
+      "url": "https://emojicircle.com/games/emoji-racing-game.html",
+      "genre": ["Racing", "Arcade", "Action"],
+      "playMode": "SinglePlayer",
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "description": "An endless highway racing game utilizing vehicle emojis. Dodge traffic, collect power-ups, and achieve high scores.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com"
+      }
+    }
+    </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://emojicircle.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://emojicircle.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Emoji Racing Game",
+          "item": "https://emojicircle.com/games/emoji-racing-game.html"
+        }
+      ]
+    }
+    </script>
+
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <style>
+    :root {
+      --bg: #000;
+      --surface: #121214;
+      --surface-alt: #18181b;
+      --surface-strong: #0b0b0c;
+      --border: #27272a;
+      --accent: #ff4d00;
+      --text-primary: #f8fafc;
+      --road: #2a2a2e;
+      --grass: #1a331a;
+      --lane-line: #555
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      overflow-x: hidden
+    }
+
+    .racing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0;
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 14px;
+      transition: all .2s
+    }
+
+    .btn:hover {
+      background: var(--surface-alt)
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--surface-strong);
+      font-weight: 700
+    }
+
+    .btn.primary:hover {
+      background: #e64400
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-right: 6px;
+      font-size: 13px;
+      white-space: nowrap
+    }
+
+    /* Road container */
+    #gameContainer {
+      position: relative;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      flex: 1;
+      overflow: hidden;
+      background: var(--grass);
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none
+    }
+
+    #road {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background: var(--road)
+    }
+
+    /* Lane divider lines */
+    .lane-line {
+      position: absolute;
+      width: 4px;
+      background: var(--lane-line);
+      border-radius: 2px;
+      opacity: .6
+    }
+
+    /* Shoulder lines */
+    .shoulder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffb300
+    }
+
+    .shoulder.left {
+      left: 0
+    }
+
+    .shoulder.right {
+      right: 0
+    }
+
+    /* Player car */
+    #player {
+      position: absolute;
+      bottom: 60px;
+      font-size: 48px;
+      width: 48px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: none;
+      filter: drop-shadow(0 0 8px rgba(255, 77, 0, .5));
+      pointer-events: none
+    }
+
+    /* Obstacle */
+    .obstacle-car {
+      position: absolute;
+      font-size: 44px;
+      width: 48px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      pointer-events: none
+    }
+
+    /* Power-ups */
+    .powerup {
+      position: absolute;
+      font-size: 36px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+      animation: powerupFloat 1s ease-in-out infinite alternate;
+      pointer-events: none
+    }
+
+    @keyframes powerupFloat {
+      0% {
+        transform: scale(1) rotate(-5deg)
+      }
+
+      100% {
+        transform: scale(1.15) rotate(5deg)
+      }
+    }
+
+    /* HUD overlay */
+    #hud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 14px;
+      display: none; /* Moved to top header */
+      z-index: 20;
+      pointer-events: none
+    }
+
+    #hud .chip {
+      pointer-events: auto;
+      font-size: 12px;
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, .6);
+      backdrop-filter: blur(4px);
+      border-color: rgba(255, 255, 255, .1)
+    }
+
+    /* Fuel bar */
+    #fuelBarOuter {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 120px;
+      height: 14px;
+      background: rgba(0, 0, 0, .5);
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      z-index: 20;
+      overflow: hidden
+    }
+
+    #fuelBarInner {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ff4d00, #ffb300);
+      border-radius: 7px;
+      transition: width .3s
+    }
+
+    #fuelLabel {
+      position: absolute;
+      bottom: 26px;
+      left: 10px;
+      font-size: 11px;
+      z-index: 20;
+      color: #ffb300;
+      opacity: .8
+    }
+
+    /* Nitro bar */
+    #nitroBarOuter {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 80px;
+      height: 14px;
+      background: rgba(0, 0, 0, .5);
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      z-index: 20;
+      overflow: hidden
+    }
+
+    #nitroBarInner {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #00bfff, #ff00ff);
+      border-radius: 7px;
+      transition: width .3s
+    }
+
+    #nitroLabel {
+      position: absolute;
+      bottom: 26px;
+      right: 10px;
+      font-size: 11px;
+      z-index: 20;
+      color: #00bfff;
+      opacity: .8
+    }
+
+    /* Shield visual */
+    #shieldEffect {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid rgba(0, 200, 255, .7);
+      background: rgba(0, 200, 255, .12);
+      z-index: 11;
+      pointer-events: none;
+      display: none;
+      animation: shieldPulse 1s ease-in-out infinite
+    }
+
+    @keyframes shieldPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(0, 200, 255, .3)
+      }
+
+      50% {
+        box-shadow: 0 0 24px rgba(0, 200, 255, .6)
+      }
+    }
+
+    /* Speed lines */
+    .speed-line {
+      position: absolute;
+      width: 2px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 1px;
+      z-index: 1;
+      pointer-events: none
+    }
+
+    /* Crash effect */
+    #crashOverlay {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      pointer-events: none
+    }
+
+    .crash-particle {
+      position: absolute;
+      font-size: 24px;
+      pointer-events: none;
+      animation: crashFly .8s ease-out forwards
+    }
+
+    @keyframes crashFly {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg)
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(.3) rotate(360deg)
+      }
+    }
+
+    /* Screens */
+    .overlay-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .85);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      padding: 20px
+    }
+
+    .overlay-screen h2 {
+      font-size: 28px;
+      margin-bottom: 8px
+    }
+
+    .overlay-screen p {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 16px
+    }
+
+    .overlay-screen .final-score {
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--accent);
+      margin: 10px 0
+    }
+
+    .overlay-screen .high-score-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 18px
+    }
+
+    .overlay-screen .btn {
+      margin: 6px;
+      min-width: 140px
+    }
+
+    /* Car selection */
+    .car-select {
+      display: flex;
+      gap: 14px;
+      margin: 14px 0;
+      flex-wrap: wrap;
+      justify-content: center
+    }
+
+    .car-option {
+      width: 64px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--surface-alt);
+      cursor: pointer;
+      transition: all .2s;
+      padding: 6px;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .car-option:hover,
+    .car-option.selected {
+      border-color: var(--accent);
+      background: rgba(255, 77, 0, .12);
+      transform: scale(1.1)
+    }
+
+    .car-option img,
+    .car-option svg {
+      width: 40px;
+      height: auto;
+      pointer-events: none
+    }
+
+    .car-option .car-label {
+      font-size: 9px;
+      color: #999;
+      white-space: nowrap
+    }
+
+    /* Player car image */
+    #player img,
+    #player svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none
+    }
+
+    /* Dodge bonus popup */
+    .dodge-popup {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 700;
+      color: #00ff88;
+      z-index: 30;
+      pointer-events: none;
+      animation: dodgePop .8s ease-out forwards
+    }
+
+    @keyframes dodgePop {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(1.3)
+      }
+    }
+
+    /* Nitro visual */
+    #nitroFlame {
+      position: absolute;
+      font-size: 20px;
+      z-index: 9;
+      pointer-events: none;
+      display: none;
+      animation: flamePulse .15s infinite alternate
+    }
+
+    @keyframes flamePulse {
+      0% {
+        opacity: .8;
+        transform: scaleY(1)
+      }
+
+      100% {
+        opacity: 1;
+        transform: scaleY(1.2)
+      }
+    }
+
+    /* Mobile touch zones */
+    .touch-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 15;
+      opacity: 0
+    }
+
+    .touch-zone.left {
+      left: 0
+    }
+
+    .touch-zone.right {
+      right: 0
+    }
+
+    /* Responsive */
+    @media(max-width:500px) {
+      #gameContainer {
+        height: 100%;
+      }
+      .racing-card {
+        padding: 0;
+      }
+    }
+
+    .game-hud .hud-pill {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    .game-hud .hud-label {
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .game-hud .hud-value {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .visually-hidden {
+      position: absolute!important;
+      width: 1px!important;
+      height: 1px!important;
+      padding: 0!important;
+      margin: -1px!important;
+      overflow: hidden!important;
+      clip: rect(0,0,0,0)!important;
+      white-space: nowrap!important;
+      border: 0!important;
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 8px 14px; min-height: 56px; display: flex; align-items: center; }
+      .game-hud .hud-right { width: 100%; justify-content: flex-start !important; gap: 8px !important; }
+      #restartBtn { margin-left: auto !important; padding: 6px 14px !important; font-size: 14px !important; border-radius: 20px !important; }
+      #soundToggle { padding: 4px !important; min-width: 36px !important; height: 36px !important; display: flex !important; align-items: center; justify-content: center; backdrop-filter: blur(4px); background: rgba(255,255,255,0.05) !important; border-radius: 50% !important; border: 1px solid var(--border) !important; }
+      .hud-pill { padding: 6px 10px !important; font-size: 13px !important; min-width: 0 !important; flex-direction: row !important; gap: 4px !important; border-radius: 20px !important; background: rgba(255,255,255,0.04) !important; border: 1px solid var(--border) !important; }
+      .hud-pill .hud-label { display: block !important; font-size: 10px !important; opacity: 0.8; text-transform: capitalize !important; font-weight: 500 !important; }
+      .hud-pill .hud-label::after { content: ":"; }
+      .hud-pill .hud-value { font-size: 13px !important; font-weight: 700 !important; }
+      #speedPill { display: none !important; }
+      .board-area { padding: 0 !important; overflow: hidden; display: flex !important; flex: 1 !important; }
+      .racing-card {
+        width: 100% !important;
+        height: 100% !important;
+        flex: 1 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        border-radius: 0;
+        overflow: hidden;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+    }
+
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+</head>
+
+<body data-current-game="emoji-racing-game">
+
+  <main class="game-page">
+    <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent; display: flex; flex-direction: column; height: 100%;">
+      <div class="game-hud">
+        <h1>🏁 Emoji <span>Racing</span></h1>
+        <div class="hud-right" style="gap: 12px;">
+          <div class="hud-pill">
+            <span class="hud-label">Score</span>
+            <span class="hud-value" id="scoreDisplay">0</span>
+          </div>
+          <div class="hud-pill" id="speedPill">
+            <span class="hud-label">Speed</span>
+            <span class="hud-value" id="speedDisplay">1</span>
+          </div>
+          <div class="hud-pill" id="highScorePill">
+            <span class="hud-label">High</span>
+            <span class="hud-value" id="highScoreDisplay">0</span>
+          </div>
+          <div class="hud-pill" title="Toggle sound" style="cursor:pointer;" id="soundToggle">🔊</div>
+          <button id="restartBtn" class="btn primary">Restart</button>
+        </div>
+      </div>
+      
+      <div class="board-area" style="display: flex; flex: 1; flex-direction: column; overflow: hidden; justify-content: stretch; padding: 0;">
+        <div class="racing-card" style="box-shadow:none; border:none; background:transparent; margin:0; padding:0; width:100%; height:100%;">
+          <div id="gameContainer">
+            <div id="road">
+              <div class="shoulder left"></div>
+              <div class="shoulder right"></div>
+            </div>
+
+            <!-- Internal overlays (Fuel, Nitro, Shield) -->
+            <div id="shieldTimer" style="display:none; position:absolute; top:10px; right:10px;" class="chip">🛡️ <b id="shieldCountdown">0</b>s</div>
+
+            <div id="fuelLabel">⛽ Fuel</div>
+            <div id="fuelBarOuter">
+              <div id="fuelBarInner"></div>
+            </div>
+
+            <div id="nitroLabel">🔥 Nitro</div>
+            <div id="nitroBarOuter">
+              <div id="nitroBarInner"></div>
+            </div>
+
+            <div id="shieldEffect"></div>
+            <div id="nitroFlame">🔥</div>
+
+            <div id="player"></div>
+            <div id="crashOverlay"></div>
+
+            <div class="touch-zone left" id="touchLeft"></div>
+            <div class="touch-zone right" id="touchRight"></div>
+
+            <!-- Start Screen -->
+            <div class="overlay-screen" id="startScreen">
+              <h2>🏁 Emoji Racing</h2>
+              <p>Dodge traffic on the endless highway!</p>
+              <div style="font-size:13px;color:#888;margin-bottom:10px">Choose your car:</div>
+              <div class="car-select" id="carSelect">
+                <!-- Car options remain same -->
+            <div class="car-option selected" data-car="blue">
+              <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="blueG" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#4ba3e3" />
+                    <stop offset="50%" stop-color="#5bb8f0" />
+                    <stop offset="100%" stop-color="#4ba3e3" />
+                  </linearGradient>
+                </defs>
+                <rect x="15" y="20" width="90" height="170" rx="30" fill="url(#blueG)" stroke="#3a8ad0"
+                  stroke-width="2" />
+                <rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".85" />
+                <rect x="28" y="112" width="64" height="35" rx="6" fill="#2a3a50" opacity=".7" />
+                <rect x="8" y="70" width="10" height="30" rx="4" fill="#4ba3e3" stroke="#3a8ad0" stroke-width="1" />
+                <rect x="102" y="70" width="10" height="30" rx="4" fill="#4ba3e3" stroke="#3a8ad0" stroke-width="1" />
+                <rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <ellipse cx="60" cy="135" rx="14" ry="10" fill="#1e2e40" opacity=".5" />
+              </svg>
+              <span class="car-label">Blue</span>
+            </div>
+            <div class="car-option" data-car="police">
+              <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="20" width="90" height="170" rx="30" fill="#f0f0f0" stroke="#bbb" stroke-width="2" />
+                <rect x="20" y="20" width="80" height="55" rx="22" fill="#1a1a2e" />
+                <rect x="22" y="62" width="76" height="45" rx="8" fill="#2a2a3e" opacity=".8" />
+                <rect x="28" y="120" width="64" height="30" rx="6" fill="#e8e8e8" stroke="#ccc" stroke-width="1" />
+                <rect x="38" y="125" width="18" height="10" rx="2" fill="#d03030" />
+                <rect x="64" y="125" width="18" height="10" rx="2" fill="#3070d0" />
+                <rect x="56" y="124" width="8" height="12" rx="1" fill="#222" /><text x="60" y="162"
+                  text-anchor="middle" font-size="18" font-weight="bold" fill="#222"
+                  font-family="Arial,sans-serif">911</text><text x="60" y="190" text-anchor="middle" font-size="10"
+                  font-weight="bold" fill="#222" font-family="Arial,sans-serif">POLICE</text>
+                <rect x="42" y="8" width="36" height="10" rx="4" fill="#3070d0" />
+                <rect x="48" y="5" width="8" height="6" rx="2" fill="#d03030" />
+                <rect x="64" y="5" width="8" height="6" rx="2" fill="#3070d0" /><text x="60" y="42" text-anchor="middle"
+                  font-size="11" font-weight="bold" fill="#f0f0f0" font-family="Arial,sans-serif"
+                  transform="rotate(180,60,38)">POLICE</text>
+              </svg>
+              <span class="car-label">Police</span>
+            </div>
+            <div class="car-option" data-car="taxi">
+              <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="taxiG" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#e8a820" />
+                    <stop offset="50%" stop-color="#ffc832" />
+                    <stop offset="100%" stop-color="#e8a820" />
+                  </linearGradient>
+                </defs>
+                <rect x="15" y="20" width="90" height="170" rx="30" fill="url(#taxiG)" stroke="#d09818"
+                  stroke-width="2" />
+                <rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".85" />
+                <rect x="28" y="120" width="64" height="32" rx="6" fill="#d09818" opacity=".6" /><text x="60" y="146"
+                  text-anchor="middle" font-size="16" font-weight="bold" fill="#222"
+                  font-family="Arial,sans-serif">TAXI</text>
+                <rect x="38" y="12" width="44" height="8" rx="3" fill="#ffd84a" stroke="#c89010" stroke-width="1" />
+                <rect x="8" y="70" width="10" height="30" rx="4" fill="#ffc832" stroke="#d09818" stroke-width="1" />
+                <rect x="102" y="70" width="10" height="30" rx="4" fill="#ffc832" stroke="#d09818" stroke-width="1" />
+                <rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <rect x="42" y="72" width="36" height="5" rx="2" fill="#f8f8f0" opacity=".6" />
+              </svg>
+              <span class="car-label">Taxi</span>
+            </div>
+            <div class="car-option" data-car="silver">
+              <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="silverG" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#a8a8a8" />
+                    <stop offset="50%" stop-color="#d0d0d0" />
+                    <stop offset="100%" stop-color="#a8a8a8" />
+                  </linearGradient>
+                </defs>
+                <rect x="15" y="20" width="90" height="170" rx="30" fill="url(#silverG)" stroke="#909090"
+                  stroke-width="2" />
+                <rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".8" />
+                <rect x="28" y="115" width="64" height="35" rx="6" fill="#2a3a50" opacity=".65" />
+                <rect x="8" y="70" width="10" height="30" rx="4" fill="#c0c0c0" stroke="#909090" stroke-width="1" />
+                <rect x="102" y="70" width="10" height="30" rx="4" fill="#c0c0c0" stroke="#909090" stroke-width="1" />
+                <rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000" />
+                <rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040" />
+                <ellipse cx="60" cy="138" rx="14" ry="10" fill="#1e2e40" opacity=".45" />
+              </svg>
+              <span class="car-label">Silver</span>
+            </div>
+          </div>
+          <button class="btn primary" id="startBtn" style="font-size:16px;padding:12px 36px;margin-top:10px">▶ Start
+            Race</button>
+          <p style="margin-top:14px;font-size:12px;color:#666">← → or A/D to steer · Space for Nitro<br>Tap left/right
+            on mobile</p>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div class="overlay-screen" id="gameOverScreen" style="display:none">
+          <h2>💥 Game Over!</h2>
+          <div class="final-score" id="finalScore">0</div>
+          <div class="high-score-label">🏆 Best: <span id="gameOverHighScore">0</span></div>
+          <p id="gameOverMsg">You crashed!</p>
+          <button class="btn primary" id="retryBtn" style="font-size:16px;padding:12px 36px">🔁 Retry</button>
+        </div>
+      </div>
+
+
+          
+          <div class="visually-hidden">
+            <h2>Play Emoji Racing Game</h2>
+            <p>Start your engines and experience the thrill of the Emoji Racing Game! Drive your car down an endless highway
+              and dodge a variety of vehicle emojis like 🚕 taxi, 🚓 police car, and 🚒 fire engine. Don't forget to collect
+              fuel ⛽, protective shields 🛡️, and nitro boosts 🔥 to go faster and farther.</p>
+            <ul>
+              <li><a href="/index.html">Discover all transport emojis</a></li>
+              <li><a href="/games.html">Explore our emoji game arcade</a></li>
+            </ul>
+            <h3>How to Play</h3>
+            <p>Use your keyboard's left and right arrow keys to steer your car. Press Spacebar to engage the nitro boost when
+              you've collected enough nitro power-ups. On mobile, tap the left or right side of the screen to change lanes.
+              Survive as long as you can to set a high score!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ─── Audio System (Web Audio API beeps) ─────────────────────
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      function ensureAudio() { if (!audioCtx) audioCtx = new AudioCtx(); }
+
+      function playTone(freq, dur, type, vol) {
+        if (!soundEnabled) return;
+        try {
+          ensureAudio();
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.type = type || 'square';
+          o.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          g.gain.setValueAtTime(vol || .08, audioCtx.currentTime);
+          g.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + dur);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(); o.stop(audioCtx.currentTime + dur);
+        } catch (e) { }
+      }
+
+      function sfxDodge() { playTone(880, .1, 'sine', .06); }
+      function sfxPowerup() { playTone(660, .08, 'sine', .08); setTimeout(() => playTone(990, .12, 'sine', .08), 80); }
+      function sfxCrash() { playTone(120, .3, 'sawtooth', .12); }
+      function sfxNitro() { playTone(440, .05, 'square', .05); }
+      function sfxStart() { playTone(523, .08, 'sine', .06); setTimeout(() => playTone(659, .08, 'sine', .06), 100); setTimeout(() => playTone(784, .15, 'sine', .08), 200); }
+
+      // ─── DOM refs ───────────────────────────────────────────────
+      const gameContainer = document.getElementById('gameContainer');
+      const road = document.getElementById('road');
+      const playerEl = document.getElementById('player');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const speedDisplay = document.getElementById('speedDisplay');
+      const highScoreDisplay = document.getElementById('highScoreDisplay');
+      const fuelBarInner = document.getElementById('fuelBarInner');
+      const nitroBarInner = document.getElementById('nitroBarInner');
+      const shieldEffect = document.getElementById('shieldEffect');
+      const shieldTimerChip = document.getElementById('shieldTimer');
+      const shieldCountdown = document.getElementById('shieldCountdown');
+      const nitroFlame = document.getElementById('nitroFlame');
+      const crashOverlay = document.getElementById('crashOverlay');
+      const startScreen = document.getElementById('startScreen');
+      const gameOverScreen = document.getElementById('gameOverScreen');
+      const finalScoreEl = document.getElementById('finalScore');
+      const gameOverHighScoreEl = document.getElementById('gameOverHighScore');
+      const gameOverMsg = document.getElementById('gameOverMsg');
+      const startBtn = document.getElementById('startBtn');
+      const retryBtn = document.getElementById('retryBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const soundToggle = document.getElementById('soundToggle');
+      const carSelect = document.getElementById('carSelect');
+      const touchLeft = document.getElementById('touchLeft');
+      const touchRight = document.getElementById('touchRight');
+
+      // ─── Constants ──────────────────────────────────────────────
+      const ROAD_W = () => gameContainer.clientWidth;
+      const ROAD_H = () => gameContainer.clientHeight;
+      const PLAYER_W = 48;
+      const PLAYER_H = 56;
+      const OBS_W = 48;
+      const OBS_H = 56;
+      const POWERUP_SIZE = 40;
+      const PLAYER_SPEED = 320; // px/sec base
+      const OBSTACLE_CARS = ['🚙', '🚕', '🚓', '🚚', '🚛', '🚌', '🚑', '🏎️'];
+      const POWERUP_TYPES = [
+        { emoji: '⛽', type: 'fuel' },
+        { emoji: '🛡️', type: 'shield' },
+        { emoji: '🔥', type: 'nitro' }
+      ];
+
+      // ─── Car SVG Graphics ────────────────────────────────────────
+      function getCarSVG(carId) {
+        const cars = {
+          blue: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pblueG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4ba3e3"/><stop offset="50%" stop-color="#5bb8f0"/><stop offset="100%" stop-color="#4ba3e3"/></linearGradient></defs><rect x="15" y="20" width="90" height="170" rx="30" fill="url(#pblueG)" stroke="#3a8ad0" stroke-width="2"/><rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".85"/><rect x="28" y="112" width="64" height="35" rx="6" fill="#2a3a50" opacity=".7"/><rect x="8" y="70" width="10" height="30" rx="4" fill="#4ba3e3" stroke="#3a8ad0" stroke-width="1"/><rect x="102" y="70" width="10" height="30" rx="4" fill="#4ba3e3" stroke="#3a8ad0" stroke-width="1"/><rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040"/><rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040"/><ellipse cx="60" cy="135" rx="14" ry="10" fill="#1e2e40" opacity=".5"/></svg>`,
+          police: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="20" width="90" height="170" rx="30" fill="#f0f0f0" stroke="#bbb" stroke-width="2"/><rect x="20" y="20" width="80" height="55" rx="22" fill="#1a1a2e"/><rect x="22" y="62" width="76" height="45" rx="8" fill="#2a2a3e" opacity=".8"/><rect x="28" y="120" width="64" height="30" rx="6" fill="#e8e8e8" stroke="#ccc" stroke-width="1"/><rect x="38" y="125" width="18" height="10" rx="2" fill="#d03030"/><rect x="64" y="125" width="18" height="10" rx="2" fill="#3070d0"/><rect x="56" y="124" width="8" height="12" rx="1" fill="#222"/><text x="60" y="162" text-anchor="middle" font-size="18" font-weight="bold" fill="#222" font-family="Arial,sans-serif">911</text><text x="60" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#222" font-family="Arial,sans-serif">POLICE</text><rect x="42" y="8" width="36" height="10" rx="4" fill="#3070d0"/><rect x="48" y="5" width="8" height="6" rx="2" fill="#d03030"/><rect x="64" y="5" width="8" height="6" rx="2" fill="#3070d0"/><text x="60" y="42" text-anchor="middle" font-size="11" font-weight="bold" fill="#f0f0f0" font-family="Arial,sans-serif" transform="rotate(180,60,38)">POLICE</text></svg>`,
+          taxi: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ptaxiG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e8a820"/><stop offset="50%" stop-color="#ffc832"/><stop offset="100%" stop-color="#e8a820"/></linearGradient></defs><rect x="15" y="20" width="90" height="170" rx="30" fill="url(#ptaxiG)" stroke="#d09818" stroke-width="2"/><rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".85"/><rect x="28" y="120" width="64" height="32" rx="6" fill="#d09818" opacity=".6"/><text x="60" y="146" text-anchor="middle" font-size="16" font-weight="bold" fill="#222" font-family="Arial,sans-serif">TAXI</text><rect x="38" y="12" width="44" height="8" rx="3" fill="#ffd84a" stroke="#c89010" stroke-width="1"/><rect x="8" y="70" width="10" height="30" rx="4" fill="#ffc832" stroke="#d09818" stroke-width="1"/><rect x="102" y="70" width="10" height="30" rx="4" fill="#ffc832" stroke="#d09818" stroke-width="1"/><rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040"/><rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040"/><rect x="42" y="72" width="36" height="5" rx="2" fill="#f8f8f0" opacity=".6"/></svg>`,
+          silver: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="psilverG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a8a8a8"/><stop offset="50%" stop-color="#d0d0d0"/><stop offset="100%" stop-color="#a8a8a8"/></linearGradient></defs><rect x="15" y="20" width="90" height="170" rx="30" fill="url(#psilverG)" stroke="#909090" stroke-width="2"/><rect x="22" y="55" width="76" height="50" rx="8" fill="#2a3a50" opacity=".8"/><rect x="28" y="115" width="64" height="35" rx="6" fill="#2a3a50" opacity=".65"/><rect x="8" y="70" width="10" height="30" rx="4" fill="#c0c0c0" stroke="#909090" stroke-width="1"/><rect x="102" y="70" width="10" height="30" rx="4" fill="#c0c0c0" stroke="#909090" stroke-width="1"/><rect x="30" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="78" y="12" width="12" height="6" rx="2" fill="#f0a000"/><rect x="35" y="178" width="10" height="6" rx="2" fill="#e04040"/><rect x="75" y="178" width="10" height="6" rx="2" fill="#e04040"/><ellipse cx="60" cy="138" rx="14" ry="10" fill="#1e2e40" opacity=".45"/></svg>`
+        };
+        return cars[carId] || cars.blue;
+      }
+
+      // ─── State ──────────────────────────────────────────────────
+      let state = 'start'; // start | playing | gameover
+      let selectedCar = 'blue';
+      let playerX = 0;
+      let playerY = 0;
+      let score = 0;
+      let scoreAccum = 0;
+      let speedLevel = 1;
+      let baseSpeed = 180; // obstacle px/s
+      let obstacleSpeed = 180;
+      let spawnInterval = 1100; // ms
+      let timeSinceSpawn = 0;
+      let timeSincePowerup = 0;
+      let powerupInterval = 6000;
+      let gameTime = 0; // total elapsed seconds
+      let lastDifficultyBump = 0;
+      let lanes = 3;
+      let laneWidth = 0;
+
+      function resizeGame() {
+        const rw = ROAD_W();
+        const rh = ROAD_H();
+        laneWidth = rw / lanes;
+        
+        // Re-initialize player position if needed or keep proportional
+        if (state === 'playing') {
+          // Adjust playerX proportionally
+          // playerX = (playerX / oldRw) * rw; // complicated to track oldRw
+        }
+        
+        createLaneLines();
+        createSpeedLines();
+      }
+
+      let fuel = 100;
+      let nitro = 0;
+      let nitroActive = false;
+      let shieldActive = false;
+      let shieldTimeLeft = 0;
+
+      let obstacles = [];
+      let powerups = [];
+      let laneLines = [];
+      let speedLines = [];
+      let laneLineOffset = 0;
+
+      let keysDown = {};
+      let highScore = parseInt(localStorage.getItem('emojiRacing_highScore')) || 0;
+      let lastFrameTime = null;
+
+      highScoreDisplay.textContent = highScore;
+
+      // ─── Lane Lines ─────────────────────────────────────────────
+      function createLaneLines() {
+        laneLines.forEach(l => l.el.remove());
+        laneLines = [];
+        laneWidth = ROAD_W() / lanes;
+        const h = ROAD_H();
+        const dashH = 40;
+        const gap = 30;
+        const totalH = dashH + gap;
+        const count = Math.ceil(h / totalH) + 2;
+
+        for (let li = 1; li < lanes; li++) {
+          const x = laneWidth * li - 2;
+          for (let i = 0; i < count; i++) {
+            const el = document.createElement('div');
+            el.className = 'lane-line';
+            el.style.left = x + 'px';
+            el.style.height = dashH + 'px';
+            el.style.top = (i * totalH) + 'px';
+            road.appendChild(el);
+            laneLines.push({ el, baseY: i * totalH, x });
+          }
+        }
+      }
+
+      function updateLaneLines(dt) {
+        const totalH = 70; // dash + gap
+        const maxY = ROAD_H() + 50;
+        laneLineOffset += obstacleSpeed * (nitroActive ? 1.8 : 1) * dt;
+        if (laneLineOffset > totalH) laneLineOffset -= totalH;
+        laneLines.forEach(l => {
+          const y = l.baseY + laneLineOffset;
+          l.el.style.top = (y > maxY ? y - (Math.ceil(maxY / totalH) + 2) * totalH : y) + 'px';
+        });
+      }
+
+      // ─── Speed Lines ────────────────────────────────────────────
+      function createSpeedLines() {
+        speedLines.forEach(s => s.el.remove());
+        speedLines = [];
+        const count = 12;
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement('div');
+          el.className = 'speed-line';
+          el.style.height = (30 + Math.random() * 40) + 'px';
+          el.style.left = Math.random() * ROAD_W() + 'px';
+          el.style.top = Math.random() * ROAD_H() + 'px';
+          el.style.opacity = 0;
+          road.appendChild(el);
+          speedLines.push({ el, y: parseFloat(el.style.top), speed: 200 + Math.random() * 200 });
+        }
+      }
+
+      function updateSpeedLines(dt) {
+        const vis = Math.min(1, (speedLevel - 1) / 5) * .25;
+        const h = ROAD_H();
+        speedLines.forEach(s => {
+          s.y += s.speed * (nitroActive ? 2.5 : 1) * dt;
+          if (s.y > h + 60) { s.y = -60; s.el.style.left = Math.random() * ROAD_W() + 'px'; }
+          s.el.style.top = s.y + 'px';
+          s.el.style.opacity = nitroActive ? .4 : vis;
+        });
+      }
+
+      // ─── Obstacle Spawning ─────────────────────────────────────
+      function spawnObstacle() {
+        const rw = ROAD_W();
+        // Randomized X position for higher difficulty
+        const x = Math.random() * (rw - OBS_W);
+        const lane = Math.floor(x / (rw / lanes));
+
+        // Avoid spawning directly on top of another obstacle
+        for (const o of obstacles) {
+          if (Math.abs(o.x - x) < OBS_W * 1.5 && o.y < OBS_H * 2) return;
+        }
+
+        const emoji = OBSTACLE_CARS[Math.floor(Math.random() * OBSTACLE_CARS.length)];
+        const el = document.createElement('div');
+        el.className = 'obstacle-car';
+        el.textContent = emoji;
+        el.style.left = x + 'px';
+        el.style.top = '-70px';
+        road.appendChild(el);
+        obstacles.push({ el, x, y: -70, lane, dodged: false });
+      }
+
+      // ─── Powerup Spawning ──────────────────────────────────────
+      function spawnPowerup() {
+        const rw = ROAD_W();
+        // Powerups can also be slightly randomized but broadly in lanes
+        const x = Math.random() * (rw - POWERUP_SIZE);
+        const pu = POWERUP_TYPES[Math.floor(Math.random() * POWERUP_TYPES.length)];
+
+        const el = document.createElement('div');
+        el.className = 'powerup';
+        el.textContent = pu.emoji;
+        el.style.left = x + 'px';
+        el.style.top = '-60px';
+        road.appendChild(el);
+        powerups.push({ el, x, y: -60, type: pu.type });
+      }
+
+      // ─── Collision Helpers ─────────────────────────────────────
+      function aabb(ax, ay, aw, ah, bx, by, bw, bh) {
+        return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+      }
+
+      // ─── Crash Animation ──────────────────────────────────────
+      function showCrash(cx, cy) {
+        crashOverlay.style.display = 'block';
+        const particles = ['💥', '🔥', '💫', '⭐', '✨', '💨', '🔧', '🛞'];
+        for (let i = 0; i < 12; i++) {
+          const p = document.createElement('div');
+          p.className = 'crash-particle';
+          p.textContent = particles[Math.floor(Math.random() * particles.length)];
+          const angle = (Math.PI * 2 / 12) * i;
+          const dist = 60 + Math.random() * 60;
+          p.style.left = cx + 'px';
+          p.style.top = cy + 'px';
+          p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          crashOverlay.appendChild(p);
+        }
+      }
+
+      function clearCrash() {
+        crashOverlay.style.display = 'none';
+        crashOverlay.innerHTML = '';
+      }
+
+      // ─── Dodge Popup ───────────────────────────────────────────
+      function showDodgePopup(x, y) {
+        const el = document.createElement('div');
+        el.className = 'dodge-popup';
+        el.textContent = '+5 Dodge!';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        road.appendChild(el);
+        setTimeout(() => el.remove(), 800);
+      }
+
+      // ─── Clear Game Objects ─────────────────────────────────────
+      function clearObjects() {
+        obstacles.forEach(o => o.el.remove());
+        obstacles = [];
+        powerups.forEach(p => p.el.remove());
+        powerups = [];
+        clearCrash();
+      }
+
+      // ─── Init / Reset ──────────────────────────────────────────
+      function initGame() {
+        resizeGame();
+        clearObjects();
+        const rw = ROAD_W();
+        const rh = ROAD_H();
+        lanes = 3;
+        laneWidth = rw / lanes;
+        playerX = (rw - PLAYER_W) / 2;
+        playerY = rh - PLAYER_H - 60;
+        score = 0;
+        scoreAccum = 0;
+        speedLevel = 1;
+        baseSpeed = 180;
+        obstacleSpeed = 180;
+        spawnInterval = 1100;
+        timeSinceSpawn = 0;
+        timeSincePowerup = 0;
+        powerupInterval = 6000;
+        gameTime = 0;
+        lastDifficultyBump = 0;
+        fuel = 100;
+        nitro = 0;
+        nitroActive = false;
+        shieldActive = false;
+        shieldTimeLeft = 0;
+        lastFrameTime = null;
+
+        playerEl.innerHTML = getCarSVG(selectedCar);
+        playerEl.style.left = playerX + 'px';
+        playerEl.style.top = playerY + 'px';
+        playerEl.style.filter = 'drop-shadow(0 0 8px rgba(255,77,0,.5))';
+        playerEl.style.transform = '';
+        shieldEffect.style.display = 'none';
+        shieldTimerChip.style.display = 'none';
+        nitroFlame.style.display = 'none';
+
+        scoreDisplay.textContent = '0';
+        speedDisplay.textContent = '1';
+        fuelBarInner.style.width = '100%';
+        nitroBarInner.style.width = '0%';
+
+        createLaneLines();
+        createSpeedLines();
+      }
+
+      // ─── Update Player ─────────────────────────────────────────
+      function updatePlayer(dt) {
+        const rw = ROAD_W();
+        const speed = PLAYER_SPEED * (nitroActive ? 1.4 : 1);
+
+        if (keysDown['ArrowLeft'] || keysDown['a'] || keysDown['A']) {
+          playerX -= speed * dt;
+        }
+        if (keysDown['ArrowRight'] || keysDown['d'] || keysDown['D']) {
+          playerX += speed * dt;
+        }
+
+        // Clamp to road boundaries
+        playerX = Math.max(4, Math.min(rw - PLAYER_W - 4, playerX));
+
+        playerEl.style.left = playerX + 'px';
+        playerEl.style.top = playerY + 'px';
+
+        // Shield effect follow
+        if (shieldActive) {
+          shieldEffect.style.display = 'block';
+          shieldEffect.style.left = (playerX - 8) + 'px';
+          shieldEffect.style.top = (playerY - 4) + 'px';
+        } else {
+          shieldEffect.style.display = 'none';
+        }
+
+        // Nitro flame
+        if (nitroActive) {
+          nitroFlame.style.display = 'block';
+          nitroFlame.style.left = (playerX + PLAYER_W / 2 - 10) + 'px';
+          nitroFlame.style.top = (playerY + PLAYER_H - 2) + 'px';
+        } else {
+          nitroFlame.style.display = 'none';
+        }
+      }
+
+      // ─── Update Obstacles ──────────────────────────────────────
+      function updateObstacles(dt) {
+        const rh = ROAD_H();
+        const speed = obstacleSpeed * (nitroActive ? 1.8 : 1);
+        const toRemove = [];
+
+        for (let i = 0; i < obstacles.length; i++) {
+          const o = obstacles[i];
+          o.y += speed * dt;
+          o.el.style.top = o.y + 'px';
+
+          // Check if passed player (dodge detection)
+          if (!o.dodged && o.y > playerY + PLAYER_H) {
+            o.dodged = true;
+            score += 5;
+            sfxDodge();
+            showDodgePopup(o.x + OBS_W / 2, playerY - 20);
+          }
+
+          // Off screen
+          if (o.y > rh + 80) {
+            o.el.remove();
+            toRemove.push(i);
+          }
+
+          // Collision
+          if (aabb(playerX, playerY, PLAYER_W, PLAYER_H, o.x, o.y, OBS_W, OBS_H)) {
+            if (shieldActive) {
+              // Shield absorbs hit
+              shieldActive = false;
+              shieldTimeLeft = 0;
+              shieldEffect.style.display = 'none';
+              shieldTimerChip.style.display = 'none';
+              o.el.remove();
+              toRemove.push(i);
+              sfxPowerup();
+              score += 10;
+            } else {
+              // Game over
+              endGame(o);
+              return;
+            }
+          }
+        }
+
+        for (let i = toRemove.length - 1; i >= 0; i--) obstacles.splice(toRemove[i], 1);
+      }
+
+      // ─── Update Powerups ───────────────────────────────────────
+      function updatePowerups(dt) {
+        const rh = ROAD_H();
+        const speed = obstacleSpeed * (nitroActive ? 1.8 : 1) * .8;
+        const toRemove = [];
+
+        for (let i = 0; i < powerups.length; i++) {
+          const p = powerups[i];
+          p.y += speed * dt;
+          p.el.style.top = p.y + 'px';
+
+          if (p.y > rh + 60) {
+            p.el.remove();
+            toRemove.push(i);
+            continue;
+          }
+
+          // Collision with player
+          if (aabb(playerX, playerY, PLAYER_W, PLAYER_H, p.x, p.y, POWERUP_SIZE, POWERUP_SIZE)) {
+            collectPowerup(p);
+            p.el.remove();
+            toRemove.push(i);
+          }
+        }
+
+        for (let i = toRemove.length - 1; i >= 0; i--) powerups.splice(toRemove[i], 1);
+      }
+
+      function collectPowerup(p) {
+        sfxPowerup();
+        switch (p.type) {
+          case 'fuel':
+            fuel = Math.min(100, fuel + 30);
+            break;
+          case 'shield':
+            shieldActive = true;
+            shieldTimeLeft = 8;
+            shieldTimerChip.style.display = '';
+            break;
+          case 'nitro':
+            nitro = Math.min(100, nitro + 40);
+            break;
+        }
+      }
+
+      // ─── Fuel System ───────────────────────────────────────────
+      function updateFuel(dt) {
+        const drain = nitroActive ? 8 : 2; // per second
+        fuel -= drain * dt;
+        fuel = Math.max(0, fuel);
+        fuelBarInner.style.width = fuel + '%';
+
+        if (fuel <= 0) {
+          endGame(null, true);
+        }
+      }
+
+      // ─── Nitro System ─────────────────────────────────────────
+      function updateNitro(dt) {
+        nitroBarInner.style.width = nitro + '%';
+        if (nitroActive) {
+          nitro -= 25 * dt; // drains over ~4s
+          if (nitro <= 0) {
+            nitro = 0;
+            nitroActive = false;
+          }
+        }
+      }
+
+      // ─── Shield Timer ─────────────────────────────────────────
+      function updateShield(dt) {
+        if (shieldActive) {
+          shieldTimeLeft -= dt;
+          shieldCountdown.textContent = Math.ceil(shieldTimeLeft);
+          if (shieldTimeLeft <= 0) {
+            shieldActive = false;
+            shieldEffect.style.display = 'none';
+            shieldTimerChip.style.display = 'none';
+          }
+        }
+      }
+
+      // ─── Scoring & Difficulty ─────────────────────────────────
+      function updateScoring(dt) {
+        scoreAccum += dt;
+        // 1 point per 0.1 seconds survived
+        const pts = Math.floor(scoreAccum * 10);
+        if (pts > 0) {
+          score += pts;
+          scoreAccum -= pts / 10;
+        }
+        scoreDisplay.textContent = score;
+
+        // Difficulty bumps every 12 seconds
+        gameTime += dt;
+        if (gameTime - lastDifficultyBump >= 12) {
+          lastDifficultyBump = gameTime;
+          speedLevel++;
+          baseSpeed += 20;
+          obstacleSpeed = baseSpeed;
+          spawnInterval = Math.max(350, 1100 - speedLevel * 80);
+          speedDisplay.textContent = speedLevel;
+
+          // Add lanes at certain levels
+          if (speedLevel === 4 && lanes < 4) {
+            lanes = 4;
+            createLaneLines();
+          } else if (speedLevel === 7 && lanes < 5) {
+            lanes = 5;
+            createLaneLines();
+          }
+        }
+      }
+
+      // ─── End Game ──────────────────────────────────────────────
+      function endGame(hitObs, outOfFuel) {
+        state = 'gameover';
+        sfxCrash();
+
+        if (hitObs) {
+          showCrash(playerX + PLAYER_W / 2, playerY + PLAYER_H / 2);
+          playerEl.style.filter = 'grayscale(1) brightness(.5)';
+        }
+
+        if (score > highScore) {
+          highScore = score;
+          localStorage.setItem('emojiRacing_highScore', highScore);
+          highScoreDisplay.textContent = highScore;
+        }
+
+        finalScoreEl.textContent = score;
+        gameOverHighScoreEl.textContent = highScore;
+        gameOverMsg.textContent = outOfFuel ? '⛽ Out of fuel!' : '💥 You crashed!';
+
+        setTimeout(() => {
+          gameOverScreen.style.display = 'flex';
+        }, outOfFuel ? 200 : 600);
+      }
+
+      // ─── Main Game Loop ────────────────────────────────────────
+      function gameLoop(timestamp) {
+        if (state !== 'playing') { requestAnimationFrame(gameLoop); return; }
+
+        if (!lastFrameTime) lastFrameTime = timestamp;
+        let dt = (timestamp - lastFrameTime) / 1000;
+        lastFrameTime = timestamp;
+
+        // Clamp dt to avoid huge jumps (e.g., tab was inactive)
+        if (dt > .1) dt = .016;
+
+        // Spawn obstacles
+        timeSinceSpawn += dt * 1000;
+        if (timeSinceSpawn >= spawnInterval) {
+          spawnObstacle();
+          timeSinceSpawn = 0;
+        }
+
+        // Spawn powerups
+        timeSincePowerup += dt * 1000;
+        if (timeSincePowerup >= powerupInterval) {
+          spawnPowerup();
+          timeSincePowerup = 0;
+        }
+
+        updatePlayer(dt);
+        updateObstacles(dt);
+        updatePowerups(dt);
+        updateLaneLines(dt);
+        updateSpeedLines(dt);
+        updateFuel(dt);
+        updateNitro(dt);
+        updateShield(dt);
+        updateScoring(dt);
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      // ─── Start Game ────────────────────────────────────────────
+      function startGame() {
+        initGame();
+        state = 'playing';
+        startScreen.style.display = 'none';
+        gameOverScreen.style.display = 'none';
+        sfxStart();
+        requestAnimationFrame(gameLoop);
+      }
+
+      // ─── Controls ──────────────────────────────────────────────
+      window.addEventListener('keydown', e => {
+        keysDown[e.key] = true;
+
+        // Nitro activation
+        if (e.key === ' ' && state === 'playing' && nitro > 0 && !nitroActive) {
+          nitroActive = true;
+          sfxNitro();
+        }
+
+        // Quick start/restart with Enter
+        if (e.key === 'Enter') {
+          if (state === 'start') startGame();
+          else if (state === 'gameover') startGame();
+        }
+      });
+
+      window.addEventListener('keyup', e => {
+        keysDown[e.key] = false;
+      });
+
+      // --- Continuous Steering & Double-Tap Controls (Mobile) ---
+      let lastTapTime = 0;
+
+      gameContainer.addEventListener('touchstart', e => {
+        const now = Date.now();
+        const t = e.touches[0];
+        const rw = ROAD_W();
+        
+        // Steering
+        if (t.clientX < rw / 2) {
+          keysDown['ArrowLeft'] = true;
+          keysDown['ArrowRight'] = false;
+        } else {
+          keysDown['ArrowRight'] = true;
+          keysDown['ArrowLeft'] = false;
+        }
+
+        // Double-tap for nitro
+        if (now - lastTapTime < 300 && state === 'playing' && nitro > 0 && !nitroActive) {
+          nitroActive = true;
+          sfxNitro();
+        }
+        lastTapTime = now;
+      }, { passive: true });
+
+      gameContainer.addEventListener('touchend', e => {
+        // Stop all steering on touchend for mobile
+        keysDown['ArrowLeft'] = false;
+        keysDown['ArrowRight'] = false;
+      }, { passive: true });
+
+      gameContainer.addEventListener('touchmove', function (e) {
+         // Optionally update direction while dragging finger
+         const t = e.touches[0];
+         const rw = ROAD_W();
+         if (t.clientX < rw / 2) {
+           keysDown['ArrowLeft'] = true;
+           keysDown['ArrowRight'] = false;
+         } else {
+           keysDown['ArrowRight'] = true;
+           keysDown['ArrowLeft'] = false;
+         }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        resizeGame();
+      });
+      
+      // Car selection
+      startBtn.addEventListener('click', startGame);
+      retryBtn.addEventListener('click', startGame);
+      restartBtn.addEventListener('click', () => {
+        if (state === 'playing' || state === 'gameover') startGame();
+        else startGame();
+      });
+
+      // Car selection
+      carSelect.addEventListener('click', e => {
+        const opt = e.target.closest('.car-option');
+        if (!opt) return;
+        carSelect.querySelectorAll('.car-option').forEach(c => c.classList.remove('selected'));
+        opt.classList.add('selected');
+        selectedCar = opt.dataset.car;
+      });
+
+      // Sound toggle
+      soundToggle.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+      });
+
+      // ─── Init lane lines for start screen background ───────────
+      createLaneLines();
+      createSpeedLines();
+
+      // Start the rAF loop (it just idles until state = 'playing')
+      requestAnimationFrame(gameLoop);
+
+    })();
+  </script>
+
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>All the emojis, stickers, and captions you need to light up every chat and post.</p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+    <div class="site-footer__bottom">
+      <p>© <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳</p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>

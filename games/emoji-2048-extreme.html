@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2048 Extreme: Emoji Edition 🧩 | The Ultimate Brain Puzzle</title>
+  <meta name="description"
+    content="Play 2048 Extreme: Emoji Edition! Merge matching emojis to reach the ultimate level in this fun, challenging twist on the classic 2048 sliding puzzle game.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-2048-extreme.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-2048-extreme.html">
+  <meta property="og:title" content="2048 Extreme: Emoji Edition">
+  <meta property="og:description" content="Merge emojis in this challenging twist on the classic 2048 puzzle game!">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-2048-extreme-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-2048-extreme.html">
+  <meta name="twitter:title" content="2048 Extreme: Emoji Edition">
+  <meta name="twitter:description" content="Merge emojis in this challenging twist on the classic 2048 puzzle game!">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-2048-extreme-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "2048 Extreme: Emoji Edition",
+    "url": "https://emojicircle.com/games/emoji-2048-extreme.html",
+    "genre": ["Puzzle", "Strategy"],
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "description": "A fun and challenging sliding tile puzzle game based on 2048, but replacing numbers with an escalating sequence of emojis.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "2048 Extreme",
+        "item": "https://emojicircle.com/games/emoji-2048-extreme.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #121214;
+      --surface-alt: #1e1e22;
+      --surface-strong: #0b0b0c;
+      --border: #2a2a30;
+      --accent: #ff4d00;
+      --accent-glow: rgba(255, 77, 0, 0.35);
+      --text-primary: #f8fafc;
+      --text-muted: rgba(148, 163, 184, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      overflow-x: hidden
+    }
+
+    /* New Game button */
+    #newBtn {
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+    }
+
+    #newBtn:hover {
+      background: #e64500;
+      box-shadow: 0 0 14px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    #newBtn:active {
+      transform: translateY(0);
+    }
+
+    .grid-wrapper {
+      position: relative;
+      width: min(430px, 75vh, 90%);
+      aspect-ratio: 1 / 1;
+      flex-shrink: 0;
+    }
+
+    .grid-bg {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #0e0e10;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .grid-bg .cell {
+      background: var(--surface-alt);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+    }
+
+    #board {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      touch-action: none;
+    }
+
+    #board.no-anim .tile {
+      transition: none !important
+    }
+
+    .tile {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+      transition: left 150ms ease-in-out, top 150ms ease-in-out;
+      user-select: none;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Emoji level colors — richer palette */
+    .tile[data-level="1"] {
+      background: #2e2e35;
+    }
+
+    .tile[data-level="2"] {
+      background: #3d3017;
+      border: 1px solid rgba(255, 190, 50, 0.15);
+    }
+
+    .tile[data-level="3"] {
+      background: #36360f;
+      border: 1px solid rgba(220, 220, 20, 0.15);
+    }
+
+    .tile[data-level="4"] {
+      background: #183318;
+      border: 1px solid rgba(60, 180, 60, 0.15);
+    }
+
+    .tile[data-level="5"] {
+      background: #0f2535;
+      border: 1px solid rgba(50, 140, 220, 0.2);
+    }
+
+    .tile[data-level="6"] {
+      background: #2a1540;
+      border: 1px solid rgba(140, 60, 220, 0.2);
+    }
+
+    .tile[data-level="7"] {
+      background: #401525;
+      border: 1px solid rgba(230, 50, 100, 0.2);
+    }
+
+    .tile[data-level="8"] {
+      background: radial-gradient(circle at 40% 40%, #a07800, #5c4200);
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      box-shadow: 0 0 22px rgba(255, 215, 0, 0.5), 0 0 8px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Spawn pop */
+    @keyframes tile-pop {
+      0% {
+        transform: scale(0);
+        opacity: 0
+      }
+
+      55% {
+        transform: scale(1.18)
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .tile.tile-new {
+      animation: tile-pop .22s ease forwards
+    }
+
+    /* Merge pulse */
+    @keyframes tile-merge {
+      0% {
+        transform: scale(1)
+      }
+
+      45% {
+        transform: scale(1.28)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    .tile.tile-merged {
+      animation: tile-merge .22s ease;
+      z-index: 2
+    }
+
+    /* ── Overlay (win / game over) ── */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, .82);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .overlay h2 {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .overlay .btn {
+      padding: 9px 22px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background .2s, border-color .2s;
+    }
+
+    .overlay .btn:hover {
+      border-color: var(--accent);
+      background: rgba(255, 77, 0, 0.12);
+    }
+
+    .overlay .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .overlay .btn.primary:hover {
+      background: #e64500;
+    }
+
+    .feedback {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .game-hud h1 {
+        display: none;
+      }
+
+      .game-hud {
+        padding: 12px 16px;
+      }
+
+      .game-hud .hud-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+
+<body data-current-game="emoji-2048-extreme">
+
+  <main class="game-page">
+    <section class="card">
+
+      <!-- Top HUD -->
+      <div class="game-hud">
+        <h1>2048 <span>Emoji</span></h1>
+        <div class="hud-right">
+          <button id="newBtn">New Game</button>
+          <div class="score-pill">
+            <span class="score-label">Score</span>
+            <span class="score-value" id="score">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Board -->
+      <div class="board-area">
+        <div class="grid-wrapper">
+          <div class="grid-bg" id="bgGrid"></div>
+          <div id="board"></div>
+          <div class="overlay" id="winOverlay">
+            <h2>🎉 You Win!</h2>
+            <button class="btn primary" id="winContinue">Keep Playing</button>
+            <button class="btn" id="winRestart">New Game</button>
+          </div>
+          <div class="overlay" id="overOverlay">
+            <h2>💀 Game Over</h2>
+            <button class="btn primary" id="overRestart">Try Again</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="feedback" id="status"></p>
+
+    </section>
+
+    <div class="visually-hidden">
+      <h2>Play 2048 Extreme Emoji Puzzle</h2>
+      <p>Get ready to test your brain with 2048 Extreme: Emoji Edition! This fresh take on the classic 2048 sliding tile
+        game replaces numbers with a fun progression of smiley emojis. Swipe and merge identical emojis to upgrade them
+        to the next level. Can you reach the ultimate crown 👑 emoji and win the game?</p>
+      <ul>
+        <li><a href="/index.html">Discover the meaning behind all smileys</a></li>
+        <li><a href="/games.html">Play more brain-teasing emoji puzzle games</a></li>
+      </ul>
+      <h3>How to Play 2048 Emoji</h3>
+      <p>Use your arrow keys (or swipe on your mobile screen) to move all emojis in a given direction across the 4x4
+        grid. When two emojis of the exact same type touch, they merge into a new, higher-level emoji. Every move spawns
+        a new level-1 emoji. The game ends when the board is completely full and no more merges are possible. Try to
+        achieve the highest score!</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const boardEl = document.getElementById('board');
+      const bgGrid = document.getElementById('bgGrid');
+      const scoreEl = document.getElementById('score');
+      const statusEl = document.getElementById('status');
+      const winOv = document.getElementById('winOverlay');
+      const overOv = document.getElementById('overOverlay');
+
+      const EMOJIS = ['😀', '😃', '😄', '😁', '😆', '🤩', '🥳', '👑'];
+      const WIN_LEVEL = 8;
+      const ANIM_MS = 150;
+      const GAP = 10;
+
+      let grid, score, won, gameOver, animating;
+      let allTiles = [];
+      let tileId = 0;
+
+      /* --- Background cells --- */
+      for (let i = 0; i < 16; i++) { const d = document.createElement('div'); d.className = 'cell'; bgGrid.appendChild(d); }
+
+      /* --- Geometry --- */
+      function cellSz() { return (boardEl.offsetWidth - 3 * GAP) / 4; }
+      function cellX(c) { const s = cellSz(); return c * (s + GAP); }
+      function cellY(r) { const s = cellSz(); return r * (s + GAP); }
+
+      /* --- Tile helpers --- */
+      function makeTile(level, row, col) {
+        const t = { id: tileId++, level, row, col, el: null };
+        const el = document.createElement('div');
+        el.className = 'tile';
+        el.setAttribute('data-level', level);
+        el.textContent = EMOJIS[level - 1];
+        const s = cellSz();
+        el.style.width = s + 'px'; el.style.height = s + 'px';
+        el.style.left = cellX(col) + 'px'; el.style.top = cellY(row) + 'px';
+        boardEl.appendChild(el);
+        t.el = el; allTiles.push(t);
+        return t;
+      }
+      function positionTile(t) {
+        t.el.style.left = cellX(t.col) + 'px';
+        t.el.style.top = cellY(t.row) + 'px';
+      }
+      function destroyTile(t) { if (t.el) t.el.remove(); allTiles = allTiles.filter(x => x !== t); }
+
+      /* --- Empty cells --- */
+      function emptyCells() {
+        const e = [];
+        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (!grid[r][c]) e.push([r, c]);
+        return e;
+      }
+
+      /* --- Spawn --- */
+      function spawnTile() {
+        const e = emptyCells(); if (!e.length) return null;
+        const [r, c] = e[Math.floor(Math.random() * e.length)];
+        const t = makeTile(1, r, c); grid[r][c] = t;
+        return t;
+      }
+
+      /* --- Line merge logic --- */
+      function processLine(tiles) {
+        let pts = 0; const result = []; let i = 0;
+        while (i < tiles.length) {
+          if (i + 1 < tiles.length && tiles[i].level === tiles[i + 1].level) {
+            const nl = tiles[i].level + 1;
+            pts += 10 * Math.pow(2, nl - 2);
+            result.push({ type: 'merge', t1: tiles[i], t2: tiles[i + 1], nl });
+            i += 2;
+          } else { result.push({ type: 'single', t: tiles[i] }); i++; }
+        }
+        return { result, pts };
+      }
+
+      /* --- Move --- */
+      function move(dir) {
+        if (animating || gameOver) return;
+        const merges = []; let pts = 0, moved = false;
+        const isH = (dir === 0 || dir === 2), rev = (dir === 2 || dir === 3);
+
+        for (let li = 0; li < 4; li++) {
+          let tiles = [];
+          for (let p = 0; p < 4; p++) {
+            const r = isH ? li : p, c = isH ? p : li;
+            if (grid[r][c]) tiles.push(grid[r][c]);
+          }
+          if (rev) tiles.reverse();
+          for (let p = 0; p < 4; p++) { const r = isH ? li : p, c = isH ? p : li; grid[r][c] = null; }
+
+          const { result, pts: lp } = processLine(tiles); pts += lp;
+          let pos = 0;
+          for (const item of result) {
+            const idx = rev ? (3 - pos) : pos;
+            const r = isH ? li : idx, c = isH ? idx : li;
+            if (item.type === 'merge') {
+              if (item.t1.row !== r || item.t1.col !== c) moved = true;
+              if (item.t2.row !== r || item.t2.col !== c) moved = true;
+              item.t1.row = r; item.t1.col = c; item.t2.row = r; item.t2.col = c;
+              merges.push({ t1: item.t1, t2: item.t2, nl: item.nl, r, c });
+              moved = true;
+            } else {
+              if (item.t.row !== r || item.t.col !== c) moved = true;
+              item.t.row = r; item.t.col = c; grid[r][c] = item.t;
+            }
+            pos++;
+          }
+        }
+        if (!moved) return;
+
+        animating = true; score += pts; scoreEl.textContent = score;
+
+        /* Phase 1 – slide all tiles to new positions (CSS transition) */
+        for (const t of allTiles) positionTile(t);
+
+        /* Phase 2 – after slide finishes, resolve merges & spawn */
+        setTimeout(() => {
+          for (const m of merges) {
+            destroyTile(m.t1); destroyTile(m.t2);
+            const nt = makeTile(m.nl, m.r, m.c);
+            nt.el.classList.add('tile-merged');
+            grid[m.r][m.c] = nt;
+          }
+          const sp = spawnTile();
+          if (sp) sp.el.classList.add('tile-new');
+          animating = false;
+          checkEnd();
+        }, ANIM_MS);
+      }
+
+      /* --- Win / Game Over --- */
+      function checkEnd() {
+        if (!won) {
+          for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++)
+            if (grid[r][c] && grid[r][c].level >= WIN_LEVEL) { won = true; winOv.classList.add('active'); return; }
+        }
+        if (!canMove()) { gameOver = true; overOv.classList.add('active'); }
+      }
+      function canMove() {
+        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+          if (!grid[r][c]) return true;
+          if (c < 3 && grid[r][c] && grid[r][c + 1] && grid[r][c].level === grid[r][c + 1].level) return true;
+          if (r < 3 && grid[r][c] && grid[r + 1][c] && grid[r][c].level === grid[r + 1][c].level) return true;
+        }
+        return false;
+      }
+
+      /* --- New Game --- */
+      function newGame() {
+        for (const t of allTiles) if (t.el) t.el.remove();
+        allTiles = []; tileId = 0;
+        grid = Array.from({ length: 4 }, () => Array(4).fill(null));
+        score = 0; won = false; gameOver = false; animating = false;
+        scoreEl.textContent = '0'; statusEl.textContent = '';
+        winOv.classList.remove('active'); overOv.classList.remove('active');
+        const s1 = spawnTile(); if (s1) s1.el.classList.add('tile-new');
+        const s2 = spawnTile(); if (s2) s2.el.classList.add('tile-new');
+      }
+
+      /* --- Keyboard --- */
+      document.addEventListener('keydown', e => {
+        const m = { ArrowLeft: 0, ArrowUp: 1, ArrowRight: 2, ArrowDown: 3 };
+        if (m[e.key] !== undefined) { e.preventDefault(); move(m[e.key]); }
+      });
+
+      /* --- Touch / Swipe --- */
+      let touchSt = null;
+      boardEl.addEventListener('touchstart', e => { touchSt = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }, { passive: false });
+      boardEl.addEventListener('touchmove', function (e) {
+        if (!touchSt) return;
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        const dx = t.clientX - touchSt.x, dy = t.clientY - touchSt.y;
+        // Prevent page scrolling when the gesture is predominantly vertical,
+        // but allow horizontal movement (game swipe) to pass through.
+        if (Math.abs(dy) > Math.abs(dx)) e.preventDefault();
+      }, { passive: false });
+
+      boardEl.addEventListener('touchend', e => {
+        if (!touchSt) return;
+        const dx = e.changedTouches[0].clientX - touchSt.x, dy = e.changedTouches[0].clientY - touchSt.y;
+        touchSt = null;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) return;
+        Math.abs(dx) > Math.abs(dy) ? move(dx > 0 ? 2 : 0) : move(dy > 0 ? 3 : 1);
+      }, { passive: true });
+
+      /* --- Resize --- */
+      window.addEventListener('resize', () => {
+        boardEl.classList.add('no-anim');
+        const s = cellSz();
+        for (const t of allTiles) { t.el.style.width = s + 'px'; t.el.style.height = s + 'px'; positionTile(t); }
+        requestAnimationFrame(() => boardEl.classList.remove('no-anim'));
+      });
+
+      /* --- Buttons --- */
+      document.getElementById('newBtn').addEventListener('click', newGame);
+      document.getElementById('winContinue').addEventListener('click', () => winOv.classList.remove('active'));
+      document.getElementById('winRestart').addEventListener('click', newGame);
+      document.getElementById('overRestart').addEventListener('click', newGame);
+
+      /* --- Start --- */
+      newGame();
+    })();
+  </script>
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>
+          All the emojis, stickers, and captions you need to light up every chat and post.
+        </p>
+      </div>
+
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+
+    <div class="site-footer__bottom">
+      <p>
+        © <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳
+      </p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>

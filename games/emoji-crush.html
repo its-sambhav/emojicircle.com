@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emoji Crush Game 🍬 | Match-3 Emoji Puzzle</title>
+  <meta name="description"
+    content="Play Emoji Crush online! A fun, addictive match-3 puzzle game featuring delicious food emojis. Complete levels, achieve objectives, and get high scores.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-crush.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-crush.html">
+  <meta property="og:title" content="Emoji Crush Match-3 Game">
+  <meta property="og:description"
+    content="Play Emoji Crush! Match 3 or more delicious emojis to clear the board and complete challenging levels.">
+  <meta property="og:image" content="https://emojicircle.com/images/games/emoji-crush-og.jpg">
+  <meta property="og:site_name" content="EmojiCircle">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://emojicircle.com/games/emoji-crush.html">
+  <meta name="twitter:title" content="Emoji Crush Match-3 Game">
+  <meta name="twitter:description"
+    content="Play Emoji Crush! Match 3 or more delicious emojis to clear the board and complete challenging levels.">
+  <meta name="twitter:image" content="https://emojicircle.com/images/games/emoji-crush-og.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Emoji Crush",
+    "url": "https://emojicircle.com/games/emoji-crush.html",
+    "genre": ["Puzzle", "Match-3", "Casual"],
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "description": "A classic match-3 puzzle game with a twist! Match food and sweet emojis to complete objectives across multiple levels.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "EmojiCircle",
+      "url": "https://emojicircle.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emojicircle.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Games",
+        "item": "https://emojicircle.com/games.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Emoji Crush",
+        "item": "https://emojicircle.com/games/emoji-crush.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/style1.css">
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-77D61P8G0J');
+  </script>
+
+
+  <style>
+    /* ── Game-specific theme (matches EmojiCircle: black + orange) ── */
+    :root {
+      --bg: #000000;
+      --card: #0a0a0a;
+      --accent: #ff6200;
+      --accent-hover: #ff4d00;
+      --muted: #a1a1aa;
+      --cell-size: calc(min(64px, 10vmin));
+    }
+
+    /* ── Game wrapper ── */
+    .app {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .visually-hidden {
+      position: absolute!important;
+      width: 1px!important;
+      height: 1px!important;
+      padding: 0!important;
+      margin: -1px!important;
+      overflow: hidden!important;
+      clip: rect(0,0,0,0)!important;
+      white-space: nowrap!important;
+      border: 0!important;
+    }
+
+    /* ── Game HUD ── */
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .title {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .game-logo {
+      font-size: 26px
+    }
+
+    .game-header h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      letter-spacing: 0.04em
+    }
+
+    .hud {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .chip {
+      background: #111;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid #27272a;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start
+    }
+
+    .chip small {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em
+    }
+
+    .chip strong {
+      font-size: 18px;
+      color: #fff
+    }
+
+    .chip.accent-border {
+      border-color: var(--accent)
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      transition: background 220ms ease
+    }
+
+    button:hover {
+      background: var(--accent-hover)
+    }
+
+    button.secondary {
+      background: transparent;
+      border: 1px solid #27272a;
+      color: #fff
+    }
+
+    button.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    button:disabled {
+      opacity: .4;
+      cursor: default
+    }
+
+    /* ── Board ── */
+    .board-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .board {
+      padding: 8px;
+      background: #0a0a0a;
+      border-radius: 14px;
+      border: 1px solid #27272a;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(var(--cols, 5), var(--cell-size));
+      grid-template-rows: repeat(var(--rows, 8), var(--cell-size));
+      gap: var(--grid-gap, 6px);
+      padding: var(--grid-pad, 6px)
+    }
+
+    .cell {
+      width: var(--cell-size);
+      height: var(--cell-size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(var(--cell-size)*0.65); /* Larger emojis */
+      background: #18181b;
+      border-radius: 12px;
+      border-bottom: 3px solid rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform .15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background .2s ease;
+      user-select: none;
+    }
+
+    .cell:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5)
+    }
+
+    .cell.selected {
+      outline: 3px solid rgba(255, 98, 0, 0.45);
+      transform: scale(1.04);
+      background: #1a1008
+    }
+
+    .cell.removed {
+      opacity: 0;
+      transform: scale(0.6)
+    }
+
+    .cell.drop {
+      animation: drop .35s ease
+    }
+
+    @keyframes drop {
+      from {
+        transform: translateY(-40px) scale(.95);
+        opacity: 0
+      }
+
+      to {
+        transform: none;
+        opacity: 1
+      }
+    }
+
+    /* ── Objective bar ── */
+    .objective-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0 24px 0; /* Added 20px space above */
+      padding: 12px 18px;
+      background: #111;
+      border: 1px solid #27272a;
+      border-radius: 14px;
+      flex-wrap: wrap
+    }
+
+    .objective-bar .obj-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600
+    }
+
+    .objective-bar .obj-value {
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem
+    }
+
+    .objective-bar .obj-value span {
+      color: var(--accent)
+    }
+
+    .progress-track {
+      flex: 1;
+      min-width: 100px;
+      height: 8px;
+      background: #1a1a1a;
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 6px;
+      transition: width .35s ease
+    }
+
+    /* ── Overlay / Modal ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1300
+    }
+
+    .overlay[style*="display: none"] {
+      pointer-events: none
+    }
+
+    .modal {
+      background: #0a0a0a;
+      padding: 32px 36px;
+      border-radius: 14px;
+      border: 1px solid #27272a;
+      text-align: center;
+      color: #fff;
+      min-width: 280px;
+      max-width: 380px
+    }
+
+    .modal h2 {
+      margin: 0 0 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem
+    }
+
+    .modal p {
+      color: var(--muted);
+      margin: 6px 0
+    }
+
+    .modal strong {
+      color: var(--accent)
+    }
+
+    .modal .stars {
+      font-size: 2rem;
+      margin: 10px 0 6px;
+      letter-spacing: 4px
+    }
+
+    .modal .btn-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap
+    }
+
+    /* ── Level Select ── */
+    .level-select {
+      text-align: center;
+      padding: 40px 20px;
+      flex: 1
+    }
+
+    .level-select h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      margin: 0 0 6px;
+      color: #fff
+    }
+
+    .level-select p {
+      color: var(--muted);
+      margin: 0 0 28px
+    }
+
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .level-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 18px 8px;
+      border-radius: 12px;
+      border: 1px solid #27272a;
+      background: #111;
+      cursor: pointer;
+      transition: all .18s ease;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem
+    }
+
+    .level-btn:hover:not(.locked) {
+      border-color: var(--accent);
+      background: #1a1008;
+      transform: translateY(-2px)
+    }
+
+    .level-btn.locked {
+      opacity: .35;
+      cursor: not-allowed
+    }
+
+    .level-btn .lv-stars {
+      font-size: .7rem;
+      color: var(--accent);
+      min-height: 14px
+    }
+
+    .level-btn.current {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(255, 98, 0, .25)
+    }
+
+    /* ── Info column (side panel) ── */
+    .side {
+      flex: 1;
+      min-width: 220px
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .legend .item {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding: 10px;
+      background: #111;
+      border-radius: 10px;
+      border: 1px solid #27272a
+    }
+
+    .legend .item strong {
+      color: #fff
+    }
+
+    .legend .item small {
+      color: var(--muted)
+    }
+
+    .side .tip {
+      color: var(--muted);
+      margin-top: 14px;
+      font-size: 0.82rem;
+      line-height: 1.6
+    }
+
+    /* ── Mobile-friendly base ── */
+    html,
+    body {
+      overflow-x: hidden
+    }
+
+    .cell {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none
+    }
+
+    .grid {
+      user-select: none;
+      -webkit-user-select: none
+    }
+
+    /* ── Responsive ── */
+    /* Cell sizing formula: (100vw - 2·appPad - 2·boardBorder - 2·boardPad - 2·gridPad - 7·gridGap) / 8 */
+
+    @media (max-width:720px) {
+      .board-wrap {
+        flex-direction: column;
+        align-items: center
+      }
+
+      .board {
+        width: 100%;
+        max-width: 100%;
+        padding: 8px;
+        box-sizing: border-box
+      }
+
+      .hud {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap
+      }
+
+      .game-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px
+      }
+
+      .level-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        max-width: 100%;
+        width: 100%
+      }
+
+      .level-btn {
+        padding: 18px 6px;
+        font-size: 1.15rem
+      }
+
+      .side {
+        display: none
+      }
+
+      :root {
+        --grid-gap: 4px;
+        --grid-pad: 4px
+      }
+    }
+
+    @media (max-width:480px) {
+      .app {
+        padding: 14px 12px
+      }
+
+      .game-header h1 {
+        font-size: 17px
+      }
+
+      .game-logo {
+        font-size: 22px
+      }
+
+      .level-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        max-width: 100%
+      }
+
+      .level-btn {
+        padding: 16px 4px;
+        font-size: 1.05rem;
+        border-radius: 10px
+      }
+
+      .modal {
+        padding: 24px 18px;
+        min-width: auto;
+        max-width: calc(100vw - 32px)
+      }
+
+      .objective-bar {
+        gap: 6px;
+        padding: 8px 10px;
+        flex-wrap: wrap
+      }
+
+      .objective-bar .obj-label {
+        font-size: 0.72rem
+      }
+
+      .objective-bar .obj-value {
+        font-size: 0.82rem
+      }
+
+      .progress-track {
+        min-width: 80px
+      }
+
+      .chip {
+        padding: 5px 8px
+      }
+
+      .chip small {
+        font-size: 10px
+      }
+
+      .chip strong {
+        font-size: 14px
+      }
+
+      .controls button {
+        padding: 7px 10px;
+        font-size: 0.78rem
+      }
+
+      .cell {
+        border-radius: 8px
+      }
+
+      .board {
+        padding: 6px;
+        border-radius: 12px
+      }
+
+      :root {
+        --grid-gap: 3px;
+        --grid-pad: 3px
+      }
+    }
+
+    @media (max-width:380px) {
+      .app {
+        padding: 10px 8px
+      }
+
+      .game-header {
+        gap: 8px
+      }
+
+      .game-header h1 {
+        font-size: 15px
+      }
+
+      .game-logo {
+        font-size: 20px
+      }
+
+      .level-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        max-width: 100%
+      }
+
+      .level-btn {
+        padding: 12px 2px;
+        font-size: 0.92rem
+      }
+
+      .chip {
+        padding: 4px 6px
+      }
+
+      .chip small {
+        font-size: 9px;
+        letter-spacing: 0.08em
+      }
+
+      .chip strong {
+        font-size: 13px
+      }
+
+      .controls button {
+        padding: 6px 8px;
+        font-size: 0.72rem
+      }
+
+      .objective-bar {
+        padding: 6px 8px;
+        gap: 5px
+      }
+
+      .objective-bar .obj-label {
+        font-size: 0.68rem
+      }
+
+      .objective-bar .obj-value {
+        font-size: 0.75rem
+      }
+
+      .progress-track {
+        min-width: 60px;
+        height: 6px
+      }
+
+      .cell {
+        border-radius: 6px
+      }
+
+      .board {
+        padding: 4px;
+        border-radius: 10px
+      }
+
+      .modal {
+        padding: 20px 14px;
+        max-width: calc(100vw - 20px);
+        border-radius: 12px
+      }
+
+      .modal h2 {
+        font-size: 1.2rem
+      }
+
+      .modal .stars {
+        font-size: 1.6rem
+      }
+
+      .modal .btn-row {
+        gap: 8px
+      }
+
+      .modal .btn-row button {
+        padding: 8px 12px;
+        font-size: 0.8rem
+      }
+
+      :root {
+        --grid-gap: 2px;
+        --grid-pad: 2px
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 8px 14px; min-height: 56px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .game-hud .hud-right { width: 100%; display: flex !important; justify-content: flex-start !important; gap: 8px !important; }
+      
+      #restartBtn { margin-left: auto !important; padding: 6px 14px !important; font-size: 14px !important; border-radius: 20px !important; }
+      #levelsBtn { display: none !important; }
+      
+      /* Hide Moves pill on mobile as requested */
+      .score-pill:nth-child(2) { display: none !important; }
+
+      .score-pill { 
+        padding: 6px 12px !important; 
+        font-size: 13px !important; 
+        min-width: 0 !important; 
+        flex-direction: row !important; 
+        gap: 4px !important; 
+        border-radius: 20px !important; 
+        background: rgba(255,255,255,0.04) !important; 
+        border: 1px solid rgba(255,255,255,0.1) !important; 
+        align-items: center !important;
+      }
+      .score-pill .score-label { display: block !important; font-size: 10px !important; opacity: 0.8; text-transform: capitalize !important; font-weight: 500 !important; }
+      .score-pill .score-label::after { content: ":"; }
+      .score-pill .score-value { font-size: 13px !important; font-weight: 700 !important; color: var(--accent) !important; }
+
+      .board-area { 
+        padding: 0 !important; 
+        overflow: hidden !important; 
+        width: 100% !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      #boardWrap {
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .board {
+        width: auto !important;
+        height: auto !important;
+      }
+      .app { padding: 10px !important; flex: 1 !important; height: 100% !important; }
+      
+      .objective-bar { margin: 10px 0 !important; padding: 10px !important; }
+    }
+
+  </style>
+
+
+</head>
+
+<body data-current-game="emoji-crush">
+  <script src="/emoji-header.js" defer></script>
+
+  <main class="game-page">
+    <section class="card">
+        <div class="game-hud">
+            <h1>🍬 Emoji <span>Crush</span></h1>
+            <div class="hud-right" id="crushHud" style="display:none">
+                <div class="score-pill">
+                  <span class="score-label">Level</span>
+                  <span class="score-value" id="hudLevel">1</span>
+                </div>
+                <div class="score-pill">
+                  <span class="score-label">Moves</span>
+                  <span class="score-value" id="hudMoves">20</span>
+                </div>
+                <div class="score-pill">
+                  <span class="score-label">Score</span>
+                  <span class="score-value" id="hudScore">0</span>
+                </div>
+                <button id="restartBtn" class="btn">Restart</button>
+                <button id="levelsBtn" class="btn primary">Levels</button>
+            </div>
+        </div>
+        
+        <script>
+            // Sync header elements with gameScreen visibility
+            document.addEventListener('DOMContentLoaded', () => {
+                const gs = document.getElementById('gameScreen');
+                const ch = document.getElementById('crushHud');
+                const obs = new MutationObserver(() => {
+                    const active = gs.style.display !== 'none';
+                    ch.style.display = active ? 'flex' : 'none';
+                });
+                obs.observe(gs, { attributes: true, attributeFilter: ['style'] });
+            });
+        </script>
+        
+        <div class="board-area" style="flex-direction: column; overflow: hidden; justify-content: stretch; padding: 0;">
+          <!-- Level-select screen -->
+          <div class="app" id="levelSelectScreen" style="padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; justify-content: center; overflow-y: auto;">
+            <div style="text-align:center;margin-bottom:16px;padding:5px">
+              <h2 style="font-family:'Inter',sans-serif;font-weight:900;font-size:1.2rem;color:#fff;margin:0">Select Level</h2>
+            </div>
+            <div class="level-grid" id="levelGrid"></div>
+          </div>
+
+          <!-- Game screen (hidden until a level is picked) -->
+          <div class="app" id="gameScreen" style="display:none; padding: 0;">
+
+    <!-- Objective bar -->
+    <div class="objective-bar" id="objectiveBar">
+      <span class="obj-label" id="objLabel">Target: 500 pts</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <span class="obj-value" id="objValue">0 / 500</span>
+    </div>
+
+    <div class="board-wrap" id="boardWrap">
+      <div class="board">
+        <div class="grid" id="grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="visually-hidden">
+    <h2>Play Emoji Crush - The Match 3 Puzzle Game</h2>
+    <p>Enjoy Emoji Crush, an exciting match-3 puzzle experience on EmojiCircle! Swap and match delicious emojis like 🍓
+      strawberry, 🍕 pizza, and 🍩 donut to score points and fulfill level objectives. With progressive difficulty and
+      special 💥 bomb power-ups, you'll be matching emojis for hours.</p>
+    <ul>
+      <li><a href="/index.html">Discover fun food emojis</a></li>
+      <li><a href="/games.html">Find your next favorite emoji game</a></li>
+    </ul>
+    <h3>How to Play Emoji Crush</h3>
+    <p>Click and swap adjacent food emojis to align 3 or more of the same kind in a row or column. Matching 4 or more
+      emojis creates explosive power-ups that clear even more tiles! Pay attention to each level's objective (score
+      target or collecting specific emojis) and complete it before you run out of moves.</p>
+  </div>
+
+  <!-- Level Complete overlay -->
+  <div id="levelCompleteOverlay" class="overlay" style="display:none">
+    <div class="modal">
+      <h2>🎉 Level Complete!</h2>
+      <div class="stars" id="lcStars">⭐⭐⭐</div>
+      <p>Score: <strong id="lcScore">0</strong></p>
+      <p id="lcExtra"></p>
+      <div class="btn-row">
+        <button id="lcLevels" class="secondary">Levels</button>
+        <button id="lcNext">Next Level</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over overlay -->
+  <div id="gameOverOverlay" class="overlay" style="display:none">
+    <div class="modal">
+      <h2>Game Over</h2>
+      <p>No moves left!</p>
+      <p>Score: <strong id="goScore">0</strong></p>
+      <div class="btn-row">
+        <button id="goLevels" class="secondary">Levels</button>
+        <button id="goRetry">Retry</button>
+      </div>
+    </div>
+  </div>
+
+    </div><!-- /board-area -->
+    </section>
+  </main>
+  <!-- Site footer -->
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">EmojiCircle<span>.com</span></a>
+        <p>All the emojis, stickers, and captions you need to light up every chat and post.</p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+    <div class="site-footer__bottom">
+      <p>&copy; <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳</p>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    //  Emoji Crush — Level-based (Candy-Crush style)
+    // ═══════════════════════════════════════════════════════════
+
+    // ── Level definitions ──
+    const levels = [
+      { level: 1, targetScore: 500, moves: 25, type: 'score' },
+      { level: 2, targetScore: 800, moves: 22, type: 'score' },
+      { level: 3, collectEmoji: '🍓', collectAmount: 10, moves: 22, type: 'collect' },
+      { level: 4, targetScore: 1200, moves: 20, type: 'score' },
+      { level: 5, collectEmoji: '🍕', collectAmount: 12, moves: 20, type: 'collect' },
+      { level: 6, targetScore: 1600, moves: 18, type: 'score' },
+      { level: 7, collectEmoji: '🍩', collectAmount: 14, moves: 20, type: 'collect' },
+      { level: 8, targetScore: 2000, moves: 18, type: 'score' },
+      { level: 9, collectEmoji: '🍔', collectAmount: 16, moves: 18, type: 'collect' },
+      { level: 10, targetScore: 2500, moves: 16, type: 'score' },
+      { level: 11, collectEmoji: '🍇', collectAmount: 18, moves: 18, type: 'collect' },
+      { level: 12, targetScore: 3000, moves: 15, type: 'score' },
+      { level: 13, collectEmoji: '🍒', collectAmount: 20, moves: 18, type: 'collect' },
+      { level: 14, targetScore: 3500, moves: 14, type: 'score' },
+      { level: 15, collectEmoji: '🍉', collectAmount: 22, moves: 16, type: 'collect' },
+      { level: 16, targetScore: 4000, moves: 14, type: 'score' },
+      { level: 17, collectEmoji: '🍓', collectAmount: 25, moves: 16, type: 'collect' },
+      { level: 18, targetScore: 5000, moves: 14, type: 'score' },
+      { level: 19, collectEmoji: '🍕', collectAmount: 28, moves: 16, type: 'collect' },
+      { level: 20, targetScore: 6000, moves: 12, type: 'score' },
+    ];
+
+    // ── localStorage helpers ──
+    const STORAGE_KEY = 'emojiCrush_progress';
+    function loadProgress() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { unlocked: 1, stars: {} }; }
+      catch (e) { return { unlocked: 1, stars: {} }; }
+    }
+    function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
+
+    // ── DOM refs ──
+    const levelSelectScreen = document.getElementById('levelSelectScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    const levelGridEl = document.getElementById('levelGrid');
+    const gridEl = document.getElementById('grid');
+    const boardWrap = document.getElementById('boardWrap');
+    const hudLevel = document.getElementById('hudLevel');
+    const hudMoves = document.getElementById('hudMoves');
+    const hudScore = document.getElementById('hudScore');
+    const objLabel = document.getElementById('objLabel');
+    const objValue = document.getElementById('objValue');
+    const progressFill = document.getElementById('progressFill');
+
+    let COLS = 12;
+    let ROWS = 6;
+
+    function resizeBoard() {
+      if (gameScreen.style.display === 'none') return;
+      const gap = parseInt(getComputedStyle(gridEl).gap) || 6;
+      const pad = parseInt(getComputedStyle(gridEl).padding) || 6;
+      
+      // Use smaller padding on mobile to maximize space
+      const isMobile = window.innerWidth <= 600;
+      const wrapPad = isMobile ? 20 : 48; 
+      const boardPad = isMobile ? 12 : 24; 
+      
+      const extraW = ((COLS - 1) * gap) + (2 * pad) + boardPad + wrapPad;
+      const extraH = ((ROWS - 1) * gap) + (2 * pad) + boardPad + wrapPad + 40; // buffer for obj bar
+      const wrapW = boardWrap.clientWidth || window.innerWidth;
+      const wrapH = boardWrap.clientHeight || window.innerHeight - 200;
+      
+      if (wrapW <= 0 || wrapH <= 0) return;
+
+      const cW = (wrapW - extraW) / COLS;
+      const cH = (wrapH - extraH) / ROWS;
+      const cellSize = Math.floor(Math.min(cW, cH));
+      
+      document.documentElement.style.setProperty('--cell-size', Math.max(10, cellSize) + 'px');
+      document.documentElement.style.setProperty('--cols', COLS);
+      document.documentElement.style.setProperty('--rows', ROWS);
+    }
+
+    window.addEventListener('resize', resizeBoard);
+
+    const lcOverlay = document.getElementById('levelCompleteOverlay');
+    const lcStars = document.getElementById('lcStars');
+    const lcScore = document.getElementById('lcScore');
+    const lcExtra = document.getElementById('lcExtra');
+    const goOverlay = document.getElementById('gameOverOverlay');
+    const goScore = document.getElementById('goScore');
+
+    // ── Constants ──
+    let TOTAL = COLS * ROWS;
+    const EMOJIS = ['🍓', '🍕', '🍩', '🍔', '🍇', '🍒', '🍉'];
+    const BOMB = '💥';
+
+    // ── Game state ──
+    let board = new Array(TOTAL).fill(null);
+    let cells = [];
+    let firstSelected = null;
+    let secondSelected = null;
+    let score = 0;
+    let movesLeft = 0;
+    let collected = 0;           // for collect objectives
+    let currentLevelIndex = 0;   // index into levels[]
+    let isProcessing = false;
+    let gameActive = false;
+    let progress = loadProgress();
+
+    // ══════════════════════════
+    //  Level Select Screen
+    // ══════════════════════════
+    function showLevelSelect() {
+      progress = loadProgress();
+      gameScreen.style.display = 'none';
+      lcOverlay.style.display = 'none';
+      goOverlay.style.display = 'none';
+      levelSelectScreen.style.display = '';
+      renderLevelGrid();
+    }
+
+    function renderLevelGrid() {
+      levelGridEl.innerHTML = '';
+      levels.forEach((lv, idx) => {
+        const num = lv.level;
+        const unlocked = num <= progress.unlocked;
+        const starCount = progress.stars[num] || 0;
+        const btn = document.createElement('button');
+        btn.className = 'level-btn' + (unlocked ? '' : ' locked') + (num === progress.unlocked ? ' current' : '');
+        btn.innerHTML = `<span>${num}</span><span class="lv-stars">${unlocked && starCount ? '⭐'.repeat(starCount) : ''}</span>`;
+        if (unlocked) {
+          btn.addEventListener('click', () => startLevel(idx));
+        }
+        levelGridEl.appendChild(btn);
+      });
+    }
+
+    // ══════════════════════════
+    //  Start / restart a level
+    // ══════════════════════════
+    function startLevel(idx) {
+      currentLevelIndex = idx;
+      const lv = levels[idx];
+      score = 0;
+      collected = 0;
+      movesLeft = lv.moves;
+      gameActive = true;
+      isProcessing = false;
+      firstSelected = null;
+      secondSelected = null;
+
+      // Switch screens
+      levelSelectScreen.style.display = 'none';
+      lcOverlay.style.display = 'none';
+      goOverlay.style.display = 'none';
+      gameScreen.style.display = 'flex';
+
+      // Set grid dimensions based on screen size (Square for mobile)
+      if (window.innerWidth <= 600) {
+        COLS = 8;
+        ROWS = 8;
+        TOTAL = 64;
+      } else {
+        COLS = 12;
+        ROWS = 6;
+        TOTAL = 72;
+      }
+      board = new Array(TOTAL).fill(null);
+
+      // Update HUD
+      hudLevel.textContent = lv.level;
+      updateHUD();
+      updateObjectiveBar();
+
+      // Build board
+      initDOM();
+      fillBoard();
+      
+      // Calculate and set board sizing
+      resizeBoard();
+    }
+
+    function updateHUD() {
+      hudMoves.textContent = movesLeft;
+      hudScore.textContent = score;
+    }
+
+    function updateObjectiveBar() {
+      const lv = levels[currentLevelIndex];
+      if (lv.type === 'score') {
+        objLabel.textContent = 'Target: ' + lv.targetScore + ' pts';
+        const pct = Math.min(100, Math.round((score / lv.targetScore) * 100));
+        progressFill.style.width = pct + '%';
+        objValue.innerHTML = '<span>' + score + '</span> / ' + lv.targetScore;
+      } else {
+        objLabel.textContent = 'Collect ' + lv.collectEmoji;
+        const pct = Math.min(100, Math.round((collected / lv.collectAmount) * 100));
+        progressFill.style.width = pct + '%';
+        objValue.innerHTML = '<span>' + collected + '</span> / ' + lv.collectAmount;
+      }
+    }
+
+    // ══════════════════════════
+    //  Board init & rendering
+    // ══════════════════════════
+    function initDOM() {
+      gridEl.innerHTML = '';
+      cells = [];
+      for (let i = 0; i < TOTAL; i++) {
+        const div = document.createElement('div');
+        div.className = 'cell';
+        div.dataset.id = i;
+        div.addEventListener('click', onCellClick);
+        
+        // --- Touch support for swapping ---
+        let touchStartX = 0;
+        let touchStartY = 0;
+        div.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          // Optionally select if it was a quick touch
+          if (!isProcessing && gameActive) {
+             onCellClick({ currentTarget: div });
+          }
+        }, { passive: true });
+
+        div.addEventListener('touchend', e => {
+          if (isProcessing || !gameActive || firstSelected === null) return;
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const dx = touchEndX - touchStartX;
+          const dy = touchEndY - touchStartY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist > 30) {
+            // Swipe detected
+            const id = Number(div.dataset.id);
+            const r = Math.floor(id / COLS);
+            const c = id % COLS;
+            let targetId = -1;
+            
+            if (Math.abs(dx) > Math.abs(dy)) {
+               // Horizontal swipe
+               if (dx > 0 && c < COLS - 1) targetId = id + 1;
+               else if (dx < 0 && c > 0) targetId = id - 1;
+            } else {
+               // Vertical swipe
+               if (dy > 0 && r < ROWS - 1) targetId = id + COLS;
+               else if (dy < 0 && r > 0) targetId = id - COLS;
+            }
+            
+            if (targetId !== -1) {
+              secondSelected = targetId;
+              attemptSwap(firstSelected, secondSelected);
+            }
+          }
+        }, { passive: true });
+
+        gridEl.appendChild(div);
+        cells.push(div);
+      }
+    }
+
+    function randomEmoji() { return EMOJIS[Math.floor(Math.random() * EMOJIS.length)]; }
+
+    function fillBoard() {
+      for (let i = 0; i < TOTAL; i++) board[i] = randomEmoji();
+      // Remove any pre-existing matches by re-rolling conflicting cells
+      let safety = 0;
+      while (findAllMatches().set.size > 0 && safety < 50) {
+        const m = findAllMatches();
+        m.set.forEach(i => { board[i] = randomEmoji(); });
+        safety++;
+      }
+      renderBoard();
+    }
+
+    function renderBoard(dropSet = new Set()) {
+      for (let i = 0; i < TOTAL; i++) {
+        const c = cells[i];
+        c.classList.remove('removed', 'selected', 'drop');
+        c.textContent = board[i] || '';
+        // Increase font size slightly to fill cell better
+        c.style.fontSize = 'calc(var(--cell-size)*0.65)';
+        if (dropSet.has(i)) c.classList.add('drop');
+      }
+      updateHUD();
+      updateObjectiveBar();
+    }
+
+    // ══════════════════════════
+    //  Click & swap logic
+    // ══════════════════════════
+    function onCellClick(e) {
+      if (isProcessing || !gameActive) return;
+      const id = Number(e.currentTarget.dataset.id);
+      if (firstSelected === null) {
+        firstSelected = id;
+        cells[id].classList.add('selected');
+        return;
+      }
+      if (firstSelected === id) {
+        cells[id].classList.remove('selected');
+        firstSelected = null;
+        return;
+      }
+      secondSelected = id;
+      if (!isAdjacent(firstSelected, secondSelected)) {
+        cells[firstSelected].classList.remove('selected');
+        firstSelected = null;
+        secondSelected = null;
+        return;
+      }
+      attemptSwap(firstSelected, secondSelected);
+    }
+
+    function isAdjacent(a, b) {
+      const ax = a % COLS, ay = Math.floor(a / COLS);
+      const bx = b % COLS, by = Math.floor(b / COLS);
+      return (Math.abs(ax - bx) + Math.abs(ay - by)) === 1;
+    }
+
+    async function attemptSwap(a, b) {
+      isProcessing = true;
+      cells[a].classList.remove('selected');
+      swap(a, b);
+      renderBoard();
+      await sleep(120);
+
+      const matches = findAllMatches();
+      if (matches.set.size > 0) {
+        // Valid move → use a move
+        movesLeft--;
+        updateHUD();
+        await processMatches(matches);
+        await cascadeMatches();
+        // Check end-of-level conditions
+        checkLevelEnd();
+      } else {
+        await sleep(180);
+        swap(a, b);
+        renderBoard();
+      }
+      firstSelected = null;
+      secondSelected = null;
+      isProcessing = false;
+    }
+
+    function swap(a, b) { const t = board[a]; board[a] = board[b]; board[b] = t; }
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    // ══════════════════════════
+    //  Match detection
+    // ══════════════════════════
+    function findAllMatches() {
+      const toRemove = new Set();
+      const info = [];
+
+      // Horizontal
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS - 2; c++) {
+          const idx = r * COLS + c;
+          const em = board[idx];
+          if (!em) continue;
+          let len = 1;
+          for (let k = c + 1; k < COLS; k++) {
+            if (board[r * COLS + k] === em) len++; else break;
+          }
+          if (len >= 3) {
+            const indices = [];
+            for (let k = 0; k < len; k++) indices.push(r * COLS + c + k);
+            indices.forEach(i => toRemove.add(i));
+            info.push({ type: 'h', emoji: em, length: len, indices });
+            c += len - 1;
+          }
+        }
+      }
+      // Vertical
+      for (let c = 0; c < COLS; c++) {
+        for (let r = 0; r < ROWS - 2; r++) {
+          const idx = r * COLS + c;
+          const em = board[idx];
+          if (!em) continue;
+          let len = 1;
+          for (let k = r + 1; k < ROWS; k++) {
+            if (board[k * COLS + c] === em) len++; else break;
+          }
+          if (len >= 3) {
+            const indices = [];
+            for (let k = 0; k < len; k++) indices.push((r + k) * COLS + c);
+            indices.forEach(i => toRemove.add(i));
+            info.push({ type: 'v', emoji: em, length: len, indices });
+            r += len - 1;
+          }
+        }
+      }
+      return { set: toRemove, info };
+    }
+
+    // ══════════════════════════
+    //  Process matches (score, collect, bombs)
+    // ══════════════════════════
+    async function processMatches({ set: toRemove, info: matchesInfo }) {
+      if (toRemove.size === 0) return;
+
+      // Animate removal
+      toRemove.forEach(i => cells[i].classList.add('removed'));
+
+      // Scoring
+      let gained = 0;
+      let combos = Math.max(0, matchesInfo.length - 1);
+      for (const m of matchesInfo) {
+        if (m.length === 3) gained += 10;
+        else if (m.length === 4) gained += 25;
+        else if (m.length >= 5) gained += 50 + (m.length - 5) * 20;
+      }
+      if (combos > 0) gained += Math.floor(gained * 0.1 * combos);
+      score += gained;
+
+      // Collect tracking
+      const lv = levels[currentLevelIndex];
+      if (lv.type === 'collect') {
+        for (const m of matchesInfo) {
+          if (m.emoji === lv.collectEmoji) collected += m.length;
+        }
+      }
+
+      // Place bombs for 4+ matches
+      const bombIndices = new Set();
+      for (const m of matchesInfo) {
+        if (m.length >= 4) {
+          const idx = m.indices[Math.floor(m.indices.length / 2)];
+          bombIndices.add(idx);
+        }
+      }
+
+      await sleep(260);
+
+      // Clear board cells
+      toRemove.forEach(i => {
+        if (bombIndices.has(i)) {
+          board[i] = BOMB;
+        } else {
+          board[i] = null;
+        }
+      });
+
+      // Detonate any bombs
+      await detonateBombs();
+
+      renderBoard();
+    }
+
+    async function detonateBombs() {
+      const dets = new Set();
+      for (let i = 0; i < TOTAL; i++) {
+        if (board[i] === BOMB) {
+          const col = i % COLS, row = Math.floor(i / COLS);
+          for (let r = 0; r < ROWS; r++) dets.add(r * COLS + col);
+          for (let c = 0; c < COLS; c++) dets.add(row * COLS + c);
+          dets.add(i);
+        }
+      }
+      if (dets.size > 0) {
+        // Track collected emojis from detonation
+        const lv = levels[currentLevelIndex];
+        if (lv.type === 'collect') {
+          dets.forEach(i => { if (board[i] === lv.collectEmoji) collected++; });
+        }
+        // Score bonus for detonation
+        score += dets.size * 2;
+        dets.forEach(i => { board[i] = null; });
+        renderBoard();
+        await sleep(200);
+        applyGravity();
+        const nd = refillBoard();
+        renderBoard(nd);
+      }
+    }
+
+    // ══════════════════════════
+    //  Cascade, gravity, refill
+    // ══════════════════════════
+    async function cascadeMatches() {
+      let loop = 0;
+      while (loop < 12) {
+        await sleep(80);
+        applyGravity();
+        const nd = refillBoard();
+        renderBoard(nd);
+        await sleep(200);
+        const matches = findAllMatches();
+        if (matches.set.size === 0) break;
+        await processMatches(matches);
+        loop++;
+      }
+    }
+
+    function applyGravity() {
+      for (let c = 0; c < COLS; c++) {
+        let ptr = ROWS - 1;
+        for (let r = ROWS - 1; r >= 0; r--) {
+          const idx = r * COLS + c;
+          if (board[idx] !== null && board[idx] !== undefined) {
+            board[ptr * COLS + c] = board[idx];
+            if (ptr !== r) board[idx] = null;
+            ptr--;
+          }
+        }
+        for (let r = ptr; r >= 0; r--) board[r * COLS + c] = null;
+      }
+    }
+
+    function refillBoard() {
+      const nd = new Set();
+      for (let i = 0; i < TOTAL; i++) {
+        if (board[i] === null || board[i] === undefined) {
+          board[i] = randomEmoji();
+          nd.add(i);
+        }
+      }
+      return nd;
+    }
+
+    // ══════════════════════════
+    //  Level end check
+    // ══════════════════════════
+    function checkLevelEnd() {
+      if (!gameActive) return;
+      const lv = levels[currentLevelIndex];
+      const objectiveMet = lv.type === 'score'
+        ? score >= lv.targetScore
+        : collected >= lv.collectAmount;
+
+      if (objectiveMet) {
+        winLevel();
+      } else if (movesLeft <= 0) {
+        loseLevel();
+      }
+    }
+
+    function winLevel() {
+      gameActive = false;
+      const lv = levels[currentLevelIndex];
+
+      // Calculate stars (1-3)
+      let stars = 1;
+      if (lv.type === 'score') {
+        if (score >= lv.targetScore * 1.5) stars = 3;
+        else if (score >= lv.targetScore * 1.2) stars = 2;
+      } else {
+        // Collect: stars based on remaining moves
+        const pct = movesLeft / lv.moves;
+        if (pct >= 0.4) stars = 3;
+        else if (pct >= 0.15) stars = 2;
+      }
+
+      // Update progress
+      const prev = progress.stars[lv.level] || 0;
+      if (stars > prev) progress.stars[lv.level] = stars;
+      if (lv.level >= progress.unlocked && currentLevelIndex + 1 < levels.length) {
+        progress.unlocked = lv.level + 1;
+      }
+      saveProgress(progress);
+
+      // Show overlay
+      lcStars.textContent = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
+      lcScore.textContent = score;
+      lcExtra.textContent = movesLeft > 0 ? movesLeft + ' moves remaining!' : '';
+      document.getElementById('lcNext').disabled = (currentLevelIndex + 1 >= levels.length);
+      lcOverlay.style.display = 'flex';
+    }
+
+    function loseLevel() {
+      gameActive = false;
+      goScore.textContent = score;
+      goOverlay.style.display = 'flex';
+    }
+
+    // ══════════════════════════
+    //  Button handlers
+    // ══════════════════════════
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      lcOverlay.style.display = 'none';
+      goOverlay.style.display = 'none';
+      startLevel(currentLevelIndex);
+    });
+    document.getElementById('levelsBtn').addEventListener('click', showLevelSelect);
+    document.getElementById('lcLevels').addEventListener('click', showLevelSelect);
+    document.getElementById('lcNext').addEventListener('click', () => {
+      if (currentLevelIndex + 1 < levels.length) startLevel(currentLevelIndex + 1);
+    });
+    document.getElementById('goLevels').addEventListener('click', showLevelSelect);
+    document.getElementById('goRetry').addEventListener('click', () => {
+      goOverlay.style.display = 'none';
+      startLevel(currentLevelIndex);
+    });
+
+    // ── Footer year ──
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // ── Boot ──
+    showLevelSelect();
+  </script>
+</body>
+
+</html>

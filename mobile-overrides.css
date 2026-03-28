@@ -1,0 +1,202 @@
+/* Mobile-only overrides for Android layout inconsistencies
+   Strictly limited to max-width:480px and max-width:400px
+   Purpose: force hero heading line-breaks, prevent button wrap,
+   keep 2-column game/catalog grid on small screens, reduce side padding.
+*/
+
+@media (max-width: 480px) {
+  /* HERO: alignment, responsive typography, spacing, and cross-platform fixes */
+  .hero {
+    max-width: 920px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-top: calc(6vw + 18px) !important;
+    padding-bottom: calc(6vw + 18px) !important;
+    padding-left: 20px !important; /* increased left gutter */
+    padding-right: 20px !important;
+    text-align: left !important;
+    display: block !important;
+    -webkit-text-size-adjust: 100% !important; /* prevent iOS font autosizing */
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  .hero__label {
+    display: block !important;
+    text-align: left !important;
+    margin: 0 0 14px 0 !important;
+    font-size: clamp(12px, 2.4vw, 14px) !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* Use clamp for fluid heading size; force three logical lines using existing <br> and span */
+  .hero__heading {
+    font-size: clamp(28px, 7.2vw, 44px) !important;
+    line-height: 1.06 !important;
+    margin: 0 0 12px 0 !important;
+    max-width: 92% !important;
+    text-align: left !important;
+    word-break: keep-all !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  /* Ensure the first two fragments don't wrap apart and the final span stays on its own line */
+  .hero__heading span {
+    display: block !important;
+    margin-top: 6px !important;
+  }
+
+  .hero__heading br { display:block !important; }
+
+  .hero__sub {
+    font-size: clamp(14px, 3.6vw, 16px) !important;
+    line-height: 1.6 !important;
+    margin: 0 0 18px 0 !important;
+    text-align: left !important;
+    max-width: 86% !important;
+    color: inherit !important;
+  }
+
+  /* Buttons aligned with left edge of text */
+  .hero__actions {
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  /* Use hero padding as the left gutter; reset per-element margins so buttons can size correctly */
+  .hero__label,
+  .hero__heading,
+  .hero__sub,
+  .hero__actions {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hero__actions .btn {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    padding: 12px 20px !important;
+    font-size: clamp(14px, 2.8vw, 16px) !important;
+  }
+
+  /* If viewport is narrow, allow stacking with equal widths */
+  @media (max-width: 380px) {
+    .hero__actions { flex-wrap: wrap !important; }
+    .hero__actions .btn { flex: 1 1 100% !important; width: 100% !important; }
+    .hero__actions .btn + .btn { margin-top: 8px !important; }
+  }
+
+  /* Make hero buttons larger and visually balanced on small screens */
+  .hero__actions {
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  /* Two equal buttons side-by-side using calc to account for gap */
+  .hero__actions .btn {
+    flex: 0 0 calc(50% - 7px) !important; /* accounts for gap */
+    max-width: calc(50% - 7px) !important;
+    padding: 14px 24px !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+  }
+
+  .hero__actions .btn--fill {
+    flex: 0 0 calc(50% - 7px) !important;
+    max-width: calc(50% - 7px) !important;
+  }
+
+  /* On very narrow devices, stack buttons full width */
+  @media (max-width: 380px) {
+    .hero__actions .btn { flex: 1 1 100% !important; max-width: 100% !important; }
+    .hero__actions .btn + .btn { margin-top: 10px !important; }
+  }
+
+  /* iOS / Safari specific smoothing and text-size control */
+  .hero, .hero * { -webkit-text-size-adjust: 100% !important; text-rendering: optimizeLegibility !important; }
+
+  /* (Removed duplicate container/button overrides to preserve desired gutter and sizing) */
+
+  /* Emoji library search row: prevent orange button wrapping */
+  .lib-search-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .lib-search-row .lib-search-input {
+    flex: 1 1 auto !important;
+    min-width: 0 !important; /* allow input to shrink without overflow */
+  }
+
+  .lib-search-row .lib-search-go {
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+    padding: 12px 20px !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Game/catalog grid: always 2 columns on small screens */
+  .catalog__grid,
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Ensure images fill and crop predictably inside cards */
+  .catalog-card__img,
+  .game-card img,
+  .catalog-card__img img {
+    aspect-ratio: 16/9 !important;
+    height: auto !important;
+    object-fit: cover !important;
+  }
+
+  /* Reduce side padding for catalog/container wrappers */
+  .catalog > .catalog__header,
+  .catalog > #catalogContainer,
+  .catalog > .catalog__empty,
+  .section {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Slightly more aggressive scaling on very small devices */
+  .hero__heading {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero__heading br {
+    margin-bottom: 8px !important;
+  }
+
+  .hero__actions {
+    gap: 8px !important;
+  }
+
+  .hero__actions .btn {
+    padding: 10px 14px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .catalog__grid,
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .catalog > .catalog__header,
+  .catalog > #catalogContainer {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+/* Safety: avoid using fixed widths; keep responsive behavior intact */
+html, body { max-width: 100vw; overflow-x: hidden; }

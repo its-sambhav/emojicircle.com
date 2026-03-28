@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emoji Snake Game – Play Classic Snake with Emojis Online Free | EmojiCircle</title>
+  <meta name="description"
+    content="Play Emoji Snake online for free – the classic Nokia Snake game reimagined with emoji characters. 3 difficulty levels. No download or login required." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://emojicircle.com/games/emoji-snake.html" />
+  <meta property="og:site_name" content="EmojiCircle">
+  <meta property="og:title" content="Emoji Snake – Classic Snake Game with Emojis | EmojiCircle">
+  <meta property="og:description"
+    content="Play the classic Nokia Snake game with emoji characters. Easy, Medium, and Hard modes. Free browser game, no login needed.">
+  <meta property="og:image" content="https://emojicircle.com/game-banners/snake.webp">
+  <meta property="og:url" content="https://emojicircle.com/games/emoji-snake.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emoji Snake – Free Online Game | EmojiCircle">
+  <meta name="twitter:description"
+    content="Classic snake game with emojis! Eat food, grow longer, avoid walls. Play free on EmojiCircle.">
+  <meta name="twitter:image" content="https://emojicircle.com/game-banners/snake.webp">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Game","name":"Emoji Snake","description":"Classic Nokia Snake reimagined with emoji characters. Control the snake, eat emoji food, grow longer, avoid walls and yourself.","url":"https://emojicircle.com/games/emoji-snake.html","genre":["Arcade","Action"],"applicationCategory":"Game","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emojicircle.com/"},{"@type":"ListItem","position":2,"name":"Emoji Games","item":"https://emojicircle.com/games/games.html"},{"@type":"ListItem","position":3,"name":"Emoji Snake","item":"https://emojicircle.com/games/emoji-snake.html"}]}
+  </script>
+  <link rel="stylesheet" href="/style1.css" />
+  <link rel="stylesheet" href="/emoji-header.css">
+  <link rel="stylesheet" href="game-layout.css">
+  <script src="game-layout.js" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77D61P8G0J"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-77D61P8G0J');</script>
+
+  <style>
+    /* =====================================================
+     CSS VARIABLES — Dark Theme with Orange Accents
+     ===================================================== */
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface-alt: #0d0d14;
+      --border: #1a1a2e;
+      --neon: #ff6200;
+      --neon-dim: rgba(255, 98, 0, 0.15);
+      --neon-glow: 0 0 10px rgba(255, 98, 0, 0.4), 0 0 30px rgba(255, 98, 0, 0.15);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888aa;
+      --danger: #ff4444;
+      --accent-btn: #ff6200;
+      --cell-size: 28px;
+    }
+
+    /* =====================================================
+     BASE STYLES
+     ===================================================== */
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      margin: 0;
+    }
+
+    /* =====================================================
+     GAME CARD — Main container
+     ===================================================== */
+    .snake-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      max-width: none;
+      width: 100%;
+      padding: 28px 24px 32px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+    }
+
+    /* Title */
+    .snake-card h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin: 0 0 6px;
+      color: var(--neon);
+      text-shadow: var(--neon-glow);
+      letter-spacing: 0.03em;
+    }
+
+    .snake-card .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin: 0 0 20px;
+    }
+
+    /* =====================================================
+     SCORE BAR — Live score display with glow
+     ===================================================== */
+    /* =====================================================
+     SCORE BAR — Live score display with glow
+     ===================================================== */
+    .score-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* =====================================================
+     CONTROL BAR — Buttons row (Start / Pause / Restart / Difficulty)
+     ===================================================== */
+    .game-hud .hud-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Shared button base */
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--neon);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn.primary {
+      background: var(--neon);
+      color: #fff;
+      border: none;
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Difficulty select in HUD */
+    .diff-select {
+        padding: 5px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+        font-size: 0.8rem;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .hud-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .hud-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .board-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .snake-board {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: var(--surface-alt);
+      overflow: hidden;
+      /* Grid lines pattern */
+      background-image: 
+        linear-gradient(rgba(255, 98, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 98, 0, 0.03) 1px, transparent 1px);
+      background-size: var(--cell-size-x) var(--cell-size-y);
+    }
+
+    /* Individual segment (new approach) */
+    .segment {
+      position: absolute;
+      width: var(--cell-size);
+      height: var(--cell-size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(var(--cell-size) * 0.85);
+      transition: none; /* Handled by JS interpolation */
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .segment.food {
+      z-index: 1;
+      animation: foodPulse 0.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes foodPulse {
+      0% { transform: scale(1); filter: brightness(1); }
+      100% { transform: scale(1.15); filter: brightness(1.3); }
+    }
+
+    /* =====================================================
+     GAME OVER OVERLAY
+     ===================================================== */
+    .game-over-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .game-over-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .game-over-overlay h2 {
+      font-size: 2rem;
+      color: var(--danger);
+      margin: 0 0 6px;
+      text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+    }
+
+    .game-over-overlay .final-score {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .game-over-overlay .final-score b {
+      color: var(--neon);
+      font-size: 1.4rem;
+      text-shadow: 0 0 8px rgba(255, 98, 0, 0.5);
+    }
+
+    /* =====================================================
+     MOBILE D-PAD — On-screen arrow buttons
+     ===================================================== */
+    /* MOBILE D-PAD REMOVED - Using Swipes instead */
+
+    /* Always show mobile controls on small screens */
+    @media (max-width: 700px) {
+      .snake-card {
+        padding: 16px 10px 24px;
+        margin: 0;
+      }
+
+      .game-card h1 {
+        font-size: 1.5rem;
+      }
+
+      .snake-board {
+        padding: 2px;
+        gap: 0px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      :root {
+        --cell-size: 14px;
+      }
+
+      .cell {
+        font-size: 9px;
+      }
+    }
+
+    /* =====================================================
+     INSTRUCTIONS TEXT
+     ===================================================== */
+    .instructions {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .instructions kbd {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.78rem;
+      color: var(--text-primary);
+    }
+  
+    @media (max-width: 600px) {
+      .game-hud h1 { display: none; }
+      .game-hud { padding: 10px 14px; }
+      .game-hud .hud-right { width: 100%; justify-content: space-between; }
+      .board-area { padding: 0 !important; overflow: hidden; display: flex !important; flex: 1 !important; }
+      .snake-card {
+        width: 100% !important;
+        height: 100% !important;
+        flex: 1 !important;
+        max-height: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 0 !important;
+        border-radius: 0;
+        overflow: hidden;
+      }
+    }
+
+  </style>
+</head>
+
+<body data-current-game="emoji-snake">
+  <!-- =====================================================
+     HTML STRUCTURE
+     ===================================================== -->
+
+  <!-- =====================================================
+  HTML STRUCTURE
+  ===================================================== -->
+  <main class="game-page">
+    <section class="card" style="padding:0; border:none; border-radius:0; max-width:none; margin:0; background:transparent; display: flex; flex-direction: column; height: 100%;">
+      <div class="game-hud">
+        <h1>🐍 Emoji <span>Snake</span></h1>
+        <div class="hud-right">
+          <div class="hud-item">
+            <span class="hud-label">LEVEL</span>
+            <select id="difficultySelect" class="diff-select" title="Difficulty">
+              <option value="easy">🟢 Easy</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="hard">🔴 Hard</option>
+            </select>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Score</span>
+            <span class="score-value" id="scoreDisplay">0</span>
+          </div>
+          <button id="playPauseBtn" class="btn primary">▶ Start</button>
+          <button id="restartBtn" class="btn" title="Restart">↻</button>
+        </div>
+      </div>
+
+      <div class="board-area" style="display: flex; flex: 1; flex-direction: column; overflow: hidden; justify-content: stretch; padding: 0;">
+        <div class="snake-card" style="box-shadow:none; border:none; background:transparent; margin:0; padding:0; width:100%; height:100%; display: flex; flex-direction: column;">
+          
+          <!-- Game Board Container -->
+          <div class="board-wrapper" style="flex: 1; overflow: hidden;">
+            <div id="gameBoard" class="snake-board"></div>
+
+            <!-- Game Over Overlay (hidden by default) -->
+            <div id="gameOverOverlay" class="game-over-overlay">
+              <h2>💀 Game Over</h2>
+              <p class="final-score">Final Score: <b id="finalScore">0</b></p>
+              <button id="overlayRestartBtn" class="btn primary">🔄 Play Again</button>
+            </div>
+          </div>
+
+          <!-- Mobile Controls: Using Swipe Gestures -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+     JAVASCRIPT — Game Logic
+     ===================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      function runGame() {
+        /* =======================================================
+           CONSTANTS
+           ======================================================= */
+      let cellSizeX = 20;                             // Dynamic X size
+      let cellSizeY = 20;                             // Dynamic Y size
+      let gridCols = 24;                              // Dynamic columns
+      let gridRows = 24;                              // Dynamic rows
+      const SNAKE_HEAD = '🐍';                        // Head emoji
+      const SNAKE_BODY = '🟢';                        // Body emoji
+      const FOOD_EMOJIS = ['🍎', '🍕', '🍩', '🍇', '🍔', '🍓', '🌮', '🍪', '🧁', '🍉'];
+      const SCORE_PER_FOOD = 10;
+      const SPEED_BUMP_EVERY = 5;
+      const SPEED_INCREMENT = 0.5;
+      
+      const DIFFICULTY_SPEEDS = {
+        easy: 3,
+        medium: 5,
+        hard: 8
+      };
+
+      /* =======================================================
+         DOM REFERENCES
+         ======================================================= */
+      const boardEl = document.getElementById('gameBoard');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const difficultySelect = document.getElementById('difficultySelect');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const gameOverOverlay = document.getElementById('gameOverOverlay');
+      const finalScoreEl = document.getElementById('finalScore');
+      const overlayRestartBtn = document.getElementById('overlayRestartBtn');
+
+      /* =======================================================
+         AUDIO
+         ======================================================= */
+      let audioCtx = null;
+      function getAudioCtx() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        return audioCtx;
+      }
+      function playEatSound() {
+        try {
+          const ctx = getAudioCtx();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587, ctx.currentTime);
+          osc.frequency.setValueAtTime(784, ctx.currentTime + 0.06);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(); osc.stop(ctx.currentTime + 0.1);
+        } catch (_) {}
+      }
+      function playGameOverSound() {
+        try {
+          const ctx = getAudioCtx();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(220, ctx.currentTime);
+          osc.frequency.setValueAtTime(110, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(); osc.stop(ctx.currentTime + 0.5);
+        } catch (_) {}
+      }
+
+      /* =======================================================
+         GAME STATE
+         ======================================================= */
+      let logicalSnake = [];      // Logical cells {x, y}
+      let prevSnake = [];         // State before last tick for interpolation
+      let direction = { x: 1, y: 0 };
+      let lastMoveDir = { x: 1, y: 0 }; // Direction of the last logical move
+      let nextDirection = { x: 1, y: 0 };
+      let food = null;
+      let score = 0;
+      let foodEaten = 0;
+      let speed = 5;
+      let isRunning = false;
+      let isPaused = false;
+      let isGameOver = false;
+
+      // Rendering state
+      // Rendering state
+      let lastTickTime = 0;
+      let tickProgress = 0;       // 0 to 1 between logical ticks
+      let segmentPool = [];       // DOM elements
+      let foodEl = null;
+
+      /* =======================================================
+         INITIALIZATION
+         ======================================================= */
+      function resizeBoard() {
+        const boardArea = boardEl.parentElement; 
+        const rect = boardArea.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+
+        // Preferred cell size: ~30px
+        let preferredSize = 30;
+        if (window.innerWidth < 700) preferredSize = 26;
+        if (window.innerWidth < 440) preferredSize = 22;
+        
+        gridCols = Math.floor(rect.width / preferredSize);
+        gridRows = Math.floor(rect.height / preferredSize);
+        
+        // Exact sizes to fill the container perfectly
+        cellSizeX = rect.width / gridCols;
+        cellSizeY = rect.height / gridRows;
+        
+        boardEl.style.width = rect.width + 'px';
+        boardEl.style.height = rect.height + 'px';
+        
+        document.documentElement.style.setProperty('--cell-size-x', cellSizeX + 'px');
+        document.documentElement.style.setProperty('--cell-size-y', cellSizeY + 'px');
+        document.documentElement.style.setProperty('--cell-size', Math.min(cellSizeX, cellSizeY) + 'px');
+      }
+
+      function initializeGame() {
+        resizeBoard();
+        boardEl.innerHTML = '';
+        segmentPool = [];
+        
+        // Reset state
+        const cx = Math.floor(gridCols / 2);
+        const cy = Math.floor(gridRows / 2);
+        logicalSnake = [
+          { x: cx, y: cy },
+          { x: cx - 1, y: cy },
+          { x: cx - 2, y: cy }
+        ];
+        direction = { x: 1, y: 0 };
+        nextDirection = { x: 1, y: 0 };
+        score = 0;
+        foodEaten = 0;
+        speed = DIFFICULTY_SPEEDS[difficultySelect.value] || 5;
+        isGameOver = false;
+        isPaused = false;
+        isRunning = false;
+        tickProgress = 0;
+
+        foodEl = null; // Ensure new food element is created in DOM
+        updateScore();
+        generateFood();
+        
+        // Update HUD
+        playPauseBtn.textContent = '▶ Start';
+        playPauseBtn.classList.add('primary');
+        gameOverOverlay.classList.remove('active');
+        
+        requestAnimationFrame(render);
+      }
+
+      function generateFood() {
+        // Simple safety: if food element exists but board changed, we may need to re-find it
+        const occupied = new Set(logicalSnake.map(s => `${s.x},${s.y}`));
+        const free = [];
+        for (let y = 0; y < gridRows; y++) {
+          for (let x = 0; x < gridCols; x++) {
+            if (!occupied.has(`${x},${y}`)) free.push({ x, y });
+          }
+        }
+        if (free.length === 0) return;
+        const pos = free[Math.floor(Math.random() * free.length)];
+        food = { x: pos.x, y: pos.y, emoji: FOOD_EMOJIS[Math.floor(Math.random() * FOOD_EMOJIS.length)] };
+        
+        if (!foodEl) {
+          foodEl = document.createElement('div');
+          foodEl.className = 'segment food';
+          boardEl.appendChild(foodEl);
+        }
+        foodEl.textContent = food.emoji;
+        foodEl.style.left = (food.x * cellSizeX) + 'px';
+        foodEl.style.top = (food.y * cellSizeY) + 'px';
+        foodEl.style.width = cellSizeX + 'px';
+        foodEl.style.height = cellSizeY + 'px';
+      }
+
+      /* =======================================================
+         GAME LOOP & LOGIC
+         ======================================================= */
+      function gameTick() {
+        prevSnake = logicalSnake.map(s => ({ ...s }));
+        lastMoveDir = { ...nextDirection };
+        direction = nextDirection;
+        
+        const head = logicalSnake[0];
+        const newHead = { x: head.x + direction.x, y: head.y + direction.y };
+
+        // Wall collision
+        if (newHead.x < 0 || newHead.x >= gridCols || newHead.y < 0 || newHead.y >= gridRows) {
+          return endGame();
+        }
+        // Self collision
+        if (logicalSnake.some(s => s.x === newHead.x && s.y === newHead.y)) {
+          return endGame();
+        }
+
+        logicalSnake.unshift(newHead);
+
+        if (food && newHead.x === food.x && newHead.y === food.y) {
+          playEatSound();
+          score += SCORE_PER_FOOD;
+          foodEaten++;
+          updateScore();
+          if (foodEaten % SPEED_BUMP_EVERY === 0) speed += SPEED_INCREMENT;
+          generateFood();
+        } else {
+          logicalSnake.pop();
+        }
+      }
+
+      function endGame() {
+        isGameOver = true;
+        isRunning = false;
+        playGameOverSound();
+        finalScoreEl.textContent = score;
+        gameOverOverlay.classList.add('active');
+        playPauseBtn.textContent = '▶ Start';
+      }
+
+      function render(time) {
+        if (!lastTickTime) lastTickTime = time;
+        const dt = time - lastTickTime;
+
+        if (isRunning && !isPaused && !isGameOver) {
+          const tickDuration = 1000 / speed;
+          tickProgress += dt / tickDuration;
+
+          if (tickProgress >= 1) {
+            gameTick();
+            tickProgress %= 1;
+          }
+        }
+        lastTickTime = time;
+
+        drawSnake();
+        requestAnimationFrame(render);
+      }
+
+      function drawSnake() {
+        if (logicalSnake.length === 0) return;
+
+        // Ensure enough segments in pool
+        while (segmentPool.length < logicalSnake.length) {
+          const seg = document.createElement('div');
+          seg.className = 'segment';
+          boardEl.appendChild(seg);
+          segmentPool.push(seg);
+        }
+        
+        // Hide unused segments
+        segmentPool.forEach((s, i) => {
+          s.style.display = i < logicalSnake.length ? 'flex' : 'none';
+        });
+
+        // Initialize prevSnake if empty (for first frame)
+        if (prevSnake.length === 0) prevSnake = logicalSnake.map(s => ({ ...s }));
+
+        // Calculate positions with interpolation
+        for (let i = 0; i < logicalSnake.length; i++) {
+          const target = logicalSnake[i];
+          const source = (i < prevSnake.length) ? prevSnake[i] : prevSnake[prevSnake.length - 1];
+          
+          let displayX = target.x;
+          let displayY = target.y;
+
+          if (isRunning && !isPaused && !isGameOver) {
+            displayX = source.x + (target.x - source.x) * tickProgress;
+            displayY = source.y + (target.y - source.y) * tickProgress;
+          }
+
+          const el = segmentPool[i];
+          el.style.width = cellSizeX + 'px';
+          el.style.height = cellSizeY + 'px';
+          el.style.transform = `translate(${displayX * cellSizeX}px, ${displayY * cellSizeY}px)`;
+          el.textContent = (i === 0) ? SNAKE_HEAD : SNAKE_BODY;
+          el.style.zIndex = logicalSnake.length - i; // Head on top
+          
+          // Rotate head emoji based on direction
+          if (i === 0) {
+            let rotation = 0;
+            if (direction.x === 1) rotation = 0;
+            else if (direction.x === -1) rotation = 180;
+            else if (direction.y === 1) rotation = 90;
+            else if (direction.y === -1) rotation = 270;
+            // Emoji rotation might be tricky, let's keep it simple or skip if it looks weird
+            // el.style.transform += ` rotate(${rotation}deg)`; 
+          }
+        }
+      }
+
+      function updateScore() {
+        scoreDisplay.textContent = score;
+      }
+
+      /* =======================================================
+         CONTROLS
+         ======================================================= */
+      function togglePlay() {
+        if (isGameOver) {
+          initializeGame();
+          isRunning = true;
+        } else if (!isRunning) {
+          isRunning = true;
+          isPaused = false;
+        } else {
+          isPaused = !isPaused;
+        }
+        
+        playPauseBtn.textContent = (isRunning && !isPaused) ? '⏸ Pause' : (isGameOver ? '▶ Restart' : '▶ Resume');
+        if (!isRunning && !isPaused && !isGameOver) playPauseBtn.textContent = '▶ Start';
+        playPauseBtn.classList.toggle('primary', !isRunning || isPaused);
+      }
+
+      function changeDirection(dx, dy) {
+        if (logicalSnake.length > 1) {
+          if (dx === -direction.x && dy === -direction.y) return;
+        }
+        nextDirection = { x: dx, y: dy };
+        if (!isRunning && !isGameOver) togglePlay();
+      }
+
+      // Listeners
+      playPauseBtn.addEventListener('click', togglePlay);
+      restartBtn.addEventListener('click', initializeGame);
+      overlayRestartBtn.addEventListener('click', initializeGame);
+      difficultySelect.addEventListener('change', () => { if (!isRunning) initializeGame(); });
+      window.addEventListener('resize', resizeBoard);
+
+      document.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case 'ArrowUp': case 'w': case 'W': changeDirection(0, -1); e.preventDefault(); break;
+          case 'ArrowDown': case 's': case 'S': changeDirection(0, 1); e.preventDefault(); break;
+          case 'ArrowLeft': case 'a': case 'A': changeDirection(-1, 0); e.preventDefault(); break;
+          case 'ArrowRight': case 'd': case 'D': changeDirection(1, 0); e.preventDefault(); break;
+          case ' ': togglePlay(); e.preventDefault(); break;
+        }
+      });
+
+      /* --- Swipe Controls --- */
+      let touchSt = null;
+      boardEl.addEventListener('touchstart', e => { 
+        touchSt = { x: e.touches[0].clientX, y: e.touches[0].clientY }; 
+      }, { passive: false });
+
+      boardEl.addEventListener('touchmove', function (e) {
+        if (!touchSt) return;
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        const dx = t.clientX - touchSt.x, dy = t.clientY - touchSt.y;
+        if (Math.abs(dy) > Math.abs(dx)) e.preventDefault();
+      }, { passive: false });
+
+      boardEl.addEventListener('touchend', e => {
+        if (!touchSt) return;
+        const dx = e.changedTouches[0].clientX - touchSt.x, dy = e.changedTouches[0].clientY - touchSt.y;
+        touchSt = null;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) return;
+        if (Math.abs(dx) > Math.abs(dy)) {
+          changeDirection(dx > 0 ? 1 : -1, 0);
+        } else {
+          changeDirection(0, dy > 0 ? 1 : -1);
+        }
+      }, { passive: true });
+
+      initializeGame();
+      }
+
+      // Wait for game-layout.js to build the container
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runGame);
+      } else {
+        // Even if ready, layout might be building, but usually this is safe
+        setTimeout(runGame, 50); 
+      }
+    })();
+  </script>
+
+  <!-- =====================================================
+     FOOTER
+     ===================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <section class="site-footer-content">
+      <div class="site-footer__content">
+        <a class="logo" href="/index.html" aria-label="EmojiCircle homepage">
+          EmojiCircle<span>.com</span>
+        </a>
+        <p>All the emojis, stickers, and captions you need to light up every chat and post.</p>
+      </div>
+      <section class="site-footer-content1">
+        <nav class="site-footer__content" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading">Explore</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/about.html" title="About EmojiCircle">About us</a></li>
+            <li><a href="/emojie_globe/globe.html" title="Explore emojis visually">Emoji Globe</a></li>
+            <li><a href="/emoji-search.html" title="Browse all emojis">Emoji catalog</a></li>
+            <li><a href="/games.html" title="Play emoji games online">Emoji games</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__content" aria-labelledby="footer-support-heading">
+          <h3 id="footer-support-heading">Support</h3>
+          <ul class="site-footer__list" role="list">
+            <li><a href="/pages/rules/privacy.html" title="EmojiCircle privacy policy">Privacy Policy</a></li>
+            <li><a href="/pages/rules/terms.html" title="EmojiCircle terms and conditions">Terms &amp; Conditions</a>
+            </li>
+            <li><a href="/pages/rules/contact.html" title="Contact EmojiCircle support">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+    </section>
+    <div class="site-footer__bottom">
+      <p>© <span id="year"></span> EmojiCircle.com · Made in India 🇮🇳</p>
+    </div>
+  </footer>
+  <script src="/emoji-header.js" defer></script>
+</body>

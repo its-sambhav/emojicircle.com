@@ -1,0 +1,459 @@
+/* ===== CATEGORY PAGE SHARED STYLES ===== */
+/* category-page.css — all emoji category pages */
+
+:root {
+  --cat-bg: #000000;
+  --cat-surface: #121214;
+  --cat-surface-alt: #18181b;
+  --cat-border: #27272a;
+  --cat-text: #f8fafc;
+  --cat-muted: rgba(148, 163, 184, 0.78);
+  --cat-accent: #ff4d00;
+  --cat-accent-hover: #ff7030;
+  --cat-radius: 0;
+  --cat-shadow: 0 2px 12px rgba(0,0,0,0.28);
+  --cat-grid-gap: 14px;
+}
+
+/* ===== MAIN WRAPPER ===== */
+.category-main {
+  padding: 32px 5% 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  color: var(--cat-text);
+}
+
+/* ===== BREADCRUMB ===== */
+.cat-breadcrumb {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--cat-accent);
+  margin-bottom: 8px;
+  opacity: 0.92;
+}
+.cat-breadcrumb a {
+  color: var(--cat-accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cat-breadcrumb a:hover {
+  color: var(--cat-accent-hover);
+  text-decoration: underline;
+}
+.cat-breadcrumb span {
+  color: var(--cat-muted);
+}
+
+/* ===== HERO SECTION ===== */
+.cat-hero {
+  margin-bottom: 48px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.cat-hero h1 {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: var(--cat-text);
+}
+.cat-hero h1 .accent {
+  color: var(--cat-accent);
+}
+.cat-hero-intro {
+  max-width: 860px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.cat-hero-intro p {
+  color: var(--cat-muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+.cat-hero-intro p:last-child {
+  margin-bottom: 0;
+}
+.cat-hero-intro a {
+  color: var(--cat-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 77, 0, 0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.cat-hero-intro a:hover {
+  color: var(--cat-accent-hover);
+  border-color: var(--cat-accent-hover);
+}
+
+/* ===== EMOJI GRID ===== */
+.cat-grid-section {
+  margin-bottom: 56px;
+}
+.cat-grid-section h2 {
+  display: none;
+}
+.cat-grid-section h2 .accent {
+  color: var(--cat-accent);
+}
+
+.cat-emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: var(--cat-grid-gap);
+}
+
+.cat-emoji-card {
+  background: var(--cat-surface);
+  border: 1px solid var(--cat-border);
+  border-radius: var(--cat-radius);
+  padding: 16px 10px 14px;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.cat-emoji-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  border-color: rgba(255, 77, 0, 0.25);
+}
+
+.cat-emoji-card .emoji-display {
+  font-size: 2.4rem;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  margin-bottom: 2px;
+}
+.cat-emoji-card .emoji-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cat-text);
+  letter-spacing: 0.02em;
+  line-height: 1.28;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cat-emoji-card .emoji-meaning {
+  font-size: 0.62rem;
+  color: var(--cat-muted);
+  line-height: 1.4;
+  min-height: 2em;
+}
+.cat-emoji-card .emoji-copy-btn {
+  margin-top: 4px;
+  background: var(--cat-surface-alt);
+  color: var(--cat-muted);
+  border: 1px solid var(--cat-border);
+  border-radius: 0;
+  padding: 5px 14px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  text-transform: uppercase;
+}
+.cat-emoji-card .emoji-copy-btn:hover {
+  background: var(--cat-accent);
+  color: #fff;
+  border-color: var(--cat-accent);
+}
+.cat-emoji-card .emoji-copy-btn.copied {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+
+/* ===== SUBCATEGORY CONTENT SECTIONS ===== */
+.cat-subsection {
+  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--cat-border);
+}
+.cat-subsection:last-of-type {
+  border-bottom: none;
+}
+.cat-subsection h2 {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: var(--cat-text);
+}
+.cat-subsection h2 .accent {
+  color: var(--cat-accent);
+}
+.cat-subsection p {
+  color: var(--cat-muted);
+  font-size: 0.95rem;
+  line-height: 1.78;
+  margin: 0 0 14px;
+  max-width: 860px;
+}
+.cat-subsection a {
+  color: var(--cat-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,77,0,0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.cat-subsection a:hover {
+  color: var(--cat-accent-hover);
+  border-color: var(--cat-accent-hover);
+}
+
+/* ===== FAQ SECTION ===== */
+.cat-faq-section {
+  margin-bottom: 56px;
+  padding-top: 12px;
+}
+.cat-faq-section h2 {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  margin: 0 0 24px;
+  color: var(--cat-text);
+}
+.cat-faq-section h2 .accent {
+  color: var(--cat-accent);
+}
+
+.cat-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cat-faq-item {
+  background: var(--cat-surface);
+  border: 1px solid var(--cat-border);
+  border-radius: var(--cat-radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.cat-faq-item:hover {
+  border-color: rgba(255,77,0,0.2);
+}
+
+.cat-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  color: var(--cat-text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+.cat-faq-question:hover {
+  color: var(--cat-accent);
+}
+.cat-faq-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--cat-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  color: var(--cat-muted);
+  transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.cat-faq-item.open .cat-faq-icon {
+  transform: rotate(45deg);
+  border-color: var(--cat-accent);
+  color: var(--cat-accent);
+}
+
+.cat-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.cat-faq-item.open .cat-faq-answer {
+  max-height: 600px;
+}
+.cat-faq-answer-inner {
+  padding: 0 22px 18px;
+  color: var(--cat-muted);
+  font-size: 0.88rem;
+  line-height: 1.72;
+}
+.cat-faq-answer-inner a {
+  color: var(--cat-accent);
+  text-decoration: none;
+}
+
+/* ===== INTERNAL LINKS SECTION ===== */
+.cat-internal-links {
+  margin-bottom: 40px;
+}
+.cat-internal-links h2 {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  margin: 0 0 20px;
+  color: var(--cat-text);
+}
+.cat-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+.cat-link-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--cat-surface);
+  border: 1px solid var(--cat-border);
+  border-radius: var(--cat-radius);
+  text-decoration: none;
+  color: var(--cat-text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.cat-link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  border-color: rgba(255,77,0,0.25);
+  color: var(--cat-accent);
+}
+.cat-link-card .link-emoji {
+  font-size: 1.4rem;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Desktop: 6-8 columns */
+@media (min-width: 1200px) {
+  .cat-emoji-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* Large tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .cat-emoji-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Tablet: 3-4 columns */
+@media (min-width: 600px) and (max-width: 899px) {
+  .cat-emoji-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .category-main {
+    padding: 24px 4% 48px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+  .cat-emoji-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .category-main {
+    padding: 24px 5% 40px;
+  }
+  .cat-breadcrumb {
+    font-size: 0.62rem;
+    margin-bottom: 12px;
+  }
+  .cat-hero {
+    margin-bottom: 28px;
+  }
+  .cat-hero h1 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 0;
+  }
+  .cat-emoji-card {
+    padding: 14px 6px 12px;
+  }
+  .cat-emoji-card .emoji-display {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+  .cat-emoji-card .emoji-name {
+    font-size: 0.6rem;
+    line-height: 1.2;
+  }
+  .cat-emoji-card .emoji-meaning {
+    display: none;
+  }
+  .cat-emoji-card .emoji-copy-btn {
+    margin-top: 6px;
+    padding: 4px 10px;
+    font-size: 0.56rem;
+  }
+  .cat-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .cat-link-card {
+    padding: 10px 12px;
+    font-size: 0.74rem;
+  }
+  .cat-faq-question {
+    font-size: 0.84rem;
+    padding: 14px 16px;
+  }
+  .cat-faq-answer-inner {
+    padding: 0 16px 14px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .cat-emoji-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .cat-emoji-card .emoji-display {
+    font-size: 1.7rem;
+  }
+}
+
+/* ===== VISUALLY HIDDEN UTILITY ===== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

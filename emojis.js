@@ -176,7 +176,7 @@
     const controls = el('div', 'emoji-controls');
     const searchInput = el('input', 'emoji-search');
     searchInput.type = 'search';
-    searchInput.placeholder = 'QUERY_DATABASE...';
+    searchInput.placeholder = 'Search emojis';
     searchInput.setAttribute('aria-label', 'Search emojis');
 
     const categoryDropdown = createEmojiDropdown({ rootClass: 'emoji-category-dropdown' });
@@ -193,6 +193,30 @@
     } else {
         controls.appendChild(searchInput);
     }
+
+    // Prevent iOS from zooming the page when the search input is focused
+    // Strategy: increase input font-size to 16px on touch/focus (iOS zoom happens when font-size < 16px)
+    (function preventMobileZoomOnInput() {
+        try {
+            const isiOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !window.MSStream;
+            if (!isiOS) return;
+            const originalSize = searchInput.style.fontSize || '';
+            function apply() {
+                // only set if computed font-size is less than 16px
+                const comp = window.getComputedStyle(searchInput).fontSize || '16px';
+                const px = parseFloat(comp);
+                if (px < 16) searchInput.style.fontSize = '16px';
+            }
+            function restore() {
+                if (originalSize) searchInput.style.fontSize = originalSize; else searchInput.style.fontSize = '';
+            }
+            searchInput.addEventListener('touchstart', apply, { passive: true });
+            searchInput.addEventListener('focus', apply);
+            searchInput.addEventListener('blur', restore);
+        } catch (e) {
+            // fail silently
+        }
+    })();
     const filtersContainer = container.querySelector('.emoji-grid__filters');
     const categorySlot = container.querySelector('.emoji-grid__category-slot');
     if (categorySlot) {
@@ -325,11 +349,31 @@
 
     // Load data (try multiple paths)
     async function loadData() {
+        const cacheKey = 'emojiData.v1';
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const json = JSON.parse(cached);
+                if (Array.isArray(json)) return json;
+            }
+        } catch (e) {
+            // ignore cache errors and fall through to network
+        }
+
         for (const path of DATA_PATHS) {
             try {
-                const res = await fetch(path, {cache: "no-store"});
+                const res = await fetch(path, { cache: "force-cache" });
                 if (!res.ok) continue;
-                const json = await res.json();
+                // read as text so we can attempt to cache the raw payload
+                const txt = await res.text();
+                try {
+                    // try to persist to localStorage if size is reasonable
+                    const byteLen = new Blob([txt]).size;
+                    if (byteLen < 2500000) { // avoid exceeding typical localStorage limits
+                        try { localStorage.setItem(cacheKey, txt); } catch (err) { /* ignore */ }
+                    }
+                } catch (err) { /* ignore */ }
+                const json = JSON.parse(txt);
                 if (Array.isArray(json)) return json;
             } catch (e) {
                 // try next
@@ -453,9 +497,9 @@
         // Normalize common prefixes and separators to get hex codepoint groups
         // Examples: "U+1F600", "1F600", "0x1F600", "1F468-200D-1F469-200D-1F466"
         const cleaned = raw.replace(/^u\+/i, '')
-                           .replace(/^0x/i, '')
-                           .replace(/[^0-9A-Fa-f]+/g, ' ')
-                           .trim();
+            .replace(/^0x/i, '')
+            .replace(/[^0-9A-Fa-f]+/g, ' ')
+            .trim();
         if (!cleaned) return raw;
 
         const parts = cleaned.split(/\s+/);
@@ -467,11 +511,42 @@
         return raw;
     }
 
-    // Render list of emojis
-    function renderList(items) {
-        list.innerHTML = '';
-        count.textContent = items.length ? `${items.length} shown` : 'No emojis found';
-        items.forEach(it => {
+    // Simple debounce helper to reduce excessive filtering on fast input
+    function debounce(fn, wait) {
+        let t = null;
+        return function (...args) {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), wait);
+        };
+    }
+
+    // Render list of emojis (production-ready incremental renderer)
+    let renderList;
+    (function () {
+        // Adaptive chunk size: smaller on narrow screens
+        function getChunkSize() {
+            if (typeof navigator !== 'undefined' && navigator.hardwareConcurrency) {
+                // fewer chunks on low-core devices
+                const cores = navigator.hardwareConcurrency || 4;
+                return window.innerWidth <= 480 ? Math.max(32, Math.floor(cores * 8)) : Math.max(80, Math.floor(cores * 24));
+            }
+            return window.innerWidth <= 480 ? 48 : 120;
+        }
+
+        let CHUNK_SIZE = getChunkSize();
+        // Recompute chunk size on resize (debounced)
+        let resizeTimer = null;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { CHUNK_SIZE = getChunkSize(); }, 250);
+        });
+
+        let state = { items: [], index: 0 };
+        const sentinel = document.createElement('div');
+        sentinel.className = 'emoji-list-sentinel';
+        sentinel.setAttribute('aria-hidden', 'true');
+
+        function createEmojiButton(it) {
             const btn = el('button', 'emoji-btn');
             btn.type = 'button';
             btn.setAttribute('role', 'listitem');
@@ -480,9 +555,7 @@
             btn.setAttribute('aria-label', `${it.name || displayChar || 'emoji'} — click to copy`);
             const spanChar = el('span', 'emoji-char');
             spanChar.textContent = displayChar || '?';
-            // Do NOT display the name visually; keep it in aria-label for accessibility
             btn.appendChild(spanChar);
-
             btn.addEventListener('click', async () => {
                 try {
                     await copyText(displayChar || '');
@@ -491,10 +564,73 @@
                     showToast('Copy failed');
                 }
             });
+            return btn;
+        }
 
-            list.appendChild(btn);
-        });
-    }
+        // Use requestIdleCallback when available for background chunk work
+        const idle = window.requestIdleCallback ? window.requestIdleCallback.bind(window) : (fn) => setTimeout(fn, 50);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // load next chunk during idle time to avoid jank
+                    idle(() => appendChunk());
+                }
+            });
+        }, { root: null, rootMargin: '600px', threshold: 0.01 });
+
+        function appendChunk() {
+            if (!state.items || state.index >= state.items.length) {
+                if (sentinel.parentNode) sentinel.remove();
+                return;
+            }
+
+            const end = Math.min(state.items.length, state.index + CHUNK_SIZE);
+            const frag = document.createDocumentFragment();
+            for (let i = state.index; i < end; i++) {
+                frag.appendChild(createEmojiButton(state.items[i]));
+            }
+
+            // Batch DOM insertion on next animation frame and only then attach sentinel
+            requestAnimationFrame(() => {
+                list.appendChild(frag);
+                state.index = end;
+
+                if (state.index < state.items.length) {
+                    if (!sentinel.parentNode) list.appendChild(sentinel);
+                    observer.observe(sentinel);
+                } else {
+                    if (sentinel.parentNode) sentinel.remove();
+                    try { observer.unobserve(sentinel); } catch (e) { /* ignore */ }
+                }
+            });
+        }
+
+        function clearRender() {
+            // Remove sentinel and reset state
+            try { observer.unobserve(sentinel); } catch (e) { /* ignore */ }
+            if (sentinel.parentNode) sentinel.remove();
+            state = { items: [], index: 0 };
+        }
+
+        function render(items) {
+            clearRender();
+            state.items = Array.isArray(items) ? items : [];
+            state.index = 0;
+            list.innerHTML = '';
+            count.textContent = state.items.length ? `${state.items.length} shown` : 'No emojis found';
+
+            if (!state.items.length) return;
+
+            // Insert the first chunk immediately so the user sees content right away
+            appendChunk();
+            // subsequent chunks will be loaded via IntersectionObserver + idle
+        }
+
+        // expose
+        renderList = render;
+        window.__emojiRenderList = render;
+    })();
 
     // Filtering logic
     function createFilter(all) {
@@ -537,7 +673,12 @@
                 const tagWords = (e.tags || []).map(t => String(t).toLowerCase());
                 const cpHex = Array.from(base).map(ch => ch.codePointAt(0).toString(16));
                 // start tokens from name, tags, base and codepoints
-                const tokens = new Set([...nameWords, ...tagWords, base, ...cpHex]);
+                // also include any explicit search tokens/keywords present in the JSON
+                const extraFromJson = [
+                    ...(e.search_tokens || []).map(t => String(t).toLowerCase()),
+                    ...(e.keywords || []).map(t => String(t).toLowerCase())
+                ];
+                const tokens = new Set([...nameWords, ...tagWords, base, ...cpHex, ...extraFromJson]);
 
                 // Add helpful synonyms and compound tokens for better search
                 if ((nameWords.includes('hand') || tagWords.includes('hand'))) {
@@ -589,8 +730,8 @@
                     // prefer longer/more descriptive name
                     if (!cur.name && e.name) cur.name = e.name;
                     // merge tags and tokens
-                    cur.tags = Array.from(new Set([...(cur.tags||[]), ...(e.tags||[])]));
-                    cur._tokens = Array.from(new Set([...(cur._tokens||[]), ...(e._tokens||[])]));
+                    cur.tags = Array.from(new Set([...(cur.tags || []), ...(e.tags || [])]));
+                    cur._tokens = Array.from(new Set([...(cur._tokens || []), ...(e._tokens || [])]));
                     if (!cur.category && e.category) cur.category = e.category;
                     cur._originals.push(e);
                 }
@@ -638,8 +779,9 @@
             // wire events
             // use deduped list for filtering and rendering
             const filter = createFilter(deduped);
-            searchInput.addEventListener('input', filter);
-            categoryDropdown.onChange(() => filter());
+            const scheduleFilter = debounce(filter, 120);
+            searchInput.addEventListener('input', scheduleFilter);
+            categoryDropdown.onChange(() => scheduleFilter());
             // no skin-tone UI any more
 
             // initial render
