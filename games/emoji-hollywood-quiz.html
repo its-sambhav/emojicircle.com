@@ -29,28 +29,45 @@
 
 	<!-- Structured Data -->
 	<script type="application/ld+json">
-	{
-	  "@context": "https://schema.org",
-	  "@type": "VideoGame",
-	  "name": "Hollywood Emoji Quiz",
-	  "url": "https://emojicircle.com/games/emoji-hollywood-quiz",
-	  "genre": ["Trivia", "Puzzle", "Educational"],
-	  "playMode": ["SinglePlayer", "MultiPlayer"],
-	  "applicationCategory": "Game",
-	  "operatingSystem": "Any",
-	  "description": "A fun trivia game where players guess the names of popular Hollywood movies based on a sequence of emojis.",
-	  "publisher": {
-	    "@type": "Organization",
-	    "name": "EmojiCircle",
-	    "url": "https://emojicircle.com"
-	  },
-	  "author": {
-	    "@type": "Organization",
-	    "name": "EmojiCircle",
-	    "url": "https://emojicircle.com"
-	  }
-	}
-	</script>
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Hollywood Emoji Quiz",
+  "url": "https://emojicircle.com/games/emoji-hollywood-quiz",
+  "description": "A fun trivia game where players guess the names of popular Hollywood movies based on a sequence of emojis.",
+  "image": "https://emojicircle.com/game-banners/hollywood-quiz.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Trivia",
+    "Puzzle",
+    "Educational"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
+    }
+  },
+  "playMode": [
+    "SinglePlayer",
+    "MultiPlayer"
+  ],
+  "gamePlatform": "Web Browser"
+}
+</script>
 	<script type="application/ld+json">
 	{
 	  "@context": "https://schema.org",
@@ -531,8 +548,7 @@
 						</ul>
 					</div>
 
-					<div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);"
-						aria-hidden="true">
+					<section class="game-prose">
 						<h2>Guess The Hollywood Movie from Emojis</h2>
 						<p>Lights, camera, action! Put your film knowledge to the ultimate test with the Hollywood Emoji
 							Quiz. Can
@@ -549,7 +565,7 @@
 							representing a famous Hollywood movie. Type your answer and click Submit before the
 							countdown timer hits
 							zero! Use your limited hints if you get stuck, and see who can score the highest points.</p>
-					</div>
+					</section>
 				</div>
 			</div>
 			</div>

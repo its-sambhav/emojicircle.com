@@ -27,21 +27,38 @@
 
     <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Emoji Compatibility Calculator",
-      "url": "https://emojicircle.com/games/emoji-compatibility-calculator",
-      "applicationCategory": "EntertainmentApplication",
-      "operatingSystem": "Any",
-      "description": "A fun love and relationship compatibility calculator utilizing names and emoji selections to generate a compatibility score.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "EmojiCircle",
-        "url": "https://emojicircle.com"
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Emoji Compatibility Calculator",
+  "url": "https://emojicircle.com/games/emoji-compatibility-calculator",
+  "description": "A fun love and relationship compatibility calculator utilizing names and emoji selections to generate a compatibility score.",
+  "image": "https://emojicircle.com/game-banners/compatibility.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Casual"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-    </script>
+  }
+}
+</script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -772,7 +789,7 @@
             </div><!-- /board-area -->
         </section><!-- /card -->
 
-        <div class="visually-hidden">
+        <section class="game-prose">
             <h2>Emoji Love & Compatibility Test</h2>
             <p>Curious if you and your crush are meant to be? Try our interactive Emoji Compatibility Calculator! By
                 combining numerology based on your names with the vibes of your favorite emojis, our algorithm
@@ -785,7 +802,7 @@
             <p>Enter your first name and your partner's or friend's name. Then, have each person select 5 emojis that
                 best represent their personality or current mood. Click "Check Compatibility 💘" to see your unique
                 relationship score percentage and a fun assessment of your dynamic!</p>
-        </div>
+        </section>
     </main>
 
     <!-- Confetti container (for emoji burst) -->

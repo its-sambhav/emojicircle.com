@@ -29,28 +29,45 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "VideoGame",
-      "name": "Emoji Rock Paper Scissors",
-      "url": "https://emojicircle.com/games/emoji-rock-paper-scissors",
-      "genre": ["Puzzle", "Action", "Casual"],
-      "playMode": ["SinglePlayer", "MultiPlayer"],
-      "applicationCategory": "Game",
-      "operatingSystem": "Any",
-      "description": "A fun and interactive Rock Paper Scissors game using emojis. Play against the computer or together with up to 3 players.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "EmojiCircle",
-        "url": "https://emojicircle.com"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "EmojiCircle",
-        "url": "https://emojicircle.com"
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Rock Paper Scissors",
+  "url": "https://emojicircle.com/games/emoji-rock-paper-scissors",
+  "description": "A fun and interactive Rock Paper Scissors game using emojis. Play against the computer or together with up to 3 players.",
+  "image": "https://emojicircle.com/game-banners/rock-paper.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Puzzle",
+    "Action",
+    "Casual"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-    </script>
+  },
+  "playMode": [
+    "SinglePlayer",
+    "MultiPlayer"
+  ],
+  "gamePlatform": "Web Browser"
+}
+</script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -792,7 +809,7 @@
 
       <!-- Action buttons removed from here and moved to HUD -->
 
-      <div class="visually-hidden">
+      <section class="game-prose">
         <h2>Play Emoji Rock Paper Scissors Online</h2>
         <p>Enjoy the classic Rock Paper Scissors game transformed with emojis! Discover emojis as you play and interact
           with fun hand signs like ✊ (Rock), ✋ (Paper), and ✌️ (Scissors). Play against the smart computer or engage in
@@ -808,7 +825,7 @@
           <li>Tap on either the ✊ rock, ✋ paper, or ✌️ scissors emoji to make your choice.</li>
           <li>See who wins based on classic rules: Rock beats Scissors, Scissors beats Paper, and Paper beats Rock!</li>
         </ol>
-      </div>
+      </section>
       </div>
       </div>
     </section>

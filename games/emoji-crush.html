@@ -29,28 +29,42 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Emoji Crush",
-    "url": "https://emojicircle.com/games/emoji-crush",
-    "genre": ["Puzzle", "Match-3", "Casual"],
-    "playMode": "SinglePlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Any",
-    "description": "A classic match-3 puzzle game with a twist! Match food and sweet emojis to complete objectives across multiple levels.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Crush",
+  "url": "https://emojicircle.com/games/emoji-crush",
+  "description": "A classic match-3 puzzle game with a twist! Match food and sweet emojis to complete objectives across multiple levels.",
+  "image": "https://emojicircle.com/game-banners/crush.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Puzzle",
+    "Match-3",
+    "Casual"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-  }
-  </script>
+  },
+  "playMode": "SinglePlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -890,7 +904,7 @@
     </div>
   </div>
 
-  <div class="visually-hidden">
+  <section class="game-prose">
     <h2>Play Emoji Crush - The Match 3 Puzzle Game</h2>
     <p>Enjoy Emoji Crush, an exciting match-3 puzzle experience on EmojiCircle! Swap and match delicious emojis like 🍓
       strawberry, 🍕 pizza, and 🍩 donut to score points and fulfill level objectives. With progressive difficulty and
@@ -903,7 +917,7 @@
     <p>Click and swap adjacent food emojis to align 3 or more of the same kind in a row or column. Matching 4 or more
       emojis creates explosive power-ups that clear even more tiles! Pay attention to each level's objective (score
       target or collecting specific emojis) and complete it before you run out of moves.</p>
-  </div>
+  </section>
 
   <!-- Level Complete overlay -->
   <div id="levelCompleteOverlay" class="overlay" style="display:none">

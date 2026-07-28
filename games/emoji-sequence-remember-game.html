@@ -29,28 +29,42 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Emoji Sequence Remember",
-    "url": "https://emojicircle.com/games/emoji-sequence-remember-game",
-    "genre": ["Brainteaser", "Memory", "Puzzle"],
-    "playMode": "SinglePlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Any",
-    "description": "A memory game where players must watch and then accurately repeat an increasingly long sequence of flashing emojis. Inspired by the classic Simon game.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Sequence Remember",
+  "url": "https://emojicircle.com/games/emoji-sequence-remember-game",
+  "description": "A memory game where players must watch and then accurately repeat an increasingly long sequence of flashing emojis. Inspired by the classic Simon game.",
+  "image": "https://emojicircle.com/game-banners/pattern.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Brainteaser",
+    "Memory",
+    "Puzzle"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-  }
-  </script>
+  },
+  "playMode": "SinglePlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -748,7 +762,7 @@
             </div>
           </section>
       
-          <div class="visually-hidden">
+          <section class="game-prose">
             <h2>Play Emoji Sequence Memory Game</h2>
             <p>Train your brain with the Emoji Sequence Remember game! Inspired by the classic Simon memory game, this
               addictive challenge tests your ability to remember increasingly long patterns of flashing emojis. With both
@@ -762,7 +776,7 @@
             <p>When the game starts, watch carefully as the emojis flash on the 4x4 grid. Once the sequence is finished, tap
               the exact same emojis in the identical order. Each round you complete adds a new emoji to the pattern, making it
               harder to remember. If you enable "Strict Mode", a single mistake resets the game completely!</p>
-          </div>
+          </section>
         </div>
       </div>
     </section>

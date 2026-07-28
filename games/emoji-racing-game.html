@@ -29,28 +29,42 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "VideoGame",
-      "name": "Emoji Racing Game",
-      "url": "https://emojicircle.com/games/emoji-racing-game",
-      "genre": ["Racing", "Arcade", "Action"],
-      "playMode": "SinglePlayer",
-      "applicationCategory": "Game",
-      "operatingSystem": "Any",
-      "description": "An endless highway racing game utilizing vehicle emojis. Dodge traffic, collect power-ups, and achieve high scores.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "EmojiCircle",
-        "url": "https://emojicircle.com"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "EmojiCircle",
-        "url": "https://emojicircle.com"
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Racing Game",
+  "url": "https://emojicircle.com/games/emoji-racing-game",
+  "description": "An endless highway racing game utilizing vehicle emojis. Dodge traffic, collect power-ups, and achieve high scores.",
+  "image": "https://emojicircle.com/game-banners/race.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Racing",
+    "Arcade",
+    "Action"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-    </script>
+  },
+  "playMode": "SinglePlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -827,7 +841,7 @@
 
 
           
-          <div class="visually-hidden">
+          <section class="game-prose">
             <h2>Play Emoji Racing Game</h2>
             <p>Start your engines and experience the thrill of the Emoji Racing Game! Drive your car down an endless highway
               and dodge a variety of vehicle emojis like 🚕 taxi, 🚓 police car, and 🚒 fire engine. Don't forget to collect
@@ -840,7 +854,7 @@
             <p>Use your keyboard's left and right arrow keys to steer your car. Press Spacebar to engage the nitro boost when
               you've collected enough nitro power-ups. On mobile, tap the left or right side of the screen to change lanes.
               Survive as long as you can to set a high score!</p>
-          </div>
+          </section>
         </div>
       </div>
     </section>

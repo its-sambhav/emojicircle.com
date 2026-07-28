@@ -25,18 +25,42 @@
   <meta name="twitter:image" content="https://emojicircle.com/game-banners/tic-tac-toe.webp">
   <!-- Schema: Game -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Game",
-    "name": "Emoji Tic Tac Toe",
-    "description": "A modern version of Tic Tac Toe where players pick emoji symbols instead of X and O. Play on 3x3 or 6x6 grids vs AI or a friend.",
-    "url": "https://emojicircle.com/games/emoji-tick-tac-toe",
-    "genre": ["Board Game", "Strategy", "Puzzle"],
-    "applicationCategory": "Game",
-    "operatingSystem": "Web Browser",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Tic Tac Toe",
+  "url": "https://emojicircle.com/games/emoji-tick-tac-toe",
+  "description": "A modern version of Tic Tac Toe where players pick emoji symbols instead of X and O. Play on 3x3 or 6x6 grids vs AI or a friend.",
+  "image": "https://emojicircle.com/game-banners/tic-tac-toe.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Board Game",
+    "Strategy",
+    "Puzzle"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
+    }
+  },
+  "playMode": "SinglePlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
   {

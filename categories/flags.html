@@ -40,14 +40,53 @@
   </script>
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"How do flag emojis work?","acceptedAnswer":{"@type":"Answer","text":"Country flag emojis are created using pairs of Regional Indicator Symbols that correspond to ISO 3166-1 alpha-2 country codes. For example, the US flag 🇺🇸 uses Regional Indicator U + Regional Indicator S. Subdivision flags use tag sequences like 🏴󠁧󠁢󠁥󠁮󠁧󠁿 for England."}},
-    {"@type":"Question","name":"How many country flag emojis are there?","acceptedAnswer":{"@type":"Answer","text":"There are over 250 flag emojis in Unicode, covering countries, territories, and subdivisions. Every UN-recognized country has a flag emoji, along with many territories, dependencies, and special administrative regions."}},
-    {"@type":"Question","name":"What are the pride flag emojis?","acceptedAnswer":{"@type":"Answer","text":"The rainbow flag 🏳️‍🌈 represents LGBTQ+ pride, and the transgender flag 🏳️‍⚧️ represents the transgender community. These are the official pride flag emojis in Unicode, though communities use various emoji combinations to represent other pride flags."}},
-    {"@type":"Question","name":"How to copy flag emojis?","acceptedAnswer":{"@type":"Answer","text":"Click the Copy button on any flag emoji card on this page. The flag emoji is copied to your clipboard instantly and ready to paste into WhatsApp, Instagram, X (Twitter), or any app."}},
-    {"@type":"Question","name":"Why do some flag emojis not display on Windows?","acceptedAnswer":{"@type":"Answer","text":"Windows historically showed country flag emojis as two-letter country codes instead of flag images. This is a platform design choice by Microsoft. Flag emojis display correctly on iOS, Android, macOS, and most other platforms."}}
-  ]}
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do flag emojis work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Country flag emojis use pairs of Regional Indicator Symbols matching ISO 3166-1 alpha-2 country codes. For example, the US flag uses Regional Indicator U + S. Subdivision flags like England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 use tag sequences with ISO 3166-2 codes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many country flag emojis are there?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Over 250 flag emojis exist in Unicode, covering every UN-recognized country plus territories, dependencies, and special regions like the EU, UN, and UK subdivisions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the pride flag emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The rainbow flag 🏳️‍🌈 represents LGBTQ+ pride, and the transgender flag 🏳️‍⚧️ represents the transgender community. These are formed using Zero Width Joiner sequences with the white flag emoji."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why don't flag emojis show on Windows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Windows historically displays country flags as two-letter country codes rather than flag images. This is a platform design choice by Microsoft. Flags display correctly as images on iOS, Android, macOS, and most other operating systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to copy flag emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the Copy button on any flag emoji card on this page. The flag emoji is instantly copied to your clipboard and ready to paste into WhatsApp, Instagram, X (Twitter), email, or any application."
+      }
+    }
+  ]
+}
+</script>
 
   <!-- Schema: ItemList -->
   <script type="application/ld+json">
@@ -110,7 +149,191 @@
 
     <section class="cat-grid-section" id="emoji-grid">
       <h2>All <span class="accent">Flag</span> Emojis</h2>
-      <div class="cat-emoji-grid" id="flagsGrid"></div>
+      <div class="cat-emoji-grid" id="flagsGrid">
+        <div class="cat-emoji-card"><div class="emoji-display">🏳️</div><div class="emoji-name">White Flag</div><div class="emoji-meaning">Surrender, peace</div><button class="emoji-copy-btn" aria-label="Copy White Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏴</div><div class="emoji-name">Black Flag</div><div class="emoji-meaning">Pirate, dark</div><button class="emoji-copy-btn" aria-label="Copy Black Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏁</div><div class="emoji-name">Checkered Flag</div><div class="emoji-meaning">Racing finish</div><button class="emoji-copy-btn" aria-label="Copy Checkered Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🚩</div><div class="emoji-name">Triangular Flag</div><div class="emoji-meaning">Red flag, warning</div><button class="emoji-copy-btn" aria-label="Copy Triangular Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎌</div><div class="emoji-name">Crossed Flags</div><div class="emoji-meaning">Japan celebration</div><button class="emoji-copy-btn" aria-label="Copy Crossed Flags">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏴‍☠️</div><div class="emoji-name">Pirate Flag</div><div class="emoji-meaning">Jolly Roger</div><button class="emoji-copy-btn" aria-label="Copy Pirate Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏳️‍🌈</div><div class="emoji-name">Rainbow Flag</div><div class="emoji-meaning">LGBTQ+ pride</div><button class="emoji-copy-btn" aria-label="Copy Rainbow Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏳️‍⚧️</div><div class="emoji-name">Transgender Flag</div><div class="emoji-meaning">Trans pride</div><button class="emoji-copy-btn" aria-label="Copy Transgender Flag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇫</div><div class="emoji-name">Afghanistan</div><div class="emoji-meaning">AF – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Afghanistan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇱</div><div class="emoji-name">Albania</div><div class="emoji-meaning">AL – Europe</div><button class="emoji-copy-btn" aria-label="Copy Albania">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇿</div><div class="emoji-name">Algeria</div><div class="emoji-meaning">DZ – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Algeria">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇸</div><div class="emoji-name">American Samoa</div><div class="emoji-meaning">AS – Oceania</div><button class="emoji-copy-btn" aria-label="Copy American Samoa">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇩</div><div class="emoji-name">Andorra</div><div class="emoji-meaning">AD – Europe</div><button class="emoji-copy-btn" aria-label="Copy Andorra">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇴</div><div class="emoji-name">Angola</div><div class="emoji-meaning">AO – Africa</div><button class="emoji-copy-btn" aria-label="Copy Angola">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇬</div><div class="emoji-name">Antigua &amp; Barbuda</div><div class="emoji-meaning">AG – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Antigua &amp; Barbuda">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇷</div><div class="emoji-name">Argentina</div><div class="emoji-meaning">AR – South America</div><button class="emoji-copy-btn" aria-label="Copy Argentina">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇲</div><div class="emoji-name">Armenia</div><div class="emoji-meaning">AM – West Asia</div><button class="emoji-copy-btn" aria-label="Copy Armenia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇺</div><div class="emoji-name">Australia</div><div class="emoji-meaning">AU – Oceania</div><button class="emoji-copy-btn" aria-label="Copy Australia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇹</div><div class="emoji-name">Austria</div><div class="emoji-meaning">AT – Europe</div><button class="emoji-copy-btn" aria-label="Copy Austria">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇿</div><div class="emoji-name">Azerbaijan</div><div class="emoji-meaning">AZ – West Asia</div><button class="emoji-copy-btn" aria-label="Copy Azerbaijan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇸</div><div class="emoji-name">Bahamas</div><div class="emoji-meaning">BS – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Bahamas">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇭</div><div class="emoji-name">Bahrain</div><div class="emoji-meaning">BH – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Bahrain">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇩</div><div class="emoji-name">Bangladesh</div><div class="emoji-meaning">BD – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Bangladesh">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇧</div><div class="emoji-name">Barbados</div><div class="emoji-meaning">BB – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Barbados">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇾</div><div class="emoji-name">Belarus</div><div class="emoji-meaning">BY – Europe</div><button class="emoji-copy-btn" aria-label="Copy Belarus">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇪</div><div class="emoji-name">Belgium</div><div class="emoji-meaning">BE – Europe</div><button class="emoji-copy-btn" aria-label="Copy Belgium">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇿</div><div class="emoji-name">Belize</div><div class="emoji-meaning">BZ – Central America</div><button class="emoji-copy-btn" aria-label="Copy Belize">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇯</div><div class="emoji-name">Benin</div><div class="emoji-meaning">BJ – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Benin">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇹</div><div class="emoji-name">Bhutan</div><div class="emoji-meaning">BT – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Bhutan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇴</div><div class="emoji-name">Bolivia</div><div class="emoji-meaning">BO – South America</div><button class="emoji-copy-btn" aria-label="Copy Bolivia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇦</div><div class="emoji-name">Bosnia &amp; Herzegovina</div><div class="emoji-meaning">BA – Europe</div><button class="emoji-copy-btn" aria-label="Copy Bosnia &amp; Herzegovina">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇼</div><div class="emoji-name">Botswana</div><div class="emoji-meaning">BW – Southern Africa</div><button class="emoji-copy-btn" aria-label="Copy Botswana">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇷</div><div class="emoji-name">Brazil</div><div class="emoji-meaning">BR – South America</div><button class="emoji-copy-btn" aria-label="Copy Brazil">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇳</div><div class="emoji-name">Brunei</div><div class="emoji-meaning">BN – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Brunei">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇬</div><div class="emoji-name">Bulgaria</div><div class="emoji-meaning">BG – Europe</div><button class="emoji-copy-btn" aria-label="Copy Bulgaria">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇫</div><div class="emoji-name">Burkina Faso</div><div class="emoji-meaning">BF – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Burkina Faso">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇧🇮</div><div class="emoji-name">Burundi</div><div class="emoji-meaning">BI – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Burundi">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇭</div><div class="emoji-name">Cambodia</div><div class="emoji-meaning">KH – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Cambodia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇲</div><div class="emoji-name">Cameroon</div><div class="emoji-meaning">CM – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Cameroon">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇦</div><div class="emoji-name">Canada</div><div class="emoji-meaning">CA – North America</div><button class="emoji-copy-btn" aria-label="Copy Canada">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇻</div><div class="emoji-name">Cape Verde</div><div class="emoji-meaning">CV – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Cape Verde">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇫</div><div class="emoji-name">Central African Rep.</div><div class="emoji-meaning">CF – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Central African Rep.">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇩</div><div class="emoji-name">Chad</div><div class="emoji-meaning">TD – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Chad">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇱</div><div class="emoji-name">Chile</div><div class="emoji-meaning">CL – South America</div><button class="emoji-copy-btn" aria-label="Copy Chile">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇳</div><div class="emoji-name">China</div><div class="emoji-meaning">CN – East Asia</div><button class="emoji-copy-btn" aria-label="Copy China">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇴</div><div class="emoji-name">Colombia</div><div class="emoji-meaning">CO – South America</div><button class="emoji-copy-btn" aria-label="Copy Colombia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇲</div><div class="emoji-name">Comoros</div><div class="emoji-meaning">KM – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Comoros">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇬</div><div class="emoji-name">Congo - Brazzaville</div><div class="emoji-meaning">CG – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Congo - Brazzaville">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇩</div><div class="emoji-name">Congo - Kinshasa</div><div class="emoji-meaning">CD – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Congo - Kinshasa">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇷</div><div class="emoji-name">Costa Rica</div><div class="emoji-meaning">CR – Central America</div><button class="emoji-copy-btn" aria-label="Copy Costa Rica">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇭🇷</div><div class="emoji-name">Croatia</div><div class="emoji-meaning">HR – Europe</div><button class="emoji-copy-btn" aria-label="Copy Croatia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇺</div><div class="emoji-name">Cuba</div><div class="emoji-meaning">CU – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Cuba">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇾</div><div class="emoji-name">Cyprus</div><div class="emoji-meaning">CY – Europe</div><button class="emoji-copy-btn" aria-label="Copy Cyprus">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇿</div><div class="emoji-name">Czechia</div><div class="emoji-meaning">CZ – Europe</div><button class="emoji-copy-btn" aria-label="Copy Czechia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇰</div><div class="emoji-name">Denmark</div><div class="emoji-meaning">DK – Europe</div><button class="emoji-copy-btn" aria-label="Copy Denmark">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇯</div><div class="emoji-name">Djibouti</div><div class="emoji-meaning">DJ – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Djibouti">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇲</div><div class="emoji-name">Dominica</div><div class="emoji-meaning">DM – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Dominica">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇴</div><div class="emoji-name">Dominican Republic</div><div class="emoji-meaning">DO – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Dominican Republic">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇨</div><div class="emoji-name">Ecuador</div><div class="emoji-meaning">EC – South America</div><button class="emoji-copy-btn" aria-label="Copy Ecuador">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇬</div><div class="emoji-name">Egypt</div><div class="emoji-meaning">EG – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Egypt">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇻</div><div class="emoji-name">El Salvador</div><div class="emoji-meaning">SV – Central America</div><button class="emoji-copy-btn" aria-label="Copy El Salvador">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇶</div><div class="emoji-name">Equatorial Guinea</div><div class="emoji-meaning">GQ – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Equatorial Guinea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇷</div><div class="emoji-name">Eritrea</div><div class="emoji-meaning">ER – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Eritrea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇪</div><div class="emoji-name">Estonia</div><div class="emoji-meaning">EE – Europe</div><button class="emoji-copy-btn" aria-label="Copy Estonia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇹</div><div class="emoji-name">Ethiopia</div><div class="emoji-meaning">ET – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Ethiopia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇫🇯</div><div class="emoji-name">Fiji</div><div class="emoji-meaning">FJ – Oceania</div><button class="emoji-copy-btn" aria-label="Copy Fiji">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇫🇮</div><div class="emoji-name">Finland</div><div class="emoji-meaning">FI – Europe</div><button class="emoji-copy-btn" aria-label="Copy Finland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇫🇷</div><div class="emoji-name">France</div><div class="emoji-meaning">FR – Europe</div><button class="emoji-copy-btn" aria-label="Copy France">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇦</div><div class="emoji-name">Gabon</div><div class="emoji-meaning">GA – Central Africa</div><button class="emoji-copy-btn" aria-label="Copy Gabon">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇲</div><div class="emoji-name">Gambia</div><div class="emoji-meaning">GM – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Gambia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇪</div><div class="emoji-name">Georgia</div><div class="emoji-meaning">GE – West Asia</div><button class="emoji-copy-btn" aria-label="Copy Georgia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇩🇪</div><div class="emoji-name">Germany</div><div class="emoji-meaning">DE – Europe</div><button class="emoji-copy-btn" aria-label="Copy Germany">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇭</div><div class="emoji-name">Ghana</div><div class="emoji-meaning">GH – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Ghana">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇷</div><div class="emoji-name">Greece</div><div class="emoji-meaning">GR – Europe</div><button class="emoji-copy-btn" aria-label="Copy Greece">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇩</div><div class="emoji-name">Grenada</div><div class="emoji-meaning">GD – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Grenada">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇹</div><div class="emoji-name">Guatemala</div><div class="emoji-meaning">GT – Central America</div><button class="emoji-copy-btn" aria-label="Copy Guatemala">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇳</div><div class="emoji-name">Guinea</div><div class="emoji-meaning">GN – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Guinea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇾</div><div class="emoji-name">Guyana</div><div class="emoji-meaning">GY – South America</div><button class="emoji-copy-btn" aria-label="Copy Guyana">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇭🇹</div><div class="emoji-name">Haiti</div><div class="emoji-meaning">HT – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Haiti">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇭🇳</div><div class="emoji-name">Honduras</div><div class="emoji-meaning">HN – Central America</div><button class="emoji-copy-btn" aria-label="Copy Honduras">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇭🇰</div><div class="emoji-name">Hong Kong</div><div class="emoji-meaning">HK – East Asia</div><button class="emoji-copy-btn" aria-label="Copy Hong Kong">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇭🇺</div><div class="emoji-name">Hungary</div><div class="emoji-meaning">HU – Europe</div><button class="emoji-copy-btn" aria-label="Copy Hungary">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇸</div><div class="emoji-name">Iceland</div><div class="emoji-meaning">IS – Europe</div><button class="emoji-copy-btn" aria-label="Copy Iceland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇳</div><div class="emoji-name">India</div><div class="emoji-meaning">IN – South Asia</div><button class="emoji-copy-btn" aria-label="Copy India">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇩</div><div class="emoji-name">Indonesia</div><div class="emoji-meaning">ID – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Indonesia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇷</div><div class="emoji-name">Iran</div><div class="emoji-meaning">IR – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Iran">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇶</div><div class="emoji-name">Iraq</div><div class="emoji-meaning">IQ – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Iraq">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇪</div><div class="emoji-name">Ireland</div><div class="emoji-meaning">IE – Europe</div><button class="emoji-copy-btn" aria-label="Copy Ireland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇱</div><div class="emoji-name">Israel</div><div class="emoji-meaning">IL – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Israel">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇮🇹</div><div class="emoji-name">Italy</div><div class="emoji-meaning">IT – Europe</div><button class="emoji-copy-btn" aria-label="Copy Italy">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇯🇲</div><div class="emoji-name">Jamaica</div><div class="emoji-meaning">JM – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Jamaica">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇯🇵</div><div class="emoji-name">Japan</div><div class="emoji-meaning">JP – East Asia</div><button class="emoji-copy-btn" aria-label="Copy Japan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇯🇴</div><div class="emoji-name">Jordan</div><div class="emoji-meaning">JO – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Jordan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇿</div><div class="emoji-name">Kazakhstan</div><div class="emoji-meaning">KZ – Central Asia</div><button class="emoji-copy-btn" aria-label="Copy Kazakhstan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇪</div><div class="emoji-name">Kenya</div><div class="emoji-meaning">KE – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Kenya">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇼</div><div class="emoji-name">Kuwait</div><div class="emoji-meaning">KW – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Kuwait">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇬</div><div class="emoji-name">Kyrgyzstan</div><div class="emoji-meaning">KG – Central Asia</div><button class="emoji-copy-btn" aria-label="Copy Kyrgyzstan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇦</div><div class="emoji-name">Laos</div><div class="emoji-meaning">LA – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Laos">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇻</div><div class="emoji-name">Latvia</div><div class="emoji-meaning">LV – Europe</div><button class="emoji-copy-btn" aria-label="Copy Latvia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇧</div><div class="emoji-name">Lebanon</div><div class="emoji-meaning">LB – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Lebanon">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇾</div><div class="emoji-name">Libya</div><div class="emoji-meaning">LY – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Libya">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇮</div><div class="emoji-name">Liechtenstein</div><div class="emoji-meaning">LI – Europe</div><button class="emoji-copy-btn" aria-label="Copy Liechtenstein">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇹</div><div class="emoji-name">Lithuania</div><div class="emoji-meaning">LT – Europe</div><button class="emoji-copy-btn" aria-label="Copy Lithuania">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇺</div><div class="emoji-name">Luxembourg</div><div class="emoji-meaning">LU – Europe</div><button class="emoji-copy-btn" aria-label="Copy Luxembourg">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇴</div><div class="emoji-name">Macao</div><div class="emoji-meaning">MO – East Asia</div><button class="emoji-copy-btn" aria-label="Copy Macao">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇬</div><div class="emoji-name">Madagascar</div><div class="emoji-meaning">MG – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Madagascar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇼</div><div class="emoji-name">Malawi</div><div class="emoji-meaning">MW – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Malawi">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇾</div><div class="emoji-name">Malaysia</div><div class="emoji-meaning">MY – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Malaysia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇻</div><div class="emoji-name">Maldives</div><div class="emoji-meaning">MV – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Maldives">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇱</div><div class="emoji-name">Mali</div><div class="emoji-meaning">ML – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Mali">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇹</div><div class="emoji-name">Malta</div><div class="emoji-meaning">MT – Europe</div><button class="emoji-copy-btn" aria-label="Copy Malta">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇽</div><div class="emoji-name">Mexico</div><div class="emoji-meaning">MX – North America</div><button class="emoji-copy-btn" aria-label="Copy Mexico">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇳</div><div class="emoji-name">Mongolia</div><div class="emoji-meaning">MN – East Asia</div><button class="emoji-copy-btn" aria-label="Copy Mongolia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇪</div><div class="emoji-name">Montenegro</div><div class="emoji-meaning">ME – Europe</div><button class="emoji-copy-btn" aria-label="Copy Montenegro">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇦</div><div class="emoji-name">Morocco</div><div class="emoji-meaning">MA – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Morocco">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇿</div><div class="emoji-name">Mozambique</div><div class="emoji-meaning">MZ – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Mozambique">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇲</div><div class="emoji-name">Myanmar</div><div class="emoji-meaning">MM – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Myanmar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇦</div><div class="emoji-name">Namibia</div><div class="emoji-meaning">NA – Southern Africa</div><button class="emoji-copy-btn" aria-label="Copy Namibia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇵</div><div class="emoji-name">Nepal</div><div class="emoji-meaning">NP – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Nepal">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇱</div><div class="emoji-name">Netherlands</div><div class="emoji-meaning">NL – Europe</div><button class="emoji-copy-btn" aria-label="Copy Netherlands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇿</div><div class="emoji-name">New Zealand</div><div class="emoji-meaning">NZ – Oceania</div><button class="emoji-copy-btn" aria-label="Copy New Zealand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇮</div><div class="emoji-name">Nicaragua</div><div class="emoji-meaning">NI – Central America</div><button class="emoji-copy-btn" aria-label="Copy Nicaragua">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇪</div><div class="emoji-name">Niger</div><div class="emoji-meaning">NE – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Niger">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇬</div><div class="emoji-name">Nigeria</div><div class="emoji-meaning">NG – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Nigeria">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇵</div><div class="emoji-name">North Korea</div><div class="emoji-meaning">KP – East Asia</div><button class="emoji-copy-btn" aria-label="Copy North Korea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇲🇰</div><div class="emoji-name">North Macedonia</div><div class="emoji-meaning">MK – Europe</div><button class="emoji-copy-btn" aria-label="Copy North Macedonia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇳🇴</div><div class="emoji-name">Norway</div><div class="emoji-meaning">NO – Europe</div><button class="emoji-copy-btn" aria-label="Copy Norway">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇴🇲</div><div class="emoji-name">Oman</div><div class="emoji-meaning">OM – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Oman">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇰</div><div class="emoji-name">Pakistan</div><div class="emoji-meaning">PK – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Pakistan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇸</div><div class="emoji-name">Palestine</div><div class="emoji-meaning">PS – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Palestine">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇦</div><div class="emoji-name">Panama</div><div class="emoji-meaning">PA – Central America</div><button class="emoji-copy-btn" aria-label="Copy Panama">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇬</div><div class="emoji-name">Papua New Guinea</div><div class="emoji-meaning">PG – Oceania</div><button class="emoji-copy-btn" aria-label="Copy Papua New Guinea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇾</div><div class="emoji-name">Paraguay</div><div class="emoji-meaning">PY – South America</div><button class="emoji-copy-btn" aria-label="Copy Paraguay">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇪</div><div class="emoji-name">Peru</div><div class="emoji-meaning">PE – South America</div><button class="emoji-copy-btn" aria-label="Copy Peru">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇭</div><div class="emoji-name">Philippines</div><div class="emoji-meaning">PH – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Philippines">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇱</div><div class="emoji-name">Poland</div><div class="emoji-meaning">PL – Europe</div><button class="emoji-copy-btn" aria-label="Copy Poland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇹</div><div class="emoji-name">Portugal</div><div class="emoji-meaning">PT – Europe</div><button class="emoji-copy-btn" aria-label="Copy Portugal">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇵🇷</div><div class="emoji-name">Puerto Rico</div><div class="emoji-meaning">PR – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Puerto Rico">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇶🇦</div><div class="emoji-name">Qatar</div><div class="emoji-meaning">QA – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Qatar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇷🇴</div><div class="emoji-name">Romania</div><div class="emoji-meaning">RO – Europe</div><button class="emoji-copy-btn" aria-label="Copy Romania">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇷🇺</div><div class="emoji-name">Russia</div><div class="emoji-meaning">RU – Europe/Asia</div><button class="emoji-copy-btn" aria-label="Copy Russia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇷🇼</div><div class="emoji-name">Rwanda</div><div class="emoji-meaning">RW – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Rwanda">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇦</div><div class="emoji-name">Saudi Arabia</div><div class="emoji-meaning">SA – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Saudi Arabia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇳</div><div class="emoji-name">Senegal</div><div class="emoji-meaning">SN – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Senegal">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇷🇸</div><div class="emoji-name">Serbia</div><div class="emoji-meaning">RS – Europe</div><button class="emoji-copy-btn" aria-label="Copy Serbia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇬</div><div class="emoji-name">Singapore</div><div class="emoji-meaning">SG – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Singapore">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇰</div><div class="emoji-name">Slovakia</div><div class="emoji-meaning">SK – Europe</div><button class="emoji-copy-btn" aria-label="Copy Slovakia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇮</div><div class="emoji-name">Slovenia</div><div class="emoji-meaning">SI – Europe</div><button class="emoji-copy-btn" aria-label="Copy Slovenia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇴</div><div class="emoji-name">Somalia</div><div class="emoji-meaning">SO – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Somalia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇿🇦</div><div class="emoji-name">South Africa</div><div class="emoji-meaning">ZA – Southern Africa</div><button class="emoji-copy-btn" aria-label="Copy South Africa">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇰🇷</div><div class="emoji-name">South Korea</div><div class="emoji-meaning">KR – East Asia</div><button class="emoji-copy-btn" aria-label="Copy South Korea">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇸</div><div class="emoji-name">South Sudan</div><div class="emoji-meaning">SS – East Africa</div><button class="emoji-copy-btn" aria-label="Copy South Sudan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇸</div><div class="emoji-name">Spain</div><div class="emoji-meaning">ES – Europe</div><button class="emoji-copy-btn" aria-label="Copy Spain">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇱🇰</div><div class="emoji-name">Sri Lanka</div><div class="emoji-meaning">LK – South Asia</div><button class="emoji-copy-btn" aria-label="Copy Sri Lanka">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇩</div><div class="emoji-name">Sudan</div><div class="emoji-meaning">SD – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Sudan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇪</div><div class="emoji-name">Sweden</div><div class="emoji-meaning">SE – Europe</div><button class="emoji-copy-btn" aria-label="Copy Sweden">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇨🇭</div><div class="emoji-name">Switzerland</div><div class="emoji-meaning">CH – Europe</div><button class="emoji-copy-btn" aria-label="Copy Switzerland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇸🇾</div><div class="emoji-name">Syria</div><div class="emoji-meaning">SY – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Syria">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇼</div><div class="emoji-name">Taiwan</div><div class="emoji-meaning">TW – East Asia</div><button class="emoji-copy-btn" aria-label="Copy Taiwan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇿</div><div class="emoji-name">Tanzania</div><div class="emoji-meaning">TZ – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Tanzania">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇭</div><div class="emoji-name">Thailand</div><div class="emoji-meaning">TH – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Thailand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇬</div><div class="emoji-name">Togo</div><div class="emoji-meaning">TG – West Africa</div><button class="emoji-copy-btn" aria-label="Copy Togo">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇹</div><div class="emoji-name">Trinidad &amp; Tobago</div><div class="emoji-meaning">TT – Caribbean</div><button class="emoji-copy-btn" aria-label="Copy Trinidad &amp; Tobago">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇳</div><div class="emoji-name">Tunisia</div><div class="emoji-meaning">TN – North Africa</div><button class="emoji-copy-btn" aria-label="Copy Tunisia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇷</div><div class="emoji-name">Türkiye</div><div class="emoji-meaning">TR – Europe/Asia</div><button class="emoji-copy-btn" aria-label="Copy Türkiye">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇹🇲</div><div class="emoji-name">Turkmenistan</div><div class="emoji-meaning">TM – Central Asia</div><button class="emoji-copy-btn" aria-label="Copy Turkmenistan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇬</div><div class="emoji-name">Uganda</div><div class="emoji-meaning">UG – East Africa</div><button class="emoji-copy-btn" aria-label="Copy Uganda">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇦</div><div class="emoji-name">Ukraine</div><div class="emoji-meaning">UA – Europe</div><button class="emoji-copy-btn" aria-label="Copy Ukraine">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇦🇪</div><div class="emoji-name">United Arab Emirates</div><div class="emoji-meaning">AE – Middle East</div><button class="emoji-copy-btn" aria-label="Copy United Arab Emirates">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇬🇧</div><div class="emoji-name">United Kingdom</div><div class="emoji-meaning">GB – Europe</div><button class="emoji-copy-btn" aria-label="Copy United Kingdom">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇸</div><div class="emoji-name">United States</div><div class="emoji-meaning">US – North America</div><button class="emoji-copy-btn" aria-label="Copy United States">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇾</div><div class="emoji-name">Uruguay</div><div class="emoji-meaning">UY – South America</div><button class="emoji-copy-btn" aria-label="Copy Uruguay">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇿</div><div class="emoji-name">Uzbekistan</div><div class="emoji-meaning">UZ – Central Asia</div><button class="emoji-copy-btn" aria-label="Copy Uzbekistan">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇻🇪</div><div class="emoji-name">Venezuela</div><div class="emoji-meaning">VE – South America</div><button class="emoji-copy-btn" aria-label="Copy Venezuela">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇻🇳</div><div class="emoji-name">Vietnam</div><div class="emoji-meaning">VN – Southeast Asia</div><button class="emoji-copy-btn" aria-label="Copy Vietnam">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇾🇪</div><div class="emoji-name">Yemen</div><div class="emoji-meaning">YE – Middle East</div><button class="emoji-copy-btn" aria-label="Copy Yemen">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇿🇲</div><div class="emoji-name">Zambia</div><div class="emoji-meaning">ZM – Southern Africa</div><button class="emoji-copy-btn" aria-label="Copy Zambia">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇿🇼</div><div class="emoji-name">Zimbabwe</div><div class="emoji-meaning">ZW – Southern Africa</div><button class="emoji-copy-btn" aria-label="Copy Zimbabwe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇪🇺</div><div class="emoji-name">European Union</div><div class="emoji-meaning">EU – Europe</div><button class="emoji-copy-btn" aria-label="Copy European Union">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🇺🇳</div><div class="emoji-name">United Nations</div><div class="emoji-meaning">UN – International</div><button class="emoji-copy-btn" aria-label="Copy United Nations">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="emoji-name">England</div><div class="emoji-meaning">GB-ENG – UK</div><button class="emoji-copy-btn" aria-label="Copy England">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div><div class="emoji-name">Scotland</div><div class="emoji-meaning">GB-SCT – UK</div><button class="emoji-copy-btn" aria-label="Copy Scotland">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏴󠁧󠁢󠁷󠁬󠁳󠁿</div><div class="emoji-name">Wales</div><div class="emoji-meaning">GB-WLS – UK</div><button class="emoji-copy-btn" aria-label="Copy Wales">Copy</button></div>
+      </div>
     </section>
 
     <section class="cat-subsection">
@@ -498,6 +721,9 @@
 
     function renderGrid(data, id) {
       const grid = document.getElementById(id);
+      // Cards are pre-rendered into the HTML so crawlers and no-JS visitors
+      // see them; only build them client-side if that markup is missing.
+      if (!grid || grid.children.length) return;
       data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'cat-emoji-card';

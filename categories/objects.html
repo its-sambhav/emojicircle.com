@@ -40,14 +40,53 @@
   </script>
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What object emojis are available?","acceptedAnswer":{"@type":"Answer","text":"Object emojis include technology (📱💻🖥️), office supplies (📎✏️📌), tools (🔧🔨🪛), musical instruments (🎸🎹🥁), clothing (👕👗👠), household items (🪑🛋️🪴), and many more everyday objects."}},
-    {"@type":"Question","name":"What technology emojis exist?","acceptedAnswer":{"@type":"Answer","text":"Technology emojis include 📱 Mobile Phone, 💻 Laptop, 🖥️ Desktop, ⌨️ Keyboard, 🖨️ Printer, 📷 Camera, 📹 Video Camera, 🔋 Battery, 🔌 Plug, and 💾 Floppy Disk."}},
-    {"@type":"Question","name":"How to copy object emojis?","acceptedAnswer":{"@type":"Answer","text":"Click the Copy button on any emoji card on this page. The emoji is copied to your clipboard instantly and can be pasted into WhatsApp, Instagram, or any app or document."}},
-    {"@type":"Question","name":"What musical instrument emojis are there?","acceptedAnswer":{"@type":"Answer","text":"Musical instrument emojis include 🎸 Guitar, 🎹 Musical Keyboard, 🎺 Trumpet, 🎻 Violin, 🥁 Drum, 🪗 Accordion, 🪕 Banjo, and 🎷 Saxophone."}},
-    {"@type":"Question","name":"Are there clothing emojis?","acceptedAnswer":{"@type":"Answer","text":"Yes! Clothing emojis include 👕 T-Shirt, 👔 Necktie, 👗 Dress, 👠 High-Heeled Shoe, 🧥 Coat, 👒 Woman's Hat, 🎒 Backpack, 👜 Handbag, 🧢 Billed Cap, and more."}}
-  ]}
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What object emojis are available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Object emojis cover technology (phones, laptops, cameras), tools (hammers, wrenches), musical instruments (guitar, drums), office supplies (pens, paperclips), clothing (shirts, dresses, shoes), household items (furniture, keys), and many more everyday objects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What technology emojis exist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Technology emojis include 📱 Mobile Phone, 💻 Laptop, 🖥️ Desktop Computer, ⌨️ Keyboard, 🖨️ Printer, 📷 Camera, 📹 Video Camera, 🔋 Battery, 🔌 Plug, 💾 Floppy Disk, 📺 Television, and 📡 Satellite Antenna."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What musical instrument emojis are there?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Musical instrument emojis include 🎸 Guitar, 🎹 Musical Keyboard, 🎺 Trumpet, 🎻 Violin, 🥁 Drum, 🪗 Accordion, 🪕 Banjo, and 🎷 Saxophone. Combined with 🎤 Microphone and 🎧 Headphone for audio content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there clothing emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Clothing emojis include 👕 T-Shirt, 👔 Necktie, 👗 Dress, 👠 High-Heeled Shoe, 🧥 Coat, 👒 Hat, 🎒 Backpack, 👜 Handbag, 🧢 Billed Cap, 👖 Jeans, 👟 Running Shoe, 💍 Ring, and 💎 Gem Stone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to copy object emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the Copy button on any emoji card on this page. The emoji is immediately copied to your clipboard and ready to paste into WhatsApp, Instagram, email, documents, or any application."
+      }
+    }
+  ]
+}
+</script>
 
   <!-- Schema: ItemList -->
   <script type="application/ld+json">
@@ -109,7 +148,173 @@
 
     <section class="cat-grid-section" id="emoji-grid">
       <h2>All <span class="accent">Object</span> Emojis</h2>
-      <div class="cat-emoji-grid" id="objectsGrid"></div>
+      <div class="cat-emoji-grid" id="objectsGrid">
+        <div class="cat-emoji-card"><div class="emoji-display">📱</div><div class="emoji-name">Mobile Phone</div><div class="emoji-meaning">Smartphone, cell</div><button class="emoji-copy-btn" aria-label="Copy Mobile Phone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📲</div><div class="emoji-name">Phone with Arrow</div><div class="emoji-meaning">Incoming call</div><button class="emoji-copy-btn" aria-label="Copy Phone with Arrow">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💻</div><div class="emoji-name">Laptop</div><div class="emoji-meaning">Computer, work</div><button class="emoji-copy-btn" aria-label="Copy Laptop">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖥️</div><div class="emoji-name">Desktop Computer</div><div class="emoji-meaning">PC, monitor</div><button class="emoji-copy-btn" aria-label="Copy Desktop Computer">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖨️</div><div class="emoji-name">Printer</div><div class="emoji-meaning">Print document</div><button class="emoji-copy-btn" aria-label="Copy Printer">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⌨️</div><div class="emoji-name">Keyboard</div><div class="emoji-meaning">Typing, input</div><button class="emoji-copy-btn" aria-label="Copy Keyboard">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖱️</div><div class="emoji-name">Computer Mouse</div><div class="emoji-meaning">Click, pointer</div><button class="emoji-copy-btn" aria-label="Copy Computer Mouse">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖲️</div><div class="emoji-name">Trackball</div><div class="emoji-meaning">Control device</div><button class="emoji-copy-btn" aria-label="Copy Trackball">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💾</div><div class="emoji-name">Floppy Disk</div><div class="emoji-meaning">Save, retro storage</div><button class="emoji-copy-btn" aria-label="Copy Floppy Disk">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💿</div><div class="emoji-name">Optical Disc</div><div class="emoji-meaning">CD, compact disc</div><button class="emoji-copy-btn" aria-label="Copy Optical Disc">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📀</div><div class="emoji-name">DVD</div><div class="emoji-meaning">Movie disc</div><button class="emoji-copy-btn" aria-label="Copy DVD">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📷</div><div class="emoji-name">Camera</div><div class="emoji-meaning">Photo, photography</div><button class="emoji-copy-btn" aria-label="Copy Camera">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📸</div><div class="emoji-name">Camera Flash</div><div class="emoji-meaning">Snapshot, selfie</div><button class="emoji-copy-btn" aria-label="Copy Camera Flash">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📹</div><div class="emoji-name">Video Camera</div><div class="emoji-meaning">Recording, filming</div><button class="emoji-copy-btn" aria-label="Copy Video Camera">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎥</div><div class="emoji-name">Movie Camera</div><div class="emoji-meaning">Cinema, film</div><button class="emoji-copy-btn" aria-label="Copy Movie Camera">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📽️</div><div class="emoji-name">Film Projector</div><div class="emoji-meaning">Movie screening</div><button class="emoji-copy-btn" aria-label="Copy Film Projector">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📺</div><div class="emoji-name">Television</div><div class="emoji-meaning">TV, watching</div><button class="emoji-copy-btn" aria-label="Copy Television">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📻</div><div class="emoji-name">Radio</div><div class="emoji-meaning">AM/FM, broadcast</div><button class="emoji-copy-btn" aria-label="Copy Radio">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📡</div><div class="emoji-name">Satellite Antenna</div><div class="emoji-meaning">Signal, broadcast</div><button class="emoji-copy-btn" aria-label="Copy Satellite Antenna">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔋</div><div class="emoji-name">Battery</div><div class="emoji-meaning">Power, charge level</div><button class="emoji-copy-btn" aria-label="Copy Battery">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪫</div><div class="emoji-name">Low Battery</div><div class="emoji-meaning">Low power</div><button class="emoji-copy-btn" aria-label="Copy Low Battery">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔌</div><div class="emoji-name">Electric Plug</div><div class="emoji-meaning">Power supply</div><button class="emoji-copy-btn" aria-label="Copy Electric Plug">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔦</div><div class="emoji-name">Flashlight</div><div class="emoji-meaning">Torch, light</div><button class="emoji-copy-btn" aria-label="Copy Flashlight">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🕯️</div><div class="emoji-name">Candle</div><div class="emoji-meaning">Flame, ambiance</div><button class="emoji-copy-btn" aria-label="Copy Candle">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💡</div><div class="emoji-name">Light Bulb</div><div class="emoji-meaning">Idea, bright</div><button class="emoji-copy-btn" aria-label="Copy Light Bulb">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪔</div><div class="emoji-name">Diya Lamp</div><div class="emoji-meaning">Festival, Diwali</div><button class="emoji-copy-btn" aria-label="Copy Diya Lamp">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📔</div><div class="emoji-name">Notebook Decorative</div><div class="emoji-meaning">Journal, diary</div><button class="emoji-copy-btn" aria-label="Copy Notebook Decorative">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📕</div><div class="emoji-name">Closed Book</div><div class="emoji-meaning">Red book</div><button class="emoji-copy-btn" aria-label="Copy Closed Book">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📖</div><div class="emoji-name">Open Book</div><div class="emoji-meaning">Reading, study</div><button class="emoji-copy-btn" aria-label="Copy Open Book">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📗</div><div class="emoji-name">Green Book</div><div class="emoji-meaning">Study, textbook</div><button class="emoji-copy-btn" aria-label="Copy Green Book">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📘</div><div class="emoji-name">Blue Book</div><div class="emoji-meaning">Reference, guide</div><button class="emoji-copy-btn" aria-label="Copy Blue Book">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📙</div><div class="emoji-name">Orange Book</div><div class="emoji-meaning">Textbook, manual</div><button class="emoji-copy-btn" aria-label="Copy Orange Book">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📚</div><div class="emoji-name">Books</div><div class="emoji-meaning">Library, stack</div><button class="emoji-copy-btn" aria-label="Copy Books">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📓</div><div class="emoji-name">Notebook</div><div class="emoji-meaning">Notepad, journal</div><button class="emoji-copy-btn" aria-label="Copy Notebook">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📒</div><div class="emoji-name">Ledger</div><div class="emoji-meaning">Yellow notebook</div><button class="emoji-copy-btn" aria-label="Copy Ledger">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📃</div><div class="emoji-name">Page with Curl</div><div class="emoji-meaning">Document, paper</div><button class="emoji-copy-btn" aria-label="Copy Page with Curl">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📄</div><div class="emoji-name">Page Facing Up</div><div class="emoji-meaning">Document, file</div><button class="emoji-copy-btn" aria-label="Copy Page Facing Up">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📰</div><div class="emoji-name">Newspaper</div><div class="emoji-meaning">News, press</div><button class="emoji-copy-btn" aria-label="Copy Newspaper">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗞️</div><div class="emoji-name">Rolled Newspaper</div><div class="emoji-meaning">News, daily paper</div><button class="emoji-copy-btn" aria-label="Copy Rolled Newspaper">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📑</div><div class="emoji-name">Bookmark Tabs</div><div class="emoji-meaning">Tagged pages</div><button class="emoji-copy-btn" aria-label="Copy Bookmark Tabs">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔖</div><div class="emoji-name">Bookmark</div><div class="emoji-meaning">Saved, marked</div><button class="emoji-copy-btn" aria-label="Copy Bookmark">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏷️</div><div class="emoji-name">Label</div><div class="emoji-meaning">Tag, price tag</div><button class="emoji-copy-btn" aria-label="Copy Label">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✉️</div><div class="emoji-name">Envelope</div><div class="emoji-meaning">Mail, letter</div><button class="emoji-copy-btn" aria-label="Copy Envelope">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📧</div><div class="emoji-name">E-Mail</div><div class="emoji-meaning">Email, electronic</div><button class="emoji-copy-btn" aria-label="Copy E-Mail">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📨</div><div class="emoji-name">Incoming Envelope</div><div class="emoji-meaning">Received mail</div><button class="emoji-copy-btn" aria-label="Copy Incoming Envelope">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📩</div><div class="emoji-name">Envelope Arrow</div><div class="emoji-meaning">Outgoing mail</div><button class="emoji-copy-btn" aria-label="Copy Envelope Arrow">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📦</div><div class="emoji-name">Package</div><div class="emoji-meaning">Box, delivery</div><button class="emoji-copy-btn" aria-label="Copy Package">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📫</div><div class="emoji-name">Mailbox Flag Up</div><div class="emoji-meaning">Mail pending</div><button class="emoji-copy-btn" aria-label="Copy Mailbox Flag Up">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📪</div><div class="emoji-name">Mailbox Flag Down</div><div class="emoji-meaning">Mail collected</div><button class="emoji-copy-btn" aria-label="Copy Mailbox Flag Down">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📬</div><div class="emoji-name">Mailbox with Mail</div><div class="emoji-meaning">You've got mail</div><button class="emoji-copy-btn" aria-label="Copy Mailbox with Mail">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📮</div><div class="emoji-name">Postbox</div><div class="emoji-meaning">Mail collection</div><button class="emoji-copy-btn" aria-label="Copy Postbox">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✏️</div><div class="emoji-name">Pencil</div><div class="emoji-meaning">Writing, edit</div><button class="emoji-copy-btn" aria-label="Copy Pencil">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✒️</div><div class="emoji-name">Black Nib</div><div class="emoji-meaning">Ink pen</div><button class="emoji-copy-btn" aria-label="Copy Black Nib">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖊️</div><div class="emoji-name">Pen</div><div class="emoji-meaning">Ballpoint, write</div><button class="emoji-copy-btn" aria-label="Copy Pen">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖋️</div><div class="emoji-name">Fountain Pen</div><div class="emoji-meaning">Elegant writing</div><button class="emoji-copy-btn" aria-label="Copy Fountain Pen">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖌️</div><div class="emoji-name">Paintbrush</div><div class="emoji-meaning">Art, painting</div><button class="emoji-copy-btn" aria-label="Copy Paintbrush">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖍️</div><div class="emoji-name">Crayon</div><div class="emoji-meaning">Coloring, drawing</div><button class="emoji-copy-btn" aria-label="Copy Crayon">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📝</div><div class="emoji-name">Memo</div><div class="emoji-meaning">Note, writing</div><button class="emoji-copy-btn" aria-label="Copy Memo">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📁</div><div class="emoji-name">File Folder</div><div class="emoji-meaning">Directory, organize</div><button class="emoji-copy-btn" aria-label="Copy File Folder">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📂</div><div class="emoji-name">Open Folder</div><div class="emoji-meaning">Open directory</div><button class="emoji-copy-btn" aria-label="Copy Open Folder">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗂️</div><div class="emoji-name">Card Index Dividers</div><div class="emoji-meaning">Organize, tabs</div><button class="emoji-copy-btn" aria-label="Copy Card Index Dividers">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📅</div><div class="emoji-name">Calendar</div><div class="emoji-meaning">Date, schedule</div><button class="emoji-copy-btn" aria-label="Copy Calendar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📆</div><div class="emoji-name">Tear-Off Calendar</div><div class="emoji-meaning">Daily date</div><button class="emoji-copy-btn" aria-label="Copy Tear-Off Calendar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗓️</div><div class="emoji-name">Spiral Calendar</div><div class="emoji-meaning">Planner, dates</div><button class="emoji-copy-btn" aria-label="Copy Spiral Calendar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📇</div><div class="emoji-name">Card Index</div><div class="emoji-meaning">Contacts, rolodex</div><button class="emoji-copy-btn" aria-label="Copy Card Index">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📈</div><div class="emoji-name">Chart Increasing</div><div class="emoji-meaning">Growth, stocks up</div><button class="emoji-copy-btn" aria-label="Copy Chart Increasing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📉</div><div class="emoji-name">Chart Decreasing</div><div class="emoji-meaning">Decline, stocks down</div><button class="emoji-copy-btn" aria-label="Copy Chart Decreasing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📊</div><div class="emoji-name">Bar Chart</div><div class="emoji-meaning">Statistics, data</div><button class="emoji-copy-btn" aria-label="Copy Bar Chart">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📋</div><div class="emoji-name">Clipboard</div><div class="emoji-meaning">List, tasks</div><button class="emoji-copy-btn" aria-label="Copy Clipboard">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📌</div><div class="emoji-name">Pushpin</div><div class="emoji-meaning">Pin, important</div><button class="emoji-copy-btn" aria-label="Copy Pushpin">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📍</div><div class="emoji-name">Round Pushpin</div><div class="emoji-meaning">Location pin</div><button class="emoji-copy-btn" aria-label="Copy Round Pushpin">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📎</div><div class="emoji-name">Paperclip</div><div class="emoji-meaning">Attach, clip</div><button class="emoji-copy-btn" aria-label="Copy Paperclip">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖇️</div><div class="emoji-name">Linked Paperclips</div><div class="emoji-meaning">Connected, joined</div><button class="emoji-copy-btn" aria-label="Copy Linked Paperclips">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📏</div><div class="emoji-name">Straight Ruler</div><div class="emoji-meaning">Measure, scale</div><button class="emoji-copy-btn" aria-label="Copy Straight Ruler">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📐</div><div class="emoji-name">Triangular Ruler</div><div class="emoji-meaning">Geometry, angle</div><button class="emoji-copy-btn" aria-label="Copy Triangular Ruler">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✂️</div><div class="emoji-name">Scissors</div><div class="emoji-meaning">Cut, trim</div><button class="emoji-copy-btn" aria-label="Copy Scissors">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗃️</div><div class="emoji-name">Card File Box</div><div class="emoji-meaning">Archive, storage</div><button class="emoji-copy-btn" aria-label="Copy Card File Box">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗄️</div><div class="emoji-name">File Cabinet</div><div class="emoji-meaning">Filing, office</div><button class="emoji-copy-btn" aria-label="Copy File Cabinet">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗑️</div><div class="emoji-name">Wastebasket</div><div class="emoji-meaning">Trash, delete</div><button class="emoji-copy-btn" aria-label="Copy Wastebasket">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔒</div><div class="emoji-name">Locked</div><div class="emoji-meaning">Secure, private</div><button class="emoji-copy-btn" aria-label="Copy Locked">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔓</div><div class="emoji-name">Unlocked</div><div class="emoji-meaning">Open, accessible</div><button class="emoji-copy-btn" aria-label="Copy Unlocked">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔏</div><div class="emoji-name">Locked with Pen</div><div class="emoji-meaning">Secure edit</div><button class="emoji-copy-btn" aria-label="Copy Locked with Pen">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔐</div><div class="emoji-name">Locked with Key</div><div class="emoji-meaning">Encrypted</div><button class="emoji-copy-btn" aria-label="Copy Locked with Key">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔑</div><div class="emoji-name">Key</div><div class="emoji-meaning">Access, unlock</div><button class="emoji-copy-btn" aria-label="Copy Key">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗝️</div><div class="emoji-name">Old Key</div><div class="emoji-meaning">Vintage key, secret</div><button class="emoji-copy-btn" aria-label="Copy Old Key">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔧</div><div class="emoji-name">Wrench</div><div class="emoji-meaning">Fix, repair, tool</div><button class="emoji-copy-btn" aria-label="Copy Wrench">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪛</div><div class="emoji-name">Screwdriver</div><div class="emoji-meaning">Repair, tighten</div><button class="emoji-copy-btn" aria-label="Copy Screwdriver">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔨</div><div class="emoji-name">Hammer</div><div class="emoji-meaning">Build, construct</div><button class="emoji-copy-btn" aria-label="Copy Hammer">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⛏️</div><div class="emoji-name">Pick</div><div class="emoji-meaning">Mining, dig</div><button class="emoji-copy-btn" aria-label="Copy Pick">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪓</div><div class="emoji-name">Axe</div><div class="emoji-meaning">Chop, lumber</div><button class="emoji-copy-btn" aria-label="Copy Axe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪚</div><div class="emoji-name">Carpentry Saw</div><div class="emoji-meaning">Woodworking</div><button class="emoji-copy-btn" aria-label="Copy Carpentry Saw">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔩</div><div class="emoji-name">Nut and Bolt</div><div class="emoji-meaning">Hardware, fasten</div><button class="emoji-copy-btn" aria-label="Copy Nut and Bolt">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⚙️</div><div class="emoji-name">Gear</div><div class="emoji-meaning">Settings, mechanism</div><button class="emoji-copy-btn" aria-label="Copy Gear">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🗜️</div><div class="emoji-name">Clamp</div><div class="emoji-meaning">Compress, hold</div><button class="emoji-copy-btn" aria-label="Copy Clamp">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⛓️</div><div class="emoji-name">Chains</div><div class="emoji-meaning">Link, connected</div><button class="emoji-copy-btn" aria-label="Copy Chains">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪝</div><div class="emoji-name">Hook</div><div class="emoji-meaning">Catch, hang</div><button class="emoji-copy-btn" aria-label="Copy Hook">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧲</div><div class="emoji-name">Magnet</div><div class="emoji-meaning">Attract, pull</div><button class="emoji-copy-btn" aria-label="Copy Magnet">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🛡️</div><div class="emoji-name">Shield</div><div class="emoji-meaning">Protection, defense</div><button class="emoji-copy-btn" aria-label="Copy Shield">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔫</div><div class="emoji-name">Water Pistol</div><div class="emoji-meaning">Toy gun, squirt</div><button class="emoji-copy-btn" aria-label="Copy Water Pistol">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪃</div><div class="emoji-name">Boomerang</div><div class="emoji-meaning">Return, throw</div><button class="emoji-copy-btn" aria-label="Copy Boomerang">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏹</div><div class="emoji-name">Bow and Arrow</div><div class="emoji-meaning">Archery, aim</div><button class="emoji-copy-btn" aria-label="Copy Bow and Arrow">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔍</div><div class="emoji-name">Magnifying Left</div><div class="emoji-meaning">Search, zoom in</div><button class="emoji-copy-btn" aria-label="Copy Magnifying Left">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔎</div><div class="emoji-name">Magnifying Right</div><div class="emoji-meaning">Investigate, find</div><button class="emoji-copy-btn" aria-label="Copy Magnifying Right">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔗</div><div class="emoji-name">Link</div><div class="emoji-meaning">URL, chain link</div><button class="emoji-copy-btn" aria-label="Copy Link">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎸</div><div class="emoji-name">Guitar</div><div class="emoji-meaning">Rock, acoustic</div><button class="emoji-copy-btn" aria-label="Copy Guitar">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎹</div><div class="emoji-name">Musical Keyboard</div><div class="emoji-meaning">Piano, keys</div><button class="emoji-copy-btn" aria-label="Copy Musical Keyboard">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎺</div><div class="emoji-name">Trumpet</div><div class="emoji-meaning">Brass, jazz</div><button class="emoji-copy-btn" aria-label="Copy Trumpet">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎻</div><div class="emoji-name">Violin</div><div class="emoji-meaning">Classical, strings</div><button class="emoji-copy-btn" aria-label="Copy Violin">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪕</div><div class="emoji-name">Banjo</div><div class="emoji-meaning">Country, folk</div><button class="emoji-copy-btn" aria-label="Copy Banjo">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🥁</div><div class="emoji-name">Drum</div><div class="emoji-meaning">Beat, percussion</div><button class="emoji-copy-btn" aria-label="Copy Drum">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪗</div><div class="emoji-name">Accordion</div><div class="emoji-meaning">Squeeze box</div><button class="emoji-copy-btn" aria-label="Copy Accordion">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎷</div><div class="emoji-name">Saxophone</div><div class="emoji-meaning">Jazz, blues</div><button class="emoji-copy-btn" aria-label="Copy Saxophone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎤</div><div class="emoji-name">Microphone</div><div class="emoji-meaning">Singing, karaoke</div><button class="emoji-copy-btn" aria-label="Copy Microphone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎧</div><div class="emoji-name">Headphone</div><div class="emoji-meaning">Music, audio</div><button class="emoji-copy-btn" aria-label="Copy Headphone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔈</div><div class="emoji-name">Speaker Low</div><div class="emoji-meaning">Quiet volume</div><button class="emoji-copy-btn" aria-label="Copy Speaker Low">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔉</div><div class="emoji-name">Speaker Medium</div><div class="emoji-meaning">Medium volume</div><button class="emoji-copy-btn" aria-label="Copy Speaker Medium">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔊</div><div class="emoji-name">Speaker High</div><div class="emoji-meaning">Loud volume</div><button class="emoji-copy-btn" aria-label="Copy Speaker High">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📢</div><div class="emoji-name">Loudspeaker</div><div class="emoji-meaning">Announcement</div><button class="emoji-copy-btn" aria-label="Copy Loudspeaker">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">📣</div><div class="emoji-name">Megaphone</div><div class="emoji-meaning">Amplify, cheer</div><button class="emoji-copy-btn" aria-label="Copy Megaphone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔔</div><div class="emoji-name">Bell</div><div class="emoji-meaning">Notification, ring</div><button class="emoji-copy-btn" aria-label="Copy Bell">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🔕</div><div class="emoji-name">Bell Slash</div><div class="emoji-meaning">Muted, silent</div><button class="emoji-copy-btn" aria-label="Copy Bell Slash">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👕</div><div class="emoji-name">T-Shirt</div><div class="emoji-meaning">Casual top</div><button class="emoji-copy-btn" aria-label="Copy T-Shirt">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👔</div><div class="emoji-name">Necktie</div><div class="emoji-meaning">Formal, business</div><button class="emoji-copy-btn" aria-label="Copy Necktie">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👗</div><div class="emoji-name">Dress</div><div class="emoji-meaning">Gown, fashion</div><button class="emoji-copy-btn" aria-label="Copy Dress">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👖</div><div class="emoji-name">Jeans</div><div class="emoji-meaning">Denim, pants</div><button class="emoji-copy-btn" aria-label="Copy Jeans">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧥</div><div class="emoji-name">Coat</div><div class="emoji-meaning">Jacket, outerwear</div><button class="emoji-copy-btn" aria-label="Copy Coat">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧣</div><div class="emoji-name">Scarf</div><div class="emoji-meaning">Winter, warmth</div><button class="emoji-copy-btn" aria-label="Copy Scarf">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧤</div><div class="emoji-name">Gloves</div><div class="emoji-meaning">Hand protection</div><button class="emoji-copy-btn" aria-label="Copy Gloves">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧦</div><div class="emoji-name">Socks</div><div class="emoji-meaning">Footwear, hosiery</div><button class="emoji-copy-btn" aria-label="Copy Socks">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👠</div><div class="emoji-name">High-Heeled Shoe</div><div class="emoji-meaning">Stiletto, fashion</div><button class="emoji-copy-btn" aria-label="Copy High-Heeled Shoe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👟</div><div class="emoji-name">Running Shoe</div><div class="emoji-meaning">Sneaker, athletic</div><button class="emoji-copy-btn" aria-label="Copy Running Shoe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🥿</div><div class="emoji-name">Flat Shoe</div><div class="emoji-meaning">Ballet flat</div><button class="emoji-copy-btn" aria-label="Copy Flat Shoe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🥾</div><div class="emoji-name">Hiking Boot</div><div class="emoji-meaning">Outdoor boot</div><button class="emoji-copy-btn" aria-label="Copy Hiking Boot">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👞</div><div class="emoji-name">Man's Shoe</div><div class="emoji-meaning">Dress shoe</div><button class="emoji-copy-btn" aria-label="Copy Man&#x27;s Shoe">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👡</div><div class="emoji-name">Woman's Sandal</div><div class="emoji-meaning">Sandal, summer</div><button class="emoji-copy-btn" aria-label="Copy Woman&#x27;s Sandal">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👒</div><div class="emoji-name">Woman's Hat</div><div class="emoji-meaning">Sun hat</div><button class="emoji-copy-btn" aria-label="Copy Woman&#x27;s Hat">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎩</div><div class="emoji-name">Top Hat</div><div class="emoji-meaning">Formal, magic</div><button class="emoji-copy-btn" aria-label="Copy Top Hat">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧢</div><div class="emoji-name">Billed Cap</div><div class="emoji-meaning">Baseball cap</div><button class="emoji-copy-btn" aria-label="Copy Billed Cap">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎓</div><div class="emoji-name">Graduation Cap</div><div class="emoji-meaning">Education, degree</div><button class="emoji-copy-btn" aria-label="Copy Graduation Cap">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👑</div><div class="emoji-name">Crown</div><div class="emoji-meaning">Royalty, king</div><button class="emoji-copy-btn" aria-label="Copy Crown">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💍</div><div class="emoji-name">Ring</div><div class="emoji-meaning">Engagement, diamond</div><button class="emoji-copy-btn" aria-label="Copy Ring">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💎</div><div class="emoji-name">Gem Stone</div><div class="emoji-meaning">Diamond, luxury</div><button class="emoji-copy-btn" aria-label="Copy Gem Stone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👜</div><div class="emoji-name">Handbag</div><div class="emoji-meaning">Purse, accessory</div><button class="emoji-copy-btn" aria-label="Copy Handbag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👝</div><div class="emoji-name">Clutch Bag</div><div class="emoji-meaning">Evening purse</div><button class="emoji-copy-btn" aria-label="Copy Clutch Bag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎒</div><div class="emoji-name">Backpack</div><div class="emoji-meaning">School bag, hiking</div><button class="emoji-copy-btn" aria-label="Copy Backpack">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🛍️</div><div class="emoji-name">Shopping Bags</div><div class="emoji-meaning">Retail, haul</div><button class="emoji-copy-btn" aria-label="Copy Shopping Bags">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🩴</div><div class="emoji-name">Thong Sandal</div><div class="emoji-meaning">Flip-flop</div><button class="emoji-copy-btn" aria-label="Copy Thong Sandal">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👙</div><div class="emoji-name">Bikini</div><div class="emoji-meaning">Swimwear, beach</div><button class="emoji-copy-btn" aria-label="Copy Bikini">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🩱</div><div class="emoji-name">One-Piece Swimsuit</div><div class="emoji-meaning">Swimming</div><button class="emoji-copy-btn" aria-label="Copy One-Piece Swimsuit">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🩳</div><div class="emoji-name">Shorts</div><div class="emoji-meaning">Summer wear</div><button class="emoji-copy-btn" aria-label="Copy Shorts">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💰</div><div class="emoji-name">Money Bag</div><div class="emoji-meaning">Wealth, finance</div><button class="emoji-copy-btn" aria-label="Copy Money Bag">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💵</div><div class="emoji-name">Dollar Bills</div><div class="emoji-meaning">USD, cash</div><button class="emoji-copy-btn" aria-label="Copy Dollar Bills">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💴</div><div class="emoji-name">Yen Banknote</div><div class="emoji-meaning">Japanese yen</div><button class="emoji-copy-btn" aria-label="Copy Yen Banknote">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💶</div><div class="emoji-name">Euro Banknote</div><div class="emoji-meaning">EUR, currency</div><button class="emoji-copy-btn" aria-label="Copy Euro Banknote">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💷</div><div class="emoji-name">Pound Banknote</div><div class="emoji-meaning">GBP, sterling</div><button class="emoji-copy-btn" aria-label="Copy Pound Banknote">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💳</div><div class="emoji-name">Credit Card</div><div class="emoji-meaning">Payment, swipe</div><button class="emoji-copy-btn" aria-label="Copy Credit Card">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💸</div><div class="emoji-name">Money with Wings</div><div class="emoji-meaning">Spending, expensive</div><button class="emoji-copy-btn" aria-label="Copy Money with Wings">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🪙</div><div class="emoji-name">Coin</div><div class="emoji-meaning">Currency, token</div><button class="emoji-copy-btn" aria-label="Copy Coin">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧾</div><div class="emoji-name">Receipt</div><div class="emoji-meaning">Bill, purchase</div><button class="emoji-copy-btn" aria-label="Copy Receipt">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⏰</div><div class="emoji-name">Alarm Clock</div><div class="emoji-meaning">Wake up, time</div><button class="emoji-copy-btn" aria-label="Copy Alarm Clock">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⏱️</div><div class="emoji-name">Stopwatch</div><div class="emoji-meaning">Timer, speed</div><button class="emoji-copy-btn" aria-label="Copy Stopwatch">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⏲️</div><div class="emoji-name">Timer Clock</div><div class="emoji-meaning">Countdown</div><button class="emoji-copy-btn" aria-label="Copy Timer Clock">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🕰️</div><div class="emoji-name">Mantelpiece Clock</div><div class="emoji-meaning">Vintage clock</div><button class="emoji-copy-btn" aria-label="Copy Mantelpiece Clock">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⌛</div><div class="emoji-name">Hourglass Done</div><div class="emoji-meaning">Time elapsed</div><button class="emoji-copy-btn" aria-label="Copy Hourglass Done">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">⏳</div><div class="emoji-name">Hourglass Flowing</div><div class="emoji-meaning">Time passing</div><button class="emoji-copy-btn" aria-label="Copy Hourglass Flowing">Copy</button></div>
+      </div>
     </section>
 
     <section class="cat-subsection">
@@ -473,6 +678,9 @@
 
     function renderGrid(data, id) {
       const grid = document.getElementById(id);
+      // Cards are pre-rendered into the HTML so crawlers and no-JS visitors
+      // see them; only build them client-side if that markup is missing.
+      if (!grid || grid.children.length) return;
       data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'cat-emoji-card';

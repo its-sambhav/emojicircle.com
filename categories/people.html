@@ -48,18 +48,53 @@
   </script>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"What are people emojis?","acceptedAnswer":{"@type":"Answer","text":"People emojis are Unicode characters representing humans, hand gestures, body parts, professions, families, and person activities. They include skin tone and gender variations."}},
-      {"@type":"Question","name":"How do skin tone modifiers work on emojis?","acceptedAnswer":{"@type":"Answer","text":"Unicode defines five skin tone modifiers based on the Fitzpatrick scale. When applied to a supported emoji, the emoji changes to display the selected skin tone. Not all emojis support skin tone modifiers."}},
-      {"@type":"Question","name":"Can I copy people emojis with skin tones?","acceptedAnswer":{"@type":"Answer","text":"Yes. On EmojiCircle, click the Copy button on any people emoji card. If the emoji supports skin tones, you can also find skin tone variants in the full emoji search tool."}},
-      {"@type":"Question","name":"What are the most popular hand gesture emojis?","acceptedAnswer":{"@type":"Answer","text":"The most popular hand gesture emojis include 👍 Thumbs Up, 👏 Clapping Hands, 🙏 Folded Hands (prayer/thank you), ✌️ Victory Hand, and 🤝 Handshake."}},
-      {"@type":"Question","name":"Are there profession emojis?","acceptedAnswer":{"@type":"Answer","text":"Yes. Unicode includes emoji representations for many professions including doctor, teacher, firefighter, artist, astronaut, cook, pilot, technologist, and more, each with gender and skin tone variants."}}
-    ]
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are people emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "People emojis represent humans, hand gestures, body parts, professions, families, and daily activities. They include skin tone and gender variations for greater personalization and inclusivity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do skin tone modifiers work on emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unicode defines five skin tone modifiers based on the Fitzpatrick dermatological scale. When applied to a supported people emoji, the emoji displays in the chosen skin tone. The base (yellow) version is the default. Supported platforms include iOS, Android, Windows, and most web browsers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most used hand gesture emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most used hand gesture emojis are 👍 Thumbs Up, 👏 Clapping Hands, 🙏 Folded Hands, ✌️ Victory Hand, 🤝 Handshake, and 💪 Flexed Biceps. These are used billions of times per day across major messaging platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there gender-neutral people emojis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Unicode supports gender-neutral variants for many people emojis using the \"person\" base character (🧑). For example: 🧑‍⚕️ Health Worker, 🧑‍🍳 Cook, and 🧑‍💻 Technologist are all gender-neutral options alongside their male and female variants."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I copy people emojis with different skin tones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The emojis on this page use the default yellow skin tone. For specific skin tone variants, use the Emoji Search tool where you can find and copy all available skin tone options for each people emoji."
+      }
+    }
+  ]
+}
+</script>
 
   <!-- Schema: ItemList -->
   <script type="application/ld+json">
@@ -122,7 +157,137 @@
 
     <section class="cat-grid-section" id="emoji-grid">
       <h2>All <span class="accent">People</span> Emojis</h2>
-      <div class="cat-emoji-grid" id="peopleGrid"></div>
+      <div class="cat-emoji-grid" id="peopleGrid">
+        <div class="cat-emoji-card"><div class="emoji-display">👋</div><div class="emoji-name">Waving Hand</div><div class="emoji-meaning">Hello, goodbye greeting</div><button class="emoji-copy-btn" aria-label="Copy Waving Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤚</div><div class="emoji-name">Raised Back of Hand</div><div class="emoji-meaning">Stop, high five</div><button class="emoji-copy-btn" aria-label="Copy Raised Back of Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖐️</div><div class="emoji-name">Hand with Fingers Splayed</div><div class="emoji-meaning">High five, stop</div><button class="emoji-copy-btn" aria-label="Copy Hand with Fingers Splayed">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✋</div><div class="emoji-name">Raised Hand</div><div class="emoji-meaning">Stop, high five</div><button class="emoji-copy-btn" aria-label="Copy Raised Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖖</div><div class="emoji-name">Vulcan Salute</div><div class="emoji-meaning">Live long and prosper</div><button class="emoji-copy-btn" aria-label="Copy Vulcan Salute">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫱</div><div class="emoji-name">Rightward Hand</div><div class="emoji-meaning">Offering, handshake start</div><button class="emoji-copy-btn" aria-label="Copy Rightward Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫲</div><div class="emoji-name">Leftward Hand</div><div class="emoji-meaning">Receiving, handshake start</div><button class="emoji-copy-btn" aria-label="Copy Leftward Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫳</div><div class="emoji-name">Palm Down Hand</div><div class="emoji-meaning">Dropping, dismissing</div><button class="emoji-copy-btn" aria-label="Copy Palm Down Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫴</div><div class="emoji-name">Palm Up Hand</div><div class="emoji-meaning">Offering, asking</div><button class="emoji-copy-btn" aria-label="Copy Palm Up Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫷</div><div class="emoji-name">Leftward Pushing Hand</div><div class="emoji-meaning">Pushing away left</div><button class="emoji-copy-btn" aria-label="Copy Leftward Pushing Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫸</div><div class="emoji-name">Rightward Pushing Hand</div><div class="emoji-meaning">Pushing away right</div><button class="emoji-copy-btn" aria-label="Copy Rightward Pushing Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👌</div><div class="emoji-name">OK Hand</div><div class="emoji-meaning">Perfect, agreement</div><button class="emoji-copy-btn" aria-label="Copy OK Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤌</div><div class="emoji-name">Pinched Fingers</div><div class="emoji-meaning">Italian gesture, what?</div><button class="emoji-copy-btn" aria-label="Copy Pinched Fingers">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤏</div><div class="emoji-name">Pinching Hand</div><div class="emoji-meaning">Small amount, tiny</div><button class="emoji-copy-btn" aria-label="Copy Pinching Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✌️</div><div class="emoji-name">Victory Hand</div><div class="emoji-meaning">Peace, victory sign</div><button class="emoji-copy-btn" aria-label="Copy Victory Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤞</div><div class="emoji-name">Crossed Fingers</div><div class="emoji-meaning">Good luck, hoping</div><button class="emoji-copy-btn" aria-label="Copy Crossed Fingers">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫰</div><div class="emoji-name">Hand with Index Thumb</div><div class="emoji-meaning">Money, snap gesture</div><button class="emoji-copy-btn" aria-label="Copy Hand with Index Thumb">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤟</div><div class="emoji-name">Love-You Gesture</div><div class="emoji-meaning">I love you in ASL</div><button class="emoji-copy-btn" aria-label="Copy Love-You Gesture">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤘</div><div class="emoji-name">Sign of Horns</div><div class="emoji-meaning">Rock on, metal</div><button class="emoji-copy-btn" aria-label="Copy Sign of Horns">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤙</div><div class="emoji-name">Call Me Hand</div><div class="emoji-meaning">Call me, hang loose</div><button class="emoji-copy-btn" aria-label="Copy Call Me Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👈</div><div class="emoji-name">Pointing Left</div><div class="emoji-meaning">Look left, back</div><button class="emoji-copy-btn" aria-label="Copy Pointing Left">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👉</div><div class="emoji-name">Pointing Right</div><div class="emoji-meaning">Look right, forward</div><button class="emoji-copy-btn" aria-label="Copy Pointing Right">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👆</div><div class="emoji-name">Pointing Up</div><div class="emoji-meaning">Look above, up</div><button class="emoji-copy-btn" aria-label="Copy Pointing Up">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🖕</div><div class="emoji-name">Middle Finger</div><div class="emoji-meaning">Rude gesture, anger</div><button class="emoji-copy-btn" aria-label="Copy Middle Finger">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👇</div><div class="emoji-name">Pointing Down</div><div class="emoji-meaning">Look below, down</div><button class="emoji-copy-btn" aria-label="Copy Pointing Down">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">☝️</div><div class="emoji-name">Index Pointing Up</div><div class="emoji-meaning">Number one, attention</div><button class="emoji-copy-btn" aria-label="Copy Index Pointing Up">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫵</div><div class="emoji-name">Index Pointing at Viewer</div><div class="emoji-meaning">You! pointing out</div><button class="emoji-copy-btn" aria-label="Copy Index Pointing at Viewer">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👍</div><div class="emoji-name">Thumbs Up</div><div class="emoji-meaning">Approval, like, yes</div><button class="emoji-copy-btn" aria-label="Copy Thumbs Up">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👎</div><div class="emoji-name">Thumbs Down</div><div class="emoji-meaning">Disapproval, dislike</div><button class="emoji-copy-btn" aria-label="Copy Thumbs Down">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✊</div><div class="emoji-name">Raised Fist</div><div class="emoji-meaning">Solidarity, power</div><button class="emoji-copy-btn" aria-label="Copy Raised Fist">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👊</div><div class="emoji-name">Oncoming Fist</div><div class="emoji-meaning">Fist bump, punch</div><button class="emoji-copy-btn" aria-label="Copy Oncoming Fist">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤛</div><div class="emoji-name">Left-Facing Fist</div><div class="emoji-meaning">Fist bump left</div><button class="emoji-copy-btn" aria-label="Copy Left-Facing Fist">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤜</div><div class="emoji-name">Right-Facing Fist</div><div class="emoji-meaning">Fist bump right</div><button class="emoji-copy-btn" aria-label="Copy Right-Facing Fist">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👏</div><div class="emoji-name">Clapping Hands</div><div class="emoji-meaning">Applause, bravo</div><button class="emoji-copy-btn" aria-label="Copy Clapping Hands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙌</div><div class="emoji-name">Raising Hands</div><div class="emoji-meaning">Celebration, hooray</div><button class="emoji-copy-btn" aria-label="Copy Raising Hands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫶</div><div class="emoji-name">Heart Hands</div><div class="emoji-meaning">Love gesture</div><button class="emoji-copy-btn" aria-label="Copy Heart Hands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👐</div><div class="emoji-name">Open Hands</div><div class="emoji-meaning">Hugging, openness</div><button class="emoji-copy-btn" aria-label="Copy Open Hands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤲</div><div class="emoji-name">Palms Up Together</div><div class="emoji-meaning">Prayer, offering</div><button class="emoji-copy-btn" aria-label="Copy Palms Up Together">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤝</div><div class="emoji-name">Handshake</div><div class="emoji-meaning">Agreement, deal</div><button class="emoji-copy-btn" aria-label="Copy Handshake">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙏</div><div class="emoji-name">Folded Hands</div><div class="emoji-meaning">Thank you, prayer</div><button class="emoji-copy-btn" aria-label="Copy Folded Hands">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">✍️</div><div class="emoji-name">Writing Hand</div><div class="emoji-meaning">Writing, signing</div><button class="emoji-copy-btn" aria-label="Copy Writing Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💅</div><div class="emoji-name">Nail Polish</div><div class="emoji-meaning">Sassy, self-care</div><button class="emoji-copy-btn" aria-label="Copy Nail Polish">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤳</div><div class="emoji-name">Selfie</div><div class="emoji-meaning">Taking a selfie</div><button class="emoji-copy-btn" aria-label="Copy Selfie">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💪</div><div class="emoji-name">Flexed Biceps</div><div class="emoji-meaning">Strength, workout</div><button class="emoji-copy-btn" aria-label="Copy Flexed Biceps">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦾</div><div class="emoji-name">Mechanical Arm</div><div class="emoji-meaning">Prosthetic, strength</div><button class="emoji-copy-btn" aria-label="Copy Mechanical Arm">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦿</div><div class="emoji-name">Mechanical Leg</div><div class="emoji-meaning">Prosthetic leg</div><button class="emoji-copy-btn" aria-label="Copy Mechanical Leg">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦵</div><div class="emoji-name">Leg</div><div class="emoji-meaning">Kicking, leg day</div><button class="emoji-copy-btn" aria-label="Copy Leg">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦶</div><div class="emoji-name">Foot</div><div class="emoji-meaning">Barefoot, step</div><button class="emoji-copy-btn" aria-label="Copy Foot">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👂</div><div class="emoji-name">Ear</div><div class="emoji-meaning">Listening, hearing</div><button class="emoji-copy-btn" aria-label="Copy Ear">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦻</div><div class="emoji-name">Ear with Hearing Aid</div><div class="emoji-meaning">Hearing accessibility</div><button class="emoji-copy-btn" aria-label="Copy Ear with Hearing Aid">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👃</div><div class="emoji-name">Nose</div><div class="emoji-meaning">Smell, sniffing</div><button class="emoji-copy-btn" aria-label="Copy Nose">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧠</div><div class="emoji-name">Brain</div><div class="emoji-meaning">Intelligence, thinking</div><button class="emoji-copy-btn" aria-label="Copy Brain">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫀</div><div class="emoji-name">Anatomical Heart</div><div class="emoji-meaning">Real heart, health</div><button class="emoji-copy-btn" aria-label="Copy Anatomical Heart">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫁</div><div class="emoji-name">Lungs</div><div class="emoji-meaning">Breathing, respiratory</div><button class="emoji-copy-btn" aria-label="Copy Lungs">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦷</div><div class="emoji-name">Tooth</div><div class="emoji-meaning">Dentist, bite</div><button class="emoji-copy-btn" aria-label="Copy Tooth">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦴</div><div class="emoji-name">Bone</div><div class="emoji-meaning">Skeleton, structure</div><button class="emoji-copy-btn" aria-label="Copy Bone">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👀</div><div class="emoji-name">Eyes</div><div class="emoji-meaning">Looking, watching</div><button class="emoji-copy-btn" aria-label="Copy Eyes">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👁️</div><div class="emoji-name">Eye</div><div class="emoji-meaning">Seeing, awareness</div><button class="emoji-copy-btn" aria-label="Copy Eye">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👅</div><div class="emoji-name">Tongue</div><div class="emoji-meaning">Taste, playful</div><button class="emoji-copy-btn" aria-label="Copy Tongue">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👄</div><div class="emoji-name">Mouth</div><div class="emoji-meaning">Lips, kissing</div><button class="emoji-copy-btn" aria-label="Copy Mouth">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫦</div><div class="emoji-name">Biting Lip</div><div class="emoji-meaning">Nervous, flirty</div><button class="emoji-copy-btn" aria-label="Copy Biting Lip">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👶</div><div class="emoji-name">Baby</div><div class="emoji-meaning">Infant, newborn</div><button class="emoji-copy-btn" aria-label="Copy Baby">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧒</div><div class="emoji-name">Child</div><div class="emoji-meaning">Young child</div><button class="emoji-copy-btn" aria-label="Copy Child">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👦</div><div class="emoji-name">Boy</div><div class="emoji-meaning">Young male</div><button class="emoji-copy-btn" aria-label="Copy Boy">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👧</div><div class="emoji-name">Girl</div><div class="emoji-meaning">Young female</div><button class="emoji-copy-btn" aria-label="Copy Girl">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧑</div><div class="emoji-name">Person</div><div class="emoji-meaning">Gender-neutral adult</div><button class="emoji-copy-btn" aria-label="Copy Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👱</div><div class="emoji-name">Blond Person</div><div class="emoji-meaning">Blond hair person</div><button class="emoji-copy-btn" aria-label="Copy Blond Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👨</div><div class="emoji-name">Man</div><div class="emoji-meaning">Adult male</div><button class="emoji-copy-btn" aria-label="Copy Man">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧔</div><div class="emoji-name">Bearded Person</div><div class="emoji-meaning">Person with beard</div><button class="emoji-copy-btn" aria-label="Copy Bearded Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👩</div><div class="emoji-name">Woman</div><div class="emoji-meaning">Adult female</div><button class="emoji-copy-btn" aria-label="Copy Woman">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧓</div><div class="emoji-name">Older Person</div><div class="emoji-meaning">Elder, senior</div><button class="emoji-copy-btn" aria-label="Copy Older Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👴</div><div class="emoji-name">Old Man</div><div class="emoji-meaning">Elderly man</div><button class="emoji-copy-btn" aria-label="Copy Old Man">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👵</div><div class="emoji-name">Old Woman</div><div class="emoji-meaning">Elderly woman</div><button class="emoji-copy-btn" aria-label="Copy Old Woman">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙍</div><div class="emoji-name">Person Frowning</div><div class="emoji-meaning">Disappointed, upset</div><button class="emoji-copy-btn" aria-label="Copy Person Frowning">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙎</div><div class="emoji-name">Person Pouting</div><div class="emoji-meaning">Annoyed, pouting</div><button class="emoji-copy-btn" aria-label="Copy Person Pouting">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙅</div><div class="emoji-name">Person Gesturing No</div><div class="emoji-meaning">Not okay, no</div><button class="emoji-copy-btn" aria-label="Copy Person Gesturing No">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙆</div><div class="emoji-name">Person Gesturing OK</div><div class="emoji-meaning">Okay, sure</div><button class="emoji-copy-btn" aria-label="Copy Person Gesturing OK">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💁</div><div class="emoji-name">Person Tipping Hand</div><div class="emoji-meaning">Here you go, sassy</div><button class="emoji-copy-btn" aria-label="Copy Person Tipping Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙋</div><div class="emoji-name">Person Raising Hand</div><div class="emoji-meaning">Question, volunteer</div><button class="emoji-copy-btn" aria-label="Copy Person Raising Hand">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧏</div><div class="emoji-name">Deaf Person</div><div class="emoji-meaning">Deaf, signing</div><button class="emoji-copy-btn" aria-label="Copy Deaf Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🙇</div><div class="emoji-name">Person Bowing</div><div class="emoji-meaning">Respect, apology</div><button class="emoji-copy-btn" aria-label="Copy Person Bowing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤦</div><div class="emoji-name">Person Facepalming</div><div class="emoji-meaning">Disbelief, frustration</div><button class="emoji-copy-btn" aria-label="Copy Person Facepalming">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤷</div><div class="emoji-name">Person Shrugging</div><div class="emoji-meaning">I don't know, meh</div><button class="emoji-copy-btn" aria-label="Copy Person Shrugging">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👮</div><div class="emoji-name">Police Officer</div><div class="emoji-meaning">Law enforcement</div><button class="emoji-copy-btn" aria-label="Copy Police Officer">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🕵️</div><div class="emoji-name">Detective</div><div class="emoji-meaning">Spy, investigator</div><button class="emoji-copy-btn" aria-label="Copy Detective">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💂</div><div class="emoji-name">Guard</div><div class="emoji-meaning">Royal guard</div><button class="emoji-copy-btn" aria-label="Copy Guard">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🥷</div><div class="emoji-name">Ninja</div><div class="emoji-meaning">Stealth, warrior</div><button class="emoji-copy-btn" aria-label="Copy Ninja">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👷</div><div class="emoji-name">Construction Worker</div><div class="emoji-meaning">Builder, hard hat</div><button class="emoji-copy-btn" aria-label="Copy Construction Worker">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫅</div><div class="emoji-name">Person with Crown</div><div class="emoji-meaning">Royalty, monarch</div><button class="emoji-copy-btn" aria-label="Copy Person with Crown">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤴</div><div class="emoji-name">Prince</div><div class="emoji-meaning">Royal male</div><button class="emoji-copy-btn" aria-label="Copy Prince">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👸</div><div class="emoji-name">Princess</div><div class="emoji-meaning">Royal female</div><button class="emoji-copy-btn" aria-label="Copy Princess">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👳</div><div class="emoji-name">Person with Turban</div><div class="emoji-meaning">Turban wearer</div><button class="emoji-copy-btn" aria-label="Copy Person with Turban">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👲</div><div class="emoji-name">Person with Skullcap</div><div class="emoji-meaning">Chinese cap</div><button class="emoji-copy-btn" aria-label="Copy Person with Skullcap">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧕</div><div class="emoji-name">Person with Headscarf</div><div class="emoji-meaning">Hijab, headscarf</div><button class="emoji-copy-btn" aria-label="Copy Person with Headscarf">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤵</div><div class="emoji-name">Person in Tuxedo</div><div class="emoji-meaning">Formal, groom</div><button class="emoji-copy-btn" aria-label="Copy Person in Tuxedo">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👰</div><div class="emoji-name">Person with Veil</div><div class="emoji-meaning">Bride, wedding</div><button class="emoji-copy-btn" aria-label="Copy Person with Veil">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤰</div><div class="emoji-name">Pregnant Person</div><div class="emoji-meaning">Expecting, pregnancy</div><button class="emoji-copy-btn" aria-label="Copy Pregnant Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫃</div><div class="emoji-name">Pregnant Man</div><div class="emoji-meaning">Male pregnancy</div><button class="emoji-copy-btn" aria-label="Copy Pregnant Man">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🫄</div><div class="emoji-name">Pregnant Person</div><div class="emoji-meaning">Gender-neutral pregnancy</div><button class="emoji-copy-btn" aria-label="Copy Pregnant Person">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤱</div><div class="emoji-name">Breast-Feeding</div><div class="emoji-meaning">Nursing, motherhood</div><button class="emoji-copy-btn" aria-label="Copy Breast-Feeding">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👼</div><div class="emoji-name">Baby Angel</div><div class="emoji-meaning">Cherub, innocence</div><button class="emoji-copy-btn" aria-label="Copy Baby Angel">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🎅</div><div class="emoji-name">Santa Claus</div><div class="emoji-meaning">Christmas, Santa</div><button class="emoji-copy-btn" aria-label="Copy Santa Claus">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🤶</div><div class="emoji-name">Mrs. Claus</div><div class="emoji-meaning">Mother Christmas</div><button class="emoji-copy-btn" aria-label="Copy Mrs. Claus">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦸</div><div class="emoji-name">Superhero</div><div class="emoji-meaning">Hero, brave</div><button class="emoji-copy-btn" aria-label="Copy Superhero">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🦹</div><div class="emoji-name">Supervillain</div><div class="emoji-meaning">Villain, evil</div><button class="emoji-copy-btn" aria-label="Copy Supervillain">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧙</div><div class="emoji-name">Mage</div><div class="emoji-meaning">Wizard, magic</div><button class="emoji-copy-btn" aria-label="Copy Mage">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧚</div><div class="emoji-name">Fairy</div><div class="emoji-meaning">Magical being</div><button class="emoji-copy-btn" aria-label="Copy Fairy">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧛</div><div class="emoji-name">Vampire</div><div class="emoji-meaning">Spooky, undead</div><button class="emoji-copy-btn" aria-label="Copy Vampire">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧜</div><div class="emoji-name">Merperson</div><div class="emoji-meaning">Mermaid/merman</div><button class="emoji-copy-btn" aria-label="Copy Merperson">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧝</div><div class="emoji-name">Elf</div><div class="emoji-meaning">Fantasy being</div><button class="emoji-copy-btn" aria-label="Copy Elf">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧞</div><div class="emoji-name">Genie</div><div class="emoji-meaning">Wish granter</div><button class="emoji-copy-btn" aria-label="Copy Genie">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧟</div><div class="emoji-name">Zombie</div><div class="emoji-meaning">Undead, horror</div><button class="emoji-copy-btn" aria-label="Copy Zombie">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧌</div><div class="emoji-name">Troll</div><div class="emoji-meaning">Ugly creature, internet troll</div><button class="emoji-copy-btn" aria-label="Copy Troll">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💆</div><div class="emoji-name">Person Getting Massage</div><div class="emoji-meaning">Relaxation, spa</div><button class="emoji-copy-btn" aria-label="Copy Person Getting Massage">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💇</div><div class="emoji-name">Person Getting Haircut</div><div class="emoji-meaning">Salon, haircut</div><button class="emoji-copy-btn" aria-label="Copy Person Getting Haircut">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🚶</div><div class="emoji-name">Person Walking</div><div class="emoji-meaning">Walking, pedestrian</div><button class="emoji-copy-btn" aria-label="Copy Person Walking">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧍</div><div class="emoji-name">Person Standing</div><div class="emoji-meaning">Standing still</div><button class="emoji-copy-btn" aria-label="Copy Person Standing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🧎</div><div class="emoji-name">Person Kneeling</div><div class="emoji-meaning">Kneeling, prayer</div><button class="emoji-copy-btn" aria-label="Copy Person Kneeling">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🏃</div><div class="emoji-name">Person Running</div><div class="emoji-meaning">Running, jogging</div><button class="emoji-copy-btn" aria-label="Copy Person Running">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">💃</div><div class="emoji-name">Woman Dancing</div><div class="emoji-meaning">Dancing, celebration</div><button class="emoji-copy-btn" aria-label="Copy Woman Dancing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">🕺</div><div class="emoji-name">Man Dancing</div><div class="emoji-meaning">Dancing, party</div><button class="emoji-copy-btn" aria-label="Copy Man Dancing">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👫</div><div class="emoji-name">Man and Woman</div><div class="emoji-meaning">Couple, holding hands</div><button class="emoji-copy-btn" aria-label="Copy Man and Woman">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👬</div><div class="emoji-name">Two Men</div><div class="emoji-meaning">Male couple</div><button class="emoji-copy-btn" aria-label="Copy Two Men">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👭</div><div class="emoji-name">Two Women</div><div class="emoji-meaning">Female couple</div><button class="emoji-copy-btn" aria-label="Copy Two Women">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👨‍👩‍👦</div><div class="emoji-name">Family MWB</div><div class="emoji-meaning">Family: man, woman, boy</div><button class="emoji-copy-btn" aria-label="Copy Family MWB">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👨‍👩‍👧</div><div class="emoji-name">Family MWG</div><div class="emoji-meaning">Family: man, woman, girl</div><button class="emoji-copy-btn" aria-label="Copy Family MWG">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👨‍👩‍👧‍👦</div><div class="emoji-name">Family MWGB</div><div class="emoji-meaning">Family of four</div><button class="emoji-copy-btn" aria-label="Copy Family MWGB">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👨‍👦</div><div class="emoji-name">Family: Man, Boy</div><div class="emoji-meaning">Single father &amp; son</div><button class="emoji-copy-btn" aria-label="Copy Family: Man, Boy">Copy</button></div>
+        <div class="cat-emoji-card"><div class="emoji-display">👩‍👦</div><div class="emoji-name">Family: Woman, Boy</div><div class="emoji-meaning">Single mother &amp; son</div><button class="emoji-copy-btn" aria-label="Copy Family: Woman, Boy">Copy</button></div>
+      </div>
     </section>
 
     <!-- Subcategory: Hand Gestures -->
@@ -466,6 +631,9 @@
 
     function renderGrid(data, id) {
       const grid = document.getElementById(id);
+      // Cards are pre-rendered into the HTML so crawlers and no-JS visitors
+      // see them; only build them client-side if that markup is missing.
+      if (!grid || grid.children.length) return;
       data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'cat-emoji-card';

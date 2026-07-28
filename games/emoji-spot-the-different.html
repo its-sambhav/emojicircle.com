@@ -27,28 +27,42 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Spot the Different Emoji",
-    "url": "https://emojicircle.com/games/emoji-spot-the-different",
-    "genre": ["Puzzle", "Brainteaser", "Casual"],
-    "playMode": "SinglePlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Any",
-    "description": "A visual perception puzzle game where players must quickly identify the single emoji that differs from the rest of the grid before time runs out.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Spot the Different Emoji",
+  "url": "https://emojicircle.com/games/emoji-spot-the-different",
+  "description": "A visual perception puzzle game where players must quickly identify the single emoji that differs from the rest of the grid before time runs out.",
+  "image": "https://emojicircle.com/game-banners/spot-the-diff.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Puzzle",
+    "Brainteaser",
+    "Casual"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-  }
-  </script>
+  },
+  "playMode": "SinglePlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -571,7 +585,7 @@
             <div id="board" role="grid"></div>
           </div>
 
-          <div class="visually-hidden">
+          <section class="game-prose">
             <h2>Play Spot the Different Emoji Game</h2>
             <p>Challenge your vision and reflexes with our online Spot the Different Emoji game! In a grid full of identical
               emojis, one is slightly (or completely) different. As you progress, the grids get larger and the differences
@@ -584,7 +598,7 @@
             <p>Choose your difficulty level to start. You will see a grid filled with emojis (like 🍎 apples or 😀 smileys).
               Click or tap the single emoji that does not perfectly match the others. If you choose correctly, you earn
               points and move to the next level. If you click the wrong emoji or run out of time, you lose a life.</p>
-          </div>
+          </section>
         </div>
       </div>
     </section>

@@ -27,28 +27,41 @@
 
     <!-- Structured Data -->
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Emoji Othello",
-    "url": "https://emojicircle.com/games/emoji-othello",
-    "genre": ["Board Game", "Strategy"],
-    "playMode": "MultiPlayer",
-    "applicationCategory": "Game",
-    "operatingSystem": "Any",
-    "description": "A modern twist on the classic strategy board game Othello (Reversi), utilizing colorful round emojis on an 8x8 grid.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "EmojiCircle",
-      "url": "https://emojicircle.com"
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Emoji Othello",
+  "url": "https://emojicircle.com/games/emoji-othello",
+  "description": "A modern twist on the classic strategy board game Othello (Reversi), utilizing colorful round emojis on an 8x8 grid.",
+  "image": "https://emojicircle.com/game-banners/othello.webp",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "genre": [
+    "Board Game",
+    "Strategy"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EmojiCircle",
+    "url": "https://emojicircle.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emojicircle.com/logo-512.png"
     }
-  }
-  </script>
+  },
+  "playMode": "MultiPlayer",
+  "gamePlatform": "Web Browser"
+}
+</script>
     <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -538,7 +551,7 @@
                             <div id="status" class="status" style="text-align: center;">
                                 Place a disc next to your opponent to flip their emojis.
                             </div>
-                            <div class="visually-hidden">
+                            <section class="game-prose">
                                 <h2>Play Emoji Othello (Reversi)</h2>
                                 <p>Welcome to Emoji Othello, a fantastic visual spin on the classic Reversi board game! Instead of
                                     standard black and white discs, you'll be placing vibrant orange 🟠 and black ⚫ emojis on the 8x8
@@ -552,7 +565,7 @@
                                     empty square is filled. On your turn, place an emoji on the board such that there is at least one
                                     straight line (horizontal, vertical, or diagonal) of opposing emojis trapped between your new piece
                                     and another of your existing pieces. All opposing pieces in that line will flip to your color!</p>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>
