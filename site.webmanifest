@@ -1,0 +1,15 @@
+{
+  "name": "EmojiCircle — Emoji Games, Globe, Library & Blog",
+  "short_name": "EmojiCircle",
+  "description": "Search 3,900+ emojis, play 20+ emoji games, and explore the interactive 3D Emoji Globe. Free, no login.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#121214",
+  "theme_color": "#121214",
+  "icons": [
+    { "src": "/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

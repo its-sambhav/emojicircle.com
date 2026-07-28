@@ -7,21 +7,62 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/logo-180.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="canonical" href="https://emojie.in/pages/emojie_globe/globe.html">
-    <script type="application/ld+json" data-emojie-schema="brand">
+    <link rel="canonical" href="https://emojicircle.com/emojie_globe/globe">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Emoji Globe – Interactive 3D Emoji World Map | EmojiCircle</title>
+  <meta name="description" content="Spin an interactive 3D globe built entirely from emojis. Filter by category, adjust density, and click any emoji to copy it. Free, no login, works in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EmojiCircle">
+  <meta property="og:title" content="Emoji Globe – Interactive 3D Emoji World Map">
+  <meta property="og:description" content="Spin an interactive 3D globe built entirely from emojis. Filter by category, adjust density, and click any emoji to copy it.">
+  <meta property="og:url" content="https://emojicircle.com/emojie_globe/globe">
+  <meta property="og:image" content="https://emojicircle.com/game-banners/globe.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emoji Globe – Interactive 3D Emoji World Map">
+  <meta name="twitter:description" content="Spin an interactive 3D globe built entirely from emojis. Filter by category, adjust density, and click any emoji to copy it.">
+  <meta name="twitter:image" content="https://emojicircle.com/game-banners/globe.webp">
+    <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "emojie.in",
-        "url": "https://emojie.in",
-        "logo": "https://emojie.in/logo-512.png"
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Emoji Globe",
+      "url": "https://emojicircle.com/emojie_globe/globe",
+      "description": "An interactive 3D globe rendered entirely from Unicode emojis. Rotate, zoom, filter by emoji category, adjust emoji density, and click any emoji to copy it to your clipboard.",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Any (web browser)",
+      "browserRequirements": "Requires JavaScript and WebGL",
+      "image": "https://emojicircle.com/game-banners/globe.webp",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EmojiCircle",
+        "url": "https://emojicircle.com",
+        "logo": { "@type": "ImageObject", "url": "https://emojicircle.com/logo-512.png" }
+      }
     }
     </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Emoji Globe — Canvas</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://emojicircle.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Emoji Globe", "item": "https://emojicircle.com/emojie_globe/globe" }
+      ]
+    }
+    </script>
   <style>
-    html,body{height:100%;margin:0}
-  #app{width:100%;height:100%;overflow:hidden;background:#000}
+    html,body{min-height:100%;margin:0}
+  #app{width:100%;height:100vh;overflow:hidden;background:#000}
+  .globe-about{background:#000;color:#e8eaed;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+    max-width:760px;margin:0 auto;padding:48px 24px 64px;line-height:1.7;font-size:16px}
+  .globe-about h1{font-size:1.9rem;line-height:1.25;margin:0 0 24px;color:#fff}
+  .globe-about p{margin:0 0 18px}
+  .globe-about a{color:#ff9a4d}
+  .globe-about .globe-note{font-size:14px;opacity:.7}
+  .globe-about .globe-back{margin-top:28px;font-weight:600}
+  body.pseudo-fullscreen .globe-about{display:none}
   #app canvas{touch-action:none;}
   body.pseudo-fullscreen{overflow:hidden;}
   #app.pseudo-fullscreen{position:fixed; inset:0; width:100vw; height:100vh; background:#000; z-index:4;}
@@ -122,6 +163,26 @@
     </details>
   </div>
   <button type="button" id="fullscreenToggle" class="fullscreen-btn" aria-pressed="false" aria-label="Enter fullscreen">⤢</button>
+
+  <article class="globe-about">
+    <h1>Emoji Globe: An Interactive 3D World Built From Emojis</h1>
+    <p>The Emoji Globe is a rotating three-dimensional sphere rendered entirely out of Unicode emojis. Instead of
+      continents and coastlines, its surface is made of hundreds of individual emoji characters positioned across the
+      sphere. Drag to spin it, scroll or pinch to zoom, and click any emoji on the surface to copy it straight to your
+      clipboard. It runs in the browser with no download, no account, and no cost.</p>
+    <p>Use the settings panel in the top-left corner to shape what you see. The <strong>Density</strong> slider controls
+      how many emojis are placed on the globe, from a sparse 50 up to a densely packed 2,000. The
+      <strong>Categories</strong> filter lets you build a globe from only the emoji groups you care about — a planet of
+      nothing but animals, food, flags, or smileys. The fullscreen button expands the globe to fill your screen.</p>
+    <p>The Emoji Globe was built by the EmojiCircle team as an original way to explore the emoji set spatially rather
+      than through a search box or a scrolling grid. If you would rather look emojis up by name or meaning, the
+      <a href="/emoji-search">emoji search library</a> covers all 3,900+ emojis, and the
+      <a href="/categories/smileys">category pages</a> group them by theme. For something more competitive, try the
+      <a href="/games/games">emoji games collection</a>.</p>
+    <p class="globe-note">The globe itself requires JavaScript and WebGL. If it does not load, your browser or device
+      may not support WebGL rendering.</p>
+    <p class="globe-back"><a href="/">← Back to EmojiCircle home</a></p>
+  </article>
   <script>
     (function(){
       const statusEl = document.getElementById('status');

@@ -1,4 +1,11 @@
-/quiz          /games/emoji-quiz.html          301
-/memory        /games/emoji-memory.html        301
-/tick-tac-toe  /games/emoji-tick-tac-toe.html  301
-/games.html    /games/games.html               301
+# Short vanity URLs
+/quiz              /games/emoji-quiz              301
+/memory            /games/emoji-memory            301
+/tick-tac-toe      /games/emoji-tick-tac-toe      301
+/globe             /emojie_globe/globe            301
+/blog              /blogs/blog                    301
+/search            /emoji-search                  301
+
+# Legacy paths -> canonical URLs
+/games.html        /games/games                   301
+/games             /games/games                   301
