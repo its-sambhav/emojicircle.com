@@ -5,130 +5,84 @@ this file covers what comes next and what still needs a decision from you.
 
 ---
 
-## Phase 4 recommendation: do NOT build 3,900 individual emoji pages
+## Phase 4 pilot plan — approved approach, 10 hub pages
 
-The brief asks whether to build individual emoji detail pages or grouped pages,
-and asks for an honest read on thin-content risk. Here it is.
+Approved: intent-clustered hub pages, not 3,900 per-emoji pages, gated on a
+hand-written 10-page pilot. **Nothing is written yet.** This is the plan for
+review; sources come from you before drafting.
 
-**Recommendation: grouped pages, expanded — not one page per emoji.**
+Ground rules for every page below:
 
-Reasoning:
+- No statistic ships without a citable source. Where I've flagged `TODO(source)`
+  the page still works without the number — the claim gets cut, not guessed.
+- Each page is a `/guides/<slug>` URL, extensionless, self-referencing canonical,
+  in the sitemap, with `FAQPage` schema built from the visible Q&A only.
+- Each links to the relevant category page and to at least two others in the set.
+- "Non-generic" below means: the specific thing on this page that Emojipedia,
+  EmojiTerra and emojikeyboard.org do not have. If that column is ever weak, the
+  page shouldn't ship.
 
-1. **The unique-content budget doesn't exist.** An emoji page ranks only if it
-   says something Emojipedia doesn't. Emojipedia already has per-emoji pages
-   with cross-platform renderings, Unicode metadata, and version history — and
-   a decade of authority behind them. To beat that on 🍕 you need genuinely
-   better content on 🍕. Multiply by 3,900 and the honest question is: can this
-   two-person team write 3,900 genuinely distinct pages? If not, what ships is
-   a template with the name swapped, which is the documented path to a
-   site-wide quality demotion. The downside isn't "those pages don't rank" —
-   it's that they drag the whole domain down.
+| # | Page | Primary target query | What makes it non-generic |
+|---|---|---|---|
+| 1 | Every heart emoji and what each colour means | "heart emoji meanings" | A single comparison table of all ~20 hearts with colour, Unicode name, connotation, and the common misread (💚 jealousy vs friendship, 🖤 grief vs aesthetic). Incumbents scatter these across 20 separate pages — the comparison *is* the value. |
+| 2 | Why the same emoji looks different on iPhone, Android and WhatsApp | "why do emojis look different on android" | Explains the render pipeline: one code point, per-vendor font. Uses the site's own cross-platform screenshots of ~10 emojis with the biggest visual divergence. **Needs original screenshots — I can't produce these.** |
+| 3 | What 🙏 actually means: prayer, thank you, or high five | "what does the folded hands emoji mean" | The Indian reading (namaste / thanks) is under-represented in English results, and the "high five" myth is widespread. Names the Unicode name, the Japanese origin, and the three live readings without declaring one correct. |
+| 4 | Emoji meanings in Hindi — इमोजी का मतलब | "emoji meaning in hindi" | Real Hindi, not machine translation. `/emoji-search` already has seed content for this that only became visible in Phase 3. Highest-differentiation page in the set. **Needs a fluent Hindi review pass before publishing.** |
+| 5 | Hand gesture emojis and what they mean in different countries | "hand gesture emoji meanings" | The cross-cultural angle: 👌 🤌 👍 🤙 carry different and occasionally offensive meanings by region. Genuinely useful and almost entirely uncovered. `TODO(source)` for any "offensive in country X" claim — cite or cut. |
+| 6 | Emojis that don't mean what you think | "emoji hidden meanings" | Curated set where the common use has drifted from the Unicode name (🥺 💀 🫠 🧢 🌽). Frames each as name vs actual use. Highest share and link potential in the set. |
+| 7 | How to type emojis on Windows, Mac, Android and iPhone | "how to type emoji on laptop" | Pure how-to with the actual keystrokes (Win+`.`, Ctrl+Cmd+Space). Ranks on clarity and freshness, not authority — the realistic early win. Genuinely sequential, so this one gets real `HowTo` schema. |
+| 8 | Emoji etiquette at work: what 👍 signals to your manager | "is thumbs up emoji rude" | The generational read of 👍 as dismissive is a live, frequently-searched question. India-specific workplace framing is uncontested. Opinion-shaped, so no statistics needed — which makes it fast to ship. |
+| 9 | Every skin tone modifier and how to use them | "emoji skin tone meaning" | Explains Fitzpatrick modifiers mechanically — why some emojis take them, why groups often don't, why the modifier sometimes fails to apply. A mechanism page, not a list. |
+| 10 | New emojis coming in Emoji 17.0 and 18.0 | "new emojis 2026" | Recurring seasonal demand and the existing blog post already covers the ground — this is the *evergreen hub* version, updated per release, that the blog post links into. **Must be checked against the current Unicode release status before publishing; do not restate the blog post's dates without re-verifying.** |
 
-2. **The site is too young to spend crawl budget this way.** A 2026 domain with
-   a thin backlink profile gets crawled conservatively. Adding 3,900 URLs of
-   near-identical content teaches Google that crawling this site is low-value,
-   which slows re-crawl on the pages that *do* deserve to rank.
+### Sequencing
 
-3. **The cheap 80% is already shipped.** In Phase 3 I pre-rendered all 1,355
-   emoji entries — character, official name, and meaning — into the 9 category
-   pages as static HTML. Those terms are now crawlable and indexable without
-   JavaScript, on pages that already have real prose, FAQ schema, and internal
-   links. That captures a large share of `[emoji] meaning` intent at zero
-   thin-content risk.
+Ship 3 first — #1, #6, #7. They need no external sources, no screenshots, and
+no language review, so they test the format fastest. Wait 6–8 weeks, read
+Search Console impressions, and only then commit to the remaining 7. If the
+first three earn nothing, the answer to scaling this was always no.
 
-### What I'd build instead, in priority order
+### What I need from you before drafting
 
-1. **Intent-clustered hub pages** (~15–30 pages, not 3,900). Group by the way
-   people actually search, not by Unicode block:
-   - "Heart emoji meanings — all 20 colours and what each one means"
-   - "Hand gesture emojis and what they mean in different countries"
-   - "Emojis people use to mean something else" (the coded-meaning angle)
-   - "Emojis that look different on iPhone vs Android"
-
-   Each is a real article with a comparison table, genuinely researched, and
-   internally links to the relevant category page. These target multi-word
-   queries the incumbents cover thinly, and they're few enough to write well.
-
-2. **Deepen the 9 existing category pages** rather than splitting them. Add
-   per-emoji "commonly used for" lines and a short cross-platform note to the
-   entries that have real search demand. Same URLs, more depth, no new crawl
-   surface.
-
-3. **Only then**, consider individual pages — and only for the ~50–100 emojis
-   with genuine standalone search volume (🥺 💀 🫠 🙏 🔥 and similar), each
-   written by hand. Ship 10, wait 8 weeks, measure. If those 10 earn
-   impressions, extend. If they don't, the answer to 3,900 was always no.
-
-**Decision needed from you before I build any of this.**
-
----
-
-## 10 blog topics — question-shaped, low-competition, India-weighted
-
-The existing 7 posts cover history, Unicode, AI, psychology, diversity,
-business, and new releases. These 10 don't overlap, and they lean into the
-India angle the brief identifies as under-served.
-
-| # | Working title | Primary query shape |
-|---|---|---|
-| 1 | What does 🙏 actually mean? Namaste, thank you, or prayer? | "what does the folded hands emoji mean" — genuinely contested, and the Indian reading is under-represented in English-language results |
-| 2 | Emoji meanings in Hindi: a complete guide (हिंदी में इमोजी अर्थ) | "emoji meaning in hindi" — high India volume, thin English-language competition. The site already has seed content for this on /emoji-search |
-| 3 | Why does the same emoji look different on iPhone, Android, and WhatsApp? | "why do emojis look different on android" — high-intent, explainer-shaped, perfect for AI answer engines |
-| 4 | What emojis do Indian teens actually use? A regional usage guide | Long-tail, no real incumbent, strong differentiator |
-| 5 | The 20 heart emojis and what each colour means | "heart emoji meanings" — commercial-adjacent and reliably queried |
-| 6 | Emojis that mean something different than you think | "emoji hidden meanings" — high CTR, strong share potential |
-| 7 | How to type emojis on a Windows PC, Mac, Android, and iPhone | "how to type emoji on laptop" — pure how-to, ranks on clarity not authority |
-| 8 | Are emojis legally binding? What courts have decided | Genuinely interesting, earns links. **Requires real case research — do not write without sources.** |
-| 9 | Emoji etiquette at work in India: what 👍 signals to your manager | Workplace + India, essentially uncontested |
-| 10 | Which emojis are most used in Indian languages on WhatsApp? | **Only if a citable data source exists.** If not, drop it — do not estimate. |
-
-Topics 8 and 10 need real sources before drafting. I won't write either from
-memory, and neither should anyone else.
-
----
+- #2: cross-platform screenshots
+- #4: a fluent Hindi reviewer
+- #5: sources for any regional-offensiveness claim
+- #10: confirmation of current Unicode release status
 
 ## Open items that need you
 
-1. **Verify the social URLs.** I had no network access, so I could not check
-   that these resolve. They're now in the sitewide footer and in the
-   `Organization.sameAs` on `index.html`:
-   - `https://www.instagram.com/emojicircle`
-   - `https://www.youtube.com/@emojicircle`
-   - `https://x.com/emojicircle4u`
-   - `https://pin.it/6mgY7seJK` (footer only — a `pin.it` short link is a
-     redirect, so it's deliberately excluded from `sameAs`)
+1. **Which X handle is real?** The repo disagrees with itself and I am not
+   guessing again:
+   - `x.com/emojicircle4u` — was in the sitewide JS header
+   - `twitter.com/emojicircle` — was on the contact page
 
-   The repo previously disagreed with itself: the JS header said
-   `x.com/emojicircle4u`, the contact page said `twitter.com/emojicircle`. I
-   standardised on the former because it was deployed sitewide and uses the
-   current domain. **If any of these 404, remove it from `sameAs` — a dead
-   `sameAs` URL weakens the entity signal rather than strengthening it.**
+   I standardised on `emojicircle4u` to stop the contradiction, but that was a
+   judgement call, not knowledge. It is now in `Organization.sameAs` on
+   `index.html` and `pages/rules/about.html`, and in both footers. Tell me
+   which is right and it's a one-line change.
 
-2. **Named authorship is still open.** The brief asks for a named human author
-   on blog posts, and it's right that AI answer engines weight this. I did not
-   do it, because there is no real name anywhere in the repo and inventing an
-   author is not an option. Give me a name, a one-line bio, and ideally a
-   photo, and I'll add `Person` authorship plus an author page.
+2. **Pinterest.** `pin.it/6mgY7seJK` is a short link, so it is deliberately
+   **not** in any `sameAs` array — short links redirect and aren't stable
+   entity identifiers. It's kept as a footer link because it works for humans.
+   Send the full `pinterest.com/<profile>` URL and it goes into `sameAs`.
 
-3. **Confirm the canonical form on the live host.** I inferred that the host
-   strips `.html` from your July crawl (it reported pages served at
-   `/games/games` and `/pages/rules/about`), and set all 44 canonicals to the
-   extensionless form. Please confirm with:
+3. **Confirm the redirects deployed.** I pushed 44 forced `.html` ->
+   extensionless 301 rules, but the sandbox lost network before I could verify
+   them live. Please check:
 
    ```
-   curl -I https://emojicircle.com/games/games.html
+   curl -sI https://emojicircle.com/games/emoji-quiz.html | head -3
+   curl -sI https://emojicircle.com/google585d8a6ecd08e358.html | head -3
    ```
 
-   Expect `301` with `location: /games/games`. If instead `.html` serves `200`
-   directly, tell me and I'll invert every canonical — it's one script run.
+   Expected: the first returns `301` with `location: /games/emoji-quiz`; the
+   second must still return **200**, because Search Console fetches that exact
+   path and `build-redirects.py` deliberately excludes it. If the verification
+   file 301s, GSC verification breaks.
 
-4. **`hreflang`** — not applicable yet. The multilingual content on
-   `/emoji-search` is sections within one English page, not separate URLs, so
-   `hreflang` would be wrong today. Revisit only if Hindi/Spanish/Japanese
-   become their own pages. (Blog topic #2 above would be the first real
-   trigger.)
-
----
+4. **Then request re-indexing.** Both URL forms are currently in Google's
+   index. The 301s tell Google which one wins, but that consolidation takes
+   weeks. Resubmit the sitemap after confirming the redirects fire.
 
 ## Known issues I deliberately did not fix
 
