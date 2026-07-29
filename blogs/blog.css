@@ -359,3 +359,26 @@
   font-size: 0.95rem;
   color: #b9bec7;
 }
+
+/* ── Author card ── */
+.author-card {
+  margin: 40px 0 0;
+  padding: 22px 24px;
+  border-left: 3px solid #ff6200;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 12px 12px 0;
+}
+.author-card h2 {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9ca3af !important;
+  margin: 0 0 8px !important;
+  padding-top: 0 !important;
+}
+.author-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #d1d5db;
+}
+.author-card a { color: #ff6200; }
