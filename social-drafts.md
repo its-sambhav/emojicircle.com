@@ -69,3 +69,69 @@ rollout timing on EmojiCircle.
 > nine emoji names stacked in a readable column with their code points in a lighter
 > grey. Use placeholder rounded squares rather than glyphs. Bottom strip:
 > "emojicircle.com".
+
+---
+
+## 2026-07-30 — New page: What Was the First Emoji?
+
+**Change:** Created `blogs/what-was-the-first-emoji.html`, a dedicated answer page for the
+"first emoji / who invented emojis / oldest emoji" query cluster, which previously had no
+page of its own on the site.
+
+### X (280 char limit)
+
+"Shigetaka Kurita invented emoji in 1999" is the tidiest wrong answer on the internet.
+
+SoftBank shipped 90 emoji on the J-Phone SkyWalker DP-211SW on 1 November 1997 — two years
+earlier. The poo emoji was in that set.
+
+emojicircle.com/blogs/what-was-the-first-emoji
+
+### Instagram caption
+
+The first emoji was not made in 1999. 🕵️
+
+Almost every article credits Shigetaka Kurita and his 176 icons for NTT DoCoMo's i-mode
+service. Great set, genuinely important — but not first.
+
+Here's the actual order:
+
+• 1988 — Sharp PA-8500, over 100 emoji-like designs at 16×16 pixels
+• 1990 — NEC PI-ET1, over 130 emoji-like designs
+• Nov 1997 — SoftBank (then J-Phone) SkyWalker DP-211SW, 90 emoji
+• 1999 — DoCoMo i-mode, Kurita's 176 icons
+
+The 1997 SoftBank set is where 💩 comes from, which makes the pile of poo one of the oldest
+emoji designs still in daily use anywhere.
+
+So why did nobody notice? The DP-211SW sold badly and the emoji worked on no other J-Phone
+handset. A first that nobody could use is easy to forget.
+
+Bonus: the word 絵文字 itself is older than all of it — the OED records it as attested from
+1928 or earlier.
+
+Full breakdown at the link in bio.
+
+#EmojiHistory #FirstEmoji #Emoji #Unicode #EmojiFacts #EmojiCircle
+
+> **Image note:** A dark 1080×1080 card, four stacked rows forming a vertical timeline with a
+> thin orange connector line down the left. Each row: the year in large orange type (1988,
+> 1990, 1997, 1999), the device name in white beside it, and the symbol count in small grey
+> below. Header reads "THE FIRST EMOJI WASN'T 1999". Use plain rounded-square placeholders for
+> any glyphs — do not render real emoji art for the pre-1997 devices.
+
+### Pinterest
+
+**Title:** What Was the First Emoji? The 1997 Set That Came Before Kurita
+
+**Description:** The first emoji set on a mobile phone was not Shigetaka Kurita's 176 icons from
+1999 — it was SoftBank's, released on the J-Phone SkyWalker DP-211SW on 1 November 1997 with 90
+characters, including the ancestor of the pile of poo emoji. Push the definition back to
+pictographic symbol sets and you reach the Sharp PA-8500 in October 1988 and the NEC PI-ET1 in
+August 1990. Even the word 絵文字 is older, attested from 1928 or earlier per the OED. See the
+full timeline, devices and sources on EmojiCircle.
+
+> **Image note:** A vertical 1000×1500 pin on the same near-black background. Big white headline
+> "WHAT WAS THE FIRST EMOJI?" at the top, with "NOT 1999." beneath it in orange. Below, the four
+> devices as a clean stacked timeline with years in orange and device names in white. Bottom
+> strip: "emojicircle.com".
