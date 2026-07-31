@@ -135,3 +135,76 @@ full timeline, devices and sources on EmojiCircle.
 > "WHAT WAS THE FIRST EMOJI?" at the top, with "NOT 1999." beneath it in orange. Below, the four
 > devices as a clean stacked timeline with years in orange and device names in white. Bottom
 > strip: "emojicircle.com".
+
+---
+
+## 2026-07-31 — New page: when new emojis actually reach your phone
+
+**Change:** Added `blogs/new-emoji-release-dates.html`, a page targeting the release-date
+query cluster (new emojis 2026 release date / android release date / new whatsapp emojis
+2026 / new samsung emojis 2026) with the confirmed vendor rollout dates for Emoji 17.0.
+
+### X (280 char limit)
+
+Approved ≠ on your phone.
+
+Unicode signed off Emoji 17.0 on 9 Sep 2025. When you actually got it:
+
+📱 Samsung — 25 Feb 2026
+💬 WhatsApp Android — 6 Mar
+🍎 iOS 26.4 — 24 Mar
+
+Emoji 18.0 reaches keyboards spring 2027.
+
+emojicircle.com/blogs/new-emoji-release-dates
+
+### Instagram
+
+Approved ≠ available. 📅
+
+Every September the "new emojis are here!" headlines go out — and nothing appears on your
+phone that day. Unicode only recommends emoji. It doesn't draw them. Every vendor has to
+design its own artwork and ship it in a normal software update, which takes months.
+
+Here's how that actually played out for Emoji 17.0:
+
+• 9 Sep 2025 — Unicode recommends the set, 163 new emoji
+• 25 Feb 2026 — Samsung One UI 8.5, first on the Galaxy S26 (133 new emoji)
+• 6 Mar 2026 — WhatsApp 2.26.8.72 for Android (143 new emoji)
+• 24 Mar 2026 — Apple iOS 26.4 (163 new emoji + 150 skin tone combos)
+• 25 Mar 2026 — Samsung's wider rollout starts
+
+Roughly six months from approval to keyboard.
+
+And if you're on iPhone, WhatsApp never sends you its own emoji — it uses Apple's, so your
+WhatsApp emoji arrived with iOS 26.4, not with a WhatsApp update.
+
+Next up: Emoji 18.0 goes to Unicode in September 2026. Unicode's own Jennifer Daniel calls
+it the batch "heading to your keyboard next Spring." So — spring 2027.
+
+Every date sourced at the link in bio.
+
+#EmojiUpdate #NewEmojis #Emoji2026 #Unicode #iOS264 #EmojiCircle
+
+> **Image note:** A dark 1080×1080 card built as a horizontal timeline bar across the middle,
+> thin orange line with five labelled nodes left to right: "SEP 2025 / Unicode approves",
+> "25 FEB / Samsung", "6 MAR / WhatsApp", "24 MAR / Apple", "25 MAR / Samsung wide". Dates in
+> large orange type, labels in white beneath. Header: "APPROVED ≠ ON YOUR PHONE". Bottom right
+> in small grey: "~6 months".
+
+### Pinterest
+
+**Title:** When Do New Emojis Actually Come Out? 2026 Dates by Platform
+
+**Description:** Unicode approving a set and your phone getting it are two different dates,
+usually about six months apart. Emoji 17.0 was recommended on 9 September 2025 and reached
+devices in 2026: Samsung's One UI 8.5 on 25 February (Galaxy S26 first, wider rollout from
+25 March), WhatsApp 2.26.8.72 for Android on 6 March, and Apple's iOS 26.4 on 24 March with
+163 new emoji plus 150 new skin tone combinations. Emoji 18.0 goes to Unicode in September
+2026 and is expected on keyboards in spring 2027. Every date sourced from the vendor
+changelogs on EmojiCircle.
+
+> **Image note:** A vertical 1000×1500 pin on near-black. Headline "WHEN DO NEW EMOJIS
+> ACTUALLY COME OUT?" in white at top, "APPROVAL ≠ AVAILABILITY" in orange beneath. Below,
+> four stacked rows — Samsung / WhatsApp / Apple / Emoji 18.0 — each with the date in large
+> orange and the platform in white. Bottom strip: "emojicircle.com".
