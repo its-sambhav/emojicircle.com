@@ -208,3 +208,77 @@ changelogs on EmojiCircle.
 > ACTUALLY COME OUT?" in white at top, "APPROVAL ≠ AVAILABILITY" in orange beneath. Below,
 > four stacked rows — Samsung / WhatsApp / Apple / Emoji 18.0 — each with the date in large
 > orange and the platform in white. Bottom strip: "emojicircle.com".
+
+---
+
+## 2026-08-03 — New page: the emoji timeline, 1988 to 2026
+
+**Change:** Added `blogs/emoji-timeline.html`, a page targeting the timeline / evolution
+query cluster (emoji timeline / evolution of emojis / emoji evolution / emoji history
+timeline) with every dated emoji release from the pre-Unicode pictograph sets through
+Emoji 17.0 and the 18.0 beta. Dates taken from the Modifications section of Unicode's
+UTS #51.
+
+### X (280 char limit)
+
+Emoji versions go 5.0 → 11.0. There is no Emoji 8.0.
+
+Unicode resynced the numbering in 2018 so emoji and Unicode versions would match — and they
+have ever since.
+
+That, plus every release date from 1988 to 2026:
+
+emojicircle.com/blogs/emoji-timeline
+
+### Instagram caption
+
+There is no Emoji 6.0, 7.0, 8.0, 9.0 or 10.0. 🗓️
+
+Emoji versions run 1.0, 2.0, 3.0, 4.0, 5.0 — and then jump straight to 11.0. It looks like a
+typo. It isn't.
+
+Emoji 5.0 shipped alongside Unicode 10.0, and rather than let the two numbers drift apart
+forever, Unicode's emoji spec resynchronised them: from version 11.0 onwards, the emoji
+version and the Unicode version are the same number. So Emoji 8.0 was never cancelled. It
+simply never existed.
+
+The rest of the timeline is just as uneven at the start and just as tidy at the end:
+
+• Oct 1988 — Sharp PA-8500, 100+ pictographs at 16×16 pixels
+• Nov 1997 — SoftBank SkyWalker DP-211SW, 90 emoji, the first phone with a set
+• Jan 1999 — NTT DoCoMo i-mode, Kurita's famous 176
+• 11 Oct 2010 — Unicode 6.0. Emoji stop being a product feature and become a standard
+• 2015 and 2016 — two releases each year
+• 2021 onwards — one release, every September, like clockwork
+
+14 Sep 2021. 13 Sep 2022. 12 Sep 2023. 10 Sep 2024. 9 Sep 2025. Five Septembers in a row,
+each a day or two earlier than the last.
+
+Every date on the page comes from Unicode's own specification. Link in bio.
+
+#EmojiHistory #EmojiTimeline #Unicode #Emoji #EmojiFacts #EmojiCircle
+
+> **Image note:** A dark 1080×1080 card. Top two-thirds: a vertical orange line with year
+> labels down the left — 1988, 1997, 1999, 2010, 2025 — each with a one-line white caption
+> to the right. Bottom third, separated by a thin rule: the version sequence "1.0 2.0 3.0
+> 4.0 5.0" in white, then a large orange "11.0" with a small orange arrow curving into it,
+> captioned "no 6–10". Header in white caps: "THE EMOJI TIMELINE".
+
+### Pinterest
+
+**Title:** The Complete Emoji Timeline: Every Version and Release Date, 1988–2026
+
+**Description:** Emoji didn't start in 1999. The earliest known pictograph set shipped on
+the Sharp PA-8500 in October 1988, and the first mobile phone with emoji was SoftBank's
+SkyWalker DP-211SW on 1 November 1997, two years before Kurita's famous 176 icons for NTT
+DoCoMo. Emoji entered the Unicode Standard on 11 October 2010 with Unicode 6.0, and there
+have been seventeen dated releases since — including the jump from Emoji 5.0 straight to
+11.0, when Unicode resynchronised emoji version numbers with its own. Emoji 17.0 landed on
+9 September 2025 with 3,953 recommended emoji; Emoji 18.0 is in beta and expected in
+September 2026. Every date sourced from Unicode's UTS #51 on EmojiCircle.
+
+> **Image note:** A vertical 1000×1500 pin on near-black. Headline "EVERY EMOJI RELEASE,
+> 1988–2026" in white at top. Below it a single continuous orange vertical line running the
+> full height, with eight labelled nodes: 1988 Sharp, 1997 SoftBank, 1999 DoCoMo, 2010
+> Unicode 6.0, 2015 Emoji 1.0, 2018 Emoji 11.0, 2025 Emoji 17.0, 2026 Emoji 18.0 (beta) —
+> years in large orange, labels in white. Bottom strip: "emojicircle.com".
