@@ -128,7 +128,8 @@
       { "@type": "ListItem", "position": 7, "name": "New Emojis 2025 & 2026: Emoji 17.0 Guide", "url": "https://emojicircle.com/blogs/new-emojis-2025-2026" },
       { "@type": "ListItem", "position": 8, "name": "What Was the First Emoji?", "url": "https://emojicircle.com/blogs/what-was-the-first-emoji" },
       { "@type": "ListItem", "position": 9, "name": "When Do New Emojis Come Out? 2026 Release Dates", "url": "https://emojicircle.com/blogs/new-emoji-release-dates" },
-      { "@type": "ListItem", "position": 10, "name": "Emoji Timeline: The Evolution of Emojis from 1988 to 2026", "url": "https://emojicircle.com/blogs/emoji-timeline" }
+      { "@type": "ListItem", "position": 10, "name": "Emoji Timeline: The Evolution of Emojis from 1988 to 2026", "url": "https://emojicircle.com/blogs/emoji-timeline" },
+      { "@type": "ListItem", "position": 11, "name": "New WhatsApp Emojis in 2026: What Changed, and Why They Look Different", "url": "https://emojicircle.com/blogs/new-whatsapp-emojis" }
     ]
   }
   </script>
@@ -385,6 +386,27 @@
           </div>
         </a>
 
+        <!-- Blog 11 -->
+        <a class="blog-card" href="/blogs/new-whatsapp-emojis" data-title="New WhatsApp Emojis 2026"
+          data-tags="whatsapp new emojis 2025 2026 list update android ios flags designs soccer ball">
+          <div class="blog-card__img">
+            <img src="/blog-banners/new-whatsapp-emojis.webp" alt="New WhatsApp emojis in 2026"
+              loading="lazy" decoding="async" fetchpriority="low" width="400" height="225">
+            <div class="blog-card__img-overlay">
+              <h2 class="blog-card__title">New WhatsApp Emojis in 2026: What Changed, and Why They Look Different</h2>
+            </div>
+          </div>
+          <div class="blog-card__content">
+            <span class="blog-card__tag">Latest Updates</span>
+            <p class="blog-card__excerpt">143 new designs on 6 March 2026 — plus the flags and sponsored redesigns
+              you'll only ever see on WhatsApp.</p>
+            <div class="blog-card__meta">
+              <span>📅 Published <time datetime="2026-08-05">August 2026</time></span>
+              <span>⏱ 6 min read</span>
+            </div>
+          </div>
+        </a>
+
       </div>
 
       <p class="blog-catalog__empty" id="blogEmpty" style="display:none;">No blog posts found.</p>
@@ -442,6 +464,7 @@
           while (deferredFrag.firstChild && moved < batchSize) { next.appendChild(deferredFrag.firstChild); moved++; }
           container.appendChild(next);
           if (!deferredFrag.firstChild) deferredFrag = null;
+          observeTrigger();
         }
 
         // Observe the last initially visible card to trigger loading more
@@ -449,9 +472,14 @@
           entries.forEach(function (e) { if (e.isIntersecting) rIC(loadMore); });
         }, { root: null, rootMargin: '400px', threshold: 0.01 });
 
+        // Observe the last card currently in the DOM, re-arming after every batch.
+        // (Observing a fixed card only ever fires once, stranding later batches.)
         function observeTrigger() {
+          if (!deferredFrag) { obs.disconnect(); return; }
           var cards = container.querySelectorAll('.blog-card');
-          if (cards.length >= initialVisible) { obs.observe(cards[initialVisible - 1]); }
+          if (!cards.length) return;
+          obs.disconnect();
+          obs.observe(cards[cards.length - 1]);
         }
 
         // Search handler: restore deferred only when input length > 1

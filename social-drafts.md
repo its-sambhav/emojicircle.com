@@ -282,3 +282,59 @@ September 2026. Every date sourced from Unicode's UTS #51 on EmojiCircle.
 > full height, with eight labelled nodes: 1988 Sharp, 1997 SoftBank, 1999 DoCoMo, 2010
 > Unicode 6.0, 2015 Emoji 1.0, 2018 Emoji 11.0, 2025 Emoji 17.0, 2026 Emoji 18.0 (beta) —
 > years in large orange, labels in white. Bottom strip: "emojicircle.com".
+
+---
+
+## 2026-08-05 — New page: new WhatsApp emojis in 2026
+
+### X (under 280 characters)
+
+WhatsApp added 143 new emoji designs on 6 March 2026 in v2.26.8.72 — but only on Android.
+On iPhone you get Apple's. WhatsApp also ships flags Unicode never recommended, and swapped
+⚽ for an Adidas Trionda during the World Cup. New guide 👇
+emojicircle.com/blogs/new-whatsapp-emojis
+
+### Instagram
+
+Your WhatsApp emoji are not your phone's emoji. 💬
+
+WhatsApp draws its own artwork — it has since October 2017 — so the same message can look
+genuinely different on two phones. Its Emoji 17.0 update landed on 6 March 2026 in version
+2.26.8.72 with 143 new designs, and that update was Android-only: on iPhone, WhatsApp
+shows Apple's emoji, supplied by iOS.
+
+It also ships emoji nobody else has. The Flag for England arrived in 2014, three years
+before Unicode standardised it. Scotland and Wales followed in late 2016, Texas in late
+2017, and the Refugee Nation Flag in June 2021. And on 4 June 2026, WhatsApp partnered with
+Adidas to redraw ⚽ as the Trionda, the official 2026 World Cup match ball — across Android,
+Web and even iOS — then reverted it once the tournament ended.
+
+Full breakdown, every date sourced from Emojipedia's changelogs, on emojicircle.com.
+
+#whatsapp #emoji #newemojis #emoji2026 #unicode #emojicircle
+
+> **Image note:** A dark 1080×1080 card split down the middle by a thin vertical rule.
+> Left half headed "ANDROID" in white caps with a green WhatsApp-style chat bubble below it;
+> right half headed "IPHONE" in white caps with a grey bubble. The same ⚽ sits in both
+> bubbles but drawn in two visibly different styles. Across the bottom, one line in green:
+> "same character. different picture." Small "emojicircle.com" in the corner.
+
+### Pinterest
+
+**Title:** New WhatsApp Emojis in 2026: What Changed and Why They Look Different
+
+**Description:** WhatsApp's Emoji 17.0 update shipped on 6 March 2026 in version 2.26.8.72
+with 143 new emoji designs — an Android update, because WhatsApp on iPhone shows the native
+Apple emoji provided by iOS instead. WhatsApp has drawn its own emoji artwork since October
+2017, and it repeatedly ships characters Unicode does not recommend for general
+interchange: the Flag for England in 2014, Scotland and Wales in late 2016, the Flag for
+Texas in late 2017, and the Refugee Nation Flag in June 2021. It also runs sponsored
+redesigns — an Adidas Trionda soccer ball on 4 June 2026 for the World Cup, reverted after
+the tournament, and a Mercedes-AMG PETRONAS racing car in April 2024 that is still in place.
+Every date sourced from Emojipedia on EmojiCircle.
+
+> **Image note:** A vertical 1000×1500 pin on near-black. Headline "THE EMOJI ONLY WHATSAPP
+> HAS" in white caps at top. Below, a single column of five rows, each a small flag or icon
+> on the left and a year in large green on the right: England 2014, Scotland & Wales 2016,
+> Texas 2017, Refugee Nation 2021, Adidas Trionda ⚽ 2026. A thin green rule separates each
+> row. Bottom strip: "emojicircle.com".
