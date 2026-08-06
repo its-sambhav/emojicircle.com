@@ -390,29 +390,3 @@ body {
     transition: none;
   }
 }
-/* ── Supporting prose below the game (was hidden from users) ── */
-.game-prose {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 32px 24px 64px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.75;
-  font-size: 0.97rem;
-}
-.game-prose h2 {
-  color: #fff;
-  font-size: clamp(1.15rem, 2.6vw, 1.4rem);
-  font-weight: 800;
-  margin: 32px 0 12px;
-}
-.game-prose h3 {
-  color: #fff;
-  font-size: 1.02rem;
-  font-weight: 700;
-  margin: 22px 0 8px;
-}
-.game-prose p { margin: 0 0 15px; }
-.game-prose ul, .game-prose ol { margin: 0 0 15px; padding-left: 22px; }
-.game-prose li { margin-bottom: 7px; }
-.game-prose a { color: #ff7a1f; text-decoration: underline; text-underline-offset: 3px; }
-.game-prose a:hover { color: #ff9a4d; }

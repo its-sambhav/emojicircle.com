@@ -63,6 +63,10 @@
   .globe-about .globe-note{font-size:14px;opacity:.7}
   .globe-about .globe-back{margin-top:28px;font-weight:600}
   body.pseudo-fullscreen .globe-about{display:none}
+  /* Embedded in the homepage iframe: show only the globe, no article.
+     The standalone page (the canonical URL crawlers fetch) still renders it. */
+  html.is-embedded .globe-about{display:none}
+  html.is-embedded #app{height:100vh}
   #app canvas{touch-action:none;}
   body.pseudo-fullscreen{overflow:hidden;}
   #app.pseudo-fullscreen{position:fixed; inset:0; width:100vw; height:100vh; background:#000; z-index:4;}
@@ -141,6 +145,10 @@
        crossorigin="anonymous"></script>
 </head>
 <body>
+  <script>
+    // Hide the article when this page is embedded (homepage preview iframe).
+    if (window.self !== window.top) document.documentElement.classList.add("is-embedded");
+  </script>
   <div id="app"></div>
   <div class="status" id="status">Loading…</div>
   <button type="button" id="fullscreenBack" class="fullscreen-back-btn" aria-label="Exit fullscreen"><span aria-hidden="true">←</span><span>Back</span></button>
