@@ -338,3 +338,65 @@ Every date sourced from Emojipedia on EmojiCircle.
 > on the left and a year in large green on the right: England 2014, Scotland & Wales 2016,
 > Texas 2017, Refugee Nation 2021, Adidas Trionda ⚽ 2026. A thin green rule separates each
 > row. Bottom strip: "emojicircle.com".
+
+---
+
+## 2026-08-07 — New page: what the latest Unicode emoji version actually is
+
+### X
+
+Emoji 18.0 is not out.
+
+The latest released emoji version is still Emoji 17.0 — 163 emoji, approved by Unicode
+on 9 September 2025. Everything labelled 18.0 right now is a beta draft that can still
+change before September.
+
+emojicircle.com/blogs/latest-unicode-emoji-version
+
+### Instagram
+
+"What's the newest emoji version?" has two answers, and that's the whole problem. 🔢
+
+There's the Unicode Standard — the encoding behind every character your phone can draw,
+currently Unicode 17.0.0. And there's the emoji version, a narrower release covering just
+the emoji set, currently Emoji 17.0 with 163 emoji, approved on 9 September 2025.
+
+Both say 17.0 today. They are not the same number.
+
+So when you read that Unicode 18.0 adds 13,047 new characters — that's the whole standard
+talking. The emoji part of it is nine new emoji characters, and it's still in beta. Unicode
+opened that beta review on 26 May 2026 and closed it on 7 July. Final approval isn't
+expected until September 2026, and Jennifer Daniel called the batch "the new emoji heading
+to your keyboard next Spring."
+
+Until then: 163, from September 2025. That's the safe number to cite.
+
+Sourced from unicode.org and Emojipedia. Full breakdown on emojicircle.com.
+
+#unicode #emoji #emoji17 #emoji18 #newemojis #emojicircle
+
+> **Image note:** A dark 1080×1080 card. Two large numerals side by side, separated by a
+> thin vertical rule: on the left "17.0" in white with the small caption "RELEASED" beneath
+> it in green; on the right "18.0" in dim grey with "STILL A DRAFT" beneath it in orange.
+> Above both, one line in white caps: "THE LATEST EMOJI VERSION IS". Bottom corner:
+> "emojicircle.com".
+
+### Pinterest
+
+**Title:** What Is the Latest Unicode Emoji Version? Emoji 17.0, Explained
+
+**Description:** The latest released emoji version is Emoji 17.0 — Unicode's own emoji
+version chart lists it as v17.0 (2025) with 163 emoji, approved on 9 September 2025. The
+matching Unicode Standard release, Unicode 17.0.0, is likewise the most recent, following
+16.0.0 in 2024 and 15.1.0 in 2023. Emoji 18.0 is not out: Unicode ran the Unicode 18.0 beta
+review from 26 May to 7 July 2026, covering 13,047 new characters and nine new emoji
+characters, with Emojipedia counting 19 draft emoji and noting both remain in draft form and
+subject to change ahead of expected approval in September 2026. Approval isn't availability
+either — Emoji 17.0 was approved in September 2025 but only reached Apple, Google, Samsung
+and WhatsApp in March 2026. Sourced from unicode.org and Emojipedia on EmojiCircle.
+
+> **Image note:** A vertical 1000×1500 pin on near-black. Headline "EMOJI VERSIONS, IN
+> ORDER" in white caps at top. Below, four stacked rows, each a year in large green on the
+> left and a label in white on the right: 2023 Unicode 15.1.0 · 2024 Unicode 16.0.0 · 2025
+> Unicode 17.0.0 + Emoji 17.0 (163 emoji) · 2026 Unicode 18.0 beta. The 2025 row is boxed in
+> green with a small "YOU ARE HERE" tag. Bottom strip: "emojicircle.com".
